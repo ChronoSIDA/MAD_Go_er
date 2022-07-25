@@ -1,0 +1,112 @@
+package edu.neu.madcourse.mad_goer;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import edu.neu.madcourse.team36_a8.messages.User;
+
+//import edu.neu.madcourse.team36_a8.messages.MemoryData;
+
+public class LoginActivity extends AppCompatActivity{
+    EditText input_userName;
+    Button btn_login;
+
+
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://team36a8-default-rtdb.firebaseio.com/");
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        final EditText input_username = findViewById(R.id.input_username);
+        final Button btn_login = findViewById(R.id.btn_login);
+
+
+        //if input userid already exists in our database, then jump to main activity with this user
+        //it would look more reasonable if we have several fields like email and mobile and they all
+        //      match memory data archive
+//        if(!MemoryData.getName(this).isEmpty()){
+//            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//            intent.putExtra("name",MemoryData.getName(this));
+//            startActivity(intent);
+//            finish();
+//        }
+//
+
+
+        btn_login.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //final String nameTxt = input_username.getText().toString();
+                String nameTxt = input_username.getText().toString();
+
+                //hide keyboard
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
+
+                if (nameTxt.isEmpty()){
+                    Toast.makeText(LoginActivity.this,"USERNAME REQUIRED",Toast.LENGTH_SHORT).show();
+                }else{
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.child("users").hasChild(nameTxt)){
+                                Toast.makeText(LoginActivity.this,"Welcome back, " + nameTxt,Toast.LENGTH_SHORT).show();
+
+
+                                Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.team36_a8.MainActivity.class);
+                                intent.putExtra("DBcurrentUserID", nameTxt);
+                                startActivity(intent);
+                            }else{
+                                //pass the user to database
+                                if(nameTxt == null){
+                                    Toast.makeText(LoginActivity.this,"Username cannot be empty",Toast.LENGTH_SHORT).show();
+                                } else if(nameTxt.length() < 3 || nameTxt.length() > 10){
+                                    Toast.makeText(LoginActivity.this,"Username length cannot be less than 3 characters \nUsername length cannot be longer than 10 characters",Toast.LENGTH_LONG).show();
+                                } else {
+                                    User currentUser = new User((nameTxt));
+                                    databaseReference.child("users").child(nameTxt).setValue(currentUser);
+                                    Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
+
+
+                                    Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.team36_a8.MainActivity.class);
+                                    intent.putExtra("DBcurrentUserID", nameTxt);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+
+            }
+        });
+        Button btn_about = findViewById(R.id.btn_about);
+        btn_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
