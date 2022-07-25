@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import edu.neu.madcourse.mad_goer.messages.User;
 
-//import edu.neu.madcourse.team36_a8.messages.MemoryData;
+//import edu.neu.madcourse.mad_goer.messages.MemoryData;
 
 public class LoginActivity extends AppCompatActivity{
     EditText input_userName;

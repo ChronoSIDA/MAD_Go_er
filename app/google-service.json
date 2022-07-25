@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "287743095493",
+    "project_id": "goerapp-4e3c7",
+    "storage_bucket": "goerapp-4e3c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287743095493:android:4f7b1b1ea3c604bf5436ac",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.mad_goer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "287743095493-bofkdv2qge68hu1regllvcf284i2ra62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.neu.madcourse.mad_goer",
+            "certificate_hash": "03f1d2e8777b1aa23bb388e1532fd7cf94b5106b"
+          }
+        },
+        {
+          "client_id": "287743095493-ibjfagjdkli4tpi0d147a8qjhl3q4ndn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgtybn4Xxco0riKbf9d9Ze2_QHhXkjzCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "287743095493-ibjfagjdkli4tpi0d147a8qjhl3q4ndn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

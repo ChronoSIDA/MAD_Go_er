@@ -21,7 +21,6 @@ public class AlbumFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         binding = Fragment3AlbumBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -30,7 +29,6 @@ public class AlbumFragment extends Fragment {
         TextView totalSentCount = binding.idTotalSent;
 
         MainActivity activity = (MainActivity) getActivity();
-
 
         return root;
     }

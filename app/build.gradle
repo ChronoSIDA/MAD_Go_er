@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "edu.neu.madcourse.team36_a8"
+        applicationId "edu.neu.madcourse.mad_goer"
         minSdk 26
         targetSdk 32
         versionCode 1
