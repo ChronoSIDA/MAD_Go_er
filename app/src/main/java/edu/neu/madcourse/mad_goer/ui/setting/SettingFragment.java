@@ -1,4 +1,4 @@
-package edu.neu.madcourse.mad_goer.ui.logout;
+package edu.neu.madcourse.mad_goer.ui.setting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import edu.neu.madcourse.mad_goer.databinding.FragmentLogoutBinding;
+import edu.neu.madcourse.mad_goer.databinding.Fragment4SettingBinding;
 
-public class LogoutFragment extends Fragment {
+public class SettingFragment extends Fragment {
 
-    private FragmentLogoutBinding binding;
+    private Fragment4SettingBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentLogoutBinding.inflate(inflater, container, false);
+        binding = Fragment4SettingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        final TextView textView = binding.textLogout;
-//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

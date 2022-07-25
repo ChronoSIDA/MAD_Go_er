@@ -1,4 +1,4 @@
-package edu.neu.madcourse.mad_goer.ui.send;
+package edu.neu.madcourse.mad_goer.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,20 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import edu.neu.madcourse.mad_goer.MainActivity;
-import edu.neu.madcourse.mad_goer.databinding.FragmentSendBinding;
+import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 
-public class SendFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    private FragmentSendBinding binding;
+    private Fragment1HomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentSendBinding.inflate(inflater, container, false);
+        binding = Fragment1HomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         MainActivity activity = (MainActivity) getActivity();
-        activity.getData();
+//        activity.getData();
 
         return root;
     }

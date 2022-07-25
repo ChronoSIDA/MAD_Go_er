@@ -1,18 +1,17 @@
-package edu.neu.madcourse.mad_goer.ui.send;
+package edu.neu.madcourse.mad_goer.ui.album;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SendViewModel extends ViewModel {
+public class AlbumViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public SendViewModel() {
+    public AlbumViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is dashboard fragment");
     }
-
 
     public LiveData<String> getText() {
         return mText;

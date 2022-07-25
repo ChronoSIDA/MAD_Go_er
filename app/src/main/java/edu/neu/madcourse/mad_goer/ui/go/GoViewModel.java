@@ -1,16 +1,16 @@
-package edu.neu.madcourse.mad_goer.ui.history;
+package edu.neu.madcourse.mad_goer.ui.go;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HistoryViewModel extends ViewModel {
+public class GoViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HistoryViewModel() {
+    public GoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is home fragment");
     }
 
     public LiveData<String> getText() {

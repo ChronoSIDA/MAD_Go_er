@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_send"
-        android:icon="@android:drawable/ic_menu_send"
-        android:title="@string/txt_stick_em" />
+        android:id="@+id/navigation_home"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:title="@string/txt_home_nav" />
 
     <item
-        android:id="@+id/navigation_receive"
-        android:icon="@android:drawable/ic_dialog_email"
-        android:title="@string/txt_receive" />
+        android:id="@+id/navigation_go"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/txt_go_nav" />
 
     <item
-        android:id="@+id/navigation_history"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="@string/txt_history" />
+        android:id="@+id/navigation_album"
+        android:icon="@android:drawable/ic_menu_slideshow"
+        android:title="@string/txt_album_nav" />
 
     <item
-        android:id="@+id/navigation_logout"
-        android:icon="@android:drawable/ic_lock_power_off"
-        android:title="@string/txt_logout" />
+        android:id="@+id/navigation_setting"
+        android:icon="?attr/actionModeShareDrawable"
+        android:title="@string/txt_setting_nav" />
 
 </menu>

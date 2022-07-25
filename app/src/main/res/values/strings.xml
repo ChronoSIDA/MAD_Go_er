@@ -1,40 +1,14 @@
 <resources>
-    <string name="app_name">Stick\' Em_T36</string>
+    <string name="app_name">Go-er</string>
     <string name="txt_username_text">Username</string>
-    <string name="txt_logo_text">Stick It To \'em</string>
+    <string name="txt_logo_text">Go-er</string>
     <string name="btn_login_text">Login</string>
     <string name="txt_team36_text">Team36 &amp; CS5520</string>
-    <string name="txt_stick_em">Stick \'Em</string>
-    <string name="txt_receive">Message</string>
-    <string name="txt_history">History</string>
-    <string name="txt_logout">Logout</string>
+    <string name="txt_home_nav">Home</string>
+    <string name="txt_go_nav">Go</string>
+    <string name="txt_album_nav">Album</string>
+    <string name="txt_setting_nav">Setting</string>
 
-    <string name="dropdown_contacts">Contacts</string>
-    <string name="title_sender">Sender:</string>
-    <string name="title_rndusr">Random User</string>
-    <string name="title_receiver">Receiver:</string>
-    <string name="title_send">Send</string>
-    <string name="title_hey">Hey!</string>
-    <string name="title_sender_receive">User I</string>
-    <string name="title_receive_receiver">User II</string>
-    <string name="title_just_sent">just sent this sticker to</string>
-    <string name="title_timestamp">at 12:30 Sunday Afternoon</string>
-    <string name="title_sticker_01">sticker_01</string>
-    <string name="title_sticker_02">sticker_02</string>
-    <string name="title_sticker_03">sticker_03</string>
-    <string name="title_sticker_04">sticker_04</string>
-    <string name="title_sticker_05">sticker_05</string>
-    <string name="title_sticker_06">sticker_06</string>
-    <string name="title_sticker_07">sticker_07</string>
-    <string name="title_sticker_08">sticker_08</string>
-    <string name="title_sticker_09">sticker_09</string>
-    <string name="sender_name">sender_name</string>
-    <string name="sender_Name">sender_name</string>
-    <string name="send_a_sticker_to">send a sticker to</string>
-    <string name="timestamp">timeStamp</string>
-    <string name="to">To</string>
-    <string name="title_total_stickers">Total # of Stickers have Sent:</string>
-    <string name="title_sent_stickers">999</string>
     <string name="teamInfo">Sida Zhang\nNUID: 001597035\nGithub: ChronoSIDA\n\nYang Yang\nNUID: 002921499\n Github: alyssayyang\n\nYiqian Huang\nNUID:002965390\nGithub: Lynette-Huang\n\nXue Tang\nNUID: 002916453\nGithub: XueTang422</string>
     <string-array name="dropdown_userlist">
     </string-array>

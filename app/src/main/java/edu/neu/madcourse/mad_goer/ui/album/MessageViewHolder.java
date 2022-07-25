@@ -1,4 +1,4 @@
-package edu.neu.madcourse.mad_goer.ui.history;
+package edu.neu.madcourse.mad_goer.ui.album;
 
 import android.view.View;
 import android.widget.ImageView;

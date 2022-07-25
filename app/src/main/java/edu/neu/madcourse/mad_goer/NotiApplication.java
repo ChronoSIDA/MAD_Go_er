@@ -5,7 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
-public class NotiApp extends Application {
+public class NotiApplication extends Application {
     public static final String CHANNEL_1_ID = "Everyone";
     public static final String CHANNEL_2_ID = "Friends only";
 

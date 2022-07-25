@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import edu.neu.madcourse.team36_a8.messages.User;
+import edu.neu.madcourse.mad_goer.messages.User;
 
 //import edu.neu.madcourse.team36_a8.messages.MemoryData;
 
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity{
                                 Toast.makeText(LoginActivity.this,"Welcome back, " + nameTxt,Toast.LENGTH_SHORT).show();
 
 
-                                Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.team36_a8.MainActivity.class);
+                                Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
                                 intent.putExtra("DBcurrentUserID", nameTxt);
                                 startActivity(intent);
                             }else{
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity{
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
 
 
-                                    Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.team36_a8.MainActivity.class);
+                                    Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
                                     intent.putExtra("DBcurrentUserID", nameTxt);
                                     startActivity(intent);
                                 }
