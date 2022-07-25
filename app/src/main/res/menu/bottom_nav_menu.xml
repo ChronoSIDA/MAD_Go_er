@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_go"
-        android:icon="@drawable/ic_go_grey"
+        android:icon="@drawable/ic_action_go"
         android:title="@string/txt_go_nav" />
 
     <item
