@@ -13,6 +13,9 @@ public enum EventType {EDUCATION("Education"), SPORTS("Sports"),
     private EventType(String category){
         this.category = category;
     }
+    public String toString(){
+        return this.category;
+    }
 }
 
 //public enum EventType {Education,Sports,Fitness,Technology,Travel,Outdoor,Games,
