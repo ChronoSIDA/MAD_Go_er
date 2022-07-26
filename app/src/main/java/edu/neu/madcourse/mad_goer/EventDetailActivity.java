@@ -103,10 +103,8 @@ public class EventDetailActivity extends AppCompatActivity {
     public String location(Event event){
         String address;
         if(this.event.isInPerson()){
-//            method = "Address: ";
             address = event.getLocation().toString();
         }else{
-//            method = "Link: ";
             address = event.getLink();
         }
         return address;
