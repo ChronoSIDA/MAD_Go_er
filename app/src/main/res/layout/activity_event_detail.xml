@@ -1,7 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/smokeWhite">
 
+    <TextView
+        android:id="@+id/id_location_detail"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:text="https://whateverthisshitis.com"
+        android:textAlignment="textEnd"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="224dp" />
+
+    <TextView
+        android:id="@+id/id_timestamp_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="07/26/2022"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="207dp"
+        tools:layout_editor_absoluteY="184dp" />
+
+    <TextView
+        android:id="@+id/txt_time_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="Time:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="207dp"
+        tools:layout_editor_absoluteY="162dp" />
+
+    <TextView
+        android:id="@+id/txt_location_detail"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:text="Link:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="224dp" />
+
+    <TextView
+        android:id="@+id/id_event_name_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="Random Event"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="207dp"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <TextView
+        android:id="@+id/txt_host_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="Host: random_usr"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="207dp"
+        tools:layout_editor_absoluteY="44dp" />
+
+    <TextView
+        android:id="@+id/txt_event_name_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="Event Name:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="207dp"
+        tools:layout_editor_absoluteY="97dp" />
+
+    <TextView
+        android:id="@+id/txt_categories_detail"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Art"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="184dp" />
+
+    <TextView
+        android:id="@+id/txt_isPublic_detail"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Public"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="44dp" />
+
+    <ImageView
+        android:id="@+id/img_categories"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        app:srcCompat="@drawable/Sticker_Community"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="97dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
