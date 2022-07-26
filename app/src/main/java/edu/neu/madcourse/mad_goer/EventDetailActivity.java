@@ -1,17 +1,22 @@
 package edu.neu.madcourse.mad_goer;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import edu.neu.madcourse.mad_goer.messages.Event;
+import edu.neu.madcourse.mad_goer.messages.User;
 
 
 public class EventDetailActivity extends AppCompatActivity {
     private Event event;
+    private User user;
     private Button joinBtn;
     private Button cancelBtn;
     private TextView hostTV;
@@ -23,11 +28,20 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView addressTV;
     private TextView attendingListTV;
     private TextView descriptionTV;
+    private boolean joined;
+    private String eventID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
+
+        //TODO: find the event based on eventID,probably need eventlist from mainactivity;
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        eventID = extras.getString("eventID");
+
 
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
         scrollGoers.setMovementMethod(new ScrollingMovementMethod());
@@ -46,7 +60,15 @@ public class EventDetailActivity extends AppCompatActivity {
         addressTV = (TextView) findViewById(R.id.id_location_detail);
         attendingListTV = (TextView) findViewById(R.id.id_goers_detail);
         descriptionTV = (TextView) findViewById(R.id.id_desc_detail);
-
+        //        b = findViewById(R.id.button1);
+//
+//        b.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "Yiqian Huang\nhuang.yiqia@northeastern.edu", Toast.LENGTH_SHORT).show();
+//                //Toast.makeText(MainActivity.this, "huang.yiqia@northeastern.edu", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,14 +78,36 @@ public class EventDetailActivity extends AppCompatActivity {
                 //if not full: Toast "Congratulations! Successfully Join!
                 //if full: Toast "Sorry, this event is full!"
 
+                //不知道这里加user写的对不对， getter后面能不能直接add
+                if(!event.getAttendingList().contains(user)){
+                    if(event.getCapacity() > event.getAttendingList().size()){
+                        event.getAttendingList().add(user);
+                        Toast.makeText(EventDetailActivity.this,
+                                "Congratulations! You will GO to this event!", Toast.LENGTH_SHORT).show();
+                        joinBtn.setText("Joined");
+                    }else{
+                        Toast.makeText(EventDetailActivity.this,
+                                "Sorry, this event is full. Try earlier next time!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                    event.getAttendingList().remove(user);
+                    Toast.makeText(EventDetailActivity.this,
+                            "Cancelled", Toast.LENGTH_SHORT).show();
+                    joinBtn.setText("Go");
+                }
+
             }
         });
+
+        joinBtn.setText(checkJoin(event, user));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO:
                 //return to main activity
+
             }
         });
 
@@ -75,7 +119,17 @@ public class EventDetailActivity extends AppCompatActivity {
         isVirtualTV.setText(checkVirtual(event));
         addressTV.setText(location(event));
         attendingListTV.setText(event.getAttendingList().toString());
+        descriptionTV.setText(event.getDesc());
 
+    }
+
+    //check joined
+    public String checkJoin(Event event, User user){
+        if(event.getAttendingList().contains(user)){
+            return "Joined";
+        }else{
+            return "GO";
+        }
     }
 
     //public tag text
