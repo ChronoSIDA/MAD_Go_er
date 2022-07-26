@@ -67,7 +67,7 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
-        hostTV.setText(event.getHost().toString());
+        hostTV.setText("Host: " + event.getHost().toString());
         eventNameTV.setText(event.getEventName());
         timeTV.setText(event.getStartDate().toString());
         categoryTV.setText(event.getCategory().toString());
