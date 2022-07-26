@@ -44,7 +44,7 @@
 
      <!--Text View to display Course Name-->
         <TextView
-            android:id="@+id/SenderName"
+            android:id="@+id/eventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -56,10 +56,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/blabla"
+            android:id="@+id/eventDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/SenderName"
+            android:layout_below="@id/eventName"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/stickerImage"
@@ -67,10 +67,10 @@
             android:text="@string/to" />
 
         <TextView
-            android:id="@+id/ReceiverName"
+            android:id="@+id/hostName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/blabla"
+            android:layout_below="@id/eventDate"
             android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@id/stickerImage"
@@ -83,10 +83,10 @@
         <!--Text VIew to display COurse Rating-->
         <!--Image used in present in drawable folder-->
         <TextView
-            android:id="@+id/timeStamp"
+            android:id="@+id/eventLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/SenderName"
+            android:layout_below="@id/eventName"
             android:layout_marginStart="10dp"
             android:layout_marginTop="55dp"
             android:layout_toEndOf="@id/stickerImage"
