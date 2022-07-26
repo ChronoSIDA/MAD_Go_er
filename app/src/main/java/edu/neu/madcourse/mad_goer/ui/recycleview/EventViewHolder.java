@@ -16,6 +16,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     private ImageView eventIcon;
     private TextView eventName,hostName, eventDate,eventLocation;
 
+
     public EventViewHolder(@NonNull View itemView){
         super(itemView);
         eventIcon=itemView.findViewById(R.id.eventIcon);
@@ -23,6 +24,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         hostName = itemView.findViewById(R.id.hostName);
         eventDate = itemView.findViewById(R.id.eventDate);
         eventLocation = itemView.findViewById(R.id.eventLocation);
+
     }
 
     public void bindThisData(Event theEventToBind) {

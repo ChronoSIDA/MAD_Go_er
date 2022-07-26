@@ -21,7 +21,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
     private final ArrayList<Event> eventList;
     private final Context context;
 
-
     public EventAdapter(ArrayList<Event> eventList, Context context) {
         this.eventList = eventList;
         this.context = context;
@@ -56,13 +55,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
         return eventList.size();
     }
 
+
+
     public class Viewholder extends RecyclerView.ViewHolder{
         private ImageView eventIcon;
         private TextView eventName,hostName, eventDate,eventLocation;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
-
             eventIcon=itemView.findViewById(R.id.eventIcon);
             eventName = itemView.findViewById(R.id.eventName);
             hostName = itemView.findViewById(R.id.hostName);
@@ -70,4 +70,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
             eventLocation = itemView.findViewById(R.id.eventLocation);
         }
     }
+
 }

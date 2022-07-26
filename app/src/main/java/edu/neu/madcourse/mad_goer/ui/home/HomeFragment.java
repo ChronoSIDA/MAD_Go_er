@@ -1,5 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
+import edu.neu.madcourse.mad_goer.ui.recycleview.RecyclerItemClickListener;
 
 public class HomeFragment extends Fragment {
 
@@ -31,6 +35,20 @@ public class HomeFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.rvHomefrag;
+
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context,recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position){
+                Intent intent = new Intent(getContext(), EventDetailActivity.class);
+                intent.putExtra("eventID",eventList.get(position).getEventID());
+                startActivity(intent);
+            }
+            @Override
+            public void onLongItemClick(View view, int position){
+
+            }
+        }));
 
 
         MainActivity activity = (MainActivity) getActivity();
@@ -50,6 +68,8 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+
 
 
     @Override
