@@ -47,6 +47,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventName;
     private EditText newEventType;
     private Button newEventSave, newEventCancel;
-    private ArrayList<Event> eventList;
+    private HashMap<String, Event> eventMap;
+
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("event");
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity{
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
+
         //use extras to get the passed in userName/userID from login to main activity
 
         Intent intent = getIntent();
@@ -179,7 +183,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void addNewEvent(String name, EventType type) {
-        eventList.add(new Event(name, type));
+       // eventMap.put(new Event(name, type));
     }
 
     public void addEvent() {
@@ -192,8 +196,8 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    public ArrayList<Event> getTotalEvents(){
-        return eventList;
+    public HashMap<String, Event> getTotalEvents(){
+        return eventMap;
     }
 
 

@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -31,7 +30,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView attendingListTV;
     private TextView descriptionTV;
     private String eventID;
-    private HashMap<String, Event> eventList;
+    private HashMap<String,Event> eventmap;
     private MainActivity mainActivity;
 
 
@@ -41,13 +40,14 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
+        mainActivity = new MainActivity();
+        eventmap = mainActivity.getTotalEvents();
+
         //TODO: find the event based on eventID,probably need eventlist from mainactivity;
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         eventID = extras.getString("eventID");
-        mainActivity = new MainActivity();
-        eventList = mainActivity.getTotalEvents();
-        event = eventList.get(eventID);
+        event = eventmap.get(eventID);
 
 
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
