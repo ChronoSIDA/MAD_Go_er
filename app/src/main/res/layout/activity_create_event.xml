@@ -1,133 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-        <LinearLayout
-            android:layout_width="409dp"
-            android:layout_height="729dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="1dp">
+    android:id="@+id/layout"
+    android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-                <TextView
-                    android:id="@+id/txt_event_name_create"
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="19dp"
-                    android:layout_marginEnd="28dp"
-                    android:text="@string/string_event_name"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_host_detail"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/txt_desc_create"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/string_descrition"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/id_goers_detail"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/txt_goers_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_goers_detail"
-                    app:layout_constraintVertical_bias="0.05" />
-
-                <EditText
-                    android:id="@+id/id_desc_create"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/id_event_name_create"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="48dp"
-                    android:text="Add description here"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_desc_detail"
-                    app:layout_constraintVertical_bias="0.0" />
+                    tools:layout_editor_absoluteY="1dp">
 
-                <TextView
-                    android:id="@+id/txt_time_create"
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/string_time"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/id_timestamp_detail"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.508"
-                    app:layout_constraintStart_toEndOf="@+id/img_categories"
-                    app:layout_constraintTop_toBottomOf="@+id/id_event_name_detail"
-                    app:layout_constraintVertical_bias="0.019" />
+                        <Button
+                            android:id="@+id/btn_create_create"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightRed"
+                            android:text="Create"
+                            tools:layout_editor_absoluteX="266dp"
+                            tools:layout_editor_absoluteY="844dp" />
 
-                <EditText
-                    android:id="@+id/id_timestamp_create"
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:minHeight="48dp"
-                    android:text="@string/string_07_26_2022"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                        <TextView
+                            android:id="@+id/txt_time_create2"
+                            android:layout_width="100dp"
+                            android:layout_height="42dp"
+                            android:paddingTop="8dp"
+                            android:text="Date:"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="37dp"
+                            tools:layout_editor_absoluteY="501dp" />
 
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.517"
-                    app:layout_constraintStart_toEndOf="@+id/txt_categories_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_time_detail"
-                    app:layout_constraintVertical_bias="0.018" />
+                        <EditText
+                            android:id="@+id/editTextTime2"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="time"
+                            android:textSize="16sp"
+                            tools:layout_editor_absoluteX="148dp"
+                            tools:layout_editor_absoluteY="501dp" />
 
-                <TextView
-                    android:id="@+id/id_event_name_detail"
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginEnd="28dp"
-                    android:text="@string/string_random_event"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/img_categories"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_event_name_detail"
-                    app:layout_constraintVertical_bias="0.005" />
+                        <TextView
+                            android:id="@+id/txt_event_name_create4"
+                            android:layout_width="200dp"
+                            android:layout_height="40dp"
+                            android:paddingTop="8dp"
+                            android:text="@string/string_random_event"
+                            android:textAlignment="viewEnd"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="158dp"
+                            tools:layout_editor_absoluteY="239dp" />
 
-                <TextView
-                    android:id="@+id/txt_host_detail"
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="28dp"
-                    android:text="@string/string_host_random_usr"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.062" />
+                        <TextView
+                            android:id="@+id/txt_isLocation_create"
+                            android:layout_width="100dp"
+                            android:layout_height="42dp"
+                            android:paddingTop="8dp"
+                            android:text="Address:"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="33dp"
+                            tools:layout_editor_absoluteY="452dp" />
 
-                <TextView
-                    android:id="@+id/txt_isPublic_detail"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/string_public"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_host_detail"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.062" />
+                        <ImageView
+                            android:id="@+id/img_category_create"
+                            android:layout_width="wrap_content"
+                            android:layout_height="209dp"
+                            app:srcCompat="@drawable/Sticker_Art" />
 
-        </LinearLayout>
-</ScrollView>
+                        <EditText
+                            android:id="@+id/id_desc_create"
+                            android:layout_width="325dp"
+                            android:layout_height="200dp"
+                            android:minHeight="48dp"
+                            android:text="Add description here"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="37dp"
+                            tools:layout_editor_absoluteY="594dp" />
+
+                        <TextView
+                            android:id="@+id/txt_time_create"
+                            android:layout_width="100dp"
+                            android:layout_height="42dp"
+                            android:paddingTop="8dp"
+                            android:text="@string/string_time"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="37dp"
+                            tools:layout_editor_absoluteY="543dp" />
+
+                        <EditText
+                            android:id="@+id/id_islocation_create"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Location"
+                            android:textSize="16sp"
+                            tools:layout_editor_absoluteX="149dp"
+                            tools:layout_editor_absoluteY="459dp" />
+
+                        <EditText
+                            android:id="@+id/id_islocation_create2"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="URL"
+                            android:textSize="16sp"
+                            tools:layout_editor_absoluteX="148dp"
+                            tools:layout_editor_absoluteY="452dp"
+                            tools:visibility="invisible" />
+
+                        <RadioGroup
+                            android:layout_width="325dp"
+                            android:layout_height="51dp"
+                            android:orientation="horizontal"
+                            tools:layout_editor_absoluteX="34dp"
+                            tools:layout_editor_absoluteY="279dp">
+
+                                <RadioButton
+                                    android:id="@+id/id_radio_private"
+                                    android:layout_width="162.5dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="onRadioButtonClicked"
+                                    android:padding="10dp"
+                                    android:text="Public" />
+
+                                <RadioButton
+                                    android:id="@+id/id_radio_public"
+                                    android:layout_width="162.5dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="onRadioButtonClicked"
+                                    android:padding="10dp"
+                                    android:text="Private" />
+
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:layout_width="325dp"
+                            android:layout_height="85dp"
+                            android:orientation="horizontal"
+                            tools:layout_editor_absoluteX="33dp"
+                            tools:layout_editor_absoluteY="367dp">
+
+                                <RadioButton
+                                    android:id="@+id/id_radio_inperson"
+                                    android:layout_width="162.5dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="onRadioButtonClicked"
+                                    android:padding="8dp"
+                                    android:text="In-Person" />
+
+                                <RadioButton
+                                    android:id="@+id/id_radio_virtual"
+                                    android:layout_width="162.5dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="onRadioButtonClicked"
+                                    android:padding="10dp"
+                                    android:text="Virtual" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:id="@+id/txt_event_name_create"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:paddingTop="8dp"
+                            android:text="@string/string_event_name"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="34dp"
+                            tools:layout_editor_absoluteY="240dp" />
+
+                        <EditText
+                            android:id="@+id/id_password_create"
+                            android:layout_width="325dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Password"
+                            android:textSize="12sp"
+                            tools:layout_editor_absoluteX="34dp"
+                            tools:layout_editor_absoluteY="330dp"
+                            tools:visibility="invisible" />
+
+                        <EditText
+                            android:id="@+id/editTextTime"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="time"
+                            android:textSize="16sp"
+                            tools:layout_editor_absoluteX="148dp"
+                            tools:layout_editor_absoluteY="543dp" />
+
+                        <Button
+                            android:id="@+id/btn_back_create"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightRed"
+                            android:text="Back"
+                            tools:layout_editor_absoluteX="38dp"
+                            tools:layout_editor_absoluteY="844dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+</LinearLayout>>
