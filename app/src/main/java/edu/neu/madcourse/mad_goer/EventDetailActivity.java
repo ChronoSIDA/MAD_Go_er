@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -30,7 +31,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView attendingListTV;
     private TextView descriptionTV;
     private String eventID;
-    private ArrayList<Event> eventList;
+    private HashMap<String, Event> eventList;
     private MainActivity mainActivity;
 
 
@@ -44,6 +45,9 @@ public class EventDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         eventID = extras.getString("eventID");
+        mainActivity = new MainActivity();
+        eventList = mainActivity.getTotalEvents();
+        event = eventList.get(eventID);
 
 
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
@@ -69,10 +73,14 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO:
+                //join之后user 的attend list增加该event
+
+
+
+
                 //check if event attendingList is full
                 //if not full: Toast "Congratulations! Successfully Join!
                 //if full: Toast "Sorry, this event is full!"
-
                 //不知道这里加user写的对不对， getter后面能不能直接add
                 if(!event.getAttendingList().contains(user)){
                     if(event.getCapacity() > event.getAttendingList().size()){
@@ -115,6 +123,10 @@ public class EventDetailActivity extends AppCompatActivity {
         addressTV.setText(location(event));
         attendingListTV.setText(event.getAttendingList().toString());
         descriptionTV.setText(event.getDesc());
+
+        //TODO:
+        //star后加入该user的 saved list
+
 
     }
 
