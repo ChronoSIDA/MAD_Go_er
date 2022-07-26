@@ -14,4 +14,6 @@
     <color name="bluepale">#9bc4e2</color>
     <color name="blueroyal">#4169e1</color>
     <color name="grey">#757575</color>
+    <color name ="lightRed">#FF7276</color>
+    <color name = "darkGrey">#9A9A9A</color>
 </resources>
