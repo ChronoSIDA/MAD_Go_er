@@ -6,103 +6,228 @@
     android:layout_height="match_parent"
     android:background="@color/smokeWhite">
 
-    <TextView
-        android:id="@+id/id_location_detail"
-        android:layout_width="275dp"
+    <Button
+        android:id="@+id/btn_join_detail"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="https://whateverthisshitis.com"
-        android:textAlignment="textEnd"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="224dp" />
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/lightRed"
+        android:text="@string/string_join"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/id_desc_detail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel_detail"
+        app:layout_constraintTop_toBottomOf="@+id/id_desc_detail"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/id_timestamp_detail"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:text="07/26/2022"
+        android:id="@+id/id_desc_detail"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:scrollbars="horizontal"
+        android:text="@string/string_descs"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="184dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_desc_detail"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txt_time_detail"
-        android:layout_width="175dp"
+        android:id="@+id/txt_desc_detail"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Time:"
+        android:text="@string/string_descrition"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="162dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/id_goers_detail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_goers_detail"
+        app:layout_constraintTop_toBottomOf="@+id/txt_goers_detail"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/txt_location_detail"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:text="Link:"
+        android:layout_marginStart="28dp"
+        android:text="@string/string_link"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="224dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/id_location_detail"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_categories_detail"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <TextView
+        android:id="@+id/id_location_detail"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="@string/string_adresssss"
+        android:textAlignment="textEnd"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_timestamp_detail"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <TextView
+        android:id="@+id/id_goers_detail"
+        android:layout_width="275dp"
+        android:layout_height="22dp"
+        android:scrollbars="vertical"
+        android:text="@string/string_userlist"
+        android:textAlignment="textEnd"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toEndOf="@+id/txt_goers_detail"
+        app:layout_constraintTop_toBottomOf="@+id/id_location_detail"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <TextView
+        android:id="@+id/id_timestamp_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="@string/string_07_26_2022"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toEndOf="@+id/txt_categories_detail"
+        app:layout_constraintTop_toBottomOf="@+id/txt_time_detail"
+        app:layout_constraintVertical_bias="0.018" />
+
+    <TextView
+        android:id="@+id/txt_time_detail"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="@string/string_time"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/img_categories"
+        app:layout_constraintTop_toBottomOf="@+id/id_event_name_detail"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <TextView
+        android:id="@+id/txt_goers_detail"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/string_go_ers"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_location_detail"
+        app:layout_constraintVertical_bias="0.049" />
 
     <TextView
         android:id="@+id/id_event_name_detail"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:text="Random Event"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/string_random_event"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="118dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/img_categories"
+        app:layout_constraintTop_toBottomOf="@+id/txt_event_name_detail"
+        app:layout_constraintVertical_bias="0.005" />
 
     <TextView
         android:id="@+id/txt_host_detail"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:text="Host: random_usr"
+        android:layout_marginEnd="28dp"
+        android:text="@string/string_host_random_usr"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/txt_event_name_detail"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:text="Event Name:"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/string_event_name"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="97dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_host_detail"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txt_categories_detail"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Art"
+        android:layout_marginStart="28dp"
+        android:text="@string/string_art"
         android:textAlignment="viewStart"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="184dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_categories"
+        app:layout_constraintVertical_bias="0.04" />
 
     <TextView
         android:id="@+id/txt_isPublic_detail"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Public"
+        android:text="@string/string_public"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_host_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
 
     <ImageView
         android:id="@+id/img_categories"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        app:srcCompat="@drawable/Sticker_Community"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="97dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_event_name_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_isPublic_detail"
+        app:layout_constraintVertical_bias="0.033"
+        app:srcCompat="@drawable/Sticker_Community" />
+
+    <Button
+        android:id="@+id/btn_cancel_detail"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightRed"
+        android:text="@string/string_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/id_desc_detail"
+        app:layout_constraintTop_toBottomOf="@+id/id_desc_detail"
+        app:layout_constraintVertical_bias="0.32"
+        tools:ignore="TextContrastCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

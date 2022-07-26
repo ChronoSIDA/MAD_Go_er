@@ -2,6 +2,8 @@ package edu.neu.madcourse.mad_goer;
 
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,12 @@ public class EventDetailActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        // scrollable
+        TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
+        scrollGoers.setMovementMethod(new ScrollingMovementMethod());
+        TextView scrollDesc = (TextView) findViewById(R.id.id_desc_detail);
+        scrollDesc.setMovementMethod(new ScrollingMovementMethod());
 
     }
 }
