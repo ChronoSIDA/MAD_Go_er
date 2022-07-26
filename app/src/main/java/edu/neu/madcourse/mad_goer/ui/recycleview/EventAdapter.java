@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -18,10 +19,11 @@ import edu.neu.madcourse.mad_goer.messages.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
 
-    private final ArrayList<Event> eventList;
+    //private final ArrayList<Event> eventList;
+    private final HashMap<String,Event> eventList;
     private final Context context;
 
-    public EventAdapter(ArrayList<Event> eventList, Context context) {
+    public EventAdapter(HashMap<String,Event> eventList, Context context) {
         this.eventList = eventList;
         this.context = context;
     }
