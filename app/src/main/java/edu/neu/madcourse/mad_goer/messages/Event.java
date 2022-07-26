@@ -39,7 +39,8 @@ public class Event {
 
     // TODO: add theme icon
 
-    public Event() {
-
+    public Event(String name, EventType eventType) {
+        this.eventName = name;
+        this.category = eventType;
     }
 }

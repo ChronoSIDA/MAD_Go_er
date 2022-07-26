@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -42,6 +45,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,6 +63,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
+import edu.neu.madcourse.mad_goer.messages.Event;
+import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.messages.message;
 import edu.neu.madcourse.mad_goer.ui.album.AlbumFragment;
@@ -71,6 +78,12 @@ public class MainActivity extends AppCompatActivity{
     private String timePattern = "yyyy-MM-dd HH:mm:ss z";
     private DateFormat df = new SimpleDateFormat(timePattern);
 
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText newEventName;
+    private EditText newEventType;
+    private Button newEventSave, newEventCancel;
+    private ArrayList<Event> events;
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://team36a8-default-rtdb.firebaseio.com/");
     DatabaseReference databaseUserInfo = FirebaseDatabase.getInstance().getReferenceFromUrl("https://team36a8-default-rtdb.firebaseio.com/users/");
@@ -254,4 +267,57 @@ public class MainActivity extends AppCompatActivity{
         savedInstanceState.putString(CURRENT_USER, currentUserID);
         super.onSaveInstanceState(savedInstanceState);
     }
+
+    public void addNewEvent(String name, EventType type) { events.add(new Event(name, type));
+    }
+
+    public void addEvent() {
+        FloatingActionButton fab = findViewById(R.id.create_event);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createNewDialog();
+            }
+        });
+    }
+
+
+    public void createNewDialog(){
+        dialogBuilder= new AlertDialog.Builder(this);
+        final View linkPopupView = getLayoutInflater().inflate(R.layout.event_popup, null);
+        newEventName = (EditText) linkPopupView.findViewById(R.id.newEventName);
+        newEventType = (EditText) linkPopupView.findViewById(R.id.newEventCategory);
+        newEventSave = (Button) linkPopupView.findViewById(R.id.newEventSave);
+        newEventCancel = (Button) linkPopupView.findViewById(R.id.newEventCancel);
+
+        dialogBuilder.setView(linkPopupView);
+        dialog= dialogBuilder.create();
+        dialog.show();
+
+        newEventSave.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if(newEventName!=null && newEventType!=null) {
+                    addNewEvent(newEventName.getText().toString(), newEventType);
+                    Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else{
+                    Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
+        newEventCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Snackbar.make(view, "Link canceled", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+    }
+
+
 }
