@@ -1,4 +1,4 @@
-package edu.neu.madcourse.mad_goer.ui.home;
+package edu.neu.madcourse.mad_goer.ui.recycleview;
 
 import android.content.Context;
 import android.view.LayoutInflater;

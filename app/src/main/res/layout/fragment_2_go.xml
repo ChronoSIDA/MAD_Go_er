@@ -5,4 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/smokeWhite"
-    tools:context=".ui.go.GoFragment"/>
+    tools:context=".ui.go.GoFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_gofrag"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

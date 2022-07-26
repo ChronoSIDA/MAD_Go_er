@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
+import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
 
 public class HomeFragment extends Fragment {
 

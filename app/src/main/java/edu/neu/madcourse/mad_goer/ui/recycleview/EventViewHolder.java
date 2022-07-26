@@ -1,4 +1,4 @@
-package edu.neu.madcourse.mad_goer.ui.home;
+package edu.neu.madcourse.mad_goer.ui.recycleview;
 
 import android.view.View;
 import android.widget.ImageView;
