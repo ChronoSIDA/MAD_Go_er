@@ -1,6 +1,5 @@
 package edu.neu.madcourse.mad_goer;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -8,8 +7,10 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
 
@@ -28,8 +29,10 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView addressTV;
     private TextView attendingListTV;
     private TextView descriptionTV;
-    private boolean joined;
     private String eventID;
+    private ArrayList<Event> eventList;
+    private MainActivity mainActivity;
+
 
 
     @Override
