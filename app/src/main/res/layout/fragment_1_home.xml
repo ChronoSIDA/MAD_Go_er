@@ -5,4 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/smokeWhite"
-    tools:context=".ui.home.HomeFragment"/>
+    tools:context=".ui.home.HomeFragment">
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Search"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="66dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

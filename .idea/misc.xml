@@ -5,9 +5,14 @@
       <map>
         <entry key="app/src/main/res/drawable/highlight_selected.xml" value="0.2565" />
         <entry key="app/src/main/res/font/bad_script.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout-land/activity_create_event.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout-land/activity_event_detail.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout-land/activity_host.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout-land/activity_interest.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout-land/fragment_3_album.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout-land/fragment_4_setting.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout-land/fragment_send.xml" value="0.35989583333333336" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_host.xml" value="0.25" />
