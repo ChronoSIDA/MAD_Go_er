@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,14 +38,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
 
     @Override
     public void onBindViewHolder(@NonNull EventAdapter.Viewholder holder, int position) {
+
+        //on item selected
         Event event = eventList.get(position);
-//
-//        holder.senderName.setText(msg.getSendName());
-//        holder.receiverName.setText(msg.getReceiveName());
-//
-//
-//        holder.timeStamp.setText(msg.getTimeStemp());
-//        holder.stickerSent.setText();
+
+        holder.hostName.setText(event.getHost().getUserID());
+        holder.eventName.setText(event.getEventName());
+        //event Date is startDate for now
+        //TODO: consider change to a range of Date in future
+        holder.eventDate.setText(event.getStartDate().toString());
+        //TODO:override toString for location, or add a format
+        holder.eventLocation.setText(event.getLocation().toString());
     }
 
     @Override
@@ -52,15 +57,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
-//        private ImageView stickerIV;
-//        private TextView senderName, receiverName,timeStamp;
+        private ImageView eventIcon;
+        private TextView eventName,hostName, eventDate,eventLocation;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
-//            stickerIV=itemView.findViewById(R.id.stickerImage);
-//            senderName = itemView.findViewById(R.id.SenderName);
-//            receiverName = itemView.findViewById(R.id.ReceiverName);
-//            timeStamp = itemView.findViewById(R.id.timeStamp);
+
+            eventIcon=itemView.findViewById(R.id.eventIcon);
+            eventName = itemView.findViewById(R.id.eventName);
+            hostName = itemView.findViewById(R.id.hostName);
+            eventDate = itemView.findViewById(R.id.eventDate);
+            eventLocation = itemView.findViewById(R.id.eventLocation);
         }
     }
 }

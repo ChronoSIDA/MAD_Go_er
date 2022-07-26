@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity{
     Button btn_login;
 
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://team36a8-default-rtdb.firebaseio.com/");
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +35,6 @@ public class LoginActivity extends AppCompatActivity{
 
         final EditText input_username = findViewById(R.id.input_username);
         final Button btn_login = findViewById(R.id.btn_login);
-
-
-        //if input userid already exists in our database, then jump to main activity with this user
-        //it would look more reasonable if we have several fields like email and mobile and they all
-        //      match memory data archive
-//        if(!MemoryData.getName(this).isEmpty()){
-//            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//            intent.putExtra("name",MemoryData.getName(this));
-//            startActivity(intent);
-//            finish();
-//        }
-//
 
 
         btn_login.setOnClickListener(new View.OnClickListener(){
