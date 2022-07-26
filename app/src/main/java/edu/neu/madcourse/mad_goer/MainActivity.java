@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -272,8 +273,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void addEvent() {
-        FloatingActionButton fab = findViewById(R.id.create_event);
-        fab.setOnClickListener(new View.OnClickListener() {
+        ImageButton plus = findViewById(R.id.btn_create_event);
+        plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createNewDialog();
