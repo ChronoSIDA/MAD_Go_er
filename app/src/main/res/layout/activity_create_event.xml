@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,57 +26,84 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/lightRed"
                             android:text="Create"
-                            tools:layout_editor_absoluteX="266dp"
-                            tools:layout_editor_absoluteY="844dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_desc_create"
+                            app:layout_constraintHorizontal_bias="0.992"
+                            app:layout_constraintStart_toEndOf="@+id/btn_back_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_desc_create"
+                            app:layout_constraintVertical_bias="0.097" />
 
                         <TextView
-                            android:id="@+id/txt_time_create2"
+                            android:id="@+id/txt_date_create"
                             android:layout_width="100dp"
                             android:layout_height="42dp"
                             android:paddingTop="8dp"
                             android:text="Date:"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            tools:layout_editor_absoluteX="37dp"
-                            tools:layout_editor_absoluteY="501dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/txt_isLocation_create"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_isLocation_create"
+                            app:layout_constraintVertical_bias="0.012" />
 
-                        <EditText
-                            android:id="@+id/editTextTime2"
+                        <TextView
+                            android:id="@+id/id_date_create"
                             android:layout_width="210dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="15dp"
+                            android:clickable="true"
                             android:ems="10"
+                            android:hint="Pick event date"
                             android:inputType="time"
+                            android:paddingTop="8dp"
                             android:textSize="16sp"
-                            tools:layout_editor_absoluteX="148dp"
-                            tools:layout_editor_absoluteY="501dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_islocation_create"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/txt_date_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_islocation_create"
+                            app:layout_constraintVertical_bias="0.011" />
 
                         <TextView
                             android:id="@+id/txt_event_name_create4"
-                            android:layout_width="200dp"
+                            android:layout_width="210dp"
                             android:layout_height="40dp"
+                            android:layout_marginEnd="36dp"
                             android:paddingTop="8dp"
                             android:text="@string/string_random_event"
-                            android:textAlignment="viewEnd"
+                            android:textAlignment="textStart"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            tools:layout_editor_absoluteX="158dp"
-                            tools:layout_editor_absoluteY="239dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/img_category_create"
+                            app:layout_constraintVertical_bias="0.014" />
 
                         <TextView
                             android:id="@+id/txt_isLocation_create"
                             android:layout_width="100dp"
                             android:layout_height="42dp"
+                            android:layout_marginTop="8dp"
                             android:paddingTop="8dp"
                             android:text="Address:"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            tools:layout_editor_absoluteX="33dp"
-                            tools:layout_editor_absoluteY="452dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/id_isurl_create"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+                            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <ImageView
                             android:id="@+id/img_category_create"
                             android:layout_width="wrap_content"
-                            android:layout_height="209dp"
+                            android:layout_height="200dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"
                             app:srcCompat="@drawable/Sticker_Art" />
 
                         <EditText
@@ -86,8 +114,37 @@
                             android:text="Add description here"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            tools:layout_editor_absoluteX="37dp"
-                            tools:layout_editor_absoluteY="594dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_capacity_create"
+                            app:layout_constraintStart_toStartOf="@+id/txt_capacity_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_capacity_create"
+                            app:layout_constraintVertical_bias="0.047" />
+
+                        <TextView
+                            android:id="@+id/txt_duration_create"
+                            android:layout_width="100dp"
+                            android:layout_height="42dp"
+                            android:paddingTop="8dp"
+                            android:text="Duration:"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/txt_time_create"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_time_create"
+                            app:layout_constraintVertical_bias="0.017" />
+
+                        <TextView
+                            android:id="@+id/txt_capacity_create"
+                            android:layout_width="100dp"
+                            android:layout_height="42dp"
+                            android:paddingTop="8dp"
+                            android:text="Capacity:"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/txt_duration_create"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_duration_create"
+                            app:layout_constraintVertical_bias="0.016" />
 
                         <TextView
                             android:id="@+id/txt_time_create"
@@ -97,38 +154,50 @@
                             android:text="@string/string_time"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            tools:layout_editor_absoluteX="37dp"
-                            tools:layout_editor_absoluteY="543dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/txt_date_create"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_date_create"
+                            app:layout_constraintVertical_bias="0.016" />
 
                         <EditText
                             android:id="@+id/id_islocation_create"
                             android:layout_width="210dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:ems="10"
+                            android:hint="Enter the location"
                             android:inputType="textPersonName"
-                            android:text="Location"
                             android:textSize="16sp"
-                            tools:layout_editor_absoluteX="149dp"
-                            tools:layout_editor_absoluteY="459dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+                            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <EditText
-                            android:id="@+id/id_islocation_create2"
+                            android:id="@+id/id_isurl_create"
                             android:layout_width="210dp"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:hint="Input a virtual meeting URL"
                             android:inputType="textPersonName"
-                            android:text="URL"
                             android:textSize="16sp"
-                            tools:layout_editor_absoluteX="148dp"
-                            tools:layout_editor_absoluteY="452dp"
-                            tools:visibility="invisible" />
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+                            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                            app:layout_constraintVertical_bias="0.009" />
 
                         <RadioGroup
+                            android:id="@+id/radioGroup2"
                             android:layout_width="325dp"
-                            android:layout_height="51dp"
+                            android:layout_height="52dp"
                             android:orientation="horizontal"
-                            tools:layout_editor_absoluteX="34dp"
-                            tools:layout_editor_absoluteY="279dp">
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/txt_event_name_create4"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/txt_event_name_create"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_event_name_create4"
+                            app:layout_constraintVertical_bias="0.01">
 
                                 <RadioButton
                                     android:id="@+id/id_radio_private"
@@ -149,11 +218,16 @@
                         </RadioGroup>
 
                         <RadioGroup
+                            android:id="@+id/radioGroup"
                             android:layout_width="325dp"
-                            android:layout_height="85dp"
+                            android:layout_height="52dp"
                             android:orientation="horizontal"
-                            tools:layout_editor_absoluteX="33dp"
-                            tools:layout_editor_absoluteY="367dp">
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_password_create"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/id_password_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_password_create"
+                            app:layout_constraintVertical_bias="0.008">
 
                                 <RadioButton
                                     android:id="@+id/id_radio_inperson"
@@ -180,8 +254,12 @@
                             android:text="@string/string_event_name"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            tools:layout_editor_absoluteX="34dp"
-                            tools:layout_editor_absoluteY="240dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_event_name_create4"
+                            app:layout_constraintHorizontal_bias="0.7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/img_category_create"
+                            app:layout_constraintVertical_bias="0.014" />
 
                         <EditText
                             android:id="@+id/id_password_create"
@@ -191,19 +269,30 @@
                             android:inputType="textPersonName"
                             android:text="Password"
                             android:textSize="12sp"
-                            tools:layout_editor_absoluteX="34dp"
-                            tools:layout_editor_absoluteY="330dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/radioGroup2"
+                            app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+                            app:layout_constraintVertical_bias="0.008"
                             tools:visibility="invisible" />
 
-                        <EditText
-                            android:id="@+id/editTextTime"
+                        <TextView
+                            android:id="@+id/id_time_create"
                             android:layout_width="210dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="42dp"
+                            android:clickable="true"
                             android:ems="10"
+                            android:hint="Pick event time"
                             android:inputType="time"
+                            android:paddingTop="8dp"
                             android:textSize="16sp"
-                            tools:layout_editor_absoluteX="148dp"
-                            tools:layout_editor_absoluteY="543dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_date_create"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/txt_time_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_date_create"
+                            app:layout_constraintVertical_bias="0.017" />
 
                         <Button
                             android:id="@+id/btn_back_create"
@@ -211,9 +300,41 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/lightRed"
                             android:text="Back"
-                            tools:layout_editor_absoluteX="38dp"
-                            tools:layout_editor_absoluteY="844dp" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/id_desc_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_desc_create"
+                            app:layout_constraintVertical_bias="0.097" />
+
+                        <EditText
+                            android:id="@+id/id_duration_create"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Enter duration in hours"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_time_create"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/txt_duration_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_time_create"
+                            app:layout_constraintVertical_bias="0.017" />
+
+                        <EditText
+                            android:id="@+id/id_capacity_create"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Enter the capacity"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/id_duration_create"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/txt_capacity_create"
+                            app:layout_constraintTop_toBottomOf="@+id/id_duration_create"
+                            app:layout_constraintVertical_bias="0.016" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-</LinearLayout>>
+</LinearLayout>
