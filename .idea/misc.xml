@@ -7,7 +7,7 @@
         <entry key="app/src/main/res/font/bad_script.xml" value="0.28125" />
         <entry key="app/src/main/res/layout-land/fragment_2_go.xml" value="0.3255208333333333" />
         <entry key="app/src/main/res/layout-land/fragment_send.xml" value="0.35989583333333336" />
-        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.362982177734375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_layout.xml" value="0.25104166666666666" />
@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/layout/message_layout.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/messages_adapter_layout.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/noti_badge.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/password_dialog.xml" value="0.2967289719626168" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25104166666666666" />
       </map>
