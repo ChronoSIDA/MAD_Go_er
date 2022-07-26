@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -144,7 +146,6 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
 
 
         databaseUserRef.addValueEventListener(new ValueEventListener() {
@@ -269,7 +270,8 @@ public class MainActivity extends AppCompatActivity{
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    public void addNewEvent(String name, EventType type) { events.add(new Event(name, type));
+    public void addNewEvent(String name, EventType type) {
+        events.add(new Event(name, type));
     }
 
     public void addEvent() {
@@ -285,22 +287,36 @@ public class MainActivity extends AppCompatActivity{
 
     public void createNewDialog(){
         dialogBuilder= new AlertDialog.Builder(this);
-        final View linkPopupView = getLayoutInflater().inflate(R.layout.event_popup, null);
-        newEventName = (EditText) linkPopupView.findViewById(R.id.newEventName);
-        newEventType = (EditText) linkPopupView.findViewById(R.id.newEventCategory);
-        newEventSave = (Button) linkPopupView.findViewById(R.id.newEventSave);
-        newEventCancel = (Button) linkPopupView.findViewById(R.id.newEventCancel);
+        final View EventPopupView = getLayoutInflater().inflate(R.layout.event_popup, null);
+        newEventName = (EditText) EventPopupView.findViewById(R.id.newEventName);
+       // newEventType = (EditText) EventPopupView.findViewById(R.id.newEventCategory);
+        newEventSave = (Button) EventPopupView.findViewById(R.id.newEventSave);
+        newEventCancel = (Button) EventPopupView.findViewById(R.id.newEventCancel);
 
-        dialogBuilder.setView(linkPopupView);
+        dialogBuilder.setView(EventPopupView);
         dialog= dialogBuilder.create();
         dialog.show();
+
+        EnumSet<EventType> categories = EnumSet.allOf(EventType.class);
+
+        Spinner newEventSpinner = (Spinner) findViewById(R.id.spinner_category_popup);
+        ArrayList<EventType> category_list = new ArrayList<>(categories.size());
+        for (EventType t: categories) {
+            category_list.add(t);
+        }
+
+        // add enum values to the arrayList
+        ArrayAdapter<EventType> dataAdapter = new ArrayAdapter<EventType>(this, android.R.layout.simple_spinner_item, category_list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        newEventSpinner.setAdapter(dataAdapter);
+
 
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
                 if(newEventName!=null && newEventType!=null) {
-                    addNewEvent(newEventName.getText().toString(), newEventType);
+                    addNewEvent(newEventName.getText().toString(), newEventSpinner.getSelectedItem().toString());
                     Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }else{
