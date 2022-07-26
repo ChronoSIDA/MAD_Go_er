@@ -13,22 +13,24 @@ import edu.neu.madcourse.mad_goer.messages.Event;
 
 public class EventViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView nameTV;
-    public TextView timeTV;
-    public ImageView myIV;
+    private ImageView eventIcon;
+    private TextView eventName,hostName, eventDate,eventLocation;
 
     public EventViewHolder(@NonNull View itemView){
         super(itemView);
-        this.nameTV = (TextView)itemView.findViewById(R.id.name);
-        this.timeTV = (TextView)itemView.findViewById(R.id.time);
-        this.myIV = (ImageView)itemView.findViewById(R.id.imageView);
+        eventIcon=itemView.findViewById(R.id.eventIcon);
+        eventName = itemView.findViewById(R.id.eventName);
+        hostName = itemView.findViewById(R.id.hostName);
+        eventDate = itemView.findViewById(R.id.eventDate);
+        eventLocation = itemView.findViewById(R.id.eventLocation);
     }
+
     public void bindThisData(Event theEventToBind) {
-//        nameTV.setText(theEventToBind.getSendName() + " sent to " + theEventToBind.getReceiveName());
-//        timeTV.setText(String.valueOf(theEventToBind.getTimeStemp()));
-
-
-        }
+        eventName.setText(theEventToBind.getEventName());
+        hostName.setText(theEventToBind.getHost().getUserID());
+        eventDate.setText(theEventToBind.getStartDate().toString());
+        eventLocation.setText(theEventToBind.getLocation().toString());
+    }
 
     }
 

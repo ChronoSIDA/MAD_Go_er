@@ -26,5 +26,6 @@
     <string name="string_join">Join</string>
     <string name="string_cancel">Cancel</string>
     <string-array name="dropdown_categories_alertBox">
+    <string-array name="dropdown_categories_alertbox">
     </string-array>
 </resources>

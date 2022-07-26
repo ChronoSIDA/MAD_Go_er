@@ -95,7 +95,7 @@
             android:layout_marginTop="55dp"
             android:layout_toEndOf="@id/eventIcon"
             android:drawablePadding="2dp"
-            android:text="event locationo"
+            android:text="event location"
             android:textColor="@color/grey" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
