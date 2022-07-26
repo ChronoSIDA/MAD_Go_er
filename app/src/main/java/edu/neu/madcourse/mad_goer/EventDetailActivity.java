@@ -60,15 +60,7 @@ public class EventDetailActivity extends AppCompatActivity {
         addressTV = (TextView) findViewById(R.id.id_location_detail);
         attendingListTV = (TextView) findViewById(R.id.id_goers_detail);
         descriptionTV = (TextView) findViewById(R.id.id_desc_detail);
-        //        b = findViewById(R.id.button1);
-//
-//        b.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(MainActivity.this, "Yiqian Huang\nhuang.yiqia@northeastern.edu", Toast.LENGTH_SHORT).show();
-//                //Toast.makeText(MainActivity.this, "huang.yiqia@northeastern.edu", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
 
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,14 +94,14 @@ public class EventDetailActivity extends AppCompatActivity {
 
         joinBtn.setText(checkJoin(event, user));
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO:
-                //return to main activity
-
-            }
-        });
+//        cancelBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO:
+//                //return to main activity
+//
+//            }
+//        });
 
         hostTV.setText("Host: " + event.getHost().toString());
         eventNameTV.setText(event.getEventName());
@@ -162,6 +154,11 @@ public class EventDetailActivity extends AppCompatActivity {
             address = event.getLink();
         }
         return address;
+    }
+
+    public void returnMain(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
