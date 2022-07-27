@@ -1,35 +1,24 @@
 package edu.neu.madcourse.mad_goer;
 
-import static edu.neu.madcourse.mad_goer.R.drawable.ic_noti_emoji;
-
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -42,12 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -59,19 +43,17 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
-import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.messages.message;
 import edu.neu.madcourse.mad_goer.ui.album.AlbumFragment;
-import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
 
 public class MainActivity extends AppCompatActivity{
     private NotificationManagerCompat notificationManagerCompat;
@@ -86,18 +68,17 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventName;
     private EditText newEventType;
     private Button newEventSave, newEventCancel;
-    private ArrayList<Event> events;
+    private HashMap<String, Event> eventMap;
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://team36a8-default-rtdb.firebaseio.com/");
-    DatabaseReference databaseUserInfo = FirebaseDatabase.getInstance().getReferenceFromUrl("https://team36a8-default-rtdb.firebaseio.com/users/");
+
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
-    DatabaseReference databaseMsgRef = FirebaseDatabase.getInstance().getReference("messages");
-    DatabaseReference dbMsgUnderUserRef;
+    DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("event");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -108,12 +89,13 @@ public class MainActivity extends AppCompatActivity{
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
+
         //use extras to get the passed in userName/userID from login to main activity
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
-        String urlJson = "https://team36a8-default-rtdb.firebaseio.com/users/" + "" +".json";
+        String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
         StringRequest request = new StringRequest(Request.Method.GET, urlJson, new Response.Listener<String>(){
             @Override
@@ -159,16 +141,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        databaseMsgRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
@@ -199,68 +171,8 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        //this part is for message module
-        //go the messages in database, then go to current user
 
-        databaseReference.child("messages").child(currentUserID).limitToLast(1).addChildEventListener(new ChildEventListener(){
 
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        //this is for history module, have a listener for all msg under current user, once there is a new message
-        //add it to msglist
-        //msglist will be passed to an adapter and then to recycleview
-        albumFragment = new AlbumFragment();
-        databaseReference.child("messages").child(currentUserID).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                message tmp = snapshot.getValue(message.class);
-                msgList.add(tmp);
-                albumFragment = new AlbumFragment();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 
@@ -271,7 +183,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void addNewEvent(String name, EventType type) {
-        events.add(new Event(name, type));
+       // eventMap.put(new Event(name, type));
     }
 
     public void addEvent() {
@@ -282,6 +194,10 @@ public class MainActivity extends AppCompatActivity{
                 createNewDialog();
             }
         });
+    }
+
+    public HashMap<String, Event> getTotalEvents(){
+        return eventMap;
     }
 
 

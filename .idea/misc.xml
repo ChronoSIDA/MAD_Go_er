@@ -3,6 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/highlight_selected.xml" value="0.2565" />
+        <entry key="app/src/main/res/font/bad_script.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout-land/activity_create_event.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout-land/fragment_2_go.xml" value="0.3255208333333333" />
+        <entry key="app/src/main/res/layout-land/fragment_send.xml" value="0.35989583333333336" />
+        <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_host.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/card_layout.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/fragment_1_home.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/fragment_2_go.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/fragment_3_album.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/fragment_4_setting.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/fragment_send.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/item_message.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/login_main.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/message_layout.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/messages_adapter_layout.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/noti_badge.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/radio_grop.xml" value="0.44140625" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_go.xml" value="0.1055" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_go_red.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/highlight_selected.xml" value="0.196" />

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.databinding.Fragment2GoBinding;
@@ -25,7 +26,7 @@ public class GoFragment extends Fragment {
     private String timePattern = "yyyy-MM-dd HH:mm:ss z";
     private DateFormat df = new SimpleDateFormat(timePattern);
 
-    private ArrayList<Event> eventList;
+    private HashMap<String,Event> eventList;
     private RecyclerView recyclerView;
 
 
@@ -42,7 +43,7 @@ public class GoFragment extends Fragment {
 
         MainActivity activity = (MainActivity) getActivity();
         //TODO: maybe do filter of event list here?
-        eventList = activity.getTotalEventList();
+        eventList = activity.getTotalEvents();
 
         EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);

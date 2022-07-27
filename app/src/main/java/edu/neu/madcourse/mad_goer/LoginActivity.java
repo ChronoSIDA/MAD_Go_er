@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity{
     EditText input_userName;
     Button btn_login;
 
-
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com/");
 
     @Override

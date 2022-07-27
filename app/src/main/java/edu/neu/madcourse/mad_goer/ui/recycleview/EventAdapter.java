@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -18,11 +19,11 @@ import edu.neu.madcourse.mad_goer.messages.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
 
-    private final ArrayList<Event> eventList;
+    //private final ArrayList<Event> eventList;
+    private final HashMap<String,Event> eventList;
     private final Context context;
 
-
-    public EventAdapter(ArrayList<Event> eventList, Context context) {
+    public EventAdapter(HashMap<String,Event> eventList, Context context) {
         this.eventList = eventList;
         this.context = context;
     }
@@ -56,13 +57,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
         return eventList.size();
     }
 
+
+
     public class Viewholder extends RecyclerView.ViewHolder{
         private ImageView eventIcon;
         private TextView eventName,hostName, eventDate,eventLocation;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
-
             eventIcon=itemView.findViewById(R.id.eventIcon);
             eventName = itemView.findViewById(R.id.eventName);
             hostName = itemView.findViewById(R.id.hostName);
@@ -70,4 +72,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
             eventLocation = itemView.findViewById(R.id.eventLocation);
         }
     }
+
 }

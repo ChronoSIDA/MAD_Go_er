@@ -1,5 +1,6 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
+import edu.neu.madcourse.mad_goer.ui.recycleview.RecyclerItemClickListener;
 
 public class HomeFragment extends Fragment {
 
     private Fragment1HomeBinding binding;
-    private ArrayList<Event> eventList;
+    private HashMap<String,Event> eventMap;
     private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,10 +37,27 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = binding.rvHomefrag;
 
 
-        MainActivity activity = (MainActivity) getActivity();
-        eventList = activity.getTotalEventList();
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context,recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position){
+                Intent intent = new Intent(getContext(), EventDetailActivity.class);
+                intent.putExtra("eventID", eventMap.get(position).getEventID());
+                startActivity(intent);
+            }
+            @Override
+            public void onLongItemClick(View view, int position){
 
-        EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
+            }
+        }));
+
+
+        MainActivity activity = (MainActivity) getActivity();
+        eventMap = activity.getTotalEvents();
+
+//        ArrayList<HashMap<String,Event>> arrayList = new ArrayList<>();
+//        arrayList.add(eventMap);
+
+        EventAdapter eventAdapter = new EventAdapter(eventMap,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(eventAdapter);
@@ -45,11 +66,13 @@ public class HomeFragment extends Fragment {
 
         //added Jul14
         //will auto show cardview from bottom
-        recyclerView.scrollToPosition(eventList.size()-1);
+        recyclerView.scrollToPosition(eventMap.size()-1);
 
 
         return root;
     }
+
+
 
 
     @Override
