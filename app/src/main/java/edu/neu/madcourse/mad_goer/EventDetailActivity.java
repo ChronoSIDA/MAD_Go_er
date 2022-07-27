@@ -34,7 +34,6 @@ public class EventDetailActivity extends AppCompatActivity {
         TextView scrollDesc = (TextView) findViewById(R.id.id_desc_detail);
         scrollDesc.setMovementMethod(new ScrollingMovementMethod());
 
-
         joinBtn = (Button) findViewById(R.id.btn_join_detail);
         cancelBtn = (Button) findViewById(R.id.btn_cancel_detail);
         hostTV = (TextView) findViewById(R.id.txt_host_detail);
