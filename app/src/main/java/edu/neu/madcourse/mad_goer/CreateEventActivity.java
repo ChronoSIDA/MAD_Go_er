@@ -61,7 +61,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         });
         categoryIV = (ImageView) findViewById(R.id.iv_category_create);
         categoryIV.setImageDrawable(getImageByType(event.getCategory()));
-
         categoryTV = (TextView) findViewById(R.id.txt_categories_create);
         addressTV = (EditText) findViewById(R.id.txt_address_create);
         urlTV = (EditText) findViewById(R.id.txt_url_create);
