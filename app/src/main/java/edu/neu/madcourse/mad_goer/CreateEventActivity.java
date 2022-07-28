@@ -21,10 +21,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
+import edu.neu.madcourse.mad_goer.messages.User;
 
 public class CreateEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private Event event;
@@ -39,10 +41,20 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private EditText addressTV;
     private EditText urlTV;
     private EditText descriptionTV;
+
+    //TODO: QUESTION: where is create event activity called? I need to pass userList from outside to this activity
+    //added by Yang Yang, pass in UserList from mainactivity, and connect it to firebase, so when a new event
+    //is created, add it to the user's eventlist(host) in firebase
+    //Two things added: 1. userlist    2. firebase
+    private ArrayList<User> userList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+
         cancel = (TextView) findViewById(R.id.btn_cancel_create);
         eventNameTV = (TextView) findViewById(R.id.txt_event_name_create);
         date= (TextView) findViewById(R.id.txt_event_date_create);

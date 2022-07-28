@@ -52,6 +52,7 @@ import java.util.HashMap;
 import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
+import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.messages.message;
 import edu.neu.madcourse.mad_goer.ui.album.AlbumFragment;
 
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventType;
     private Button newEventSave, newEventCancel;
     private HashMap<String, Event> eventMap;
+    private ArrayList<User> userList;
+    private String currentUser;
 
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        currentUser = extras.getString("DBcurrentUserID");
         TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
@@ -129,10 +133,29 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-
-        databaseUserRef.addValueEventListener(new ValueEventListener() {
+        //get userList from remote
+        databaseUserRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                userList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
 
@@ -234,7 +257,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putString(CURRENT_USER, currentUserID);
+        savedInstanceState.putString(CURRENT_USER, currentUser);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -255,6 +278,8 @@ public class MainActivity extends AppCompatActivity{
     public HashMap<String, Event> getTotalEvents(){
         return eventMap;
     }
+    public ArrayList<User> getUserList(){return userList;}
+    public String getCurrentUser(){return this.currentUser;}
 
 
     public void createNewDialog(){

@@ -7,8 +7,20 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
 
@@ -29,11 +41,13 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView descriptionTV;
     private String eventID;
     private HashMap<String,Event> eventmap;
+    private ArrayList<User> userList;
     private MainActivity mainActivity;
+    private String currentUser;
 
 
 
-
+    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +57,9 @@ public class EventDetailActivity extends AppCompatActivity {
         //also have eventmap from mainactivity
         mainActivity = new MainActivity();
         eventmap = mainActivity.getTotalEvents();
+        userList = mainActivity.getUserList();
+        currentUser = mainActivity.getCurrentUser();
+
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -73,8 +90,30 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO:
                 //join之后user 的attend list增加该event
+                //databaseReference.child("messages").child(currentUserID).push().setValue(msg);
+                //databaseUserRef.child(currentUser).child(hostEventList).push().setValue(event);
+
+                // Get a reference to our posts
+                DatabaseReference ref = databaseUserRef.child(currentUser);
+                Map<String,Object> userUpdates = new HashMap<>();
+                userUpdates.put("","");
 
 
+                // Attach a listener to read the data at our posts reference
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+                        user.getHostEventList().put(eventID,"host");
+                        //TODO: test if user in firebase is updated with new host event list, if not need to update the user to firebase
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
                 //check if event attendingList is full

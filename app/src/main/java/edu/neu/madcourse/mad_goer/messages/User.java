@@ -4,19 +4,18 @@ import android.os.Message;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class User {
 
     private String userID;
 
-    private ArrayList<EventType> myInterests;
-
-    private ArrayList<String> hostEventList;
-    private ArrayList<String> attendEventList;
-    private ArrayList<String> savedEventList;
-    private ArrayList<String> pastEventList;
-
-
+    //key cannot be duplicate, but values can
+    //Key is meetingID, value is "saved"/"Host"/"past"/"interested"/"attend"
+    private HashMap<String,String> myEventList;
 
     //must keep the empty constructor, otherwise generate "Class does not define a no-argument constructor." error
     public User() {
@@ -24,53 +23,41 @@ public class User {
 
     public User(String userID){
         this.userID = userID;
+        Map<String,String> myEventList = new HashMap<>();
     }
 
     public String getUserID() {
         return userID;
     }
 
-    public ArrayList<String> getAttendEventList() {
-        return attendEventList;
+
+    public Map<String,String> getAttendEventList() {
+        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "attending".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
+        return result;
     }
 
-    public void setAttendEventList(ArrayList<String> attendEventList) {
-        this.attendEventList = attendEventList;
+    public Map<String,String> getSavedEventList() {
+        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "saved".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
+        return result;
     }
 
-    public ArrayList<String> getSavedEventList() {
-        return savedEventList;
+    public Map<String,String> getPastEventList() {
+        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "past".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
+        return result;
     }
 
-    public void setSavedEventList(ArrayList<String> savedEventList) {
-        this.savedEventList = savedEventList;
+    public Map<String,String> getHostEventList() {
+        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "host".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
+        return result;
     }
 
-    public ArrayList<String> getPastEventList() {
-        return pastEventList;
-    }
-
-    public void setPastEventList(ArrayList<String> pastEventList) {
-        this.pastEventList = pastEventList;
+    public Map<String,String> getInterestedEventList() {
+        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "interested".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
+        return result;
     }
 
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public ArrayList<EventType> getMyInterests() {
-        return myInterests;
-    }
-
-    public void setMyInterests(ArrayList<EventType> myInterests) {
-        this.myInterests = myInterests;
-    }
-
-    public ArrayList<String> getHostEventList() {
-        return hostEventList;
-    }
-
-    public void setHostEventList(ArrayList<String> hostEventList) {
-        this.hostEventList = hostEventList;
-    }
 }

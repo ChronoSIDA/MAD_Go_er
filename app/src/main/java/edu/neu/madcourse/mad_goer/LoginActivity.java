@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity{
                                     Toast.makeText(LoginActivity.this,"Username length cannot be less than 3 characters \nUsername length cannot be longer than 10 characters",Toast.LENGTH_LONG).show();
                                 } else {
                                     User currentUser = new User((nameTxt));
+                                    //added a user object to database under Users
                                     databaseReference.child("users").child(nameTxt).setValue(currentUser);
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
 
