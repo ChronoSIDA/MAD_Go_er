@@ -73,10 +73,11 @@ public class InterestActivity extends AppCompatActivity {
         religion_cb = (CheckBox) findViewById(R.id.cbox_religion_interest);
         science_cb = (CheckBox) findViewById(R.id.cbox_science_interest);
 
+        //add interest type into users' interest list when clicking
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: user interest list add the chosen categories
+
                 if(music_cb.isChecked()){
                     user.getInterestedTypeList().add(EventType.MUSIC);
                 }
@@ -164,16 +165,12 @@ public class InterestActivity extends AppCompatActivity {
                 if(religion_cb.isChecked()){
                     user.getInterestedTypeList().add(EventType.RELIGION);
                 }
-
-
-
-
             }
         });
 
     }
 
-    public void mainActivityNav(View view){
+    public void returnMain(View view){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
