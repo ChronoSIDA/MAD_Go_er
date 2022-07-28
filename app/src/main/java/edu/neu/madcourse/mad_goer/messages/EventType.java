@@ -1,5 +1,9 @@
 package edu.neu.madcourse.mad_goer.messages;
 
+import android.graphics.drawable.Drawable;
+
+import edu.neu.madcourse.mad_goer.R;
+
 public enum EventType {EDUCATION("Education"), SPORTS("Sports"),
     FITNESS("Fitness"), TECHNOLOGY("Technology"),
     TRAVEL("Travel"), OUTDOOR("Outdoor"), GAMES("Games"),
@@ -10,6 +14,7 @@ public enum EventType {EDUCATION("Education"), SPORTS("Sports"),
     PETS("Pets"), RELIGION("Religion"), SCIENCE("Science");
 
     private String category;
+    //private Drawable pic;
     private EventType(String category){
         this.category = category;
     }

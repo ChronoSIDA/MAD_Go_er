@@ -20,9 +20,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
@@ -31,6 +35,7 @@ import edu.neu.madcourse.mad_goer.messages.User;
 public class CreateEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private Event event;
     private Button cancel;
+    private Button create;
     private TextView eventNameTV;
     private TextView date;
     private TextView time;
@@ -54,29 +59,46 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
+        cancel = (Button) findViewById(R.id.btn_back_create);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "If you cancel, no changes will be saved, are you sure to cancel?", Snackbar.LENGTH_LONG);
+                snackbar.setAction("Confirm", view -> {
+                    snackbar.dismiss();
+                    finish();
+                });
+                snackbar.show();
+        }};
 
-        cancel = (TextView) findViewById(R.id.btn_cancel_create);
+        create = (Button) findViewById(R.id.btn_create_create);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO DO: upload this event to firebase
+
+            }
+        });
         eventNameTV = (TextView) findViewById(R.id.txt_event_name_create);
-        date= (TextView) findViewById(R.id.txt_event_date_create);
+        date= (TextView) findViewById(R.id.id_date_create);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
-        time= (TextView) findViewById(R.id.txt_event_time_create);
+        time= (TextView) findViewById(R.id.id_time_create);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimePickerDialog();
             }
         });
-        categoryIV = (ImageView) findViewById(R.id.iv_category_create);
+        categoryIV = (ImageView) findViewById(R.id.img_category_create);
         categoryIV.setImageDrawable(getImageByType(event.getCategory()));
-        categoryTV = (TextView) findViewById(R.id.txt_categories_create);
-        addressTV = (EditText) findViewById(R.id.txt_address_create);
-        urlTV = (EditText) findViewById(R.id.txt_url_create);
-        descriptionTV = (EditText) findViewById(R.id.txt_description_create);
+        addressTV = (EditText) findViewById(R.id.id_islocation_create);
+        urlTV = (EditText) findViewById(R.id.id_isurl_create);
+        descriptionTV = (EditText) findViewById(R.id.id_desc_create);
     }
 
     public void showDatePickerDialog(){
@@ -100,41 +122,112 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     //identify the event type by enum, and return the sticker associated with that type
     public Drawable getImageByType(EventType type){
-
-        switch(type){
-
+        Drawable typeImage;
+        if(type ==null){
+            return null;
         }
-        Drawable typeImage = new Drawable() {
-            @Override
-            public void draw(@NonNull Canvas canvas) {
+        switch(type) {
+            case EDUCATION:
+                typeImage = getDrawable(R.drawable.Sticker_Education);
+                break;
+            case SPORTS:
+                typeImage = getDrawable(R.drawable.Sticker_Sports);
+                break;
+            case FITNESS:
+                typeImage = getDrawable(R.drawable.Sticker_Fitness);
+                break;
+            case TECHNOLOGY:
+                typeImage = getDrawable(R.drawable.Sticker_Technology);
+                break;
+            case TRAVEL:
+                typeImage = getDrawable(R.drawable.Sticker_Travel);
+                break;
+            case OUTDOOR:
+                typeImage = getDrawable(R.drawable.Sticker_Outdoor);
+                break;
+            case GAMES:
+                typeImage = getDrawable(R.drawable.Sticker_Games);
+                break;
+            case ART:
+                typeImage = getDrawable(R.drawable.Sticker_Art);
+                break;
+            case CULTURE:
+                typeImage = getDrawable(R.drawable.Sticker_culture);
+                break;
+            case CAREER:
+                typeImage = getDrawable(R.drawable.Sticker_Career);
+                break;
+            case BUSINESS:
+                typeImage = getDrawable(R.drawable.Sticker_Business);
+                break;
+            case COMMUNITY:
+                typeImage = getDrawable(R.drawable.Sticker_Community);
+                break;
+            case DANCING:
+                typeImage = getDrawable(R.drawable.Sticker_Dancing);
+                break;
+            case HEALTH:
+                typeImage = getDrawable(R.drawable.Sticker_Health);
+                break;
+            case HOBBIES:
+                typeImage = getDrawable(R.drawable.Sticker_Hobbies);
+                break;
+            case MOVEMENT:
+                typeImage = getDrawable(R.drawable.Sticker_Movement);
+                break;
+            case LANGUAGE:
+                typeImage = getDrawable(R.drawable.Sticker_Language);
+                break;
+            case MUSIC:
+                typeImage = getDrawable(R.drawable.Sticker_Music);
+                break;
+            case FAMILY:
+                typeImage = getDrawable(R.drawable.Sticker_Family);
+                break;
+            case PETS:
+                typeImage = getDrawable(R.drawable.Sticker_Pets);
+                break;
+            case RELIGION:
+                typeImage = getDrawable(R.drawable.Sticker_Religion);
+                break;
+            case SCIENCE:
+                typeImage = getDrawable(R.drawable.Sticker_Science);
+                break;
 
-            }
-
-            @Override
-            public void setAlpha(int alpha) {
-
-            }
-
-            @Override
-            public void setColorFilter(@Nullable ColorFilter colorFilter) {
-
-            }
-
-            @Override
-            public int getOpacity() {
-                return PixelFormat.UNKNOWN;
-            }
-        };
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
         return typeImage;
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        event.setStartDate(getDate(year, month, dayOfMonth));
+    }
 
+    public Date getDate(int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "If you leave right now, no changes will be saved, do you confirm to continue?", Snackbar.LENGTH_LONG);
+        snackbar.setAction("Confirm", view -> {
+            snackbar.dismiss();
+            finish();
+        });
+        snackbar.show();
     }
 }

@@ -12,7 +12,6 @@ public class Event {
     private String eventID;
     private String eventName;
     private Date startDate;
-    private Date endDate;
 
     //if false then virtual
     private boolean inPerson;
@@ -59,14 +58,6 @@ public class Event {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public boolean isInPerson() {

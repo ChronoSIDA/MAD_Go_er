@@ -69,8 +69,8 @@ public class LoginActivity extends AppCompatActivity{
                                     databaseReference.child("users").child(nameTxt).setValue(currentUser);
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
 
-
-                                    Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
+                                    //change launch activity to select interest
+                                    Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.InterestActivity.class);
                                     intent.putExtra("DBcurrentUserID", nameTxt);
                                     startActivity(intent);
                                 }

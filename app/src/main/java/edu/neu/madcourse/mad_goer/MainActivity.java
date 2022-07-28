@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
     private String currentUser;
 
 
+
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("event");
 
