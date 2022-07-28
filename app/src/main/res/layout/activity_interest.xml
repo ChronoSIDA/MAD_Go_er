@@ -7,69 +7,237 @@
     android:background="@color/smokeWhite">
 
     <CheckBox
-        android:id="@+id/cbox_culture_interest"
-        android:layout_width="77dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginBottom="384dp"
-        android:button="@android:color/transparent"
-        android:text="Culture"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.823"
-        app:layout_constraintStart_toEndOf="@+id/cbox_art_interest"
-        app:layout_constraintTop_toBottomOf="@+id/cbox_outdoor_interest"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <CheckBox
-        android:id="@+id/cbox_business_interest"
-        android:layout_width="77dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginBottom="384dp"
-        android:button="@android:color/transparent"
-        android:text="Business"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cbox_culture_interest" />
-
-    <CheckBox
         android:id="@+id/cbox_art_interest"
-        android:layout_width="64dp"
-        android:layout_height="38dp"
+        android:layout_width="65dp"
+        android:layout_height="40dp"
         android:button="@android:color/transparent"
-        android:text="Art"
+        android:text="@string/art"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbox_tech_interest"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <CheckBox
-        android:id="@+id/cbox_career_interest"
-        android:layout_width="77dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="384dp"
+        android:id="@+id/cbox_business_interest"
+        android:layout_width="76dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="376dp"
         android:button="@android:color/transparent"
-        android:text="Career"
+        android:text="@string/business"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
-        app:layout_constraintStart_toEndOf="@+id/cbox_business_interest" />
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toEndOf="@+id/cbox_culture_interest"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_outdoor_interest" />
+
+    <CheckBox
+        android:id="@+id/cbox_culture_interest"
+        android:layout_width="71dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="384dp"
+        android:button="@android:color/transparent"
+        android:text="@string/culture"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toEndOf="@+id/cbox_art_interest"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_tech_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_community_interest"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="328dp"
+        android:button="@android:color/transparent"
+        android:text="@string/community"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_art_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_religion_interest"
+        android:layout_width="72dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="220dp"
+        android:button="@android:color/transparent"
+        android:text="Religion"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_music_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_music_interest"
+        android:layout_width="76dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="276dp"
+        android:button="@android:color/transparent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_community_interest"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Language" />
+
+    <CheckBox
+        android:id="@+id/cbox_dance_interest"
+        android:layout_width="72dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="220dp"
+        android:button="@android:color/transparent"
+        android:text="Dancing"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_music_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_family_interest"
+        android:layout_width="76dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="328dp"
+        android:button="@android:color/transparent"
+        android:text="@string/family"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_art_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_science_interest"
+        android:layout_width="72dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="220dp"
+        android:button="@android:color/transparent"
+        android:text="Science"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_music_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_movement_interest3"
+        android:layout_width="72dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="276dp"
+        android:button="@android:color/transparent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_hobby_interest"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Music" />
+
+    <CheckBox
+        android:id="@+id/cbox_health_interest"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="328dp"
+        android:button="@android:color/transparent"
+        android:text="@string/health"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_art_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_pets_interest"
+        android:layout_width="53dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="276dp"
+        android:button="@android:color/transparent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_hobby_interest"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Pets" />
+
+    <CheckBox
+        android:id="@+id/cbox_movement_interest"
+        android:layout_width="86dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="276dp"
+        android:button="@android:color/transparent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_health_interest"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Movement" />
+
+    <CheckBox
+        android:id="@+id/cbox_hobby_interest"
+        android:layout_width="62dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="328dp"
+        android:button="@android:color/transparent"
+        android:text="@string/hobbies"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.633"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_art_interest"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/cbox_career_interest"
+        android:layout_width="73dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="376dp"
+        android:button="@android:color/transparent"
+        android:text="@string/career"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toEndOf="@+id/cbox_business_interest"
+        app:layout_constraintTop_toBottomOf="@+id/cbox_game_interest" />
 
     <CheckBox
         android:id="@+id/cbox_game_interest"
         android:layout_width="87dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="428dp"
         android:button="@android:color/transparent"
-        android:text="Games"
+        android:text="@string/games"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,10 +248,10 @@
     <CheckBox
         android:id="@+id/cbox_outdoor_interest"
         android:layout_width="87dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="428dp"
         android:button="@android:color/transparent"
-        android:text="Outdoor"
+        android:text="@string/outdoor"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,10 +262,10 @@
     <CheckBox
         android:id="@+id/cbox_tech_interest"
         android:layout_width="100dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="428dp"
         android:button="@android:color/transparent"
-        android:text="Technology"
+        android:text="@string/technology"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,18 +276,18 @@
     <CheckBox
         android:id="@+id/cbox_travel_interest"
         android:layout_width="77dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="468dp"
         android:button="@android:color/transparent"
-        android:text="Travel"
+        android:text="@string/travel"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toEndOf="@+id/cbox_edu_interest"
         app:layout_constraintTop_toTopOf="@+id/txt_main_interest"
-        app:layout_constraintVertical_bias="0.772" />
+        app:layout_constraintVertical_bias="0.804" />
 
     <TextView
         android:id="@+id/txt_main_interest"
@@ -138,13 +306,13 @@
     <CheckBox
         android:id="@+id/cbox_edu_interest"
         android:layout_width="64dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:button="@android:color/transparent"
-        android:text="Sports"
+        android:text="@string/sports"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txt_main_interest"
         app:layout_constraintVertical_bias="0.173" />
@@ -152,32 +320,32 @@
     <CheckBox
         android:id="@+id/cbox_edu_interest2"
         android:layout_width="77dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="468dp"
         android:button="@android:color/transparent"
-        android:text="Education"
+        android:text="@string/education"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/cbox_edu_interest"
         app:layout_constraintTop_toTopOf="@+id/txt_main_interest"
-        app:layout_constraintVertical_bias="0.772" />
+        app:layout_constraintVertical_bias="0.804" />
 
     <CheckBox
         android:id="@+id/cbox_fitness_interest"
         android:layout_width="77dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="468dp"
         android:button="@android:color/transparent"
-        android:text="Fitness"
+        android:text="@string/fitness"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toEndOf="@+id/cbox_edu_interest"
         app:layout_constraintTop_toTopOf="@+id/txt_main_interest"
-        app:layout_constraintVertical_bias="0.772" />
+        app:layout_constraintVertical_bias="0.804" />
 </androidx.constraintlayout.widget.ConstraintLayout>
