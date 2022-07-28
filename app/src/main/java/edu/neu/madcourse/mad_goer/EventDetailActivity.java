@@ -3,9 +3,10 @@ package edu.neu.madcourse.mad_goer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.widget.TextView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private ArrayList<User> userList;
     private MainActivity mainActivity;
     private String currentUser;
-
+    private ImageButton saveBtn;
 
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
@@ -73,6 +74,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
         joinBtn = (Button) findViewById(R.id.btn_join_detail);
         cancelBtn = (Button) findViewById(R.id.btn_cancel_detail);
+        saveBtn = (ImageButton) findViewById(R.id.btn_save_detail);
+
         hostTV = (TextView) findViewById(R.id.txt_host_detail);
         eventNameTV = (TextView) findViewById(R.id.id_event_name_detail);
         timeTV = (TextView) findViewById(R.id.id_timestamp_detail);
@@ -106,7 +109,8 @@ public class EventDetailActivity extends AppCompatActivity {
                         User user = snapshot.getValue(User.class);
                         user.getHostEventList().put(eventID,"host");
                         snapshot.getRef().updateChildren(currentUser);
-                        //TODO: test if user in firebase is updated with new host event list, if not need to update the user to firebase
+                        //TODO: test if user in firebase is updated with new host event list,
+                        // if not need to update the user to firebase
 
                     }
 
@@ -165,8 +169,16 @@ public class EventDetailActivity extends AppCompatActivity {
 
         //TODO:
         //star后加入该user的 saved list
-
-
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!user.getSavedEventList().containsKey(eventID)){
+                    user.getSavedEventList().put(eventID, "saved");
+                }else{
+                    user.getSavedEventList().remove(eventID);
+                }
+            }
+        });
     }
 
     //check joined

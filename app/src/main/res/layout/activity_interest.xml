@@ -283,17 +283,18 @@
 
     <TextView
         android:id="@+id/txt_main_interest"
-        android:layout_width="282dp"
-        android:layout_height="58dp"
+        android:layout_width="271dp"
+        android:layout_height="67dp"
         android:text="@string/string_interest_txt"
-        android:textSize="20sp"
+        android:textColor="@color/strongRed"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.115" />
 
     <CheckBox
         android:id="@+id/cbox_sport_interest"
@@ -344,6 +345,7 @@
         android:backgroundTint="@color/lightRed"
         android:text="GO"
         android:textSize="16sp"
+        android:onClick="returnMain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.438"
@@ -360,6 +362,7 @@
         android:textAlignment="textEnd"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:onClick="returnMain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbox_dance_interest"
