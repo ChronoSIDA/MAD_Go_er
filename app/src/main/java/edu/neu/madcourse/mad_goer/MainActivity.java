@@ -317,6 +317,7 @@ public class MainActivity extends AppCompatActivity{
                     addNewEvent(newEventName.getText().toString(), EventType.valueOf(type));
                     Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    // add intent
                 }else{
                     Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
