@@ -293,7 +293,7 @@
         android:id="@+id/txt_main_interest"
         android:layout_width="282dp"
         android:layout_height="58dp"
-        android:text="@string/we_really_want_to_know_which_events_you_want_to_go"
+        android:text="@string/string_interest_txt"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -348,4 +348,20 @@
         app:layout_constraintStart_toEndOf="@+id/cbox_edu_interest"
         app:layout_constraintTop_toTopOf="@+id/txt_main_interest"
         app:layout_constraintVertical_bias="0.804" />
+
+    <Button
+        android:id="@+id/btn_go_interest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="591dp" />
+
+    <Button
+        android:id="@+id/btn_skip_interest"
+        android:layout_width="77dp"
+        android:layout_height="37dp"
+        android:text="skip"
+        tools:layout_editor_absoluteX="172dp"
+        tools:layout_editor_absoluteY="602dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
