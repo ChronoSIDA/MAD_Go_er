@@ -8,10 +8,10 @@
         <entry key="app/src/main/res/layout-land/activity_create_event.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout-land/fragment_2_go.xml" value="0.3255208333333333" />
         <entry key="app/src/main/res/layout-land/fragment_send.xml" value="0.35989583333333336" />
-        <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.2861507128309572" />
+        <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_host.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/layout/activity_interest.xml" value="0.35818176269531254" />
+        <entry key="app/src/main/res/layout/activity_interest.xml" value="0.30918731689453127" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_layout.xml" value="0.25104166666666666" />

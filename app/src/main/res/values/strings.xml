@@ -44,6 +44,9 @@
     <string name="string_interest_title">We really want to know which events you want to GO:</string>
     <string name="string_in_person">In-Person</string>
     <string name="string_virtual">Virtual</string>
+    <string name="religion">Religion</string>
+    <string name="science">Science</string>
+    <string name="dancing">Dancing</string>
     <string-array name="dropdown_categories_alertbox">
     </string-array>
 </resources>
