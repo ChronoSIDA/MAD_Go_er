@@ -48,6 +48,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private ImageButton saveBtn;
 
 
+
+    //In event details activity, only need to access users in firebase to add joined event
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
@@ -90,36 +92,13 @@ public class EventDetailActivity extends AppCompatActivity {
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:
-                //join之后user 的attend list增加该event
-                //databaseReference.child("messages").child(currentUserID).push().setValue(msg);
-                //databaseUserRef.child(currentUser).child(hostEventList).push().setValue(event);
-
+                //Logic: This part aims to add the event as "attending" under current user in firebase
+                //TODO: test if user in firebase has updated its eventmap
                 // Get a reference to our posts
                 DatabaseReference ref = databaseUserRef.child(currentUser);
                 Map<String,Object> userUpdates = new HashMap<>();
-
-                userUpdates.put("","");
-
-
-                // Attach a listener to read the data at our posts reference
-                ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        User user = snapshot.getValue(User.class);
-                        user.getHostEventList().put(eventID,"host");
-                        snapshot.getRef().updateChildren(currentUser);
-                        //TODO: test if user in firebase is updated with new host event list,
-                        // if not need to update the user to firebase
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                userUpdates.put(eventID,"attending");
+                ref.push().setValue(userUpdates);
 
                 //check if event attendingList is full
                 //if not full: Toast "Congratulations! Successfully Join!

@@ -14,7 +14,7 @@ public class User {
     private String userID;
 
     //key cannot be duplicate, but values can
-    //Key is meetingID, value is "saved"/"Host"/"past"/"interested"/"attend"
+    //Key is eventID, value is "saved"/"Host"/"past"/"interested"/"attend"
     private HashMap<String,String> myEventList;
 
     private ArrayList<EventType> interestedTypeList;
@@ -57,9 +57,14 @@ public class User {
         return interestedTypeList;
     }
 
+    public Map<String,String> getTotalPersonalEvents(){
+        return this.myEventList;
+    }
+
     public void setInterestedTypeList(ArrayList<EventType> interestedTypeList) {
         this.interestedTypeList = interestedTypeList;
     }
+
 
     public void setUserID(String userID) {
         this.userID = userID;
