@@ -28,14 +28,14 @@
                             android:id="@+id/img_category_create"
                             android:layout_width="390dp"
                             android:layout_height="200dp"
+                            android:contentDescription="TODO"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.4"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0"
-                            app:srcCompat="@drawable/Sticker_Art"
-                            android:contentDescription="TODO" />
+                            app:srcCompat="@drawable/Sticker_Art" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout"
@@ -375,10 +375,10 @@
                             android:layout_height="40dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/id_desc_create"
-                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/id_desc_create"
                             app:layout_constraintTop_toBottomOf="@+id/id_desc_create"
-                            app:layout_constraintVertical_bias="0.11">
+                            app:layout_constraintVertical_bias="0.0">
 
                                 <Button
                                     android:id="@+id/btn_back_create"
