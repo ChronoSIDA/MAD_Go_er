@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 
 
@@ -49,33 +50,123 @@ public class InterestActivity extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btn_go_interest);
         skip = (TextView) findViewById(R.id.id_skip_interest);
-        music_cb = findViewById(R.id.cbox_music_interest);
-        edu_cb = findViewById(R.id.cbox_sport_interest);
-        sports_cb = findViewById(R.id.cbox_sport_interest);
-        fitness_cb = findViewById(R.id.cbox_fitness_interest);
-        tech_cb = findViewById(R.id.cbox_tech_interest);
-        travel_cb = findViewById(R.id.cbox_travel_interest);
-        outdoor_cb = findViewById(R.id.cbox_outdoor_interest);
-        game_cb = findViewById(R.id.cbox_game_interest);
-        art_cb = findViewById(R.id.cbox_art_interest);
-        cult_cb = findViewById(R.id.cbox_culture_interest);
-        career_cb = findViewById(R.id.cbox_career_interest);
-        business_cb = findViewById(R.id.cbox_business_interest);
-        community_cb = findViewById(R.id.cbox_community_interest);
-        dance_cb = findViewById(R.id.cbox_dance_interest);
-        health_cb = findViewById(R.id.cbox_health_interest);
-        hobby_cb = findViewById(R.id.cbox_hobby_interest);
-        movement_cb = findViewById(R.id.cbox_movement_interest);
-        language_cb = findViewById(R.id.cbox_language_interest);
-        family_cb = findViewById(R.id.cbox_family_interest);
-        pet_cb = findViewById(R.id.cbox_pets_interest);
-        religion_cb = findViewById(R.id.cbox_religion_interest);
-        science_cb = findViewById(R.id.cbox_science_interest);
+        music_cb = (CheckBox) findViewById(R.id.cbox_music_interest);
+        edu_cb = (CheckBox) findViewById(R.id.cbox_sport_interest);
+        sports_cb = (CheckBox) findViewById(R.id.cbox_sport_interest);
+        fitness_cb = (CheckBox) findViewById(R.id.cbox_fitness_interest);
+        tech_cb = (CheckBox) findViewById(R.id.cbox_tech_interest);
+        travel_cb = (CheckBox) findViewById(R.id.cbox_travel_interest);
+        outdoor_cb = (CheckBox) findViewById(R.id.cbox_outdoor_interest);
+        game_cb = (CheckBox) findViewById(R.id.cbox_game_interest);
+        art_cb = (CheckBox) findViewById(R.id.cbox_art_interest);
+        cult_cb = (CheckBox) findViewById(R.id.cbox_culture_interest);
+        career_cb = (CheckBox) findViewById(R.id.cbox_career_interest);
+        business_cb = (CheckBox) findViewById(R.id.cbox_business_interest);
+        community_cb = (CheckBox) findViewById(R.id.cbox_community_interest);
+        dance_cb = (CheckBox) findViewById(R.id.cbox_dance_interest);
+        health_cb = (CheckBox) findViewById(R.id.cbox_health_interest);
+        hobby_cb = (CheckBox) findViewById(R.id.cbox_hobby_interest);
+        movement_cb = (CheckBox) findViewById(R.id.cbox_movement_interest);
+        language_cb = (CheckBox) findViewById(R.id.cbox_language_interest);
+        family_cb = (CheckBox) findViewById(R.id.cbox_family_interest);
+        pet_cb = (CheckBox) findViewById(R.id.cbox_pets_interest);
+        religion_cb = (CheckBox) findViewById(R.id.cbox_religion_interest);
+        science_cb = (CheckBox) findViewById(R.id.cbox_science_interest);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: user interest list add the chosen categories
+                if(music_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.MUSIC);
+                }
+
+                if(edu_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.EDUCATION);
+                }
+
+                if(fitness_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.FITNESS);
+                }
+
+                if(sports_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.SPORTS);
+                }
+
+                if(tech_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.TECHNOLOGY);
+                }
+
+                if(travel_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.TRAVEL);
+                }
+
+                if(outdoor_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.OUTDOOR);
+                }
+
+                if(art_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.ART);
+                }
+
+                if(cult_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.CULTURE);
+                }
+
+                if(game_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.GAMES);
+                }
+
+                if(career_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.CAREER);
+                }
+
+                if(business_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.BUSINESS);
+                }
+
+                if(community_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.COMMUNITY);
+                }
+
+                if(dance_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.DANCING);
+                }
+
+                if(health_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.HEALTH);
+                }
+
+                if(hobby_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.HOBBIES);
+                }
+
+                if(movement_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.MOVEMENT);
+                }
+
+                if(family_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.FAMILY);
+                }
+
+                if(language_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.LANGUAGE);
+                }
+
+                if(pet_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.PETS);
+                }
+
+                if(science_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.SCIENCE);
+                }
+
+                if(religion_cb.isChecked()){
+                    user.getInterestedTypeList().add(EventType.RELIGION);
+                }
+
+
+
 
             }
         });
