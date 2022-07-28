@@ -69,7 +69,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     finish();
                 });
                 snackbar.show();
-        }};
+            }
+        });
+
 
         create = (Button) findViewById(R.id.btn_create_create);
         create.setOnClickListener(new View.OnClickListener() {
