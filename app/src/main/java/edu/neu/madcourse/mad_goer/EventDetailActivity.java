@@ -60,7 +60,6 @@ public class EventDetailActivity extends AppCompatActivity {
         userList = mainActivity.getUserList();
         currentUser = mainActivity.getCurrentUser();
 
-
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         eventID = extras.getString("eventID");
@@ -96,6 +95,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 // Get a reference to our posts
                 DatabaseReference ref = databaseUserRef.child(currentUser);
                 Map<String,Object> userUpdates = new HashMap<>();
+
                 userUpdates.put("","");
 
 
@@ -105,6 +105,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         User user = snapshot.getValue(User.class);
                         user.getHostEventList().put(eventID,"host");
+                        snapshot.getRef().updateChildren(currentUser);
                         //TODO: test if user in firebase is updated with new host event list, if not need to update the user to firebase
 
                     }
