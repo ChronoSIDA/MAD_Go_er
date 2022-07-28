@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <Button
-        android:id="@+id/newEventSave"
+        android:id="@+id/btn_cancel_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:allowUndo="false"
@@ -31,10 +31,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category_popup" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category_filter" />
 
     <Button
-        android:id="@+id/newEventCancel"
+        android:id="@+id/btn_apply_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/lightRed"
@@ -43,10 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category_popup" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category_filter" />
 
     <Spinner
-        android:id="@+id/spinner_category_popup"
+        android:id="@+id/spinner_category_filter"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

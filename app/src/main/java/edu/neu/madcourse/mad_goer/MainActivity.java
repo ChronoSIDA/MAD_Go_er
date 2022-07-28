@@ -38,7 +38,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,8 +52,6 @@ import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
-import edu.neu.madcourse.mad_goer.messages.message;
-import edu.neu.madcourse.mad_goer.ui.album.AlbumFragment;
 
 public class MainActivity extends AppCompatActivity{
     private NotificationManagerCompat notificationManagerCompat;
@@ -287,8 +284,8 @@ public class MainActivity extends AppCompatActivity{
         final View EventPopupView = getLayoutInflater().inflate(R.layout.event_popup, null);
         newEventName = (EditText) EventPopupView.findViewById(R.id.newEventName);
        // newEventType = (EditText) EventPopupView.findViewById(R.id.newEventCategory);
-        newEventSave = (Button) EventPopupView.findViewById(R.id.newEventSave);
-        newEventCancel = (Button) EventPopupView.findViewById(R.id.newEventCancel);
+        newEventSave = (Button) EventPopupView.findViewById(R.id.btn_cancel_filter);
+        newEventCancel = (Button) EventPopupView.findViewById(R.id.btn_apply_filter);
 
         dialogBuilder.setView(EventPopupView);
         dialog= dialogBuilder.create();
@@ -296,7 +293,7 @@ public class MainActivity extends AppCompatActivity{
 
         EnumSet<EventType> categories = EnumSet.allOf(EventType.class);
 
-        Spinner newEventSpinner = (Spinner) findViewById(R.id.spinner_category_popup);
+        Spinner newEventSpinner = (Spinner) findViewById(R.id.spinner_category_filter);
         ArrayList<EventType> category_list = new ArrayList<>(categories.size());
         for (EventType t: categories) {
             category_list.add(t);

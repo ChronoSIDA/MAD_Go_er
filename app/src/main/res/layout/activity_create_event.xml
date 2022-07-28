@@ -91,21 +91,20 @@
                             app:layout_constraintVertical_bias="0.012">
 
                                 <RadioButton
-                                    android:id="@+id/id_radio_private"
-                                    android:layout_width="161dp"
+                                    android:id="@+id/id_radio_private_filter"
+                                    android:layout_width="162.5dp"
                                     android:layout_height="wrap_content"
                                     android:onClick="onRadioButtonClicked"
                                     android:padding="10dp"
                                     android:text="@string/string_public" />
 
                                 <RadioButton
-                                    android:id="@+id/id_radio_public"
+                                    android:id="@+id/id_radio_public_filter"
                                     android:layout_width="162.5dp"
                                     android:layout_height="wrap_content"
                                     android:onClick="onRadioButtonClicked"
                                     android:padding="10dp"
                                     android:text="Private" />
-
                         </RadioGroup>
 
                         <EditText

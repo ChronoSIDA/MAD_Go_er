@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smokeWhite">
+
+    <TextView
+        android:id="@+id/newEventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Filters Search"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/btn_cancel_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:allowUndo="false"
+        android:backgroundTint="@color/lightRed"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_distance_filter"
+        app:layout_constraintVertical_bias="0.279" />
+
+    <Button
+        android:id="@+id/btn_apply_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightRed"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel_filter"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        app:layout_constraintVertical_bias="0.331" />
+
+    <Spinner
+        android:id="@+id/spinner_category_filter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="51dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newEventName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_isPublic_filter"
+        android:layout_width="325dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category_filter"
+        app:layout_constraintVertical_bias="0.08">
+
+        <CheckBox
+            android:id="@+id/id_radio_public_filter"
+            android:layout_width="162dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:text="Private"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/id_radio_private_filter"
+            android:layout_width="162dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:text="@string/string_public"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/id_radio_public_filter"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_isInPerson_filter"
+        android:layout_width="325dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_isPublic_filter"
+        app:layout_constraintVertical_bias="0.06">
+
+        <CheckBox
+            android:id="@+id/id_radio_inperson_filter"
+            android:layout_width="162dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:text="@string/string_in_person"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/id_radio_virtual_filter"
+            android:layout_width="162dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:text="@string/string_virtual"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/id_radio_inperson_filter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="221dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="252dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_distance_filter"
+        app:layout_constraintTop_toBottomOf="@+id/group_isInPerson_filter"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <CheckBox
+        android:id="@+id/checkBox_distance_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="236dp"
+        android:text="Distance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_isInPerson_filter"
+        app:layout_constraintVertical_bias="0.826" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
