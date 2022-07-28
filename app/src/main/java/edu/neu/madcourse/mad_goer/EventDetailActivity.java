@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -127,14 +128,18 @@ public class EventDetailActivity extends AppCompatActivity {
 
         joinBtn.setText(checkJoin(event, user));
 
-//        cancelBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //TODO:
-//                //return to main activity
-//
-//            }
-//        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                        "If you leave right now, no changes will be saved, do you confirm to continue?", Snackbar.LENGTH_LONG);
+                snackbar.setAction("Confirm", view -> {
+                    snackbar.dismiss();
+                    finish();
+                });
+                snackbar.show();
+            }
+        });
 
         hostTV.setText("Host: " + event.getHost().toString());
         eventNameTV.setText(event.getEventName());
