@@ -61,6 +61,7 @@ public class GoFragment extends Fragment {
         userList= activity.getUserList();
         Optional<User> matchingObject= userList.stream().filter(p->p.getUserID().equals(currentUser)).findAny();
         User curUser = matchingObject.get();
+
         if(curUser!= null) {
             personalEventMap =curUser.getTotalPersonalEvents();
         }
