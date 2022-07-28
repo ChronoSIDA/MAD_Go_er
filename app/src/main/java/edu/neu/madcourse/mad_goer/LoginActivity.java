@@ -52,10 +52,8 @@ public class LoginActivity extends AppCompatActivity{
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.child("users").hasChild(nameTxt)){
+                            if(snapshot.child("User").hasChild(nameTxt)){
                                 Toast.makeText(LoginActivity.this,"Welcome back, " + nameTxt,Toast.LENGTH_SHORT).show();
-
-
                                 Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
                                 intent.putExtra("DBcurrentUserID", nameTxt);
                                 startActivity(intent);

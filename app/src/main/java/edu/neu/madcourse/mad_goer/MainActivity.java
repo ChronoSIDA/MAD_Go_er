@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity{
         databaseUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
             }
 
             @Override
@@ -140,6 +141,61 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
+        //logic: if anything changed, clear the eventMap, and read everything from firebase again
+        //TODO: now the field eventMap is updated, we need to pass it to other fragments
+        //logic: create a method in mainactivity to return the updated eventMap
+        //in other fragments, call getTotalEvent() method
+        //e.g.    MainActivity activity = (MainActivity) getActivity();
+        //        msgData = activity.getHistoryData();
+        databaseEventRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(

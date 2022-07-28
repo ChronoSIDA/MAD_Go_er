@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class Event {
 
+    //TODO: add constructor appropriately, eventID = eventName+enddata
+    //also notice if private/public, some parameters might not be needed
     private String eventID;
     private String eventName;
     private Date startDate;
@@ -161,4 +163,6 @@ public class Event {
         this.eventName = name;
         this.category = eventType;
     }
+
+
 }

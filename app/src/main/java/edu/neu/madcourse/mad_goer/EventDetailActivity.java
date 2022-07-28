@@ -33,15 +33,17 @@ public class EventDetailActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
+        //also have eventmap from mainactivity
         mainActivity = new MainActivity();
         eventmap = mainActivity.getTotalEvents();
 
-        //TODO: find the event based on eventID,probably need eventlist from mainactivity;
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         eventID = extras.getString("eventID");

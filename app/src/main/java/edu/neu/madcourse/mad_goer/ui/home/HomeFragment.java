@@ -36,8 +36,9 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.rvHomefrag;
 
-
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context,recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+        //when clicked something in recycleview(aka the event list), get the event id from the item clicked
+        //and pass the eventid to intent, and open new activity of(eventdetailactivity)
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position){
                 Intent intent = new Intent(getContext(), EventDetailActivity.class);
@@ -51,11 +52,12 @@ public class HomeFragment extends Fragment {
         }));
 
 
+
         MainActivity activity = (MainActivity) getActivity();
         eventMap = activity.getTotalEvents();
 
-//        ArrayList<HashMap<String,Event>> arrayList = new ArrayList<>();
-//        arrayList.add(eventMap);
+//       ArrayList<HashMap<String,Event>> arrayList = new ArrayList<>();
+//       arrayList.add(eventMap);
 
         EventAdapter eventAdapter = new EventAdapter(eventMap,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
