@@ -237,10 +237,10 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.navigation_go:
                         navController.navigate(R.id.navigation_go);
                         return true;
-                    case R.id.navigation:
-                        navController.navigate(R.id.navigation_album);
+                    case R.id.navigation_comment:
+                        navController.navigate(R.id.navigation_comment);
                         return true;
-                    case R.id.navigation_logout:
+                    case R.id.navigation_setting:
                         navController.navigate(R.id.navigation_setting);
                         return true;
                 }
