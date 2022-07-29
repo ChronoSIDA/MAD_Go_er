@@ -47,11 +47,10 @@ public class InterestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
 
-
         btn = (Button) findViewById(R.id.btn_go_interest);
         skip = (TextView) findViewById(R.id.id_skip_interest);
         music_cb = (CheckBox) findViewById(R.id.cbox_music_interest);
-        edu_cb = (CheckBox) findViewById(R.id.cbox_sport_interest);
+        edu_cb = (CheckBox) findViewById(R.id.cbox_edu_interest2);
         sports_cb = (CheckBox) findViewById(R.id.cbox_sport_interest);
         fitness_cb = (CheckBox) findViewById(R.id.cbox_fitness_interest);
         tech_cb = (CheckBox) findViewById(R.id.cbox_tech_interest);
@@ -167,13 +166,10 @@ public class InterestActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void returnMain(View view){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
-
-
 }

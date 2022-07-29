@@ -104,7 +104,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 //check if event attendingList is full
                 //if not full: Toast "Congratulations! Successfully Join!
                 //if full: Toast "Sorry, this event is full!"
-                //不知道这里加user写的对不对， getter后面能不能直接add
+
                 if(!event.getAttendingList().contains(user)){
                     if(event.getCapacity() > event.getAttendingList().size()){
                         event.getAttendingList().add(user);
