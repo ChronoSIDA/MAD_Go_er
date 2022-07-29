@@ -1,4 +1,4 @@
-package edu.neu.madcourse.mad_goer.ui.album;
+package edu.neu.madcourse.mad_goer.ui.comment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,17 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import edu.neu.madcourse.mad_goer.databinding.Fragment3AlbumBinding;
+import edu.neu.madcourse.mad_goer.databinding.Fragment3CommentBinding;
 import edu.neu.madcourse.mad_goer.MainActivity;
 
-public class AlbumFragment extends Fragment {
+public class CommentFragment extends Fragment {
 
-    private Fragment3AlbumBinding binding;
+    private Fragment3CommentBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = Fragment3AlbumBinding.inflate(inflater, container, false);
+        binding = Fragment3CommentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());

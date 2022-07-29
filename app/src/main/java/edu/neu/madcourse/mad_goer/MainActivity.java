@@ -231,13 +231,13 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
-                    case R.id.navigation_send:
+                    case R.id.navigation_home:
                         navController.navigate(R.id.navigation_home);
                         return true;
-                    case R.id.navigation_receive:
+                    case R.id.navigation_go:
                         navController.navigate(R.id.navigation_go);
                         return true;
-                    case R.id.navigation_history:
+                    case R.id.navigation:
                         navController.navigate(R.id.navigation_album);
                         return true;
                     case R.id.navigation_logout:

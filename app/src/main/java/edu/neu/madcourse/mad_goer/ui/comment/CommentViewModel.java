@@ -1,14 +1,14 @@
-package edu.neu.madcourse.mad_goer.ui.album;
+package edu.neu.madcourse.mad_goer.ui.comment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AlbumViewModel extends ViewModel {
+public class CommentViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public AlbumViewModel() {
+    public CommentViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is dashboard fragment");
     }
