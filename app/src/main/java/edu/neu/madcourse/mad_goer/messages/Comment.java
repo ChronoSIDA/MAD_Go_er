@@ -6,17 +6,17 @@ public class Comment {
 
     private String comment;
     private User user;
-    private Date time;
+    private Date timeStamp;
     private Event event;
     private int likes;
 
     public Comment() {
     }
 
-    public Comment(String comment, User user, Date time, Event event) {
+    public Comment(String comment, User user, Date timeStamp, Event event) {
         this.comment = comment;
         this.user = user;
-        this.time = time;
+        this.timeStamp = timeStamp;
         this.event = event;
         this.likes = 0;
     }
@@ -29,7 +29,7 @@ public class Comment {
     }
 
     public Date getTime(){
-        return this.time;
+        return this.timeStamp;
     }
 
     public Event getEvent(){
