@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         currentUser = extras.getString("DBcurrentUserID");
-        TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
+       // TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
         StringRequest request = new StringRequest(Request.Method.GET, urlJson, new Response.Listener<String>(){
@@ -318,6 +318,8 @@ public class MainActivity extends AppCompatActivity{
                     Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     // add intent
+                    //TO DO for Yang: required to pass userList
+
                 }else{
                     Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
