@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,17 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment3CommentBinding;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.messages.Comment;
 import edu.neu.madcourse.mad_goer.messages.Event;
-import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 
 public class CommentFragment extends Fragment {
@@ -36,7 +35,10 @@ public class CommentFragment extends Fragment {
     private Button sendBtn;
     private Event event;
     private Spinner eventSpinner;
-    private String curUser;
+    private String currentUserName;
+    private User currentUser;
+
+    DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
 
     public CommentFragment() {
     }
@@ -49,10 +51,12 @@ public class CommentFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.recyclerView;
+
         MainActivity activity = (MainActivity) getActivity();
 
-        //TO DO: pass current user to this fragment to get the event lists
-        curUser = activity.getCurrentUser();
+        currentUserName = activity.getCurrentUserName();
+        currentUser = activity.getCurrentUser();
+
 
         sendBtn = binding.btnSendMsg;
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +67,10 @@ public class CommentFragment extends Fragment {
         });
         commentTV = binding.editCommentComment;
         eventSpinner = binding.idEventNameComment;
-        ArrayList<Event> event_list = new ArrayList<Event>(curUser.getTotalPersonalEvents().values());
+
+        //event_list contains all Event objects under this user
+        ArrayList<Event> event_list = activity.getListofEventLists().get(0);
+
         //TO DO: pass event information of this user
         for (Event e: event_list) {
             event_list.add(e);
@@ -81,9 +88,9 @@ public class CommentFragment extends Fragment {
                     .setAction("Action", null).show();
         }else {
             Date timestamp = Calendar.getInstance().getTime();
-            Comment newComment = new Comment(thisComment, curUser, timestamp, (Event)eventSpinner.getSelectedItem());
+            Comment newComment = new Comment(thisComment, currentUserName, timestamp, (Event)eventSpinner.getSelectedItem());
             //TO DO: push this new comment to database
-
+            databaseCommentRef.push().setValue(newComment);
         }
     }
 

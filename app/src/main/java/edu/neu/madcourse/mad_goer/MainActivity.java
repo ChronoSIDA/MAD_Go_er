@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +46,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -66,14 +68,24 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventName;
     private EditText newEventType;
     private Button newEventSave, newEventCancel;
-    private HashMap<String, Event> eventMap;
+
+    //for gofragments
+    //key is "eventID", value is Event
+    //would need all eventID under currentUser's personal eventmap
+    //we already have userlist from firebase, userlist contains User object, find currentUser from the UserList,
+    // and inside Userobject there is a personalEventMap,
+    // which is what we need to pass in the recyclerView
+    //easier way is to call getHostEvent()...methods in user to return filtered hashMap
+    private HashMap<String,Event> eventMap;
     private ArrayList<User> userList;
-    private String currentUser;
+    //this is user's personal eventmap, key is "eventID", value is "eventtype(host/attending/saved/past)"
+    private Map<String,String> personalEventMap;
+    private String currentUserName;
+    private User currentUser;
+    private ArrayList<ArrayList<Event>> listofEventLists;
 
-
-
-    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
-    DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("event");
+    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
+    DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
 
     @Override
@@ -81,7 +93,9 @@ public class MainActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
 
-        //MainActivity activity = (MainActivity) getActivity();
+        LoginActivity loginactivity = new LoginActivity();
+        currentUserName = loginactivity.getCurrentUserName();
+        currentUser = loginactivity.getCurrentUser();
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -94,11 +108,8 @@ public class MainActivity extends AppCompatActivity{
             manager.createNotificationChannel(channel);
         }
 
-        //use extras to get the passed in userName/userID from login to main activity
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        currentUser = extras.getString("DBcurrentUserID");
+
        // TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
@@ -120,7 +131,6 @@ public class MainActivity extends AppCompatActivity{
 
         RequestQueue rQueue = Volley.newRequestQueue(this);
         rQueue.add(request);
-
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -258,7 +268,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putString(CURRENT_USER, currentUser);
+        savedInstanceState.putString(CURRENT_USER, currentUserName);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -280,8 +290,46 @@ public class MainActivity extends AppCompatActivity{
         return eventMap;
     }
     public ArrayList<User> getUserList(){return userList;}
-    public String getCurrentUser(){return this.currentUser;}
+    public String getCurrentUserName(){return this.currentUserName;}
 
+    public ArrayList<ArrayList<Event>> getListofEventLists() {
+
+        if (currentUser != null) {
+            //Key is eventID, value is "saved"/"Host"/"past"
+            personalEventMap = currentUser.getTotalPersonalEvents();
+        }
+        //find a myEventMap<String,Event> of eventID in personalEventMap<String,string> from eventMap<String, Event>
+        //key is eventID
+        Set<String> eventIDkeySet = personalEventMap.keySet();
+
+        listofEventLists = new ArrayList<ArrayList<Event>>();
+
+        for (String key : eventIDkeySet) {
+
+            //for all eventstatus, all to the first list
+            listofEventLists.get(0).add(eventMap.get(key));
+
+            //if value is "host", add eventobj to first list in listoflists
+            if (personalEventMap.get(key).equals("host")) {
+                listofEventLists.get(1).add(eventMap.get(key));
+            }
+            if (personalEventMap.get(key).equals("going")) {
+                listofEventLists.get(2).add(eventMap.get(key));
+            }
+            if (personalEventMap.get(key).equals("saved")) {
+                listofEventLists.get(3).add(eventMap.get(key));
+            }
+            if (personalEventMap.get(key).equals("past")) {
+                listofEventLists.get(4).add(eventMap.get(key));
+            }
+
+        }
+        return listofEventLists;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
     public void createNewDialog(){
         dialogBuilder= new AlertDialog.Builder(this);
