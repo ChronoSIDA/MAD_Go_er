@@ -42,7 +42,8 @@ public class CommentFragment extends Fragment {
 
     DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
     private RecyclerView recyclerView;
-    private List<Comment> comments;
+    private ArrayList<Comment> comments;
+
     public CommentFragment() {
     }
 
@@ -52,7 +53,7 @@ public class CommentFragment extends Fragment {
         binding = Fragment3CommentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        comments = new ArrayList<>();
+        comments = new ArrayList<Comment>();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView = binding.recyclerView;
 

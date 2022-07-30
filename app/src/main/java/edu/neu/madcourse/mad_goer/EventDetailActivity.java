@@ -25,7 +25,7 @@ import edu.neu.madcourse.mad_goer.messages.User;
 
 public class EventDetailActivity extends AppCompatActivity {
     private Event event;
-    private User user;
+    private User currentUser;
     private Button joinBtn;
     private Button cancelBtn;
     private TextView hostTV;
@@ -41,13 +41,12 @@ public class EventDetailActivity extends AppCompatActivity {
     private HashMap<String,Event> eventmap;
     private ArrayList<User> userList;
     private MainActivity mainActivity;
-    private String currentUser;
+    private String currentUserName;
     private ImageButton saveBtn;
 
-
-
     //In event details activity, only need to access users in firebase to add joined event
-    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("users");
+    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
+    DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,8 @@ public class EventDetailActivity extends AppCompatActivity {
         mainActivity = new MainActivity();
         eventmap = mainActivity.getTotalEvents();
         userList = mainActivity.getUserList();
-        currentUser = mainActivity.getCurrentUserName();
+        currentUserName= mainActivity.getCurrentUserName();
+        currentUser = mainActivity.getCurrentUser();
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -89,21 +89,28 @@ public class EventDetailActivity extends AppCompatActivity {
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Logic: This part aims to add the event as "attending" under current user in firebase
-                //TODO: test if user in firebase has updated its eventmap
-                // Get a reference to our posts
-                DatabaseReference ref = databaseUserRef.child(currentUser);
-                Map<String,Object> userUpdates = new HashMap<>();
-                userUpdates.put(eventID,"attending");
-                ref.push().setValue(userUpdates);
+//                //Logic: This part aims to add the event as "attending" under current currentUser in firebase
+//                //TODO: test if currentUser in firebase has updated its eventmap
+//                // Get a reference to our posts
+//                DatabaseReference ref = databaseUserRef.child(currentUserName);
+//                Map<String,Object> userUpdates = new HashMap<>();
+//                userUpdates.put(eventID,"attending");
+//                ref.push().setValue(userUpdates);
+
 
                 //check if event attendingList is full
                 //if not full: Toast "Congratulations! Successfully Join!
                 //if full: Toast "Sorry, this event is full!"
 
-                if(!event.getAttendingList().contains(user)){
+                if(!event.getAttendingList().contains(currentUser)){
                     if(event.getCapacity() > event.getAttendingList().size()){
-                        event.getAttendingList().add(user);
+                        //add user to event's attending list
+                        event.getAttendingList().add(currentUser);
+                        databaseEventRef.child(eventID).setValue(event);
+                        //add this event under the user, update current user in database
+                        currentUser.addEvent(eventID,"attending");
+                        databaseUserRef.child(currentUserName).setValue(currentUser);
+
                         Toast.makeText(EventDetailActivity.this,
                                 "Congratulations! You will GO to this event!", Toast.LENGTH_SHORT).show();
                         joinBtn.setText("Joined");
@@ -111,9 +118,14 @@ public class EventDetailActivity extends AppCompatActivity {
                         Toast.makeText(EventDetailActivity.this,
                                 "Sorry, this event is full. Try earlier next time!", Toast.LENGTH_SHORT).show();
                     }
-
                 }else{
-                    event.getAttendingList().remove(user);
+                    //remove user from event attending list
+                    event.getAttendingList().remove(currentUser);
+                    databaseEventRef.child(eventID).setValue(event);
+                    //remove event from user attending list
+                    currentUser.removeEvent(eventID,"attending");
+                    databaseUserRef.child(currentUserName).setValue(currentUser);
+
                     Toast.makeText(EventDetailActivity.this,
                             "Cancelled", Toast.LENGTH_SHORT).show();
                     joinBtn.setText("Go");
@@ -122,7 +134,7 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
-        joinBtn.setText(checkJoin(event, user));
+        joinBtn.setText(checkJoin(event, currentUser));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,15 +159,18 @@ public class EventDetailActivity extends AppCompatActivity {
         attendingListTV.setText(event.getAttendingList().toString());
         descriptionTV.setText(event.getDesc());
 
-        //TODO:
+
         //star后加入该user的 saved list
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!user.getSavedEventList().containsKey(eventID)){
-                    user.getSavedEventList().put(eventID, "saved");
+                if(!currentUser.getSavedEventList().containsKey(eventID)){
+                    currentUser.addEvent(eventID, "saved");
+                    databaseUserRef.child(currentUserName).setValue(currentUser);
                 }else{
-                    user.getSavedEventList().remove(eventID);
+                    currentUser.removeEvent(eventID,"saved");
+                    databaseUserRef.child(currentUserName).setValue(currentUser);
                 }
             }
         });
