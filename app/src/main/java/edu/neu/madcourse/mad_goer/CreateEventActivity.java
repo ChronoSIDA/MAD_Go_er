@@ -77,7 +77,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO DO: upload this event to firebase
+                //TODO
+                //upload this event onto firebase
 
             }
         });
