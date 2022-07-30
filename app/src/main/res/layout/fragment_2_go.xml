@@ -8,7 +8,7 @@
     tools:context=".ui.go.GoFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/tabLayout_go"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,29 +21,34 @@
         app:tabMode="scrollable">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_all_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All" />
+            android:text="@string/all" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_host_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Host" />
+            android:text="@string/host" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_going_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Going" />
+            android:text="@string/going" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_saved_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saved" />
+            android:text="@string/saved" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_past_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Past" />
+            android:text="@string/past" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView

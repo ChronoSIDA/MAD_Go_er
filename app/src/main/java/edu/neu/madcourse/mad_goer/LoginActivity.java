@@ -24,6 +24,11 @@ import edu.neu.madcourse.mad_goer.messages.User;
 public class LoginActivity extends AppCompatActivity{
     EditText input_userName;
     Button btn_login;
+    //TODO: *this is alternative solution*
+    //TODO: we can get userlist from firebase from loginActivity, also we have user object in login activity
+    //TODO: so, wo can create methods of getCurrentUserObj and getUserList in Login Activity, when other activity
+    //TODO: want current user obj info, they can just new a LoginActivity, and call its method
+    //TODO: if implement this way, we also need to move listener for user from mainactivity to login activity
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com/");
 
@@ -34,7 +39,6 @@ public class LoginActivity extends AppCompatActivity{
 
         final EditText input_username = findViewById(R.id.input_username);
         final Button btn_login = findViewById(R.id.btn_login);
-
 
         btn_login.setOnClickListener(new View.OnClickListener(){
             @Override

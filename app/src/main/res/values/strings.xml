@@ -48,6 +48,11 @@
     <string name="science">Science</string>
     <string name="dancing">Dancing</string>
     <string name="string_skip"><u>Skip</u></string>
+    <string name="all">All</string>
+    <string name="host">Host</string>
+    <string name="going">Going</string>
+    <string name="saved">Saved</string>
+    <string name="past">Past</string>
     <string-array name="dropdown_categories_alertbox">
     </string-array>
 </resources>
