@@ -24,6 +24,9 @@ import edu.neu.madcourse.mad_goer.messages.User;
 public class LoginActivity extends AppCompatActivity{
     EditText input_userName;
     Button btn_login;
+    private String nameTxt;
+    private User currentUser;
+
     //TODO: *this is alternative solution*
     //TODO: we can get userlist from firebase from loginActivity, also we have user object in login activity
     //TODO: so, wo can create methods of getCurrentUserObj and getUserList in Login Activity, when other activity
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 //final String nameTxt = input_username.getText().toString();
-                String nameTxt = input_username.getText().toString();
+                nameTxt = input_username.getText().toString();
 
                 //hide keyboard
                 InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
@@ -59,7 +62,6 @@ public class LoginActivity extends AppCompatActivity{
                             if(snapshot.child("User").hasChild(nameTxt)){
                                 Toast.makeText(LoginActivity.this,"Welcome back, " + nameTxt,Toast.LENGTH_SHORT).show();
                                 Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
-                                intent.putExtra("DBcurrentUserID", nameTxt);
                                 startActivity(intent);
                             }else{
                                 //pass the user to database
@@ -68,14 +70,13 @@ public class LoginActivity extends AppCompatActivity{
                                 } else if(nameTxt.length() < 3 || nameTxt.length() > 10){
                                     Toast.makeText(LoginActivity.this,"Username length cannot be less than 3 characters \nUsername length cannot be longer than 10 characters",Toast.LENGTH_LONG).show();
                                 } else {
-                                    User currentUser = new User((nameTxt));
+                                    currentUser = new User((nameTxt));
                                     //added a user object to database under Users
                                     databaseReference.child("users").child(nameTxt).setValue(currentUser);
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
 
                                     //change launch activity to select interest
                                     Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.InterestActivity.class);
-                                    intent.putExtra("DBcurrentUserID", nameTxt);
                                     startActivity(intent);
                                 }
                             }
@@ -98,5 +99,12 @@ public class LoginActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+    public String getCurrentUserName() {
+        return nameTxt;
+    }
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

@@ -9,15 +9,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +58,7 @@ public class EventDetailActivity extends AppCompatActivity {
         mainActivity = new MainActivity();
         eventmap = mainActivity.getTotalEvents();
         userList = mainActivity.getUserList();
-        currentUser = mainActivity.getCurrentUser();
+        currentUser = mainActivity.getCurrentUserName();
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
