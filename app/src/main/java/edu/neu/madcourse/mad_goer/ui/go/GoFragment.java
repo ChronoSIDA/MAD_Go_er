@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,12 +44,7 @@ public class GoFragment extends Fragment {
     //this is user's personal eventmap, key is "eventID", value is "eventtype(host/attending/saved/past)"
     private Map<String,String> personalEventMap;
     private String currentUser;
-    private HashMap<String,Event> myEventMap;
-    private HashMap<String,Event> myhostevents;
-    private HashMap<String,Event> mygoingevents;
-    private HashMap<String,Event> mysavedevents;
-    private HashMap<String,Event> mypastevents;
-
+    private ArrayList<ArrayList<Event>> listofEventLists;
     private RecyclerView recyclerView;
     private TabLayout tabLayout;
     private boolean isUserScrolling = false;
@@ -63,46 +59,18 @@ public class GoFragment extends Fragment {
 
         binding = Fragment2GoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView = binding.rvGofrag;
         tabLayout = binding.tabLayoutGo;
 
         updatemyEventMap();
-        /*
-        move to getmyEventMap() function
-        MainActivity activity = (MainActivity) getActivity();
-        eventMap = activity.getTotalEvents();
-
-        currentUser=activity.getCurrentUser();
-        userList= activity.getUserList();
-
-        Optional<User> matchingObject= userList.stream().filter(p->p.getUserID().equals(currentUser)).findAny();
-        User curUser = matchingObject.get();
-
-        if(curUser!= null) {
-            personalEventMap =curUser.getTotalPersonalEvents();
-        }
-        //find a myEventMap<String,Event> of eventID in personalEventMap<String,string> from eventMap<String, Event>
-        Set<String> eventIDkeySet = personalEventMap.keySet();
-        myEventMap = new HashMap<>();
-
-        for(String key : eventIDkeySet){
-            myEventMap.put(key,eventMap.get(key));
-        }
-        */
-
-        eventAdapter = new EventAdapter(myEventMap,getContext());
+        setUpRecyclerView(0);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 isUserScrolling = false;
                 int position = tab.getPosition();
-                if(position == 0){
-                    recyclerView.smoothScrollToPosition();
-                }
-
-
+                setUpRecyclerView(position);
             }
 
             @Override
@@ -117,6 +85,13 @@ public class GoFragment extends Fragment {
         });
 
 
+        return root;
+    }
+
+    public void setUpRecyclerView(int pos){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        eventAdapter = new EventAdapter(listofEventLists.get(pos),getContext());
 
         linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -124,10 +99,6 @@ public class GoFragment extends Fragment {
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.scrollToPosition(eventMap.size()-1);
-
-
-
-        return root;
     }
 
     @Override
@@ -152,26 +123,26 @@ public class GoFragment extends Fragment {
         //find a myEventMap<String,Event> of eventID in personalEventMap<String,string> from eventMap<String, Event>
         //key is eventID
         Set<String> eventIDkeySet = personalEventMap.keySet();
-        myEventMap = new HashMap<>();
 
-
+        listofEventLists = new ArrayList<ArrayList<Event>>();
 
         for(String key : eventIDkeySet){
-            //myEventMap(key:eventID,value:eventObj)
-            //which is my all events
-            myEventMap.put(key,eventMap.get(key));
 
+            //for all eventstatus, all to the first list
+            listofEventLists.get(0).add(eventMap.get(key));
+
+            //if value is "host", add eventobj to first list in listoflists
             if(personalEventMap.get(key).equals("host")){
-
+                listofEventLists.get(1).add(eventMap.get(key));
             }
             if(personalEventMap.get(key).equals("going")){
-
+                listofEventLists.get(2).add(eventMap.get(key));
             }
             if(personalEventMap.get(key).equals("saved")){
-
+                listofEventLists.get(3).add(eventMap.get(key));
             }
             if(personalEventMap.get(key).equals("past")){
-
+                listofEventLists.get(4).add(eventMap.get(key));
             }
         }
     }
