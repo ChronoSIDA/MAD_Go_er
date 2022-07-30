@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.setting.SettingFragment"
-    android:background="@color/smokeWhite">
+    android:background="@color/smokeWhite"
+    tools:context=".ui.setting.SettingFragment">
 
 
     <include
@@ -19,22 +19,24 @@
         android:id="@+id/button_myHost_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rectangle_button"
         android:text="My Hosts"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
 
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="#FFFFFF"
-        tools:layout_editor_absoluteY="60dp" />
+        app:layout_constraintTop_toBottomOf="@+id/username_setting"
+        app:rippleColor="#FFFFFF" />
 
     <Button
         android:id="@+id/button_interest_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text=" My Interest"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -43,12 +45,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintTop_toBottomOf="@+id/button_myHost_setting" />
 
     <Button
         android:id="@+id/button_accountSec_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="Account Security"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -57,12 +60,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="202dp" />
+        app:layout_constraintTop_toBottomOf="@+id/privacy_setting" />
 
     <Button
         android:id="@+id/button_emergencyCont_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="Emergency Contact"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -72,13 +76,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.377" />
+        app:layout_constraintTop_toBottomOf="@+id/button_accountSec_setting"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_language_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="Language"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -87,12 +92,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="351dp" />
+        app:layout_constraintTop_toBottomOf="@+id/system_setting" />
 
     <Button
         android:id="@+id/button_aboutGoer_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="About Goer"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -101,12 +107,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="406dp" />
+        app:layout_constraintTop_toBottomOf="@+id/button_language_setting" />
 
     <Button
         android:id="@+id/button_logOut_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="Log Out"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -115,7 +122,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="606dp" />
+        app:layout_constraintTop_toBottomOf="@+id/button_switchAccount_setting" />
 
 
     <Button
@@ -127,29 +134,36 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"
         app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="549dp" />
+        app:layout_constraintTop_toBottomOf="@+id/button_aboutGoer_setting"
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/username_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="user_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/privacy_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="Privacy"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="173dp" />
+        app:layout_constraintTop_toBottomOf="@+id/button_interest_setting" />
 
 
     <TextView
@@ -157,8 +171,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="System"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="321dp" />
+        app:layout_constraintTop_toBottomOf="@+id/button_emergencyCont_setting" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="button_switchAccount_setting,button_logOut_setting" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="button_myHost_setting,button_interest_setting" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="privacy_setting,button_accountSec_setting,button_emergencyCont_setting" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="system_setting,button_language_setting,button_aboutGoer_setting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
