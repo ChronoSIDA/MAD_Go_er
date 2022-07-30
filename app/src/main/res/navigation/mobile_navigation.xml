@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_3_comment" >
         <action
             android:id="@+id/action_navigation_history_to_navigation_logout"
-            app:destination="@id/navigation_logout" />
+            app:destination="@id/navigation_comment" />
     </fragment>
 
     <fragment
