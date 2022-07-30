@@ -2,11 +2,9 @@ package edu.neu.madcourse.mad_goer;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,16 +15,30 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.Toast;
+
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
@@ -46,18 +58,49 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private EditText addressTV;
     private EditText urlTV;
     private EditText descriptionTV;
+    private String googleMapApiKey = "AIzaSyDH7mSYIFMEf64MuDURoVh6Fxh6dTyhipo";
 
     //TODO: QUESTION: where is create event activity called? I need to pass userList from outside to this activity
     //added by Yang Yang, pass in UserList from mainactivity, and connect it to firebase, so when a new event
     //is created, add it to the user's eventlist(host) in firebase
     //Two things added: 1. userlist    2. firebase
-    private ArrayList<User> userList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        // Initialize the SDK
+        Places.initialize(getApplicationContext(), googleMapApiKey);
+
+        // Create a new PlacesClient instance
+        PlacesClient placesClient = Places.createClient(this);
+
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.places_fragment_create);
+
+        autocompleteFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
+
+        autocompleteFragment.setCountries("US");
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onError(@NonNull Status status) {
+                // TODO: Handle the error.
+
+            }
+
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                // TODO: Get info about the selected place.
+                // TODO: add the displayed name to the location box.
+//                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            }
+        });
+
 
         cancel = (Button) findViewById(R.id.btn_back_create);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -232,5 +275,22 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             finish();
         });
         snackbar.show();
+    }
+
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+        public void afterTextChanged(Editable s) {
+            if (!s.toString().equals("")) {
+                mAutoCompleteAdapter.getFilter().filter(s.toString());
+                if (recyclerView.getVisibility() == View.GONE) {recyclerView.setVisibility(View.VISIBLE);}
+            } else {
+                if (recyclerView.getVisibility() == View.VISIBLE) {recyclerView.setVisibility(View.GONE);}
+            }
+        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+    };
+
+    public void  click(Place place) {
+        Toast.makeText(this, place.getAddress()+", "+place.getLatLng().latitude+place.getLatLng().longitude, Toast.LENGTH_SHORT).show();
     }
 }

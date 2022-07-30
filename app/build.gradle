@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "edu.neu.madcourse.mad_goer"
-        minSdk 26
+        minSdk 16
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -48,6 +49,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.2.0')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.libraries.places:places:2.6.0'
 
 
 //    implementation 'com.google.firebase:firebase-functions:20.0.1'

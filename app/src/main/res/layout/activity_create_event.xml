@@ -191,17 +191,53 @@
                                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                                     app:layout_constraintTop_toTopOf="parent" />
 
-                                <EditText
-                                    android:id="@+id/id_islocation_create"
+                                <LinearLayout
+                                    android:orientation="vertical"
                                     android:layout_width="210dp"
                                     android:layout_height="40dp"
-                                    android:ems="10"
-                                    android:hint="Enter the location"
-                                    android:inputType="textPersonName"
-                                    android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:context=".activity.CreateEventActivity">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:layout_width="210dp"
+                                            android:layout_height="40dp"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            tools:context=".activity.CreateEventActivity">
+
+                                                <EditText
+                                                    android:id="@+id/id_islocation_create"
+                                                    android:layout_width="210dp"
+                                                    android:layout_height="40dp"
+                                                    android:drawableLeft="@drawable/quantum_ic_search_grey600_24"
+                                                    android:hint="Enter the location"
+                                                    android:inputType="textPostalAddress"
+                                                    android:textSize="16sp" />
+
+                                                <fragment
+                                                    android:id="@+id/places_fragment_create"
+                                                    android:background="#FFF"
+                                                    android:orientation="vertical"
+                                                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment">
+                                                </fragment>
+                                        </LinearLayout>
+
+<!--                                        <androidx.recyclerview.widget.RecyclerView-->
+<!--                                            android:id="@+id/places_recycler_view_create"-->
+<!--                                            android:background="#FFF"-->
+<!--                                            android:orientation="vertical"-->
+<!--                                            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+<!--                                            android:layout_width="match_parent"-->
+<!--                                            android:layout_height="wrap_content">-->
+<!--                                        </androidx.recyclerview.widget.RecyclerView>-->
+                                </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
