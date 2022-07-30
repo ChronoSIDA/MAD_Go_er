@@ -21,12 +21,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import edu.neu.madcourse.mad_goer.databinding.Fragment3CommentBinding;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.messages.Comment;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
+import edu.neu.madcourse.mad_goer.ui.comment.messageRecycleview.CommentAdapter;
 
 public class CommentFragment extends Fragment {
 
@@ -39,7 +41,8 @@ public class CommentFragment extends Fragment {
     private User currentUser;
 
     DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
-
+    private RecyclerView recyclerView;
+    private List<Comment> comments;
     public CommentFragment() {
     }
 
@@ -49,11 +52,14 @@ public class CommentFragment extends Fragment {
         binding = Fragment3CommentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        comments = new ArrayList<>();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        RecyclerView recyclerView = binding.recyclerView;
+        recyclerView = binding.recyclerView;
 
         MainActivity activity = (MainActivity) getActivity();
-
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new CommentAdapter(comments, getContext()));
         currentUserName = activity.getCurrentUserName();
         currentUser = activity.getCurrentUser();
 

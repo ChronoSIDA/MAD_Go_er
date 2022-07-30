@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
+import java.util.List;
 
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.messages.Comment;
@@ -20,7 +21,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder>{
     private final HashMap<String, Comment> commentList;
     private final Context context;
 
-    public CommentAdapter(HashMap<String, Comment> messageList, Context context) {
+    public CommentAdapter(List<Comment> messageList, Context context) {
         this.commentList = messageList;
         this.context = context;
     }
