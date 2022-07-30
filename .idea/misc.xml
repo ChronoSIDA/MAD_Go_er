@@ -21,8 +21,8 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_layout.xml" value="0.33046671549479156" />
-        <entry key="app/src/main/res/layout/card_layout_msg.xml" value="0.2617753623188406" />
-        <entry key="app/src/main/res/layout/event_popup.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/card_layout_msg.xml" value="0.4038224801004933" />
+        <entry key="app/src/main/res/layout/event_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/filter_popup.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_1_home.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_2_go.xml" value="0.3765625" />

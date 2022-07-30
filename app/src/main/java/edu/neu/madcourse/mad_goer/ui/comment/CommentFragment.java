@@ -36,7 +36,7 @@ public class CommentFragment extends Fragment {
     private Button sendBtn;
     private Event event;
     private Spinner eventSpinner;
-    private User curUser;
+    private String curUser;
 
     public CommentFragment() {
     }
@@ -50,6 +50,9 @@ public class CommentFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.recyclerView;
         MainActivity activity = (MainActivity) getActivity();
+
+        //TO DO: pass current user to this fragment to get the event lists
+        curUser = activity.getCurrentUser();
 
         sendBtn = binding.btnSendMsg;
         sendBtn.setOnClickListener(new View.OnClickListener() {

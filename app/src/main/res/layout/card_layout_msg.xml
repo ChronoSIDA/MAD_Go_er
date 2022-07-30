@@ -16,21 +16,25 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
 
         <TextView
             android:id="@+id/comment_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
             android:text="random msg random msg random msg random msg random msg random msg "
             android:textColor="@color/black"
             android:textSize="11dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendername_msg"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/timestamp_msg"
@@ -38,7 +42,7 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:text="(07/29/2022 12:14pm) "
-            android:textColor="@color/black"
+            android:textColor="@color/darkGrey"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +58,7 @@
             android:text="random_user"
             android:textColor="@color/black"
             android:textSize="12dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/timestamp_msg"
             app:layout_constraintTop_toTopOf="parent"
@@ -81,7 +86,6 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
             android:padding="2dp"
             android:text="\@ "
             android:textColor="@color/black"
@@ -95,11 +99,12 @@
             android:id="@+id/eventname_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
+            android:onClick="showEventDetail"
             android:padding="2dp"
             android:text="EDC 2022"
-            android:textColor="@color/black"
+            android:textColor="@color/strongRed"
             android:textSize="12dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent"
@@ -121,31 +126,32 @@
 
         <TextView
             android:id="@+id/id_likecount_msg"
-            android:layout_width="40dp"
-            android:layout_height="14dp"
-            android:padding="2dp"
-            android:layout_marginEnd="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
             android:layout_marginBottom="5dp"
-            android:text=" "
+            android:padding="2dp"
+            android:text=" 999 likes"
             android:textColor="@color/black"
-            android:textSize="9dp"
+            android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_like_msg"
-            app:layout_constraintTop_toBottomOf="@+id/comment_msg" />
+            app:layout_constraintTop_toBottomOf="@+id/comment_msg"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
             android:id="@+id/btn_like_msg"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="26dp"
+            android:layout_height="18dp"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment_msg"
-            app:srcCompat="@android:drawable/star_big_on" />
+            app:srcCompat="@drawable/ic_like_unfilled" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

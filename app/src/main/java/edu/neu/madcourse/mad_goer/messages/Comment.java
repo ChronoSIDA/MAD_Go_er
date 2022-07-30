@@ -5,7 +5,7 @@ import java.util.Date;
 public class Comment {
 
     private String comment;
-    private User user;
+    private String userID;
     private Date timeStamp;
     private Event event;
     private int likes;
@@ -13,9 +13,9 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String comment, User user, Date timeStamp, Event event) {
+    public Comment(String comment, String userID, Date timeStamp, Event event) {
         this.comment = comment;
-        this.user = user;
+        this.userID = userID;
         this.timeStamp = timeStamp;
         this.event = event;
         this.likes = 0;
@@ -24,8 +24,8 @@ public class Comment {
     public String getComment(){
         return this.comment;
     }
-    public User getUser(){
-        return this.user;
+    public String getUser(){
+        return this.userID;
     }
 
     public Date getTime(){
@@ -39,5 +39,9 @@ public class Comment {
     public int getLikes() {
         return this.likes;
     }
+    public void likesPlusOne(){
+        this.likes += 1;
+    }
+
 }
 
