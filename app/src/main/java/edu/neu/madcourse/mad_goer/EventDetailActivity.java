@@ -118,7 +118,6 @@ public class EventDetailActivity extends AppCompatActivity {
                             "Cancelled", Toast.LENGTH_SHORT).show();
                     joinBtn.setText("Go");
                 }
-
             }
         });
 
