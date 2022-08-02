@@ -19,7 +19,7 @@ public class Event {
     //if ture, public, if false private
     private boolean isPublic;
     //only for private event
-    private int eventPassword;
+    private String eventPassword;
 
     //vitual: link
     private String link;
@@ -76,11 +76,11 @@ public class Event {
         isPublic = aPublic;
     }
 
-    public int getEventPassword() {
+    public String getEventPassword() {
         return eventPassword;
     }
 
-    public void setEventPassword(int eventPassword) {
+    public void setEventPassword(String eventPassword) {
         this.eventPassword = eventPassword;
     }
 
@@ -155,5 +155,7 @@ public class Event {
         this.category = eventType;
     }
 
-
+    public Boolean verifyPrivatePassword(String password){
+        return this.eventPassword.equals(password);
+    }
 }

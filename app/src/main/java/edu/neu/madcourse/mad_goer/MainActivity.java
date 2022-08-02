@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventType;
     private Button newEventSave, newEventCancel;
 
+
     //for gofragments
     //key is "eventID", value is Event
     //would need all eventID under currentUser's personal eventmap
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity{
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
+
 
 
         ImageButton plus = findViewById(R.id.btn_create_event);
@@ -401,8 +403,7 @@ public class MainActivity extends AppCompatActivity{
         return dataAdapter;
     }
 
-    public Boolean verifyPassword(){
-        final Boolean passwordCorrect = false;
+    public void verifyPassword(Event event, Intent intent){
         dialogBuilder= new AlertDialog.Builder(this);
         final View EventPopupView = getLayoutInflater().inflate(R.layout.password_dialog, null);
         EditText password = (EditText) EventPopupView.findViewById(R.id.editPassword_dialog);
@@ -410,6 +411,7 @@ public class MainActivity extends AppCompatActivity{
         Button joinBtn = (Button) EventPopupView.findViewById(R.id.btn_join_passdialog);
         Button cancelBtn = (Button) EventPopupView.findViewById(R.id.btn_cancel_passdialog);
 
+        String userInputPassword = password.getText().toString();
         dialogBuilder.setView(EventPopupView);
         dialog= dialogBuilder.create();
         dialog.show();
@@ -418,16 +420,19 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if(newEventName!=null && newEventType!=null) {
-                    Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
+                if(newEventName!=null && newEventType!=null && event.verifyPrivatePassword(userInputPassword)) {
+
+                    Snackbar.make(view, "Password Correct!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     // add intent
                     //TO DO for Yang: required to pass userList
-                    passwordCorrect = true;
+                    startActivity(intent);
+
                 }else{
-                    Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Event password incorrect, please try again later", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
+
             }
         });
 
