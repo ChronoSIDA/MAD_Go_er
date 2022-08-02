@@ -2,6 +2,7 @@ package edu.neu.madcourse.mad_goer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -64,20 +65,23 @@ public class InterestActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         String nameTxt = extras.getString("nameTxt");
 
+        DatabaseReference curUserRef = databaseReference.child(nameTxt);
         //read the user once from firebase, and save it to our user field.
-        databaseReference.child("User").child(nameTxt).addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot singleSnapShot: snapshot.getChildren()){
-                    user = singleSnapShot.getValue(User.class);
-                }
+                User user = snapshot.getValue(User.class);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+
+        curUserRef.addValueEventListener(postListener);
+
+
 
         btn = (Button) findViewById(R.id.btn_go_interest);
         skip = (TextView) findViewById(R.id.id_skip_interest);
