@@ -4,6 +4,7 @@ import android.os.Message;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -37,7 +38,7 @@ public class User {
     public Map<String,String> getSavedEventList() {
         //need to find all values that second param is saved
 
-        Map<String,String> result = null;
+        Map<String,String> result = Collections.emptyMap();
 
 
         for(Map.Entry<String,String> event : myEventList.entrySet()){
