@@ -27,6 +27,8 @@
     <string name="string_join">Join</string>
     <string name="string_cancel">Back</string>
     <string name="string_interest_txt">We really want to know Events you want to GO:</string>
+    <string name="string_password_txt">Please enter password for joining in a private event</string>
+    <string name="string_password_hint">6 digits password</string>
     <string name="technology">Technology</string>
     <string name="culture">Culture</string>
     <string name="art">Art</string>
