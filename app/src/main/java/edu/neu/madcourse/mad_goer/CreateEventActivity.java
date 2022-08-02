@@ -174,70 +174,70 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         }
         switch(type) {
             case EDUCATION:
-                typeImage = getDrawable(R.drawable.Sticker_Education);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Art);
                 break;
             case SPORTS:
-                typeImage = getDrawable(R.drawable.Sticker_Sports);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Sports);
                 break;
             case FITNESS:
-                typeImage = getDrawable(R.drawable.Sticker_Fitness);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Fitness);
                 break;
             case TECHNOLOGY:
-                typeImage = getDrawable(R.drawable.Sticker_Technology);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Technology);
                 break;
             case TRAVEL:
-                typeImage = getDrawable(R.drawable.Sticker_Travel);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Travel);
                 break;
             case OUTDOOR:
-                typeImage = getDrawable(R.drawable.Sticker_Outdoor);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Outdoor);
                 break;
             case GAMES:
-                typeImage = getDrawable(R.drawable.Sticker_Games);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Games);
                 break;
             case ART:
-                typeImage = getDrawable(R.drawable.Sticker_Art);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Art);
                 break;
             case CULTURE:
-                typeImage = getDrawable(R.drawable.Sticker_culture);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_culture);
                 break;
             case CAREER:
-                typeImage = getDrawable(R.drawable.Sticker_Career);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Career);
                 break;
             case BUSINESS:
-                typeImage = getDrawable(R.drawable.Sticker_Business);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Business);
                 break;
             case COMMUNITY:
-                typeImage = getDrawable(R.drawable.Sticker_Community);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Community);
                 break;
             case DANCING:
-                typeImage = getDrawable(R.drawable.Sticker_Dancing);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Dancing);
                 break;
             case HEALTH:
-                typeImage = getDrawable(R.drawable.Sticker_Health);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Health);
                 break;
             case HOBBIES:
-                typeImage = getDrawable(R.drawable.Sticker_Hobbies);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Hobbies);
                 break;
             case MOVEMENT:
-                typeImage = getDrawable(R.drawable.Sticker_Movement);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Movement);
                 break;
             case LANGUAGE:
-                typeImage = getDrawable(R.drawable.Sticker_Language);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Language);
                 break;
             case MUSIC:
-                typeImage = getDrawable(R.drawable.Sticker_Music);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Music);
                 break;
             case FAMILY:
-                typeImage = getDrawable(R.drawable.Sticker_Family);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Family);
                 break;
             case PETS:
-                typeImage = getDrawable(R.drawable.Sticker_Pets);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Pets);
                 break;
             case RELIGION:
-                typeImage = getDrawable(R.drawable.Sticker_Religion);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Religion);
                 break;
             case SCIENCE:
-                typeImage = getDrawable(R.drawable.Sticker_Science);
+                typeImage = getResources().getDrawable(R.drawable.Sticker_Science);
                 break;
 
             default:
