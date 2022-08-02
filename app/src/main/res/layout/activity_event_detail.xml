@@ -232,7 +232,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_isPublic_detail"
         app:layout_constraintVertical_bias="0.032"
-        app:srcCompat="@drawable/Sticker_Community" />
+        app:srcCompat="@drawable/sticker_community" />
 
     <ImageButton
         android:id="@+id/btn_save_detail"
