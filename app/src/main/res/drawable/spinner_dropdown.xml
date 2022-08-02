@@ -12,8 +12,8 @@
                         android:bottom="10dp"
                         />
 
-                    <gradient android:startColor="@color/blueroyal" android:endColor="@color/bluesteel" android:angle="270" />
-                    <stroke android:width="5px" android:color="@color/bluepale" />
+                    <gradient android:startColor="#FFFFFF" android:endColor="@color/lightOrange" android:angle="270" />
+                    <stroke android:width="5px" android:color="@color/lightOrange" />
                     <corners android:radius="3dp" />
                 </shape>
             </item>
