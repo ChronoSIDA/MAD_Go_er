@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
@@ -55,11 +57,11 @@ public class HomeFragment extends Fragment {
 
         MainActivity activity = (MainActivity) getActivity();
         eventMap = activity.getTotalEvents();
+        //convert the eventMap to arraylist to fit in the first parameter type
+        Collection<Event> values = eventMap.values();
+        ArrayList<Event> eventList = new ArrayList<>(values);
 
-//       ArrayList<HashMap<String,Event>> arrayList = new ArrayList<>();
-//       arrayList.add(eventMap);
-
-        EventAdapter eventAdapter = new EventAdapter(eventMap,getContext());
+        EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(eventAdapter);

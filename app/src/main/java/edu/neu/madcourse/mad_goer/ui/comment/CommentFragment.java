@@ -96,7 +96,7 @@ public class CommentFragment extends Fragment {
         }else {
             Date timestamp = Calendar.getInstance().getTime();
             Comment newComment = new Comment(thisComment, currentUserName, timestamp, (Event)eventSpinner.getSelectedItem());
-            //TO DO: push this new comment to database
+            //push this new comment to database
             databaseCommentRef.push().setValue(newComment);
         }
     }
