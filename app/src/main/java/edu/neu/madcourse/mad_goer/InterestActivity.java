@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 
@@ -42,10 +45,14 @@ public class InterestActivity extends AppCompatActivity {
     private CheckBox science_cb;
 
 
+    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
+        LoginActivity loginActivity = new LoginActivity();
+        user = loginActivity.getCurrentUser();
 
         btn = (Button) findViewById(R.id.btn_go_interest);
         skip = (TextView) findViewById(R.id.id_skip_interest);
@@ -164,6 +171,9 @@ public class InterestActivity extends AppCompatActivity {
                 if(religion_cb.isChecked()){
                     user.getInterestedTypeList().add(EventType.RELIGION);
                 }
+
+                //after checking all this, user should also be updated in firebase
+                databaseUserRef.child(user.getUserID()).setValue(user);
             }
         });
     }
