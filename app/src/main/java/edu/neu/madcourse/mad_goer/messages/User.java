@@ -32,25 +32,24 @@ public class User {
     }
 
 
-    public Map<String,String> getAttendEventList() {
-        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "attending".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
-        return result;
-    }
 
+    //Key is eventID, value is "saved"/"Host"/"past"/"interested"/"attend"
     public Map<String,String> getSavedEventList() {
-        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "saved".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
+        //need to find all values that second param is saved
+
+        Map<String,String> result = null;
+
+
+        for(Map.Entry<String,String> event : myEventList.entrySet()){
+            if(event.getValue().equals("saved")){
+                result.put(event.getKey(),"saved");
+            }
+        }
+
         return result;
     }
 
-    public Map<String,String> getPastEventList() {
-        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "past".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
-        return result;
-    }
 
-    public Map<String,String> getHostEventList() {
-        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "host".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
-        return result;
-    }
 
     public ArrayList<EventType> getInterestedTypeList() {
         return interestedTypeList;

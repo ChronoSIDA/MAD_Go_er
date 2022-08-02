@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity{
     //TODO: want current user obj info, they can just new a LoginActivity, and call its method
     //TODO: if implement this way, we also need to move listener for user from mainactivity to login activity
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com/");
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity{
                                     Toast.makeText(LoginActivity.this,"Username length cannot be less than 3 characters \nUsername length cannot be longer than 10 characters",Toast.LENGTH_LONG).show();
                                 } else {
                                     currentUser = new User((nameTxt));
+
                                     //added a user object to database under Users
                                     databaseReference.child("User").child(nameTxt).setValue(currentUser);
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
