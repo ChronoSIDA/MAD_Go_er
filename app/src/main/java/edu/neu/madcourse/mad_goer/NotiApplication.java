@@ -6,8 +6,8 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 public class NotiApplication extends Application {
-    public static final String CHANNEL_1_ID = "Everyone";
-    public static final String CHANNEL_2_ID = "Friends only";
+    public static final String CHANNEL_1_ID = "All events";
+    public static final String CHANNEL_2_ID = "My events only";
 
 
     @Override
@@ -33,7 +33,7 @@ public class NotiApplication extends Application {
 
             NotificationChannel channel2 = new NotificationChannel(
                     CHANNEL_2_ID,
-                    "Stickers from friends",
+                    "My Interested Events",
                     NotificationManager.IMPORTANCE_LOW
             );
             channel2.setDescription("Display sticker notification from friends");
