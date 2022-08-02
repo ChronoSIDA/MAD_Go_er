@@ -39,6 +39,7 @@ public class CommentFragment extends Fragment {
     private Spinner eventSpinner;
     private String currentUserName;
     private User currentUser;
+    private ArrayAdapter<Event> spinnerArrayAdapter;
 
     DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
     private RecyclerView recyclerView;
@@ -62,6 +63,7 @@ public class CommentFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new CommentAdapter(comments, getContext()));
         currentUserName = activity.getCurrentUserName();
+        spinnerArrayAdapter = activity.getArrayAdapter();
         currentUser = activity.getCurrentUser();
 
 
@@ -75,16 +77,17 @@ public class CommentFragment extends Fragment {
         commentTV = binding.editCommentComment;
         eventSpinner = binding.idEventNameComment;
 
-        //event_list contains all Event objects under this user
-        ArrayList<Event> event_list = activity.getListofEventLists().get(0);
+//        //event_list contains all Event objects under this user
+//        ArrayList<Event> event_list = activity.getListofEventLists().get(0);
+//
+//        //TO DO: pass event information of this user
+//        for (Event e: event_list) {
+//            event_list.add(e);
+//        }
 
-        //TO DO: pass event information of this user
-        for (Event e: event_list) {
-            event_list.add(e);
-        }
-        ArrayAdapter<Event> dataAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, event_list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        eventSpinner.setAdapter(dataAdapter);
+//        ArrayAdapter<Event> dataAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, event_list);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eventSpinner.setAdapter(spinnerArrayAdapter);
 
         return root;
     }
