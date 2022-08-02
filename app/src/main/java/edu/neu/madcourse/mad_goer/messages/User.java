@@ -16,8 +16,9 @@ public class User {
 
     //key cannot be duplicate, but values can
     //Key is eventID, value is "saved"/"Host"/"past"/"interested"/"attend"
-    private HashMap<String,String> myEventList;
+    private Map<String,String> myEventList;
     private ArrayList<EventType> interestedTypeList;
+
 
     //must keep the empty constructor, otherwise generate "Class does not define a no-argument constructor." error
     public User() {
@@ -25,7 +26,7 @@ public class User {
 
     public User(String userID){
         this.userID = userID;
-        Map<String,String> myEventList = new HashMap<>();
+        myEventList = new HashMap<>();
     }
 
     public String getUserID() {
@@ -36,17 +37,7 @@ public class User {
 
     //Key is eventID, value is "saved"/"Host"/"past"/"interested"/"attend"
     public Map<String,String> getSavedEventList() {
-        //need to find all values that second param is saved
-
-        Map<String,String> result = Collections.emptyMap();
-
-
-        for(Map.Entry<String,String> event : myEventList.entrySet()){
-            if(event.getValue().equals("saved")){
-                result.put(event.getKey(),"saved");
-            }
-        }
-
+        Map<String,String> result = this.myEventList.entrySet().stream().filter(map -> "saved".equals(map.getValue())).collect(Collectors.toMap(p->p.getKey(),p->p.getValue()));
         return result;
     }
 
@@ -67,10 +58,4 @@ public class User {
     public void removeEvent(String eventID, String eventStatus){
         this.myEventList.remove(eventID,eventStatus);
     }
-
-
-
-
-
-
 }

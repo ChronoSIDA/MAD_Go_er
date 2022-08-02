@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity{
                                     currentUser = new User(nameTxt);
 
                                     //added a user object to database under Users
-                                    databaseReference.child("User").child(nameTxt).setValue(nameTxt);
+                                    databaseReference.child("User").child(nameTxt).setValue(currentUser);
                                     //databaseReference.child("User").child(nameTxt).setValue(currentUser);
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
 
