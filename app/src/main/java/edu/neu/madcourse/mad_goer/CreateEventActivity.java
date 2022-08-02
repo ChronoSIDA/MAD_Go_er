@@ -277,18 +277,18 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         snackbar.show();
     }
 
-    private TextWatcher filterTextWatcher = new TextWatcher() {
-        public void afterTextChanged(Editable s) {
-            if (!s.toString().equals("")) {
-                mAutoCompleteAdapter.getFilter().filter(s.toString());
-                if (recyclerView.getVisibility() == View.GONE) {recyclerView.setVisibility(View.VISIBLE);}
-            } else {
-                if (recyclerView.getVisibility() == View.VISIBLE) {recyclerView.setVisibility(View.GONE);}
-            }
-        }
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-        public void onTextChanged(CharSequence s, int start, int before, int count) { }
-    };
+//    private TextWatcher filterTextWatcher = new TextWatcher() {
+//        public void afterTextChanged(Editable s) {
+//            if (!s.toString().equals("")) {
+//                mAutoCompleteAdapter.getFilter().filter(s.toString());
+//                if (recyclerView.getVisibility() == View.GONE) {recyclerView.setVisibility(View.VISIBLE);}
+//            } else {
+//                if (recyclerView.getVisibility() == View.VISIBLE) {recyclerView.setVisibility(View.GONE);}
+//            }
+//        }
+//        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+//        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+//    };
 
     public void  click(Place place) {
         Toast.makeText(this, place.getAddress()+", "+place.getLatLng().latitude+place.getLatLng().longitude, Toast.LENGTH_SHORT).show();
