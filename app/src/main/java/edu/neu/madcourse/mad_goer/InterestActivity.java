@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -63,15 +65,17 @@ public class InterestActivity extends AppCompatActivity {
         String nameTxt = extras.getString("nameTxt");
 
         //read the user once from firebase, and save it to our user field.
-        databaseReference.child("User").child(nameTxt).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        databaseReference.child("User").child(nameTxt).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot singleSnapShot: snapshot.getChildren()){
+                    user = singleSnapShot.getValue(User.class);
                 }
-                else {
-                    user = task.getResult().getValue(User.class);
-                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
