@@ -1,5 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -62,6 +64,7 @@ public class HomeFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position){
+
                 Intent intent = new Intent(getContext(), EventDetailActivity.class);
                 intent.putExtra("eventID", eventMap.get(position).getEventID());
 
@@ -70,6 +73,24 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 } else {
                     activity.verifyPassword(eventMap.get(position), intent);
+//                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+//                    alertDialog.setTitle("PASSWORD");
+//                    alertDialog.setMessage("Enter Password");
+//                    final EditText input = new EditText(getActivity());
+//                    alertDialog.setView(input);
+//                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"CONFIRM",new View.OnClickListener(){
+//                        @Override
+//                        public void onClick(View view) {
+//                            if(input.getText().toString().equals(eventMap.get(position).getEventPassword()){
+//                                startActivity(intent);
+//                            }else{
+//
+//                            }
+//                        }
+//                    });
+//
+//                    alertDialog.setButton(());
+
                 }
             }
             @Override
