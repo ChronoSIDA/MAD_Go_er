@@ -2,14 +2,19 @@ package edu.neu.madcourse.mad_goer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,14 +50,29 @@ public class InterestActivity extends AppCompatActivity {
     private CheckBox science_cb;
 
 
-    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
-        LoginActivity loginActivity = new LoginActivity();
-        user = loginActivity.getCurrentUser();
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String nameTxt = extras.getString("nameTxt");
+
+        //read the user once from firebase, and save it to our user field.
+        databaseReference.child("User").child(nameTxt).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    user = task.getResult().getValue(User.class);
+                }
+            }
+        });
 
         btn = (Button) findViewById(R.id.btn_go_interest);
         skip = (TextView) findViewById(R.id.id_skip_interest);
@@ -173,7 +193,7 @@ public class InterestActivity extends AppCompatActivity {
                 }
 
                 //after checking all this, user should also be updated in firebase
-                databaseUserRef.child(user.getUserID()).setValue(user);
+                databaseReference.child(user.getUserID()).setValue(user);
             }
         });
     }

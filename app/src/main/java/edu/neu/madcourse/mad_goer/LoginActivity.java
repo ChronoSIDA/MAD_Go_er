@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity{
                             if(snapshot.child("User").hasChild(nameTxt)){
                                 Toast.makeText(LoginActivity.this,"Welcome back, " + nameTxt,Toast.LENGTH_SHORT).show();
                                 Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
+                                intent.putExtra("nameTxt",nameTxt);
                                 startActivity(intent);
                             }else{
                                 //pass the user to database
@@ -74,11 +75,11 @@ public class LoginActivity extends AppCompatActivity{
 
                                     //added a user object to database under Users
                                     databaseReference.child("User").child(nameTxt).setValue(currentUser);
-                                    //databaseReference.child("User").child(nameTxt).setValue(currentUser);
                                     Toast.makeText(LoginActivity.this,"new account created!",Toast.LENGTH_SHORT).show();
 
                                     //change launch activity to select interest
                                     Intent intent =  new Intent(LoginActivity.this, edu.neu.madcourse.mad_goer.InterestActivity.class);
+                                    intent.putExtra("nameTxt",nameTxt);
                                     startActivity(intent);
                                 }
                             }
@@ -107,6 +108,6 @@ public class LoginActivity extends AppCompatActivity{
         return nameTxt;
     }
     public User getCurrentUser() {
-        return currentUser;
+        return this.currentUser;
     }
 }
