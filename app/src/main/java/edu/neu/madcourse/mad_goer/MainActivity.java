@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity{
         dialogBuilder= new AlertDialog.Builder(this);
         final View EventPopupView = getLayoutInflater().inflate(R.layout.event_popup, null);
         newEventName = (EditText) EventPopupView.findViewById(R.id.newEventName);
-       // newEventType = (EditText) EventPopupView.findViewById(R.id.newEventCategory);
+        // newEventType = (EditText) EventPopupView.findViewById(R.id.newEventCategory);
         newEventSave = (Button) EventPopupView.findViewById(R.id.btn_cancel_filter);
         newEventCancel = (Button) EventPopupView.findViewById(R.id.btn_apply_filter);
 
@@ -399,5 +399,45 @@ public class MainActivity extends AppCompatActivity{
         ArrayAdapter<Event> dataAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, event_list);
 
         return dataAdapter;
+    }
+
+    public Boolean verifyPassword(){
+        final Boolean passwordCorrect = false;
+        dialogBuilder= new AlertDialog.Builder(this);
+        final View EventPopupView = getLayoutInflater().inflate(R.layout.password_dialog, null);
+        EditText password = (EditText) EventPopupView.findViewById(R.id.editPassword_dialog);
+        // newEventType = (EditText) EventPopupView.findViewById(R.id.newEventCategory);
+        Button joinBtn = (Button) EventPopupView.findViewById(R.id.btn_join_passdialog);
+        Button cancelBtn = (Button) EventPopupView.findViewById(R.id.btn_cancel_passdialog);
+
+        dialogBuilder.setView(EventPopupView);
+        dialog= dialogBuilder.create();
+        dialog.show();
+
+        joinBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if(newEventName!=null && newEventType!=null) {
+                    Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    // add intent
+                    //TO DO for Yang: required to pass userList
+                    passwordCorrect = true;
+                }else{
+                    Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Snackbar.make(view, "Link canceled", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 }

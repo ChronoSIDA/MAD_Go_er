@@ -1,15 +1,19 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +22,7 @@ import java.util.List;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
+import edu.neu.madcourse.mad_goer.PasswordDialog;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
@@ -38,21 +43,6 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.rvHomefrag;
 
-        //when clicked something in recycleview(aka the event list), get the event id from the item clicked
-        //and pass the eventid to intent, and open new activity of(eventdetailactivity)
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
-            @Override
-            public void onItemClick(View view, int position){
-                Intent intent = new Intent(getContext(), EventDetailActivity.class);
-                intent.putExtra("eventID", eventMap.get(position).getEventID());
-                startActivity(intent);
-            }
-            @Override
-            public void onLongItemClick(View view, int position){
-
-            }
-        }));
-
 
 
         MainActivity activity = (MainActivity) getActivity();
@@ -72,6 +62,27 @@ public class HomeFragment extends Fragment {
         //will auto show cardview from bottom
         recyclerView.scrollToPosition(eventMap.size()-1);
 
+
+        //when clicked something in recycleview(aka the event list), get the event id from the item clicked
+        //and pass the eventid to intent, and open new activity of(eventdetailactivity)
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position){
+                Intent intent = new Intent(getContext(), EventDetailActivity.class);
+                intent.putExtra("eventID", eventMap.get(position).getEventID());
+
+                // public or private:
+                if(eventMap.get(position).isPublic()){
+                    startActivity(intent);
+                } else {
+                    activity.verifyPassword();
+                }
+            }
+            @Override
+            public void onLongItemClick(View view, int position){
+
+            }
+        }));
 
         return root;
     }
