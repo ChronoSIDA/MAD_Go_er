@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 
@@ -98,6 +99,77 @@ public class InterestActivity extends AppCompatActivity {
         pet_cb = (CheckBox) findViewById(R.id.cbox_pets_interest);
         religion_cb = (CheckBox) findViewById(R.id.cbox_religion_interest);
         science_cb = (CheckBox) findViewById(R.id.cbox_science_interest);
+
+        //check if user interest category contains
+        if(user.getInterestedTypeList().contains(EventType.MUSIC)){
+            music_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.EDUCATION)){
+            edu_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.SPORTS)){
+            sports_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.FITNESS)){
+            fitness_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.TECHNOLOGY)){
+            tech_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.TRAVEL)){
+            travel_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.OUTDOOR)){
+            outdoor_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.GAMES)){
+            game_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.ART)){
+            art_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.CULTURE)){
+            cult_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.CAREER)){
+            career_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.BUSINESS)){
+            business_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.COMMUNITY)){
+            community_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.DANCING)){
+            dance_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.HEALTH)){
+            health_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.HOBBIES)){
+            hobby_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.MOVEMENT)){
+            movement_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.LANGUAGE)){
+            language_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.FAMILY)){
+            family_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.PETS)){
+            pet_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.RELIGION)){
+            religion_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.SCIENCE)){
+            science_cb.setChecked(true);
+        }
+
+
+
 
         //add interest type into users' interest list when clicking
         btn.setOnClickListener(new View.OnClickListener() {
@@ -202,4 +274,8 @@ public class InterestActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
+
+
+
+
 }
