@@ -122,7 +122,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             public void onClick(View v) {
                 //TODO
                 //upload this event onto firebase
-
+                if(date!= null&&)
             }
         });
         eventNameTV = (TextView) findViewById(R.id.txt_event_name_create);

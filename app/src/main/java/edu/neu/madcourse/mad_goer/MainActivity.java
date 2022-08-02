@@ -109,7 +109,13 @@ public class MainActivity extends AppCompatActivity{
         }
 
 
-
+        ImageButton plus = findViewById(R.id.btn_create_event);
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createNewDialog();
+            }
+        });
        // TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
@@ -277,13 +283,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void addEvent() {
-        ImageButton plus = findViewById(R.id.btn_create_event);
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewDialog();
-            }
-        });
+
     }
 
     public HashMap<String, Event> getTotalEvents(){

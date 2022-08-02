@@ -39,9 +39,9 @@ public class SettingFragment extends Fragment {
         button_emergencyCont = binding.buttonEmergencyContSetting;
         button_language = binding.buttonLanguageSetting;
         button_aboutGoer = binding.buttonAboutGoerSetting;
-        button_switchAccount = binding.buttonSwitchAccountSetting;
+      //  button_switchAccount = binding.buttonSwitchAccountSetting;
         button_logOut = binding.buttonLogOutSetting;
-        txt_username = binding.txtUsernameSetting;
+       // txt_username = binding.txtUsernameSetting;
         txt_privacy = binding.txtPrivacySetting;
         txt_system = binding.txtSystemSetting;
         return root;
