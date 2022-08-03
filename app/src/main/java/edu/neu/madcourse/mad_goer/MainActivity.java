@@ -30,6 +30,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.ChildEventListener;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity{
     private User currentUser;
     private ArrayList<ArrayList<Event>> listofEventLists;
 
+
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
@@ -94,9 +97,31 @@ public class MainActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
 
-        LoginActivity loginactivity = new LoginActivity();
-        currentUserName = loginactivity.getCurrentUserName();
-        currentUser = loginactivity.getCurrentUser();
+        //need to be deleted
+//        LoginActivity loginactivity = new LoginActivity();
+//        currentUserName = loginactivity.getCurrentUserName();
+//        currentUser = loginactivity.getCurrentUser();
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String currentUserName = extras.getString("nameTxt");
+
+        databaseUserRef.child(currentUserName).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    System.out.println("firebase Error getting data");
+                }
+                else {
+                    System.out.println("firebase");
+                }
+                System.out.println(task);
+                for(DataSnapshot snapshot : task.getResult().getChildren()) {
+                    currentUser = snapshot.getValue(User.class);
+                    System.out.println(currentUser);
+                }
+            }
+        });
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -108,7 +133,6 @@ public class MainActivity extends AppCompatActivity{
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-
 
 
         ImageButton plus = findViewById(R.id.btn_create_event);

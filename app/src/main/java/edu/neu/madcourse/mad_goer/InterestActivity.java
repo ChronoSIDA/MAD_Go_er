@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Looper;
 import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -26,9 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
-import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 
@@ -73,21 +68,39 @@ public class InterestActivity extends AppCompatActivity {
         String nameTxt = extras.getString("nameTxt");
 
 
-        //method 1:
-        DatabaseReference curUserRef = databaseReference.child("User").child(nameTxt);
-        //read the user once from firebase, and save it to our user field.
-        curUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user = snapshot.getValue(User.class);
-                System.out.println(user);
-            }
+//        //method 1:
+//        DatabaseReference curUserRef = databaseReference.child("User").child(nameTxt);
+//        //read the user once from firebase, and save it to our user field.
+//        curUserRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                User user = snapshot.getValue(User.class);
+//                System.out.println(user.toString());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                System.out.println("failed");
+//            }
+//        });
 
+        databaseReference.child("User").child(nameTxt).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("failed");
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    System.out.println("firebase Error getting data");
+                }
+                else {
+                    System.out.println("firebase");
+                }
+                System.out.println(task);
+                for(DataSnapshot snapshot : task.getResult().getChildren()) {
+                    user = snapshot.getValue(User.class);
+                    System.out.println(user);
+                }
             }
         });
+
 
 
 
@@ -117,16 +130,72 @@ public class InterestActivity extends AppCompatActivity {
         science_cb = (CheckBox) findViewById(R.id.cbox_science_interest);
 
         //check if user interest category contains (for setting -> interest setting)
-
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                new Runnable() {
-                    public void run() {
-                        if(user.getInterestedTypeList() != null){
-                            setInterestData();
-                        }
-                    }
-                },
-                100);
+        if(user.getInterestedTypeList().contains(EventType.MUSIC)){
+            music_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.EDUCATION)){
+            edu_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.SPORTS)){
+            sports_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.FITNESS)){
+            fitness_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.TECHNOLOGY)){
+            tech_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.TRAVEL)){
+            travel_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.OUTDOOR)){
+            outdoor_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.GAMES)){
+            game_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.ART)){
+            art_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.CULTURE)){
+            cult_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.CAREER)){
+            career_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.BUSINESS)){
+            business_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.COMMUNITY)){
+            community_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.DANCING)){
+            dance_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.HEALTH)){
+            health_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.HOBBIES)){
+            hobby_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.MOVEMENT)){
+            movement_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.LANGUAGE)){
+            language_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.FAMILY)){
+            family_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.PETS)){
+            pet_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.RELIGION)){
+            religion_cb.setChecked(true);
+        }
+        if(user.getInterestedTypeList().contains(EventType.SCIENCE)){
+            science_cb.setChecked(true);
+        }
 
 //check box on click change bg color
         Drawable selected = getResources().getDrawable(R.drawable.interest_selected);
@@ -474,76 +543,13 @@ public class InterestActivity extends AppCompatActivity {
     }
 
     public void returnMain(View view){
-        Intent intent = new Intent(this,MainActivity.class);
+
+        Intent intent =  new Intent(this, MainActivity.class);
+        intent.putExtra("nameTxt",user.getUserID());
         startActivity(intent);
     }
 
-    public void setInterestData(){
-        if(user.getInterestedTypeList().contains(EventType.MUSIC)){
-            music_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.EDUCATION)){
-            edu_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.SPORTS)){
-            sports_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.FITNESS)){
-            fitness_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.TECHNOLOGY)){
-            tech_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.TRAVEL)){
-            travel_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.OUTDOOR)){
-            outdoor_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.GAMES)){
-            game_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.ART)){
-            art_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.CULTURE)){
-            cult_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.CAREER)){
-            career_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.BUSINESS)){
-            business_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.COMMUNITY)){
-            community_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.DANCING)){
-            dance_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.HEALTH)){
-            health_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.HOBBIES)){
-            hobby_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.MOVEMENT)){
-            movement_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.LANGUAGE)){
-            language_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.FAMILY)){
-            family_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.PETS)){
-            pet_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.RELIGION)){
-            religion_cb.setChecked(true);
-        }
-        if(user.getInterestedTypeList().contains(EventType.SCIENCE)){
-            science_cb.setChecked(true);
-        }
-    }
+
+
+
 }
