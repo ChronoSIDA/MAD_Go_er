@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import edu.neu.madcourse.mad_goer.MainActivity;
+import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment2GoBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -37,7 +39,7 @@ public class GoFragment extends Fragment {
     private Map<String,String> personalEventMap;
     private ArrayList<ArrayList<Event>> listofEventLists;
     private RecyclerView recyclerView;
-    private TabLayout tabLayout;
+    private LinearLayout tabLayout;
     private EventAdapter eventAdapter;
     private LinearLayoutManager linearLayoutManager;
 
@@ -47,31 +49,35 @@ public class GoFragment extends Fragment {
 
         binding = Fragment2GoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        
         recyclerView = binding.rvGofrag;
         tabLayout = binding.tabLayoutGo;
 
         MainActivity activity = new MainActivity();
         listofEventLists = activity.getListofEventLists();
 
-        setUpRecyclerView(0);
+        if(listofEventLists != null){
+            setUpRecyclerView(0);
+        }
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                setUpRecyclerView(position);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        // TODO new
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                int position = tab.getPosition();
+//                setUpRecyclerView(position);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
 
         return root;
@@ -100,5 +106,4 @@ public class GoFragment extends Fragment {
 //    public void updatemyEventMap(){
 //      ...
 //    }
-
 }

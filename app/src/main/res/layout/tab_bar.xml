@@ -9,21 +9,15 @@
     tools:context=".ui.go.GoFragment">
 
     <LinearLayout
-        android:id="@+id/tab_layout_go"
+        android:id="@+id/tabLayout_go"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
         android:background="@color/smokeWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
-        app:tabIndicatorAnimationMode="elastic">
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:onClick="onTabClick"
+            android:onClick="onClick"
             android:id="@+id/tab_all_go"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
@@ -43,7 +37,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:onClick="onTabClick"
+            android:onClick="onClick"
             android:id="@+id/tab_host_go"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
@@ -63,7 +57,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:onClick="onTabClick"
+            android:onClick="onClick"
             android:id="@+id/tab_going_go"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
@@ -83,7 +77,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:onClick="onTabClick"
+            android:onClick="onClick"
             android:id="@+id/tab_saved_go"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
@@ -103,7 +97,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:onClick="onTabClick"
+            android:onClick="onClick"
             android:id="@+id/tab_past_go"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
@@ -134,76 +128,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout_go"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout_go"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@color/smokeWhite"-->
-<!--    tools:context=".ui.go.GoFragment">-->
-
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tabLayout_go"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.059"-->
-<!--        app:tabIndicatorAnimationMode="elastic"-->
-<!--        app:tabMode="scrollable">-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tab_all_go"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/all" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tab_host_go"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/host" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tab_going_go"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/going" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tab_saved_go"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/saved" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tab_past_go"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/past" />-->
-<!--    </com.google.android.material.tabs.TabLayout>-->
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rv_gofrag"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:nestedScrollingEnabled="true"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tabLayout_go"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

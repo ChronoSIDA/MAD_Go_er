@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity{
         String currentUserName = extras.getString("nameTxt");
 
 
+
         databaseUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -468,5 +469,25 @@ public class MainActivity extends AppCompatActivity{
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void onTabClick(View v){
+        switch (v.getId()){
+            case R.id.tab_all_go:
+                // TODO: clear all datya for recyclerview and append all;
+                break;
+            case R.id.tab_host_go:
+                // TODO: clear all datya for recyclerview and append all;
+                break;
+            case R.id.tab_going_go:
+                // TODO: clear all datya for recyclerview and append all;
+                break;
+            case R.id.tab_saved_go:
+                // TODO: clear all datya for recyclerview and append all;
+                break;
+            case R.id.tab_past_go:
+                // TODO: clear all datya for recyclerview and append all;
+                break;
+        }
     }
 }
