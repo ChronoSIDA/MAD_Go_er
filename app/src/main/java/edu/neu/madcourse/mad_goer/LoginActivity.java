@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -94,6 +96,23 @@ public class LoginActivity extends AppCompatActivity{
 
             }
         });
+
+        databaseReference.child("User").child(nameTxt).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    System.out.println("firebase Error getting data");
+                }
+                else {
+                    System.out.println("firebase");
+                    for(DataSnapshot snapshot : task.getResult().getChildren()) {
+                        User testUser = snapshot.getValue(User.class);
+                    }
+                }
+            }
+        });
+
+
         Button btn_about = findViewById(R.id.btn_about);
         btn_about.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -54,7 +54,7 @@ public class InterestActivity extends AppCompatActivity {
     private CheckBox science_cb;
 
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com");
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +81,20 @@ public class InterestActivity extends AppCompatActivity {
 //                System.out.println("failed");
 //            }
 //        });
-        DatabaseReference curUserRef = databaseReference.child("User").child(nameTxt);
-        //read the user once from firebase, and save it to our user field.
-        curUserRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+        databaseReference.child("User").child(nameTxt).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    System.out.println("firebase Error getting data");
+                }
+                else {
+                    System.out.println("firebase");
+                }
+                System.out.println(task);
                 for(DataSnapshot snapshot : task.getResult().getChildren()) {
                     user = snapshot.getValue(User.class);
+                    System.out.println(user);
                 }
             }
         });
