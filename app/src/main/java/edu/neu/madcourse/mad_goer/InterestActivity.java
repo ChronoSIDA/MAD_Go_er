@@ -1,6 +1,8 @@
 package edu.neu.madcourse.mad_goer;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.renderscript.Sampler;
@@ -114,7 +116,7 @@ public class InterestActivity extends AppCompatActivity {
         religion_cb = (CheckBox) findViewById(R.id.cbox_religion_interest);
         science_cb = (CheckBox) findViewById(R.id.cbox_science_interest);
 
-        //check if user interest category contains
+        //check if user interest category contains (for setting -> interest setting)
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
@@ -126,7 +128,250 @@ public class InterestActivity extends AppCompatActivity {
                 },
                 100);
 
+//check box on click change bg color
+        Drawable selected = getResources().getDrawable(R.drawable.interest_selected);
+        Drawable unSelected = getResources().getDrawable(R.drawable.interest_unselected);
+        music_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(music_cb.isChecked()){
+                    music_cb.setBackground(selected);
+                }else{
+                    music_cb.setBackground(unSelected);
+                }
+            }
+        });
 
+        edu_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(edu_cb.isChecked()){
+                    edu_cb.setBackground(selected);
+                }else{
+                    edu_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        sports_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sports_cb.isChecked()){
+                    sports_cb.setBackground(selected);
+                }else{
+                    sports_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        fitness_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(fitness_cb.isChecked()){
+                    fitness_cb.setBackground(selected);
+                }else{
+                    fitness_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        tech_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(tech_cb.isChecked()){
+                    tech_cb.setBackground(selected);
+                }else{
+                    tech_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        outdoor_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(outdoor_cb.isChecked()){
+                    outdoor_cb.setBackground(selected);
+                }else{
+                    outdoor_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        travel_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(travel_cb.isChecked()){
+                    travel_cb.setBackground(selected);
+                }else{
+                    travel_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        game_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(game_cb.isChecked()){
+                    game_cb.setBackground(selected);
+                }else{
+                    game_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        art_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(art_cb.isChecked()){
+                    art_cb.setBackground(selected);
+                }else{
+                    art_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        cult_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(cult_cb.isChecked()){
+                    cult_cb.setBackground(selected);
+                }else{
+                    cult_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        career_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(career_cb.isChecked()){
+                    career_cb.setBackground(selected);
+                }else{
+                    career_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        business_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(business_cb.isChecked()){
+                    business_cb.setBackground(selected);
+                }else{
+                    business_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        community_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(community_cb.isChecked()){
+                    community_cb.setBackground(selected);
+                }else{
+                    community_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        dance_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(dance_cb.isChecked()){
+                    dance_cb.setBackground(selected);
+                }else{
+                    dance_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        health_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(health_cb.isChecked()){
+                    health_cb.setBackground(selected);
+                }else{
+                    health_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        hobby_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(hobby_cb.isChecked()){
+                    hobby_cb.setBackground(selected);
+                }else{
+                    hobby_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        movement_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(movement_cb.isChecked()){
+                    movement_cb.setBackground(selected);
+                }else{
+                    movement_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        language_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(language_cb.isChecked()){
+                    language_cb.setBackground(selected);
+                }else{
+                    language_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        family_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(family_cb.isChecked()){
+                    family_cb.setBackground(selected);
+                }else{
+                    family_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        pet_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(pet_cb.isChecked()){
+                    pet_cb.setBackground(selected);
+                }else{
+                    pet_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        religion_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(religion_cb.isChecked()){
+                    religion_cb.setBackground(selected);
+                }else{
+                    religion_cb.setBackground(unSelected);
+                }
+            }
+        });
+
+        science_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(science_cb.isChecked()){
+                    science_cb.setBackground(selected);
+                }else{
+                    science_cb.setBackground(unSelected);
+                }
+            }
+        });
 
 
         //add interest type into users' interest list when clicking
