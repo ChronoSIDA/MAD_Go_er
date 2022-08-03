@@ -66,7 +66,6 @@ public class CommentFragment extends Fragment {
         spinnerArrayAdapter = activity.getArrayAdapter();
         currentUser = activity.getCurrentUser();
 
-
         sendBtn = binding.btnSendMsg;
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
