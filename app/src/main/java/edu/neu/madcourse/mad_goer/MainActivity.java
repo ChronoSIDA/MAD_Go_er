@@ -98,32 +98,30 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         //need to be deleted
-        LoginActivity loginactivity = new LoginActivity();
-        currentUserName = loginactivity.getCurrentUserName();
-        currentUser = loginactivity.getCurrentUser();
+        //LoginActivity loginactivity = new LoginActivity();
+        //currentUserName = loginactivity.getCurrentUserName();
+        //currentUser = loginactivity.getCurrentUser();
 
-//        Intent intent = getIntent();
-//        Bundle extras = intent.getExtras();
-//        String currentUserName = extras.getString("nameTxt");
-//
-//        databaseUserRef.child(currentUserName).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-//                    System.out.println("firebase Error getting data");
-//                }
-//                else {
-//                    System.out.println("firebase");
-//                }
-//                System.out.println(task);
-//                for(DataSnapshot snapshot : task.getResult().getChildren()) {
-//                    currentUser = snapshot.getValue(User.class);
-//                    System.out.println(currentUser);
-//                }
-//            }
-//        });
-//
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String currentUserName = extras.getString("nameTxt");
 
+        databaseUserRef.child(currentUserName).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    System.out.println("firebase Error getting data");
+                }
+                else {
+                    System.out.println("firebase");
+                }
+                System.out.println(task);
+                for(DataSnapshot snapshot : task.getResult().getChildren()) {
+                    currentUser = snapshot.getValue(User.class);
+                    System.out.println(currentUser);
+                }
+            }
+        });
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

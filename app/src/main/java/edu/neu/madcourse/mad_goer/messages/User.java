@@ -61,4 +61,8 @@ public class User {
     public void removeEvent(String eventID, String eventStatus){
         this.myEventList.remove(eventID,eventStatus);
     }
+
+    public void addInterestType(EventType eventType){
+        this.interestedTypeList.add(eventType);
+    }
 }
