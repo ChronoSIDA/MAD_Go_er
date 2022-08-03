@@ -6,8 +6,8 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 public class NotiApplication extends Application {
-    public static final String CHANNEL_1_ID = "All events";
-    public static final String CHANNEL_2_ID = "My events only";
+    public static final String CHANNEL_1_ID = "Recommend events";
+    public static final String CHANNEL_2_ID = "";
 
 
     @Override
@@ -39,8 +39,11 @@ public class NotiApplication extends Application {
             channel2.setDescription("Display sticker notification from friends");
 
             NotificationManager manager = getSystemService(NotificationManager.class);
+
             manager.createNotificationChannel(channel1);
+
             manager.createNotificationChannel(channel2);
+
         }
     }
 }
