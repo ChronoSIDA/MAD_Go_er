@@ -26,7 +26,9 @@ public class User {
 
     public User(String userID){
         this.userID = userID;
-        myEventList = new HashMap<>();
+        this.myEventList = new HashMap<>();
+        this.interestedTypeList = new ArrayList<EventType>();
+
     }
 
     public String getUserID() {
