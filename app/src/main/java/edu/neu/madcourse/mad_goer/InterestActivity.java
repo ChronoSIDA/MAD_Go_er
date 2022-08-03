@@ -81,6 +81,7 @@ public class InterestActivity extends AppCompatActivity {
 //                System.out.println("failed");
 //            }
 //        });
+
         databaseReference.child("User").child(nameTxt).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
