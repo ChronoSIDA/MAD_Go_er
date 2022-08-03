@@ -108,6 +108,7 @@
         android:layout_width="76dp"
         android:layout_height="30dp"
         android:layout_marginStart="32dp"
+        android:text="Language"
         android:button="@android:color/transparent"
         android:textAlignment="center"
         android:textColor="@color/quantum_grey800"
@@ -116,8 +117,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbox_community_interest"
-        app:layout_constraintVertical_bias="0.06"
-        tools:text="Language" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <CheckBox
         android:id="@+id/cbox_pets_interest"
@@ -128,12 +128,12 @@
         android:textAlignment="center"
         android:textColor="@color/quantum_grey800"
         android:textStyle="bold"
+        android:text="Pets"
         android:background="@drawable/interest_unselected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cbox_movement_interest"
         app:layout_constraintTop_toBottomOf="@+id/cbox_hobby_interest"
-        app:layout_constraintVertical_bias="0.06"
-        tools:text="Pets" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <CheckBox
         android:id="@+id/cbox_family_interest"
@@ -182,7 +182,7 @@
         app:layout_constraintStart_toEndOf="@+id/cbox_language_interest"
         app:layout_constraintTop_toBottomOf="@+id/cbox_health_interest"
         app:layout_constraintVertical_bias="0.059"
-        tools:text="Movement" />
+        android:text="Movement" />
 
     <CheckBox
         android:id="@+id/cbox_science_interest"
@@ -216,7 +216,7 @@
         app:layout_constraintStart_toEndOf="@+id/cbox_pets_interest"
         app:layout_constraintTop_toBottomOf="@+id/cbox_family_interest"
         app:layout_constraintVertical_bias="0.045"
-        tools:text="Music" />
+        android:text="Music" />
 
     <CheckBox
         android:id="@+id/cbox_hobby_interest"
