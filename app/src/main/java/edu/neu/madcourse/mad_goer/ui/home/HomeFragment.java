@@ -44,35 +44,36 @@ public class HomeFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         eventMap = activity.getTotalEvents();
         //convert the eventMap to arraylist to fit in the first parameter type
-        Collection<Event> values = eventMap.values();
-        ArrayList<Event> eventList = new ArrayList<>(values);
+        if(eventMap != null){
+            Collection<Event> values = eventMap.values();
+            ArrayList<Event> eventList = new ArrayList<>(values);
 
-        EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(eventAdapter);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(layoutManager);
+            EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(eventAdapter);
+            recyclerView.setHasFixedSize(false);
+            recyclerView.setLayoutManager(layoutManager);
 
-        //added Jul14
-        //will auto show cardview from bottom
-        recyclerView.scrollToPosition(eventMap.size()-1);
+            //added Jul14
+            //will auto show cardview from bottom
+            recyclerView.scrollToPosition(eventMap.size()-1);
 
 
-        //when clicked something in recycleview(aka the event list), get the event id from the item clicked
-        //and pass the eventid to intent, and open new activity of(eventdetailactivity)
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
-            @Override
-            public void onItemClick(View view, int position){
+            //when clicked something in recycleview(aka the event list), get the event id from the item clicked
+            //and pass the eventid to intent, and open new activity of(eventdetailactivity)
+            recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+                @Override
+                public void onItemClick(View view, int position){
 
-                Intent intent = new Intent(getContext(), EventDetailActivity.class);
-                intent.putExtra("eventID", eventMap.get(position).getEventID());
+                    Intent intent = new Intent(getContext(), EventDetailActivity.class);
+                    intent.putExtra("eventID", eventMap.get(position).getEventID());
 
-                // public or private:
-                if(eventMap.get(position).isPublic()){
-                    startActivity(intent);
-                } else {
-                    activity.verifyPassword(eventMap.get(position), intent);
+                    // public or private:
+                    if(eventMap.get(position).isPublic()){
+                        startActivity(intent);
+                    } else {
+                        activity.verifyPassword(eventMap.get(position), intent);
 //                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
 //                    alertDialog.setTitle("PASSWORD");
 //                    alertDialog.setMessage("Enter Password");
@@ -91,13 +92,14 @@ public class HomeFragment extends Fragment {
 //
 //                    alertDialog.setButton(());
 
+                    }
                 }
-            }
-            @Override
-            public void onLongItemClick(View view, int position){
+                @Override
+                public void onLongItemClick(View view, int position){
 
-            }
-        }));
+                }
+            }));
+        }
 
         return root;
     }
