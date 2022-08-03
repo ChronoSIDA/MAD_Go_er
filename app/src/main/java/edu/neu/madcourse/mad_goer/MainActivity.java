@@ -39,6 +39,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
 
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         //need to be deleted
         //LoginActivity loginactivity = new LoginActivity();
         //currentUserName = loginactivity.getCurrentUserName();
@@ -106,26 +109,20 @@ public class MainActivity extends AppCompatActivity{
         Bundle extras = intent.getExtras();
         String currentUserName = extras.getString("nameTxt");
 
-        databaseUserRef.child(currentUserName).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+        databaseUserRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    System.out.println("firebase Error getting data");
-                }
-                else {
-                    System.out.println("firebase");
-                }
-                System.out.println(task);
-                for(DataSnapshot snapshot : task.getResult().getChildren()) {
-                    currentUser = snapshot.getValue(User.class);
-                    System.out.println(currentUser);
-                }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentUser = snapshot.getValue(User.class);
+                System.out.println(currentUser);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("failed");
             }
         });
 
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -176,37 +173,40 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        //get userList from remote
-        databaseUserRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                userList.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    User user = dataSnapshot.getValue(User.class);
-                    userList.add(user);
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        //get userList from remote
+//        databaseUserRef.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                if(userList != null){
+//                    userList.clear();
+//                }
+//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                    System.out.println(dataSnapshot.getValue(User.class));
+//                    User user = dataSnapshot.getValue(User.class);
+//                    userList.add(user);
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         //logic: if anything changed, clear the eventMap, and read everything from firebase again
         //TODO: now the field eventMap is updated, we need to pass it to other fragments

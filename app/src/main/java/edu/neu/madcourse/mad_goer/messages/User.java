@@ -16,8 +16,8 @@ public class User {
 
     //key cannot be duplicate, but values can
     //Key is eventID, value is "saved"/"Host"/"past"/"interested"/"attend"
-    private Map<String,String> myEventList;
-    private ArrayList<EventType> interestedTypeList;
+    private Map<String,String> myEventList = new HashMap<>();
+    private ArrayList<EventType> interestedTypeList = new ArrayList<EventType>();
 
 
     //must keep the empty constructor, otherwise generate "Class does not define a no-argument constructor." error
@@ -62,6 +62,8 @@ public class User {
     }
 
     public void addInterestType(EventType eventType){
+        System.out.println(eventType);
         this.interestedTypeList.add(eventType);
+        System.out.println(interestedTypeList);
     }
 }

@@ -485,7 +485,11 @@ public class InterestActivity extends AppCompatActivity {
                 System.out.println(user.getInterestedTypeList());
 
                 //after checking all this, user should also be updated in firebase
-                databaseReference.child(user.getUserID()).setValue(user);
+                databaseReference.child("User").child(user.getUserID()).setValue(user);
+
+                Intent intent =  new Intent(InterestActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
+                intent.putExtra("nameTxt", nameTxt);
+                startActivity(intent);
             }
         });
     }
