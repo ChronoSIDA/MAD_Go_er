@@ -66,72 +66,21 @@ public class InterestActivity extends AppCompatActivity {
         String nameTxt = extras.getString("nameTxt");
 
 
-        //method 1:
-        DatabaseReference curUserRef = databaseReference.child("User").child(nameTxt);
-        //read the user once from firebase, and save it to our user field.
-        curUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                System.out.println(user.toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("failed");
-            }
-        });
-
-        //method 1 end
-
-
-//        ValueEventListener postListener = new ValueEventListener() {
+//        //method 1:
+//        DatabaseReference curUserRef = databaseReference.child("User").child(nameTxt);
+//        //read the user once from firebase, and save it to our user field.
+//        curUserRef.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                User user = snapshot.getValue(User.class);
+//                System.out.println(user.toString());
 //            }
 //
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
-//
+//                System.out.println("failed");
 //            }
-//        };
-//
-//        curUserRef.addValueEventListener(postListener);
-
-
-
-        //method 2
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userRefer = rootRef.child("User").child(nameTxt);
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
-                    String userID = ds.getKey();
-                    DatabaseReference userIDRef = rootRef.child("User").child(nameTxt);
-                    ValueEventListener eventListener = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            User user = snapshot.getValue(User.class);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    };
-                    userIDRef.addListenerForSingleValueEvent(eventListener);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        userRefer.addListenerForSingleValueEvent(valueEventListener);
-        //method 2 end
+//        });
 
 
         btn = (Button) findViewById(R.id.btn_go_interest);
