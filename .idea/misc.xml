@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable-v24/pink_out_line.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/highlight_selected.xml" value="0.2565" />
         <entry key="app/src/main/res/drawable/interest_selected.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/interest_unselected 2.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/interest_unselected.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_button.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/spinner_dropdown.xml" value="0.183" />
@@ -35,7 +36,6 @@
         <entry key="app/src/main/res/layout/fragment_1_home.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_2_go.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_3_album.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_3_comment.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/fragment_4_setting.xml" value="0.3976593017578125" />
         <entry key="app/src/main/res/layout/fragment_send.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/item_message.xml" value="0.25104166666666666" />
