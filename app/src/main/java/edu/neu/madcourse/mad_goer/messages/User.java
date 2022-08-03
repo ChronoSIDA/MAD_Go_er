@@ -46,7 +46,6 @@ public class User {
 
 
     public ArrayList<EventType> getInterestedTypeList() {
-
         return interestedTypeList;
     }
 

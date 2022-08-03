@@ -394,92 +394,95 @@ public class InterestActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(music_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.MUSIC);
+                    user.addInterestType(EventType.MUSIC);
+                    System.out.println("123");
                 }
 
                 if(edu_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.EDUCATION);
+                    user.addInterestType(EventType.EDUCATION);
                 }
 
                 if(fitness_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.FITNESS);
+                    user.addInterestType(EventType.FITNESS);
                 }
 
                 if(sports_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.SPORTS);
+                    user.addInterestType(EventType.SPORTS);
                 }
 
                 if(tech_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.TECHNOLOGY);
+                    user.addInterestType(EventType.TECHNOLOGY);
                 }
 
                 if(travel_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.TRAVEL);
+                    user.addInterestType(EventType.TRAVEL);
                 }
 
                 if(outdoor_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.OUTDOOR);
+                    user.addInterestType(EventType.OUTDOOR);
                 }
 
                 if(art_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.ART);
+                    user.addInterestType(EventType.ART);
                 }
 
                 if(cult_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.CULTURE);
+                    user.addInterestType(EventType.CULTURE);
                 }
 
                 if(game_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.GAMES);
+                    user.addInterestType(EventType.GAMES);
                 }
 
                 if(career_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.CAREER);
+                    user.addInterestType(EventType.CAREER);
                 }
 
                 if(business_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.BUSINESS);
+                    user.addInterestType(EventType.BUSINESS);
                 }
 
                 if(community_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.COMMUNITY);
+                    user.addInterestType(EventType.COMMUNITY);
                 }
 
                 if(dance_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.DANCING);
+                    user.addInterestType(EventType.DANCING);
                 }
 
                 if(health_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.HEALTH);
+                    user.addInterestType(EventType.HEALTH);
                 }
 
                 if(hobby_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.HOBBIES);
+                    user.addInterestType(EventType.HOBBIES);
                 }
 
                 if(movement_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.MOVEMENT);
+                    user.addInterestType(EventType.MOVEMENT);
                 }
 
                 if(family_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.FAMILY);
+                    user.addInterestType(EventType.FAMILY);
                 }
 
                 if(language_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.LANGUAGE);
+                    user.addInterestType(EventType.LANGUAGE);
                 }
 
                 if(pet_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.PETS);
+                    user.addInterestType(EventType.PETS);
                 }
 
                 if(science_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.SCIENCE);
+                    user.addInterestType(EventType.SCIENCE);
                 }
 
                 if(religion_cb.isChecked()){
-                    user.getInterestedTypeList().add(EventType.RELIGION);
+                    user.addInterestType(EventType.RELIGION);
                 }
+
+                System.out.println(user.getInterestedTypeList());
 
                 //after checking all this, user should also be updated in firebase
                 databaseReference.child(user.getUserID()).setValue(user);
