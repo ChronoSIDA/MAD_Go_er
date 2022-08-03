@@ -81,6 +81,18 @@ public class InterestActivity extends AppCompatActivity {
 //                System.out.println("failed");
 //            }
 //        });
+        DatabaseReference curUserRef = databaseReference.child("User").child(nameTxt);
+        //read the user once from firebase, and save it to our user field.
+        curUserRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                for(DataSnapshot snapshot : task.getResult().getChildren()) {
+                    user = snapshot.getValue(User.class);
+                }
+            }
+        });
+
+
 
 
         btn = (Button) findViewById(R.id.btn_go_interest);
