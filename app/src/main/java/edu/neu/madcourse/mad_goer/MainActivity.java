@@ -326,14 +326,15 @@ public class MainActivity extends AppCompatActivity{
     public HashMap<String, Event> getTotalEvents(){
         return eventMap;
     }
-//    public ArrayList<User> getUserList(){return userList;}
+
+//  public ArrayList<User> getUserList(){return userList;}
     public String getCurrentUserName(){return this.currentUserName;}
 
-    public ArrayList<ArrayList<Event>> getListofEventLists(User user) {
+    public ArrayList<ArrayList<Event>> getListofEventLists() {
         System.out.println("123");
-        if (user != null) {
+        if (currentUser != null) {
             //Key is eventID, value is "saved"/"Host"/"past"
-            personalEventMap = user.getTotalPersonalEvents();
+            personalEventMap = currentUser.getTotalPersonalEvents();
         }
         //find a myEventMap<String,Event> of eventID in personalEventMap<String,string> from eventMap<String, Event>
         //key is eventID
@@ -429,7 +430,7 @@ public class MainActivity extends AppCompatActivity{
 
     public ArrayAdapter<Event> getArrayAdapter() {
         //event_list contains all Event objects under this user
-        ArrayList<Event> event_list = getListofEventLists(currentUser).get(0);
+        ArrayList<Event> event_list = getListofEventLists().get(0);
 
         //TO DO: pass event information of this user
         for (Event e: event_list) {

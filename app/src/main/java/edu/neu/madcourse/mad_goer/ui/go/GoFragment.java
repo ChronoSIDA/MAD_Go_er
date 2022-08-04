@@ -54,9 +54,9 @@ public class GoFragment extends Fragment {
         recyclerView = binding.rvGofrag;
         tabLayout = binding.tabLayoutGo;
 
-        MainActivity activity = new MainActivity();
+        MainActivity activity = (MainActivity) getActivity();
         currentUser = activity.getCurrentUser();
-        listofEventLists = activity.getListofEventLists(currentUser);
+        listofEventLists = activity.getListofEventLists();
 
         if(listofEventLists != null){
             setUpRecyclerView(0);
