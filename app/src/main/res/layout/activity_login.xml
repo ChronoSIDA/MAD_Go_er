@@ -16,6 +16,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:hint="@string/txt_username_text"
+        android:textColorHint="@color/grey"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textAlignment="viewStart"
