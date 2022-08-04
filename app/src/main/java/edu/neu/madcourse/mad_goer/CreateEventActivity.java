@@ -66,6 +66,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private EditText descriptionTV;
     private String googleMapApiKey = "AIzaSyDH7mSYIFMEf64MuDURoVh6Fxh6dTyhipo";
     private String currentUserName;
+    private String eventName;
+    private String eventType;
     private User currentUser;
 
     //todo:
@@ -84,7 +86,16 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         //get the user, add eventID to user's event list
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+
         currentUserName = extras.getString("nameTxt");
+        eventName = extras.getString("eventName");
+        eventType = extras.getString("eventType");
+
+
+        EventType randomTemp = EventType.valueOf(eventType.toUpperCase());
+        System.out.println(randomTemp);
+
+        event = new Event(eventName, randomTemp);
 
         databaseUserRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -207,7 +218,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     //identify the event type by enum, and return the sticker associated with that type
     public Drawable getImageByType(EventType type){
         Drawable typeImage;
-        if(type ==null){
+        if(type == null){
             return null;
         }
         switch(type) {

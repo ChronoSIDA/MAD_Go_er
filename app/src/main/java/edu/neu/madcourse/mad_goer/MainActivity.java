@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity{
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private EditText newEventName;
-    private EditText newEventType;
     private Button newEventSave, newEventCancel;
     private Spinner newEventSpinner;
     private ArrayList<String> category_list;
@@ -323,7 +322,7 @@ public class MainActivity extends AppCompatActivity{
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    public void addNewEvent(String name, EventType type) {
+    public void addNewEvent(String name, String type) {
        // eventMap.put(new Event(name, type));
     }
 
@@ -415,21 +414,21 @@ public class MainActivity extends AppCompatActivity{
 
         NavController nacControl = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 //        int currentItem = menuItem.getItemId();
+        String newEventType = newEventSpinner.getSelectedItem().toString();
 
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if(newEventName!=null && newEventType!=null) {
                     dialog.dismiss();
-                    String type = newEventSpinner.getSelectedItem().toString();
 
-                    addNewEvent(newEventName.getText().toString(), EventType.valueOf(type));
+//                    addNewEvent(newEventName.getText().toString(), newEventType);
                     Snackbar.make(mainView, "Event created successfully", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).setAnchorView(navView).show();
-                    // add intent
-                    //TO DO for Yang: required to pass userList
                     Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
                     switchActivityIntent.putExtra("nameTxt",currentUserName);
+                    switchActivityIntent.putExtra("eventName", newEventName.getText().toString());
+                    switchActivityIntent.putExtra("eventType", newEventType);
                     startActivity(switchActivityIntent);
 
                 }else{
@@ -480,7 +479,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if(newEventName!=null && newEventType!=null && event.verifyPrivatePassword(userInputPassword)) {
+                if(event.verifyPrivatePassword(userInputPassword)) {
 
                     Snackbar.make(view, "Password Correct!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
