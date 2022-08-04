@@ -24,7 +24,7 @@
         android:id="@+id/btn_cancel_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:allowUndo="false"
         android:backgroundTint="@color/lightRed"
         android:text="Create"
