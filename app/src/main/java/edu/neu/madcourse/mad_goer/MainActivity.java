@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
     //this is user's personal eventmap, key is "eventID", value is "eventtype(host/attending/saved/past)"
     private Map<String,String> personalEventMap;
     private String currentUserName;
-    private User currentUser;
+    public User currentUser;
     private ArrayList<ArrayList<Event>> listofEventLists;
 
 
@@ -138,13 +139,13 @@ public class MainActivity extends AppCompatActivity{
         }
 
 
-        ImageButton plus = findViewById(R.id.btn_create_event);
+/*        ImageButton plus = findViewById(R.id.btn_create_event);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createNewDialog();
             }
-        });
+        });*/
        // TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
@@ -295,7 +296,9 @@ public class MainActivity extends AppCompatActivity{
                         navController.navigate(R.id.navigation_setting);
                         return true;
                     case R.id.navigation_add_event:
-                        // TODO start Intent
+                        createNewDialog();
+                        return true;
+//                        Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -326,11 +329,11 @@ public class MainActivity extends AppCompatActivity{
 //    public ArrayList<User> getUserList(){return userList;}
     public String getCurrentUserName(){return this.currentUserName;}
 
-    public ArrayList<ArrayList<Event>> getListofEventLists() {
-
-        if (currentUser != null) {
+    public ArrayList<ArrayList<Event>> getListofEventLists(User user) {
+        System.out.println("123");
+        if (user != null) {
             //Key is eventID, value is "saved"/"Host"/"past"
-            personalEventMap = currentUser.getTotalPersonalEvents();
+            personalEventMap = user.getTotalPersonalEvents();
         }
         //find a myEventMap<String,Event> of eventID in personalEventMap<String,string> from eventMap<String, Event>
         //key is eventID
@@ -404,6 +407,8 @@ public class MainActivity extends AppCompatActivity{
                             .setAction("Action", null).show();
                     // add intent
                     //TO DO for Yang: required to pass userList
+                    Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
+                    startActivity(switchActivityIntent);
 
                 }else{
                     Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
@@ -424,7 +429,7 @@ public class MainActivity extends AppCompatActivity{
 
     public ArrayAdapter<Event> getArrayAdapter() {
         //event_list contains all Event objects under this user
-        ArrayList<Event> event_list = getListofEventLists().get(0);
+        ArrayList<Event> event_list = getListofEventLists(currentUser).get(0);
 
         //TO DO: pass event information of this user
         for (Event e: event_list) {

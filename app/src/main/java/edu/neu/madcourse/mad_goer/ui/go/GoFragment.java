@@ -42,6 +42,7 @@ public class GoFragment extends Fragment {
     private LinearLayout tabLayout;
     private EventAdapter eventAdapter;
     private LinearLayoutManager linearLayoutManager;
+    private User currentUser;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,7 +55,8 @@ public class GoFragment extends Fragment {
         tabLayout = binding.tabLayoutGo;
 
         MainActivity activity = new MainActivity();
-        listofEventLists = activity.getListofEventLists();
+        currentUser = activity.getCurrentUser();
+        listofEventLists = activity.getListofEventLists(currentUser);
 
         if(listofEventLists != null){
             setUpRecyclerView(0);
@@ -101,6 +103,8 @@ public class GoFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 
     //moved to mainactivity as getEventListofUser()
 //    public void updatemyEventMap(){
