@@ -56,7 +56,7 @@ public class EventDetailActivity extends AppCompatActivity {
         //also have eventmap from mainactivity
         mainActivity = new MainActivity();
         eventmap = mainActivity.getTotalEvents();
-        userList = mainActivity.getUserList();
+//        userList = mainActivity.getUserList();
         currentUserName= mainActivity.getCurrentUserName();
         currentUser = mainActivity.getCurrentUser();
 

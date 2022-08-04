@@ -23,6 +23,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -57,6 +59,8 @@ import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
+import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
+import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
 
 public class MainActivity extends AppCompatActivity{
     private NotificationManagerCompat notificationManagerCompat;
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity{
     // which is what we need to pass in the recyclerView
     //easier way is to call getHostEvent()...methods in user to return filtered hashMap
     private HashMap<String,Event> eventMap;
+
     private ArrayList<User> userList;
     //this is user's personal eventmap, key is "eventID", value is "eventtype(host/attending/saved/past)"
     private Map<String,String> personalEventMap;
@@ -318,7 +323,7 @@ public class MainActivity extends AppCompatActivity{
     public HashMap<String, Event> getTotalEvents(){
         return eventMap;
     }
-    public ArrayList<User> getUserList(){return userList;}
+//    public ArrayList<User> getUserList(){return userList;}
     public String getCurrentUserName(){return this.currentUserName;}
 
     public ArrayList<ArrayList<Event>> getListofEventLists() {
@@ -474,21 +479,22 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void onTabClick(View v){
+        GoFragment goFragment = (GoFragment)getSupportFragmentManager().findFragmentById(R.id.goFragment);
         switch (v.getId()){
             case R.id.tab_all_go:
-                // TODO: clear all datya for recyclerview and append all;
+                goFragment.setUpRecyclerView(0);
                 break;
             case R.id.tab_host_go:
-                // TODO: clear all datya for recyclerview and append all;
+                goFragment.setUpRecyclerView(1);
                 break;
             case R.id.tab_going_go:
-                // TODO: clear all datya for recyclerview and append all;
+                goFragment.setUpRecyclerView(2);
                 break;
             case R.id.tab_saved_go:
-                // TODO: clear all datya for recyclerview and append all;
+                goFragment.setUpRecyclerView(3);
                 break;
             case R.id.tab_past_go:
-                // TODO: clear all datya for recyclerview and append all;
+                goFragment.setUpRecyclerView(4);
                 break;
         }
     }
