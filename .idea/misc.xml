@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/drawable-anydpi/ic_like_unfilled.xml" value="0.23" />
         <entry key="app/src/main/res/drawable-mdpi/interest_selected.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable-v24/pink_out_line.xml" value="0.183" />
-        <entry key="app/src/main/res/drawable/add.xml" value="0.311" />
+        <entry key="app/src/main/res/drawable-v24/toggle_widget_background.xml" value="0.2265" />
         <entry key="app/src/main/res/drawable/highlight_selected.xml" value="0.2565" />
         <entry key="app/src/main/res/drawable/interest_selected.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/interest_unselected 2.xml" value="0.165" />
@@ -28,17 +28,18 @@
         <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_host.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/activity_interest.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.19246826171874998" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_layout.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/card_layout_msg.xml" value="0.45" />
         <entry key="app/src/main/res/layout/event_popup.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/filter_popup.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/floating_action_button.xml" value="0.16666666666666666" />
         <entry key="app/src/main/res/layout/fragment_1_home.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/fragment_2_go.xml" value="0.185467529296875" />
+        <entry key="app/src/main/res/layout/fragment_2_go.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_3_album.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_3_comment.xml" value="0.2749094202898551" />
         <entry key="app/src/main/res/layout/fragment_4_setting.xml" value="0.3976593017578125" />
+        <entry key="app/src/main/res/layout/fragment_5_addevent.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_send.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/item_message.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/login_main.xml" value="0.25104166666666666" />
@@ -47,9 +48,8 @@
         <entry key="app/src/main/res/layout/noti_badge.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/radio_grop.xml" value="0.44140625" />
         <entry key="app/src/main/res/layout/tab_bar.xml" value="0.16666666666666666" />
-        <entry key="app/src/main/res/layout/toolbar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.132" />
       </map>
     </option>
   </component>

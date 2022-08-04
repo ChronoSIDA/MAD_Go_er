@@ -18,7 +18,7 @@ public enum EventType {EDUCATION("Education"), SPORTS("Sports"),
     private EventType(String category){
         this.category = category;
     }
-    public String toStringRun(){
+    public String toString(){
         return this.category;
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -76,6 +78,9 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventName;
     private EditText newEventType;
     private Button newEventSave, newEventCancel;
+    private Spinner newEventSpinner;
+    private ArrayList<String> category_list;
+    public int currentMenuItemId = R.id.navigation_home;
 
 
     //for gofragments
@@ -114,7 +119,6 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String currentUserName = extras.getString("nameTxt");
-
 
 
         databaseUserRef.addValueEventListener(new ValueEventListener() {
@@ -284,15 +288,19 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.navigation_home:
+                        currentMenuItemId = R.id.navigation_home;
                         navController.navigate(R.id.navigation_home);
                         return true;
                     case R.id.navigation_go:
+                        currentMenuItemId = R.id.navigation_go;
                         navController.navigate(R.id.navigation_go);
                         return true;
                     case R.id.navigation_comment:
+                        currentMenuItemId = R.id.navigation_comment;
                         navController.navigate(R.id.navigation_comment);
                         return true;
                     case R.id.navigation_setting:
+                        currentMenuItemId = R.id.navigation_setting;
                         navController.navigate(R.id.navigation_setting);
                         return true;
                     case R.id.navigation_add_event:
@@ -386,37 +394,46 @@ public class MainActivity extends AppCompatActivity{
 
         EnumSet<EventType> categories = EnumSet.allOf(EventType.class);
 
-        Spinner newEventSpinner = (Spinner) findViewById(R.id.spinner_category_filter);
-        ArrayList<EventType> category_list = new ArrayList<>(categories.size());
+        newEventSpinner = (Spinner) EventPopupView.findViewById(R.id.spinner_category_filter);
+
+        category_list = new ArrayList<>(categories.size());
         for (EventType t: categories) {
-            category_list.add(t);
+            category_list.add(t.toString());
         }
 
         // add enum values to the arrayList
-        ArrayAdapter<EventType> dataAdapter = new ArrayAdapter<EventType>(this, android.R.layout.simple_spinner_item, category_list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, category_list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         newEventSpinner.setAdapter(dataAdapter);
 
+        View mainView = findViewById(R.id.container);
+
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+//        Menu menu = navView.getMenu();
+//        MenuItem menuItem = menu.findItem(R.id.navigation_menu);
+
+        NavController nacControl = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+//        int currentItem = menuItem.getItemId();
 
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
                 if(newEventName!=null && newEventType!=null) {
-
+                    dialog.dismiss();
                     String type = newEventSpinner.getSelectedItem().toString();
 
                     addNewEvent(newEventName.getText().toString(), EventType.valueOf(type));
-                    Snackbar.make(view, "Event created successfully", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Snackbar.make(mainView, "Event created successfully", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).setAnchorView(navView).show();
                     // add intent
                     //TO DO for Yang: required to pass userList
                     Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
                     startActivity(switchActivityIntent);
 
                 }else{
-                    Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Snackbar.make(mainView, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).setAnchorView(navView).show();
                 }
             }
         });
@@ -425,8 +442,9 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Snackbar.make(view, "Link canceled", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(mainView, "Link canceled", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).setAnchorView(navView).show();
+                nacControl.navigate(currentMenuItemId);
             }
         });
     }

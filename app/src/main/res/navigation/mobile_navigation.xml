@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_add_event"
-        android:name="edu.neu.madcourse.mad_goer.ui.comment.CommentFragment"
+        android:name="edu.neu.madcourse.mad_goer.ui.addevent.addEventFragment"
         android:label="Add"
         tools:layout="@layout/fragment_5_addevent" >
         <action
