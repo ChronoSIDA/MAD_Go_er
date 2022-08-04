@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
     //this is user's personal eventmap, key is "eventID", value is "eventtype(host/attending/saved/past)"
     private Map<String,String> personalEventMap;
     private String currentUserName;
-    private User currentUser;
+    public User currentUser;
     private ArrayList<ArrayList<Event>> listofEventLists;
 
 
@@ -138,13 +139,13 @@ public class MainActivity extends AppCompatActivity{
         }
 
 
-        ImageButton plus = findViewById(R.id.btn_create_event);
+/*        ImageButton plus = findViewById(R.id.btn_create_event);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createNewDialog();
             }
-        });
+        });*/
        // TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
@@ -295,7 +296,9 @@ public class MainActivity extends AppCompatActivity{
                         navController.navigate(R.id.navigation_setting);
                         return true;
                     case R.id.navigation_add_event:
-                        // TODO start Intent
+                        createNewDialog();
+                        return true;
+//                        Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -323,11 +326,12 @@ public class MainActivity extends AppCompatActivity{
     public HashMap<String, Event> getTotalEvents(){
         return eventMap;
     }
-//    public ArrayList<User> getUserList(){return userList;}
+
+//  public ArrayList<User> getUserList(){return userList;}
     public String getCurrentUserName(){return this.currentUserName;}
 
     public ArrayList<ArrayList<Event>> getListofEventLists() {
-
+        System.out.println("123");
         if (currentUser != null) {
             //Key is eventID, value is "saved"/"Host"/"past"
             personalEventMap = currentUser.getTotalPersonalEvents();
@@ -336,7 +340,10 @@ public class MainActivity extends AppCompatActivity{
         //key is eventID
         Set<String> eventIDkeySet = personalEventMap.keySet();
 
-        listofEventLists = new ArrayList<ArrayList<Event>>();
+        listofEventLists = new ArrayList<>();
+        for (int i = 0; i < 5; i++)  {
+            listofEventLists.add(new ArrayList<>());
+        }
 
         for (String key : eventIDkeySet) {
 
@@ -404,6 +411,8 @@ public class MainActivity extends AppCompatActivity{
                             .setAction("Action", null).show();
                     // add intent
                     //TO DO for Yang: required to pass userList
+                    Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
+                    startActivity(switchActivityIntent);
 
                 }else{
                     Snackbar.make(view, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
@@ -482,18 +491,23 @@ public class MainActivity extends AppCompatActivity{
         GoFragment goFragment = (GoFragment)getSupportFragmentManager().findFragmentById(R.id.goFragment);
         switch (v.getId()){
             case R.id.tab_all_go:
+                if(listofEventLists != null && listofEventLists.get(0).size() > 0)
                 goFragment.setUpRecyclerView(0);
                 break;
             case R.id.tab_host_go:
+                if(listofEventLists != null && listofEventLists.get(1).size() > 0)
                 goFragment.setUpRecyclerView(1);
                 break;
             case R.id.tab_going_go:
+                if(listofEventLists != null && listofEventLists.get(2).size() > 0)
                 goFragment.setUpRecyclerView(2);
                 break;
             case R.id.tab_saved_go:
+                if(listofEventLists != null && listofEventLists.get(3).size() > 0)
                 goFragment.setUpRecyclerView(3);
                 break;
             case R.id.tab_past_go:
+                if(listofEventLists != null && listofEventLists.get(4).size() > 0)
                 goFragment.setUpRecyclerView(4);
                 break;
         }

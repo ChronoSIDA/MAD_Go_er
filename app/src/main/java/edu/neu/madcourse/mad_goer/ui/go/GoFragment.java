@@ -42,6 +42,7 @@ public class GoFragment extends Fragment {
     private LinearLayout tabLayout;
     private EventAdapter eventAdapter;
     private LinearLayoutManager linearLayoutManager;
+    private User currentUser;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,39 +54,23 @@ public class GoFragment extends Fragment {
         recyclerView = binding.rvGofrag;
         tabLayout = binding.tabLayoutGo;
 
-        MainActivity activity = new MainActivity();
+        MainActivity activity = (MainActivity) getActivity();
+        currentUser = activity.getCurrentUser();
         listofEventLists = activity.getListofEventLists();
 
-        if(listofEventLists != null){
+        if(listofEventLists != null && listofEventLists.get(0).size() > 0){
+        //if(listofEventLists != null && listofEventLists.size() > 0){
             setUpRecyclerView(0);
+        } else {
+
+            // TODO and empty inbox or something design
         }
-
-        // TODO new
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                int position = tab.getPosition();
-//                setUpRecyclerView(position);
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-
 
         return root;
     }
 
     public void setUpRecyclerView(int pos){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-
         eventAdapter = new EventAdapter(listofEventLists.get(pos),getContext());
 
         linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
@@ -101,6 +86,8 @@ public class GoFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 
     //moved to mainactivity as getEventListofUser()
 //    public void updatemyEventMap(){
