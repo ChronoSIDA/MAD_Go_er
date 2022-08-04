@@ -36,6 +36,10 @@ public class Event {
     private int save;
     private int Capacity;
 
+    public void addUserToAttendingList(User user){
+        this.attendingList.add(user);
+    }
+
     public String getEventID() {
         return eventID;
     }

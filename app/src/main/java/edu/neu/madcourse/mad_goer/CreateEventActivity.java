@@ -2,6 +2,7 @@ package edu.neu.madcourse.mad_goer;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,11 @@ import android.widget.Toast;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
@@ -59,17 +65,39 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private EditText urlTV;
     private EditText descriptionTV;
     private String googleMapApiKey = "AIzaSyDH7mSYIFMEf64MuDURoVh6Fxh6dTyhipo";
+    private String currentUserName;
+    private User currentUser;
 
-    //TODO: QUESTION: where is create event activity called? I need to pass userList from outside to this activity
-    //added by Yang Yang, pass in UserList from mainactivity, and connect it to firebase, so when a new event
-    //is created, add it to the user's eventlist(host) in firebase
-    //Two things added: 1. userlist    2. firebase
+    //todo:
+    //add user obj to event's attending list
+    //add event to user's host event,
+
+    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
+    DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        //get the user, add eventID to user's event list
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        currentUserName = extras.getString("nameTxt");
+
+        databaseUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentUser = snapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
 
         // Initialize the SDK
         Places.initialize(getApplicationContext(), googleMapApiKey);
@@ -120,9 +148,19 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                //upload this event onto firebase
-//                if(date!= null&&)
+                //TODO: all condition check on whether all fields of event is complete
+//              if(date!= null&&)
+
+
+
+
+                //add event to user, add user to event
+                currentUser.addEvent(event.getEventID(),"host");
+                event.addUserToAttendingList(currentUser);
+                //update user in fb, push event to db
+                databaseUserRef.child(currentUserName).setValue(currentUser);
+                databaseEventRef.push().setValue(event);
+
             }
         });
         eventNameTV = (TextView) findViewById(R.id.txt_event_name_create);

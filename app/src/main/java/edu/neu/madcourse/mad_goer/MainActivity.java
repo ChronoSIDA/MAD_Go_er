@@ -429,6 +429,7 @@ public class MainActivity extends AppCompatActivity{
                     // add intent
                     //TO DO for Yang: required to pass userList
                     Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
+                    switchActivityIntent.putExtra("nameTxt",currentUserName);
                     startActivity(switchActivityIntent);
 
                 }else{
