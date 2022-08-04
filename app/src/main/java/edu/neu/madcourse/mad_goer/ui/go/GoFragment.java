@@ -58,8 +58,11 @@ public class GoFragment extends Fragment {
         currentUser = activity.getCurrentUser();
         listofEventLists = activity.getListofEventLists();
 
-        if(listofEventLists != null){
+        if(listofEventLists != null && listofEventLists.size() > 0){
             setUpRecyclerView(0);
+        } else {
+
+            // TODO and empty inbox or something design
         }
 
         // TODO new
@@ -87,7 +90,6 @@ public class GoFragment extends Fragment {
 
     public void setUpRecyclerView(int pos){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-
         eventAdapter = new EventAdapter(listofEventLists.get(pos),getContext());
 
         linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
