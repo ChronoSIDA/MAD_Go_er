@@ -192,7 +192,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             }
         });
         categoryIV = (ImageView) findViewById(R.id.img_category_create);
-        categoryIV.setImageDrawable(getImageByType(eventType);
+        categoryIV.setImageDrawable(getImageByType(eventType));
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
         urlTV = (EditText) findViewById(R.id.id_isurl_create);
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
@@ -248,46 +248,46 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             case "ART":
                 typeImage = getResources().getDrawable(R.drawable.sticker_art);
                 break;
-            case CULTURE:
+            case "CULTURE":
                 typeImage = getResources().getDrawable(R.drawable.sticker_culture);
                 break;
-            case CAREER:
+            case "CAREER":
                 typeImage = getResources().getDrawable(R.drawable.sticker_career);
                 break;
-            case BUSINESS:
+            case "BUSINESS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_business);
                 break;
-            case COMMUNITY:
+            case "COMMUNITY":
                 typeImage = getResources().getDrawable(R.drawable.sticker_community);
                 break;
-            case DANCING:
+            case "DANCING":
                 typeImage = getResources().getDrawable(R.drawable.sticker_dancing);
                 break;
-            case HEALTH:
+            case "HEALTH":
                 typeImage = getResources().getDrawable(R.drawable.sticker_health);
                 break;
-            case HOBBIES:
+            case "HOBBIES":
                 typeImage = getResources().getDrawable(R.drawable.sticker_hobbies);
                 break;
-            case MOVEMENT:
+            case "MOVEMENT":
                 typeImage = getResources().getDrawable(R.drawable.sticker_movement);
                 break;
-            case LANGUAGE:
+            case "LANGUAGE":
                 typeImage = getResources().getDrawable(R.drawable.sticker_language);
                 break;
-            case MUSIC:
+            case "MUSIC":
                 typeImage = getResources().getDrawable(R.drawable.sticker_music);
                 break;
-            case FAMILY:
+            case "FAMILY":
                 typeImage = getResources().getDrawable(R.drawable.sticker_family);
                 break;
-            case PETS:
+            case "PETS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_pets);
                 break;
-            case RELIGION:
+            case "RELIGION":
                 typeImage = getResources().getDrawable(R.drawable.sticker_religion);
                 break;
-            case SCIENCE:
+            case "SCIENCE":
                 typeImage = getResources().getDrawable(R.drawable.sticker_science);
                 break;
 
