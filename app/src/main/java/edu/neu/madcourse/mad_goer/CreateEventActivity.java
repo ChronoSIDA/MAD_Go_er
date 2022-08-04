@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -174,7 +175,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
             }
         });
-        eventNameTV = (TextView) findViewById(R.id.txt_event_name_create);
+        eventNameTV = (TextView) findViewById(R.id.id_event_name_name_create);
+        eventNameTV.setText(eventName);
         date= (TextView) findViewById(R.id.id_date_create);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,7 +192,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             }
         });
         categoryIV = (ImageView) findViewById(R.id.img_category_create);
-        categoryIV.setImageDrawable(getImageByType(event.getCategory()));
+        categoryIV.setImageDrawable(getImageByType(eventType);
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
         urlTV = (EditText) findViewById(R.id.id_isurl_create);
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
@@ -216,34 +218,34 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
 
     //identify the event type by enum, and return the sticker associated with that type
-    public Drawable getImageByType(EventType type){
+    public Drawable getImageByType(String type){
         Drawable typeImage;
         if(type == null){
             return null;
         }
-        switch(type) {
-            case EDUCATION:
+        switch(type.toUpperCase()) {
+            case "EDUCATION":
                 typeImage = getResources().getDrawable(R.drawable.sticker_education);
                 break;
-            case SPORTS:
+            case "SPORTS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_sports);
                 break;
-            case FITNESS:
+            case "FITNESS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_fitness);
                 break;
-            case TECHNOLOGY:
+            case "TECHNOLOGY":
                 typeImage = getResources().getDrawable(R.drawable.sticker_technology);
                 break;
-            case TRAVEL:
+            case "TRAVEL":
                 typeImage = getResources().getDrawable(R.drawable.sticker_travel);
                 break;
-            case OUTDOOR:
+            case "OUTDOOR":
                 typeImage = getResources().getDrawable(R.drawable.sticker_outdoor);
                 break;
-            case GAMES:
+            case "GAMES":
                 typeImage = getResources().getDrawable(R.drawable.sticker_games);
                 break;
-            case ART:
+            case "ART":
                 typeImage = getResources().getDrawable(R.drawable.sticker_art);
                 break;
             case CULTURE:
