@@ -39,10 +39,9 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.rvHomefrag;
 
-
-
         MainActivity activity = (MainActivity) getActivity();
         eventMap = activity.getTotalEvents();
+
         //convert the eventMap to arraylist to fit in the first parameter type
         if(eventMap != null){
             Collection<Event> values = eventMap.values();
