@@ -289,6 +289,8 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.navigation_setting:
                         navController.navigate(R.id.navigation_setting);
                         return true;
+                    case R.id.navigation_add_event:
+                        // TODO start Intent
                 }
                 return true;
             }

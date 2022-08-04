@@ -12,9 +12,14 @@
         android:title="@string/txt_go_nav" />
 
     <item
+        android:id="@+id/navigation_add_event"
+        android:icon="@drawable/ic_add"
+        android:title="" />
+
+    <item
         android:id="@+id/navigation_comment"
         android:icon="@drawable/ic_album_grey"
-        android:title="@string/txt_album_nav" />
+        android:title="Comment" />
 
     <item
         android:id="@+id/navigation_setting"
