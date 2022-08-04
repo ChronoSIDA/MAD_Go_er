@@ -340,7 +340,10 @@ public class MainActivity extends AppCompatActivity{
         //key is eventID
         Set<String> eventIDkeySet = personalEventMap.keySet();
 
-        listofEventLists = new ArrayList<ArrayList<Event>>();
+        listofEventLists = new ArrayList<>();
+        for (int i = 0; i < 5; i++)  {
+            listofEventLists.add(new ArrayList<>());
+        }
 
         for (String key : eventIDkeySet) {
 
@@ -488,18 +491,23 @@ public class MainActivity extends AppCompatActivity{
         GoFragment goFragment = (GoFragment)getSupportFragmentManager().findFragmentById(R.id.goFragment);
         switch (v.getId()){
             case R.id.tab_all_go:
+                if(listofEventLists != null && listofEventLists.get(0).size() > 0)
                 goFragment.setUpRecyclerView(0);
                 break;
             case R.id.tab_host_go:
+                if(listofEventLists != null && listofEventLists.get(1).size() > 0)
                 goFragment.setUpRecyclerView(1);
                 break;
             case R.id.tab_going_go:
+                if(listofEventLists != null && listofEventLists.get(2).size() > 0)
                 goFragment.setUpRecyclerView(2);
                 break;
             case R.id.tab_saved_go:
+                if(listofEventLists != null && listofEventLists.get(3).size() > 0)
                 goFragment.setUpRecyclerView(3);
                 break;
             case R.id.tab_past_go:
+                if(listofEventLists != null && listofEventLists.get(4).size() > 0)
                 goFragment.setUpRecyclerView(4);
                 break;
         }
