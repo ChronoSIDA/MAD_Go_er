@@ -217,13 +217,17 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         inPerson.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                event.setInPerson(true);
                 addressTV.setVisibility(View.VISIBLE);
+                urlTV.setVisibility(View.INVISIBLE);
             }
         });
         virtual.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                urlTv.set
+                event.setInPerson(false);
+                urlTV.setVisibility(View.VISIBLE);
+                addressTV.setVisibility(View.INVISIBLE);
             }
         });
     }

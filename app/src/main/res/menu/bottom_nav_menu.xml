@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/navigation_comment"
-        android:icon="@drawable/ic_album_grey"
+        android:icon="@drawable/ic_comment"
         android:title="Comment" />
 
     <item
