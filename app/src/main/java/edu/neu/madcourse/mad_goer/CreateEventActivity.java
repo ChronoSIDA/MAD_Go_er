@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -21,12 +22,18 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
@@ -52,6 +59,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
@@ -72,10 +80,13 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private EditText urlTV;
     private EditText descriptionTV;
     private String googleMapApiKey = "AIzaSyDH7mSYIFMEf64MuDURoVh6Fxh6dTyhipo";
+    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
     private String currentUserName;
     private String eventName;
     private String eventType;
     private User currentUser;
+    private EditText isLocationEditField;
+    private LatLng locationSet;
 
     //todo:
     //add user obj to event's attending list
@@ -121,33 +132,23 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
 
 
-        // Initialize the SDK
-        Places.initialize(getApplicationContext(), googleMapApiKey);
+        // Initialize place API
+        if (!Places.isInitialized()) {
+            Places.initialize(this, googleMapApiKey);
+        }
 
-        // Create a new PlacesClient instance
-        PlacesClient placesClient = Places.createClient(this);
 
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.places_fragment_create);
-
-        autocompleteFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
-
-        autocompleteFragment.setCountries("US");
-
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
-
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        isLocationEditField = (EditText) findViewById(R.id.id_islocation_create);
+        isLocationEditField.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onError(@NonNull Status status) {
-                // TODO: Handle the error.
-
-            }
-
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                // TODO: Get info about the selected place.
-                // TODO: add the displayed name to the location box.
-//                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            public void onClick(View v) {
+                // Start the autocomplete intent.
+                Intent intent = new Autocomplete.IntentBuilder(
+                        AutocompleteActivityMode.OVERLAY,
+                        Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG))
+                        .setCountry("US")
+                        .build(v.getContext());
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
             }
         });
 
@@ -206,6 +207,25 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
         urlTV = (EditText) findViewById(R.id.id_isurl_create);
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                isLocationEditField.setText(place.getAddress().toString());
+                locationSet = place.getLatLng();
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                System.out.println(status);
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void showDatePickerDialog(){
