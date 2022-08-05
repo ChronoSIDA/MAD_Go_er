@@ -101,7 +101,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
         event = new Event(eventName, randomTemp);
 
-        //todo: 这个user拿的有问题
+
+
         DatabaseReference curUserRef = databaseUserRef.child(currentUserName);
         //read the user once from firebase, and save it to our user field.
         curUserRef.addValueEventListener(new ValueEventListener() {

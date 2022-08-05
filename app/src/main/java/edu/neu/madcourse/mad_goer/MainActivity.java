@@ -78,14 +78,8 @@ public class MainActivity extends AppCompatActivity{
     private String newEventType;
 
 
-    //for gofragments
+    //saves all event from firebase
     //key is "eventID", value is Event
-
-    //would need all eventID under currentUser's personal eventmap
-    //we already have userlist from firebase, userlist contains User object, find currentUser from the UserList,
-    // and inside Userobject there is a personalEventMap,
-    // which is what we need to pass in the recyclerView
-    //easier way is to call getHostEvent()...methods in user to return filtered hashMap
     private HashMap<String,Event> eventMap = new HashMap<>();
 
     private ArrayList<User> userList = new ArrayList<>();
@@ -116,6 +110,33 @@ public class MainActivity extends AppCompatActivity{
         Bundle extras = intent.getExtras();
         currentUserName = extras.getString("nameTxt");
 
+        databaseEventRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Event event = snapshot.getValue(Event.class);
+                eventMap.put(event.getEventID(),event);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         databaseUserRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -179,48 +200,6 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-//        //get userList from remote
-//        databaseUserRef.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                if(userList != null){
-//                    userList.clear();
-//                }
-//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    System.out.println(dataSnapshot.getValue(User.class));
-//                    User user = dataSnapshot.getValue(User.class);
-//                    userList.add(user);
-//                }
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-        //logic: if anything changed, clear the eventMap, and read everything from firebase again
-        //TODO: now the field eventMap is updated, we need to pass it to other fragments
-        //logic: create a method in mainactivity to return the updated eventMap
-        //in other fragments, call getTotalEvent() method
-        //e.g.    MainActivity activity = (MainActivity) getActivity();
-        //        msgData = activity.getHistoryData();
 
 
         databaseEventRef.addChildEventListener(new ChildEventListener() {
