@@ -216,25 +216,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
         urlTV = (EditText) findViewById(R.id.id_isurl_create);
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                Place place = Autocomplete.getPlaceFromIntent(data);
-                isLocationEditField.setText(place.getAddress().toString());
-                locationSet = place.getLatLng();
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
-                Status status = Autocomplete.getStatusFromIntent(data);
-                System.out.println(status);
-            } else if (resultCode == RESULT_CANCELED) {
-                // The user canceled the operation.
-            }
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
         duration =(EditText)findViewById(R.id.id_duration_create);
         duration.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "20")});
         rg2 = (RadioGroup) findViewById(R.id.radioGroup2);
