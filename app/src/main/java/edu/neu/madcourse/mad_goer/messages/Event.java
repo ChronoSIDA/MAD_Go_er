@@ -35,7 +35,22 @@ public class Event {
     public Event() {
     }
 
-
+    public Event(String eventID, String eventName, Date startDate, boolean inPerson, boolean isPublic, String eventPassword, String link, Location location, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
+        this.eventID = eventID;
+        this.eventName = eventName;
+        this.startDate = startDate;
+        this.inPerson = inPerson;
+        this.isPublic = isPublic;
+        this.eventPassword = eventPassword;
+        this.link = link;
+        this.location = location;
+        this.desc = desc;
+        this.category = category;
+        this.host = host;
+        this.attendingList = attendingList;
+        this.save = save;
+        Capacity = capacity;
+    }
 
     private ArrayList<User> attendingList = new ArrayList<>();
     private int save;
