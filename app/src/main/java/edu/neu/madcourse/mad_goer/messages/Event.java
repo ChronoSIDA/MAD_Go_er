@@ -2,6 +2,8 @@ package edu.neu.madcourse.mad_goer.messages;
 
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,10 +26,12 @@ public class Event {
     //vitual: link
     private String link;
     //inperson:
-    private Location location;
+    private LatLng location;
 
     private String desc;
     private EventType category;
+    private int Capacity;
+    private int duration;
 
     //to link host
     private User host;
@@ -35,7 +39,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String eventID, String eventName, Date startDate, boolean inPerson, boolean isPublic, String eventPassword, String link, Location location, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
+    public Event(String eventID, String eventName, Date startDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.startDate = startDate;
@@ -54,7 +58,6 @@ public class Event {
 
     private ArrayList<User> attendingList = new ArrayList<>();
     private int save;
-    private int Capacity;
 
     public void addUserToAttendingList(User user){
         this.attendingList.add(user);
@@ -116,11 +119,11 @@ public class Event {
         this.link = link;
     }
 
-    public Location getLocation() {
+    public LatLng getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LatLng location) {
         this.location = location;
     }
 
@@ -170,6 +173,14 @@ public class Event {
 
     public void setCapacity(int capacity) {
         Capacity = capacity;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int dura) {
+        duration = dura;
     }
 
 // TODO: add theme icon

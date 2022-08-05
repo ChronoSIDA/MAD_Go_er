@@ -58,11 +58,14 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private TextView time;
     private ImageView categoryIV;
     private TextView categoryTV;
+    private EditText isLocationEditField;
+    private EditText passwordTV;
     private Switch isPublicTV;
     private Switch isVirtualTV;
     private EditText addressTV;
     private EditText urlTV;
     private EditText duration;
+    private EditText capacity;
     private EditText descriptionTV;
     private String googleMapApiKey = "AIzaSyDH7mSYIFMEf64MuDURoVh6Fxh6dTyhipo";
     private static int AUTOCOMPLETE_REQUEST_CODE = 1;
@@ -70,7 +73,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private String eventName;
     private String eventType;
     private User currentUser;
-    private EditText isLocationEditField;
+
     private LatLng locationSet;
     private RadioButton isPublic, isPrivate, inPerson, virtual;
     private RadioGroup rg1, rg2;
@@ -160,19 +163,22 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             public void onClick(View v) {
                 //TODO: all condition check on whether all fields of event is complete
 //              if(date!= null&&)
-                
-
-                event.setEventID("testeventid");
-
-                //add event to user, add user to event
-                currentUser.addEvent(event.getEventID(),"host");
-                System.out.println(currentUser);
-                event.addUserToAttendingList(currentUser);
-                //update user in fb, push event to db
-                databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);
-                databaseEventRef.push().setValue(event);
-                Toast.makeText(CreateEventActivity.this,"Event created successfully",Toast.LENGTH_SHORT).show();
-             //   finish();
+                if (checkValid()) {
+                    event.setEventID("testeventid");
+                    event.setHost(currentUser);
+                    //add event to user, add user to event
+                    currentUser.addEvent(event.getEventID(), "host");
+                    System.out.println(currentUser);
+                    event.addUserToAttendingList(currentUser);
+                    //update user in fb, push event to db
+                    databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);
+                    databaseEventRef.push().setValue(event);
+                    Toast.makeText(CreateEventActivity.this, "Event created successfully", Toast.LENGTH_SHORT).show();
+                    //or maybe go to detail page?
+                    finish();
+                } else {
+                    Toast.makeText(CreateEventActivity.this, "Make sure all fields are completed", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -192,6 +198,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 showTimePickerDialog();
             }
         });
+        passwordTV=(EditText)findViewById(R.id.id_password_create);
         categoryIV = (ImageView) findViewById(R.id.img_category_create);
         categoryIV.setImageDrawable(getImageByType(eventType));
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
@@ -199,19 +206,23 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
         duration =(EditText)findViewById(R.id.id_duration_create);
         duration.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "20")});
+        capacity =(EditText)findViewById(R.id.id_capacity_create);
+        capacity.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "200")});
         rg2 = (RadioGroup) findViewById(R.id.radioGroup2);
-        isPublic = (RadioButton) findViewById(R.id.id_radio_private_filter);
+        isPublic = (RadioButton) findViewById(R.id.id_radio_public_filter);
         isPublic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                event.setPublic(true);
+                passwordTV.setVisibility(View.INVISIBLE);
             }
         });
-        isPrivate = (RadioButton) findViewById(R.id.id_radio_public_filter);
+        isPrivate = (RadioButton) findViewById(R.id.id_radio_private_filter);
         isPrivate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                event.setPublic(false);
+                passwordTV.setVisibility(View.VISIBLE);
             }
         });
         rg1= (RadioGroup)findViewById(R.id.radioGroup);
@@ -272,8 +283,55 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         );
         timePickerDialog.show();
     }
-
-
+    public Boolean checkValid(){
+//        String str = "Check the ";
+        //check whether this event is complete, if so return true, return false otherwise.
+        if(isPrivate.isChecked()){
+            if(passwordTV.getText().toString().equals("")){
+//                str += "passwaord ";
+                return false;
+            }else{
+                event.setEventPassword(passwordTV.getText().toString());
+            }
+        }
+        if(virtual.isChecked()){
+            if(urlTV.getText().toString().equals("")){
+//                str += "meeting url ";
+                return false;
+            }else{
+                event.setLink(urlTV.getText().toString());
+            }
+        }
+        if(inPerson.isChecked()){
+            if(addressTV.getText().toString().equals("")){
+//                str+= "location ";
+                return false;
+            }else{
+                event.setLocation(locationSet);
+            }
+        }
+        if(date.getText().toString().equals("")){
+//            str+= "date ";
+            return false;
+        }
+        if(time.getText().toString().equals("")){
+//            str+= "time ";
+            return false;
+        }
+        if(duration.getText().toString().equals("")){
+//            str+= "duration ";
+            return false;
+        }else{
+            event.setDuration(Integer.parseInt(duration.getText().toString()));
+        }
+        if(capacity.getText().toString().equals("")){
+//            str+= "duration ";
+            return false;
+        }else{
+            event.setCapacity(Integer.parseInt(capacity.getText().toString()));
+        }
+        return true;
+    }
     //identify the event type by enum, and return the sticker associated with that type
     public Drawable getImageByType(String type){
         Drawable typeImage;
