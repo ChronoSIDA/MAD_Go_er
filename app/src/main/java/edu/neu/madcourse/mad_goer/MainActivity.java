@@ -462,7 +462,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Snackbar.make(mainView, "Link canceled", Snackbar.LENGTH_LONG)
+                Snackbar.make(mainView, "Creation canceled, come back later", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).setAnchorView(navView).show();
                 nacControl.navigate(currentMenuItemId);
             }
