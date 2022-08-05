@@ -321,6 +321,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 typeImage = getResources().getDrawable(R.drawable.sticker_community);
                 break;
             case "DANCING":
+                //todo
                 typeImage = getResources().getDrawable(R.drawable.sticker_dancing);
                 break;
             case "HEALTH":
