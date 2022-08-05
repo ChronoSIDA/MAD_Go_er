@@ -221,18 +221,25 @@ public class MainActivity extends AppCompatActivity{
         //in other fragments, call getTotalEvent() method
         //e.g.    MainActivity activity = (MainActivity) getActivity();
         //        msgData = activity.getHistoryData();
+
+
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(eventMap != null) {
-                    eventMap.clear();
-                }
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Event event = dataSnapshot.getValue(Event.class);
-                    String eventkey = event.getEventID();
-                    eventMap.put(eventkey,event);
-                    System.out.println("123");
-                }
+                Event event = snapshot.getValue(Event.class);
+                System.out.println(event);
+//                if(eventMap != null) {
+//                    eventMap.clear();
+//                }
+//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                    System.out.println(dataSnapshot.getChildren().getClass());
+//                    System.out.println("123");
+//                    System.out.println("123");
+//                    Event event = dataSnapshot.getValue(Event.class);
+//                    String eventkey = event.getEventID();
+//                    eventMap.put(eventkey,event);
+//                    System.out.println("123");
+//                }
             }
 
             @Override
