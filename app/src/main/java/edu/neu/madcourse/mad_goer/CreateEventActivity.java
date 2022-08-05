@@ -161,15 +161,17 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 //TODO: all condition check on whether all fields of event is complete
 //              if(date!= null&&)
 
-
-
+                event.setEventID("testeventid");
 
                 //add event to user, add user to event
                 currentUser.addEvent(event.getEventID(),"host");
+                System.out.println(currentUser);
                 event.addUserToAttendingList(currentUser);
                 //update user in fb, push event to db
-                databaseUserRef.child(currentUserName).setValue(currentUser);
+                databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);
                 databaseEventRef.push().setValue(event);
+                Toast.makeText(CreateEventActivity.this,"Event created successfully",Toast.LENGTH_SHORT).show();
+             //   finish();
 
             }
         });

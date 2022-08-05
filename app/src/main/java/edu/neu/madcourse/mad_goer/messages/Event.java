@@ -32,7 +32,12 @@ public class Event {
     //to link host
     private User host;
 
-    private ArrayList<User> attendingList;
+    public Event() {
+    }
+
+
+
+    private ArrayList<User> attendingList = new ArrayList<>();
     private int save;
     private int Capacity;
 

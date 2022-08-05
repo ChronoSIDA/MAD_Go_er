@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
     private EditText newEventName;
     private Button newEventSave, newEventCancel;
     private Spinner newEventSpinner;
-    private ArrayList<String> category_list;
+    private ArrayList<String> category_list = new ArrayList<>();
     public int currentMenuItemId = R.id.navigation_home;
     private String newEventType;
 
@@ -86,14 +86,14 @@ public class MainActivity extends AppCompatActivity{
     // and inside Userobject there is a personalEventMap,
     // which is what we need to pass in the recyclerView
     //easier way is to call getHostEvent()...methods in user to return filtered hashMap
-    private HashMap<String,Event> eventMap;
+    private HashMap<String,Event> eventMap = new HashMap<>();
 
-    private ArrayList<User> userList;
+    private ArrayList<User> userList = new ArrayList<>();
     //this is user's personal eventmap, key is "eventID", value is "eventtype(host/attending/saved/past)"
-    private Map<String,String> personalEventMap;
+    private Map<String,String> personalEventMap = new HashMap<>();
     private String currentUserName;
     public User currentUser;
-    private ArrayList<ArrayList<Event>> listofEventLists;
+    private ArrayList<ArrayList<Event>> listofEventLists = new ArrayList<>();
 
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
@@ -224,17 +224,22 @@ public class MainActivity extends AppCompatActivity{
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
                     eventMap.put(eventkey,event);
+                    System.out.println("123");
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
@@ -244,7 +249,9 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
@@ -254,7 +261,9 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();

@@ -83,7 +83,9 @@ public class EventDetailActivity extends AppCompatActivity {
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
@@ -93,7 +95,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
@@ -103,7 +107,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
@@ -113,7 +119,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                eventMap.clear();
+                if(eventMap != null) {
+                    eventMap.clear();
+                }
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Event event = dataSnapshot.getValue(Event.class);
                     String eventkey = event.getEventID();
