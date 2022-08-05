@@ -1,5 +1,6 @@
 package edu.neu.madcourse.mad_goer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -121,6 +122,15 @@ public class LoginActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        input_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
     }
 
     public String getCurrentUserName() {
@@ -128,5 +138,10 @@ public class LoginActivity extends AppCompatActivity{
     }
     public User getCurrentUser() {
         return this.currentUser;
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
