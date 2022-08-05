@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -39,6 +43,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -61,6 +66,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 
+import edu.neu.madcourse.mad_goer.helper.InputFilterMinMax;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -78,6 +84,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private Switch isVirtualTV;
     private EditText addressTV;
     private EditText urlTV;
+    private EditText duration;
     private EditText descriptionTV;
     private String googleMapApiKey = "AIzaSyDH7mSYIFMEf64MuDURoVh6Fxh6dTyhipo";
     private static int AUTOCOMPLETE_REQUEST_CODE = 1;
@@ -87,6 +94,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private User currentUser;
     private EditText isLocationEditField;
     private LatLng locationSet;
+    private RadioButton isPublic, isPrivate, inPerson, virtual;
+    private RadioGroup rg1, rg2;
 
     //todo:
     //add user obj to event's attending list
@@ -226,6 +235,26 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
+        duration =(EditText)findViewById(R.id.id_duration_create);
+        duration.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "20")});
+        rg2 = (RadioGroup) findViewById(R.id.radioGroup2);
+        isPublic = (RadioButton) findViewById(R.id.id_radio_private_filter);
+        isPublic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        isPrivate = (RadioButton) findViewById(R.id.id_radio_public_filter);
+        isPrivate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        rg1= (RadioGroup)findViewById(R.id.radioGroup);
+        inPerson = (RadioButton) findViewById(R.id.id_radio_inperson);
+        virtual = (RadioButton) findViewById(R.id.id_radio_virtual);
     }
 
     public void showDatePickerDialog(){
@@ -330,7 +359,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        event.setStartDate(getDate(year, month, dayOfMonth));
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd MMMM yyyy");
+        String stringDate= DateFor.format(getDate(year, month, dayOfMonth));
+        date.setText(" "+stringDate);
     }
 
     public Date getDate(int year, int month, int day) {
@@ -347,8 +378,18 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+//        time(hourOfDay, minute);
+//        DateTimeFormatter FOMATTER = null;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            FOMATTER = DateTimeFormatter.ofPattern("hh:mm a");
+//        }
+//        String timeString = FOMATTER.format(time);
+        StringBuilder sb = new StringBuilder()
+                .append(pad(hourOfDay)).append(":")
+                .append(pad(minute));
+        time.setText(" "+sb.toString());
     }
+
     @Override
     public void onBackPressed() {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "If you leave right now, no changes will be saved, do you confirm to continue?", Snackbar.LENGTH_LONG);
@@ -383,12 +424,4 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             return "0" + String.valueOf(c);
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-        return super.dispatchTouchEvent(ev);
-    }
 }
