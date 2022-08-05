@@ -9,11 +9,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +44,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView attendingListTV;
     private TextView descriptionTV;
     private String eventID;
-    private HashMap<String,Event> eventmap;
+    private HashMap<String,Event> eventMap;
     private ArrayList<User> userList;
     private MainActivity mainActivity;
     private String currentUserName;
@@ -53,17 +59,76 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
-        //also have eventmap from mainactivity
-        mainActivity = new MainActivity();
-        eventmap = mainActivity.getTotalEvents();
-//        userList = mainActivity.getUserList();
-        currentUserName= mainActivity.getCurrentUserName();
-        currentUser = mainActivity.getCurrentUser();
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        currentUserName = extras.getString("nameTxt");
         eventID = extras.getString("eventID");
-        event = eventmap.get(eventID);
+
+
+        DatabaseReference curUserRef = databaseUserRef.child(currentUserName);
+        //read the user once from firebase, and save it to our user field.
+        curUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentUser = snapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("failed");
+            }
+        });
+
+        //geteventmap
+        databaseEventRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                eventMap.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Event event = dataSnapshot.getValue(Event.class);
+                    String eventkey = event.getEventID();
+                    eventMap.put(eventkey,event);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        event = eventMap.get(eventID);
 
 
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);

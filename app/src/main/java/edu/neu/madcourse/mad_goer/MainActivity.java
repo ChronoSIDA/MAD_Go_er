@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity{
 
     //for gofragments
     //key is "eventID", value is Event
+
     //would need all eventID under currentUser's personal eventmap
     //we already have userlist from firebase, userlist contains User object, find currentUser from the UserList,
     // and inside Userobject there is a personalEventMap,

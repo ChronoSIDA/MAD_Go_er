@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
 
         MainActivity activity = (MainActivity) getActivity();
         eventMap = activity.getTotalEvents();
+        String nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
 
         //convert the eventMap to arraylist to fit in the first parameter type
         if(eventMap != null){
@@ -67,6 +68,7 @@ public class HomeFragment extends Fragment {
 
                     Intent intent = new Intent(getContext(), EventDetailActivity.class);
                     intent.putExtra("eventID", eventMap.get(position).getEventID());
+                    intent.putExtra("nameTxt", nameTxt);
 
                     // public or private:
                     if(eventMap.get(position).isPublic()){
