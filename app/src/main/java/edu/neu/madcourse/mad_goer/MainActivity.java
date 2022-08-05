@@ -110,33 +110,6 @@ public class MainActivity extends AppCompatActivity{
         Bundle extras = intent.getExtras();
         currentUserName = extras.getString("nameTxt");
 
-        databaseEventRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Event event = snapshot.getValue(Event.class);
-                eventMap.put(event.getEventID(),event);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         databaseUserRef.addValueEventListener(new ValueEventListener() {
             @Override
