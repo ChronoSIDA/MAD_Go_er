@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 String tmp = newEventName.getText().toString();
-                if(!newEventName.getText().toString().equals("") && newEventType != "Choose A Category") {
+                if(!newEventName.getText().toString().equals("") && newEventType.equals("Choose A Category")) {
                     dialog.dismiss();
 
 //                    addNewEvent(newEventName.getText().toString(), newEventType);
