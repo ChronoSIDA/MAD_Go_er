@@ -227,7 +227,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event event = snapshot.getValue(Event.class);
-                System.out.println(event);
 //                if(eventMap != null) {
 //                    eventMap.clear();
 //                }
