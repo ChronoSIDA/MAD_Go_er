@@ -226,60 +226,26 @@ public class MainActivity extends AppCompatActivity{
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Event event = snapshot.getValue(Event.class);
-//                if(eventMap != null) {
-//                    eventMap.clear();
-//                }
-//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    System.out.println(dataSnapshot.getChildren().getClass());
-//                    System.out.println("123");
-//                    System.out.println("123");
-//                    Event event = dataSnapshot.getValue(Event.class);
-//                    String eventkey = event.getEventID();
-//                    eventMap.put(eventkey,event);
-//                    System.out.println("123");
-//                }
+                Event newevent = snapshot.getValue(Event.class);
+                eventMap.put(newevent.getEventID(),newevent);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(eventMap != null) {
-                    eventMap.clear();
-                }
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Event event = dataSnapshot.getValue(Event.class);
-                    String eventkey = event.getEventID();
-                    eventMap.put(eventkey,event);
-                }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                if(eventMap != null) {
-                    eventMap.clear();
-                }
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Event event = dataSnapshot.getValue(Event.class);
-                    String eventkey = event.getEventID();
-                    eventMap.put(eventkey,event);
-                }
+                Event removedEvent = snapshot.getValue(Event.class);
+                eventMap.remove(removedEvent.getEventID(),removedEvent);
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(eventMap != null) {
-                    eventMap.clear();
-                }
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Event event = dataSnapshot.getValue(Event.class);
-                    String eventkey = event.getEventID();
-                    eventMap.put(eventkey,event);
-                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
