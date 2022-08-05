@@ -433,7 +433,8 @@ public class MainActivity extends AppCompatActivity{
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(newEventName.toString() != "" && newEventType != "Choose A Category") {
+                String tmp = newEventName.getText().toString();
+                if(!newEventName.getText().toString().equals("") && newEventType != "Choose A Category") {
                     dialog.dismiss();
 
 //                    addNewEvent(newEventName.getText().toString(), newEventType);
@@ -445,7 +446,7 @@ public class MainActivity extends AppCompatActivity{
                     switchActivityIntent.putExtra("eventType", newEventType);
                     startActivity(switchActivityIntent);
 
-                }else if(newEventName.toString() == ""){
+                }else if(newEventName.getText().toString().equals("")){
                     Toast toast = Toast.makeText(getApplicationContext(), "Please enter a name for your event.", Toast.LENGTH_LONG);
                     toast.show();
                     //toast.make(view, , Snackbar.LENGTH_LONG)
