@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity{
     private Spinner newEventSpinner;
     private ArrayList<String> category_list;
     public int currentMenuItemId = R.id.navigation_home;
+    private String newEventType;
 
 
     //for gofragments
@@ -396,6 +398,7 @@ public class MainActivity extends AppCompatActivity{
         newEventSpinner = (Spinner) EventPopupView.findViewById(R.id.spinner_category_filter);
 
         category_list = new ArrayList<>(categories.size());
+        category_list.add("Choose A Category");
         for (EventType t: categories) {
             category_list.add(t.toString());
         }
@@ -403,8 +406,20 @@ public class MainActivity extends AppCompatActivity{
         // add enum values to the arrayList
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, category_list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        newEventSpinner.setAdapter(dataAdapter);
 
+        newEventSpinner.setAdapter(dataAdapter);
+        newEventSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                newEventType = newEventSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
         View mainView = findViewById(R.id.container);
 
 
@@ -414,12 +429,11 @@ public class MainActivity extends AppCompatActivity{
 
         NavController nacControl = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 //        int currentItem = menuItem.getItemId();
-        String newEventType = newEventSpinner.getSelectedItem().toString();
 
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(newEventName!=null && newEventType!=null) {
+                if(newEventName.toString() != "" && newEventType != "Choose A Category") {
                     dialog.dismiss();
 
 //                    addNewEvent(newEventName.getText().toString(), newEventType);
@@ -431,9 +445,14 @@ public class MainActivity extends AppCompatActivity{
                     switchActivityIntent.putExtra("eventType", newEventType);
                     startActivity(switchActivityIntent);
 
+                }else if(newEventName.toString() == ""){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please enter a name for your event.", Toast.LENGTH_LONG);
+                    toast.show();
+                    //toast.make(view, , Snackbar.LENGTH_LONG)
+         //                   .setAction("Action", null).setAnchorView(navView).show();
                 }else{
-                    Snackbar.make(mainView, "Event creation failed, try again later", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).setAnchorView(navView).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please choose a category for your event.", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
