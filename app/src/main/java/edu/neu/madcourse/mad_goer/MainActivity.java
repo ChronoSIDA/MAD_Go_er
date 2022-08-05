@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String currentUserName = extras.getString("nameTxt");
+        currentUserName = extras.getString("nameTxt");
 
 
         databaseUserRef.addValueEventListener(new ValueEventListener() {
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity{
                     Snackbar.make(mainView, "Event created successfully", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).setAnchorView(navView).show();
                     Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
-                    switchActivityIntent.putExtra("nameTxt",currentUserName);
+                    switchActivityIntent.putExtra("nameTxt", currentUserName);
                     switchActivityIntent.putExtra("eventName", newEventName.getText().toString());
                     switchActivityIntent.putExtra("eventType", newEventType);
                     startActivity(switchActivityIntent);
