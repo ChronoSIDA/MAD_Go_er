@@ -208,6 +208,18 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         rg1= (RadioGroup)findViewById(R.id.radioGroup);
         inPerson = (RadioButton) findViewById(R.id.id_radio_inperson);
         virtual = (RadioButton) findViewById(R.id.id_radio_virtual);
+        inPerson.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                addressTV.setVisibility(View.VISIBLE);
+            }
+        });
+        virtual.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+//                urlTv.set
+            }
+        });
     }
 
     public void showDatePickerDialog(){
