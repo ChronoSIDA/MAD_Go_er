@@ -231,12 +231,13 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         if(type == null){
             return null;
         }
+
         switch(type.toUpperCase()) {
-            case "EDUCATION":
-                typeImage = getResources().getDrawable(R.drawable.sticker_education);
-                break;
             case "SPORTS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_sports);
+                break;
+            case "EDUCATION":
+                typeImage = getResources().getDrawable(R.drawable.sticker_education);
                 break;
             case "FITNESS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_fitness);
