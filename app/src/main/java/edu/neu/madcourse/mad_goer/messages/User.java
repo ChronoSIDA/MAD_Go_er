@@ -52,6 +52,10 @@ public class User {
         return this.myEventList;
     }
 
+
+    public void clearInterestList(){
+        this.interestedTypeList.clear();
+    }
     public void addEvent(String eventID, String eventStatus){
         this.myEventList.put(eventID,eventStatus);
     }
