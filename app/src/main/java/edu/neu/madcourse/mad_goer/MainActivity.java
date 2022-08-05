@@ -424,7 +424,6 @@ public class MainActivity extends AppCompatActivity{
 
         NavController nacControl = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 //        int currentItem = menuItem.getItemId();
-        String newEventType = newEventSpinner.getSelectedItem().toString();
 
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
