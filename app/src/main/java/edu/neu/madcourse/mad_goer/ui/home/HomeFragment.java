@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,27 @@ public class HomeFragment extends Fragment {
         binding = Fragment1HomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
+                        setDataOnDelay();
+                    }
+                },
+                300);
+
+        return root;
+    }
+
+
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    public void setDataOnDelay(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.rvHomefrag;
 
@@ -101,17 +123,6 @@ public class HomeFragment extends Fragment {
                 }
             }));
         }
-
-        return root;
-    }
-
-
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }
 
