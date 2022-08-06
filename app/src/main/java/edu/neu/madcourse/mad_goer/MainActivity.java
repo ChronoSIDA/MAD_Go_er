@@ -110,8 +110,9 @@ public class MainActivity extends AppCompatActivity{
         Bundle extras = intent.getExtras();
         currentUserName = extras.getString("nameTxt");
 
-
-        databaseUserRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference curUserRef = databaseUserRef.child(currentUserName);
+        //read the user once from firebase, and save it to our user field.
+        curUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentUser = snapshot.getValue(User.class);
@@ -123,7 +124,6 @@ public class MainActivity extends AppCompatActivity{
                 System.out.println("failed");
             }
         });
-
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public HashMap<String, Event> getTotalEvents(){
+    public HashMap<String, Event> getEventMap(){
         return eventMap;
     }
 
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity{
         System.out.println("123");
         if (currentUser != null) {
             //Key is eventID, value is "saved"/"Host"/"past"
-            personalEventMap = currentUser.getTotalPersonalEvents();
+            personalEventMap = currentUser.getMyEventList();
         }
         //find a myEventMap<String,Event> of eventID in personalEventMap<String,string> from eventMap<String, Event>
         //key is eventID

@@ -48,7 +48,7 @@ public class User {
         return interestedTypeList;
     }
 
-    public Map<String,String> getTotalPersonalEvents(){
+    public Map<String,String> getMyEventList(){
         return this.myEventList;
     }
 
