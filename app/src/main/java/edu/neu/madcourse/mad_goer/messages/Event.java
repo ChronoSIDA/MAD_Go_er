@@ -33,6 +33,7 @@ public class Event {
     private EventType category;
     private int Capacity;
     private int duration;
+    private int iconID;
 
     //to link host
     private User host;
@@ -40,7 +41,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
+    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity, int iconID) {
         this.isValid = isValid;
         this.eventID = eventID;
         this.eventName = eventName;
@@ -58,6 +59,7 @@ public class Event {
         this.attendingList = attendingList;
         this.save = save;
         Capacity = capacity;
+        this.iconID = iconID;
     }
 
     private ArrayList<User> attendingList = new ArrayList<>();
@@ -210,6 +212,10 @@ public class Event {
     public void setDuration(int dura) {
         duration = dura;
     }
+
+    public int getIconID(){return iconID;}
+
+    public void setIconID(int iconID){ this.iconID = iconID;}
 
 // TODO: add theme icon
 

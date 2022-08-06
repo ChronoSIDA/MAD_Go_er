@@ -1,6 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.recycleview;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.messages.Event;
+
 
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
@@ -41,14 +45,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
 
         //on item selected
         Event event = eventList.get(position);
-
-        holder.hostName.setText(event.getHost().getUserID());
+        holder.eventIcon.setImageResource(event.getIconID());
         holder.eventName.setText(event.getEventName());
-        //event Date is startDate for now
-        //TODO: consider change to a range of Date in future
-//        holder.eventDate.setText(event.getStartDate().toString());
-        //TODO:override toString for location, or add a format
-        holder.eventLocation.setText(event.getLocation().toString());
+        holder.hostName.setText("Host: " + event.getHost().getUserID());
+
+
+        SimpleDateFormat DateFor = new SimpleDateFormat("E, MMM dd, Y | hh:mm a z");
+        String stringDate= DateFor.format(event.getStartDate());
+
+        holder.eventDate.setText(stringDate);
+        holder.eventLocation.setText(event.getActualLocation());
     }
 
     @Override

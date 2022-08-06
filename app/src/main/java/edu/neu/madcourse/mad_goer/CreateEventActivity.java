@@ -79,6 +79,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private String eventName;
     private String eventType;
     private String eventID;
+    private int iconID;
     private User currentUser;
 
     private LatLng locationSet;
@@ -175,9 +176,11 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 if (checkValid()) {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     // ID = create time + name
-                    event.setEventID(timestamp.getTime() + eventName);
+                    eventID = timestamp.getTime() + eventName;
+                    event.setEventID(eventID);
                     event.setEventName(eventName);
                     event.setHost(currentUser);
+                    event.setIconID(iconID);
 
                     Long startDateTimestamp = calendar.getTimeInMillis();
                     Long durationTimeStamp = TimeUnit.HOURS.toMillis(Long.parseLong(duration.getText().toString()));
@@ -185,13 +188,13 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     event.setStartDate(startDateTimestamp);
                     // startDate + duration
                     event.setEndDate(endDateTimestamp);
-                    //add event to user, add user to event
-                    currentUser.addEvent(event.getEventID(), "host");
                     event.addUserToAttendingList(currentUser);
                     event.setActualLocation(actualLocation);
                     //update user in fb, push event to db
                     databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);
                     databaseEventRef.push().setValue(event);
+                    //add event to user, add user to event
+                    currentUser.addEvent(event.getEventID(), "host");
                     Toast.makeText(CreateEventActivity.this, "Event created successfully", Toast.LENGTH_SHORT).show();
                     //or maybe go to detail page?
                     finish();
@@ -362,69 +365,91 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         switch(type.toUpperCase()) {
             case "SPORTS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_sports);
+                iconID = R.drawable.sticker_sports;
                 break;
             case "EDUCATION":
                 typeImage = getResources().getDrawable(R.drawable.sticker_education);
+                iconID = R.drawable.sticker_education;
                 break;
             case "FITNESS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_fitness);
+                iconID = R.drawable.sticker_fitness;
                 break;
             case "TECHNOLOGY":
                 typeImage = getResources().getDrawable(R.drawable.sticker_technology);
+                iconID = R.drawable.sticker_technology;
                 break;
             case "TRAVEL":
                 typeImage = getResources().getDrawable(R.drawable.sticker_travel);
+                iconID = R.drawable.sticker_travel;
                 break;
             case "OUTDOOR":
                 typeImage = getResources().getDrawable(R.drawable.sticker_outdoor);
+                iconID = R.drawable.sticker_outdoor;
                 break;
             case "GAMES":
                 typeImage = getResources().getDrawable(R.drawable.sticker_games);
+                iconID = R.drawable.sticker_games;
                 break;
             case "ART":
                 typeImage = getResources().getDrawable(R.drawable.sticker_art);
+                iconID = R.drawable.sticker_art;
                 break;
             case "CULTURE":
                 typeImage = getResources().getDrawable(R.drawable.sticker_culture);
+                iconID = R.drawable.sticker_culture;
                 break;
             case "CAREER":
                 typeImage = getResources().getDrawable(R.drawable.sticker_career);
+                iconID = R.drawable.sticker_career;
                 break;
             case "BUSINESS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_business);
+                iconID = R.drawable.sticker_business;
                 break;
             case "COMMUNITY":
                 typeImage = getResources().getDrawable(R.drawable.sticker_community);
+                iconID = R.drawable.sticker_community;
                 break;
             case "DANCING":
                 typeImage = getResources().getDrawable(R.drawable.sticker_dancing);
+                iconID = R.drawable.sticker_dancing;
                 break;
             case "HEALTH":
                 typeImage = getResources().getDrawable(R.drawable.sticker_health);
+                iconID = R.drawable.sticker_health;
                 break;
             case "HOBBIES":
                 typeImage = getResources().getDrawable(R.drawable.sticker_hobbies);
+                iconID = R.drawable.sticker_hobbies;
                 break;
             case "MOVEMENT":
                 typeImage = getResources().getDrawable(R.drawable.sticker_movement);
+                iconID = R.drawable.sticker_movement;
                 break;
             case "LANGUAGE":
                 typeImage = getResources().getDrawable(R.drawable.sticker_language);
+                iconID = R.drawable.sticker_language;
                 break;
             case "MUSIC":
                 typeImage = getResources().getDrawable(R.drawable.sticker_music);
+                iconID = R.drawable.sticker_music;
                 break;
             case "FAMILY":
                 typeImage = getResources().getDrawable(R.drawable.sticker_family);
+                iconID = R.drawable.sticker_family;
                 break;
             case "PETS":
                 typeImage = getResources().getDrawable(R.drawable.sticker_pets);
+                iconID = R.drawable.sticker_pets;
                 break;
             case "RELIGION":
                 typeImage = getResources().getDrawable(R.drawable.sticker_religion);
+                iconID = R.drawable.sticker_religion;
                 break;
             case "SCIENCE":
                 typeImage = getResources().getDrawable(R.drawable.sticker_science);
+                iconID = R.drawable.sticker_science;
                 break;
 
             default:
