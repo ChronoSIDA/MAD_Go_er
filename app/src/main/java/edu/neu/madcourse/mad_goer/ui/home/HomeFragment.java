@@ -1,7 +1,5 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
@@ -22,10 +20,13 @@ import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
+import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
 import edu.neu.madcourse.mad_goer.ui.recycleview.RecyclerItemClickListener;
 
 public class HomeFragment extends Fragment {
+
+    private User currentUser;
 
     private Fragment1HomeBinding binding;
     private HashMap<String,Event> eventMap;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
 
         binding = Fragment1HomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
@@ -62,7 +64,8 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = binding.rvHomefrag;
 
         MainActivity activity = (MainActivity) getActivity();
-        eventMap = activity.getTotalEvents();
+        //这里拿到的eventmap size为1
+        eventMap = activity.getEventMap();
         String nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
 
         //convert the eventMap to arraylist to fit in the first parameter type
