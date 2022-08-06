@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -59,6 +60,7 @@ import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
+import edu.neu.madcourse.mad_goer.LoginActivity;
 
 public class MainActivity extends AppCompatActivity{
     private NotificationManagerCompat notificationManagerCompat;
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<String> category_list = new ArrayList<>();
     public int currentMenuItemId = R.id.navigation_home;
     private String newEventType;
+    private Boolean isLogin = false;
 
 
     //saves all event from firebase
@@ -98,7 +101,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //need to be deleted
@@ -242,6 +244,13 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
+//
+//        if(doIHaveValue != 0){
+//            if(doIHaveValue == R.id.navigation_setting) {
+//                currentMenuItemId = R.id.navigation_setting;
+//                navController.navigate(R.id.navigation_setting);
+//            }
+//        }
     }
 
 
@@ -490,6 +499,7 @@ public class MainActivity extends AppCompatActivity{
     public void clickInterest(View view){
         Intent intent = new Intent(this, InterestActivity.class);
         intent.putExtra("nameTxt", currentUserName );
+        intent.putExtra("isLogin", isLogin );
         startActivity(intent);
     }
 }

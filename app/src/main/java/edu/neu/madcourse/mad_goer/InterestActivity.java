@@ -49,6 +49,7 @@ public class InterestActivity extends AppCompatActivity {
     private CheckBox pet_cb;
     private CheckBox religion_cb;
     private CheckBox science_cb;
+    private Boolean isLogin;
 
 
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://goerapp-4e3c7-default-rtdb.firebaseio.com");
@@ -61,7 +62,7 @@ public class InterestActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String nameTxt = extras.getString("nameTxt");
-        System.out.println("123");
+        isLogin = extras.getBoolean("isLogin");
 
 
         //method 1:
@@ -465,18 +466,15 @@ public class InterestActivity extends AppCompatActivity {
                 //after checking all this, user should also be updated in firebase
                 databaseReference.child("User").child(user.getUserID()).setValue(user);
 
-                Intent intent =  new Intent(InterestActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
-                intent.putExtra("nameTxt", nameTxt);
-                startActivity(intent);
+                if(isLogin){
+                    Intent intent =  new Intent(InterestActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
+                    intent.putExtra("nameTxt", nameTxt);
+                    startActivity(intent);
+                } else {
+                    finish();
+                }
             }
         });
-    }
-
-    public void returnMain(View view){
-
-        Intent intent =  new Intent(this, MainActivity.class);
-        intent.putExtra("nameTxt",user.getUserID());
-        startActivity(intent);
     }
 
     public void setInterestList(){
