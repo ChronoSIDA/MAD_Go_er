@@ -229,8 +229,8 @@ public class Event {
         Long nowStamp = timestamp.getTime();
 
         if (nowStamp > endDate){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }
