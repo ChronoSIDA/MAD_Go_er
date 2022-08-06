@@ -38,10 +38,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 import edu.neu.madcourse.mad_goer.helper.InputFilterMinMax;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -56,6 +59,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private TextView eventNameTV;
     private TextView date;
     private TextView time;
+    private Calendar calendar;
+    private long dateInTimestamp;
+    private long timeInTimestamp;
     private ImageView categoryIV;
     private TextView categoryTV;
     private EditText isLocationEditField;
@@ -72,9 +78,11 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private String currentUserName;
     private String eventName;
     private String eventType;
+    private String eventID;
     private User currentUser;
 
     private LatLng locationSet;
+    private String actualLocation;
     private RadioButton isPublic, isPrivate, inPerson, virtual;
     private RadioGroup rg1, rg2;
 
@@ -103,6 +111,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         System.out.println(randomTemp);
 
         event = new Event(eventName, randomTemp);
+        calendar = Calendar.getInstance();
 
 
 
@@ -164,12 +173,22 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 //TODO: all condition check on whether all fields of event is complete
 //              if(date!= null&&)
                 if (checkValid()) {
-                    event.setEventID("testeventid");
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    // ID = create time + name
+                    event.setEventID(timestamp.getTime() + eventName);
+                    event.setEventName(eventName);
                     event.setHost(currentUser);
+
+                    Long startDateTimestamp = calendar.getTimeInMillis();
+                    Long durationTimeStamp = TimeUnit.HOURS.toMillis(Long.parseLong(duration.getText().toString()));
+                    Long endDateTimestamp = startDateTimestamp + durationTimeStamp;
+                    event.setStartDate(startDateTimestamp);
+                    // startDate + duration
+                    event.setEndDate(endDateTimestamp);
                     //add event to user, add user to event
                     currentUser.addEvent(event.getEventID(), "host");
-                    System.out.println(currentUser);
                     event.addUserToAttendingList(currentUser);
+                    event.setActualLocation(actualLocation);
                     //update user in fb, push event to db
                     databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);
                     databaseEventRef.push().setValue(event);
@@ -253,7 +272,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 isLocationEditField.setText(place.getAddress().toString());
-
+                actualLocation = place.getAddress().toString();
                 locationSet = new LatLng(place.getLatLng().latitude, place.getLatLng().longitude);
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
@@ -419,6 +438,12 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         SimpleDateFormat DateFor = new SimpleDateFormat("dd MMMM yyyy");
         String stringDate= DateFor.format(getDate(year, month, dayOfMonth));
         date.setText(" "+stringDate);
+
+        // get date in timestamp
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
     }
 
     public Date getDate(int year, int month, int day) {
@@ -445,6 +470,10 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 .append(pad(hourOfDay)).append(":")
                 .append(pad(minute));
         time.setText(" "+sb.toString());
+
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
     }
 
     @Override

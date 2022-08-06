@@ -10,7 +10,8 @@ public class Event {
     //also notice if private/public, some parameters might not be needed
     private String eventID;
     private String eventName;
-    private Date startDate;
+    private Long startDate;
+    private Long endDate;
 
     //if false then virtual
     private boolean inPerson;
@@ -24,6 +25,7 @@ public class Event {
     private String link;
     //inperson:
     private LatLng location;
+    private String actualLocationInString;
 
     private String desc;
     private EventType category;
@@ -36,15 +38,17 @@ public class Event {
     public Event() {
     }
 
-    public Event(String eventID, String eventName, Date startDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
+    public Event(String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.inPerson = inPerson;
         this.isPublic = isPublic;
         this.eventPassword = eventPassword;
         this.link = link;
         this.location = location;
+        this.actualLocationInString = actualLocationInString;
         this.desc = desc;
         this.category = category;
         this.host = host;
@@ -76,12 +80,20 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public Date getStartDate() {
+    public Long getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Long startDate) {
         this.startDate = startDate;
+    }
+
+    public Long getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Long endDate) {
+        this.endDate = endDate;
     }
 
     public boolean isInPerson() {
@@ -122,6 +134,14 @@ public class Event {
 
     public void setLocation(LatLng location) {
         this.location = location;
+    }
+
+    public String getActualLocation() {
+        return actualLocationInString;
+    }
+
+    public void setActualLocation(String actualLocationInString) {
+        this.actualLocationInString = actualLocationInString;
     }
 
     public String getDesc() {
