@@ -46,7 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
         holder.eventName.setText(event.getEventName());
         //event Date is startDate for now
         //TODO: consider change to a range of Date in future
-        holder.eventDate.setText(event.getStartDate().toString());
+//        holder.eventDate.setText(event.getStartDate().toString());
         //TODO:override toString for location, or add a format
         holder.eventLocation.setText(event.getLocation().toString());
     }
