@@ -25,7 +25,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -48,6 +47,7 @@ import edu.neu.madcourse.mad_goer.helper.InputFilterMinMax;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
+import edu.neu.madcourse.mad_goer.messages.LatLng;
 
 public class CreateEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private Event event;
@@ -253,7 +253,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 isLocationEditField.setText(place.getAddress().toString());
-                locationSet = place.getLatLng();
+
+                locationSet = new LatLng(place.getLatLng().latitude, place.getLatLng().longitude);
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);

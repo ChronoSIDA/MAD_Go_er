@@ -1,11 +1,8 @@
 package edu.neu.madcourse.mad_goer.messages;
 
-import android.location.Location;
-
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.ArrayList;
 import java.util.Date;
+import edu.neu.madcourse.mad_goer.messages.LatLng;
 
 public class Event {
 
