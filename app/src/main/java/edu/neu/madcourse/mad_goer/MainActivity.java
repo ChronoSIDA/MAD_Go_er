@@ -179,7 +179,9 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event newevent = snapshot.getValue(Event.class);
-                eventMap.put(newevent.getEventID(),newevent);
+                if(!newevent.isPast()){
+                    eventMap.put(newevent.getEventID(),newevent);
+                }
             }
 
             @Override

@@ -1,5 +1,6 @@
 package edu.neu.madcourse.mad_goer.messages;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import edu.neu.madcourse.mad_goer.messages.LatLng;
@@ -219,5 +220,17 @@ public class Event {
 
     public Boolean verifyPrivatePassword(String password){
         return this.eventPassword.equals(password);
+    }
+
+    public Boolean isPast(){
+        Long endDate = getEndDate();
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Long nowStamp = timestamp.getTime();
+
+        if (nowStamp > endDate){
+            return false;
+        }
+        return true;
     }
 }
