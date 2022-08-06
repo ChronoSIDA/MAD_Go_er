@@ -242,9 +242,6 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
-
-
-
     }
 
 
@@ -488,5 +485,11 @@ public class MainActivity extends AppCompatActivity{
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    public void clickInterest(View view){
+        Intent intent = new Intent(this, InterestActivity.class);
+        intent.putExtra("nameTxt", currentUserName );
+        startActivity(intent);
     }
 }

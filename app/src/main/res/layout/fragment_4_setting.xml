@@ -36,6 +36,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text=" My Interest"
+        android:onClick="clickInterest"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"
         app:backgroundTint="@color/white"

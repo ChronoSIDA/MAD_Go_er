@@ -61,6 +61,7 @@ public class InterestActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String nameTxt = extras.getString("nameTxt");
+        System.out.println("123");
 
 
         //method 1:
@@ -368,9 +369,11 @@ public class InterestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                user.clearInterestList();
+
                 if(music_cb.isChecked()){
                     user.addInterestType(EventType.MUSIC);
-                    System.out.println("123");
+//                    System.out.println("123");
                 }
 
                 if(edu_cb.isChecked()){
