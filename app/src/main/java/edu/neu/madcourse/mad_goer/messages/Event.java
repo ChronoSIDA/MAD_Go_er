@@ -8,6 +8,7 @@ public class Event {
 
     //TODO: add constructor appropriately, eventID = eventName+enddata
     //also notice if private/public, some parameters might not be needed
+    private Boolean isValid;
     private String eventID;
     private String eventName;
     private Long startDate;
@@ -38,7 +39,8 @@ public class Event {
     public Event() {
     }
 
-    public Event(String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
+    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity) {
+        this.isValid = isValid;
         this.eventID = eventID;
         this.eventName = eventName;
         this.startDate = startDate;
@@ -59,6 +61,14 @@ public class Event {
 
     private ArrayList<User> attendingList = new ArrayList<>();
     private int save;
+
+    public Boolean getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(Boolean isValid) {
+        this.isValid = isValid;
+    }
 
     public void addUserToAttendingList(User user){
         this.attendingList.add(user);
