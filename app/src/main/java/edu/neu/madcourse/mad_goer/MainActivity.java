@@ -1,5 +1,6 @@
 package edu.neu.madcourse.mad_goer;
 
+import android.app.Fragment;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -276,7 +277,6 @@ public class MainActivity extends AppCompatActivity{
     public String getCurrentUserName(){return this.currentUserName;}
 
     public ArrayList<ArrayList<Event>> getListofEventLists() {
-        System.out.println("123");
         if (currentUser != null) {
             //Key is eventID, value is "saved"/"Host"/"past"
             personalEventMap = currentUser.getMyEventList();
@@ -291,7 +291,6 @@ public class MainActivity extends AppCompatActivity{
         }
 
         for (String key : eventIDkeySet) {
-
             //for all eventstatus, all to the first list
             listofEventLists.get(0).add(eventMap.get(key));
 
@@ -461,31 +460,33 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    public void onTabClick(View v){
-        GoFragment goFragment = (GoFragment)getSupportFragmentManager().findFragmentById(R.id.goFragment);
-        switch (v.getId()){
-            case R.id.tab_all_go:
-                if(listofEventLists != null && listofEventLists.get(0).size() > 0)
-                goFragment.setUpRecyclerView(0);
-                break;
-            case R.id.tab_host_go:
-                if(listofEventLists != null && listofEventLists.get(1).size() > 0)
-                goFragment.setUpRecyclerView(1);
-                break;
-            case R.id.tab_going_go:
-                if(listofEventLists != null && listofEventLists.get(2).size() > 0)
-                goFragment.setUpRecyclerView(2);
-                break;
-            case R.id.tab_saved_go:
-                if(listofEventLists != null && listofEventLists.get(3).size() > 0)
-                goFragment.setUpRecyclerView(3);
-                break;
-            case R.id.tab_past_go:
-                if(listofEventLists != null && listofEventLists.get(4).size() > 0)
-                goFragment.setUpRecyclerView(4);
-                break;
-        }
-    }
+//    public void onTabClick(View v){
+//
+//        GoFragment goFragment = (GoFragment)getSupportFragmentManager().findFragmentById(R.id.goFragmentID);
+//
+//        switch (v.getId()){
+//            case R.id.tab_all_go:
+//                if(listofEventLists != null && listofEventLists.get(0).size() > 0)
+//                goFragment.setUpRecyclerView(0);
+//                break;
+//            case R.id.tab_host_go:
+//                if(listofEventLists != null && listofEventLists.get(1).size() > 0)
+//                goFragment.setUpRecyclerView(1);
+//                break;
+//            case R.id.tab_going_go:
+//                if(listofEventLists != null && listofEventLists.get(2).size() > 0)
+//                goFragment.setUpRecyclerView(2);
+//                break;
+//            case R.id.tab_saved_go:
+//                if(listofEventLists != null && listofEventLists.get(3).size() > 0)
+//                goFragment.setUpRecyclerView(3);
+//                break;
+//            case R.id.tab_past_go:
+//                if(listofEventLists != null && listofEventLists.get(4).size() > 0)
+//                goFragment.setUpRecyclerView(4);
+//                break;
+//        }
+//    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
