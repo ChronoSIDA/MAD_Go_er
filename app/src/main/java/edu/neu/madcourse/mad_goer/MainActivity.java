@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity{
     public int currentMenuItemId = R.id.navigation_home;
     private String newEventType;
     private Boolean isLogin = false;
+    private Boolean isCreated = false;
 
 
     //saves all event from firebase
@@ -245,13 +246,11 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
-//
-//        if(doIHaveValue != 0){
-//            if(doIHaveValue == R.id.navigation_setting) {
-//                currentMenuItemId = R.id.navigation_setting;
-//                navController.navigate(R.id.navigation_setting);
-//            }
-//        }
+
+        if(isCreated){
+            navController.navigate(R.id.navigation_go);
+            isCreated = false;
+        }
     }
 
 
@@ -371,6 +370,7 @@ public class MainActivity extends AppCompatActivity{
                 String tmp = newEventName.getText().toString();
                 if(!newEventName.getText().toString().equals("") && !newEventType.equals("Choose A Category")) {
                     dialog.dismiss();
+                    isCreated = true;
 
 //                    addNewEvent(newEventName.getText().toString(), newEventType);
                     Snackbar.make(mainView, "Event created successfully", Snackbar.LENGTH_LONG)

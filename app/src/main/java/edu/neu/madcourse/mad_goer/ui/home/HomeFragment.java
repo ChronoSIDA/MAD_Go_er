@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
                         setDataOnDelay();
                     }
                 },
-                100);
+                300);
 
         return root;
     }
