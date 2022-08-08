@@ -216,7 +216,6 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
                     public void run() {
