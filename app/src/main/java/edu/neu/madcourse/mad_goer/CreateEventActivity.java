@@ -186,7 +186,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
 
                     event.setStartDate(startDateTimestamp);
-                    // startDate + duration
+                    // startDate + duration1
                     event.setEndDate(endDateTimestamp);
                     //add event to user, add user to event
                     currentUser.addEvent(event.getEventID(), "host");
