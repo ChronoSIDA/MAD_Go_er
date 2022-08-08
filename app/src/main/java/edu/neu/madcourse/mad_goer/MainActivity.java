@@ -503,4 +503,12 @@ public class MainActivity extends AppCompatActivity{
         intent.putExtra("isLogin", isLogin );
         startActivity(intent);
     }
+
+    public void clickHost(View view){
+        Intent intent = new Intent(this, GoFragment.class);
+        intent.putExtra("nameTxt", currentUserName );
+        intent.putExtra("isLogin", isLogin );
+        startActivity(intent);
+    }
+
 }

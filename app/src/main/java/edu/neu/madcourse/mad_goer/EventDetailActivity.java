@@ -260,7 +260,7 @@ public class EventDetailActivity extends AppCompatActivity {
         return address;
     }
 
-    public void returnMain(View view){
+    public void returnBack(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

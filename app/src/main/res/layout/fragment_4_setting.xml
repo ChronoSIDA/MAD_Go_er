@@ -16,6 +16,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="My Hosts"
+        android:onClick="clickHost"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"

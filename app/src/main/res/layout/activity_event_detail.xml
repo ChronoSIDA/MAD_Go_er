@@ -185,7 +185,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:backgroundTint="@color/lightRed"
-        android:onClick="returnMain"
+        android:onClick="returnBack"
         android:text="@string/string_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/id_desc_detail"
