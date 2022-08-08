@@ -45,7 +45,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
 
         //on item selected
         Event event = eventList.get(position);
-        holder.eventIcon.setImageResource(event.getIconID());
+        Context context = holder.eventIcon.getContext();
+        String getCategory = "sticker_" + event.getCategory().toString().toLowerCase();
+        int id = context.getResources().getIdentifier(getCategory, "drawable", context.getPackageName());
+        holder.eventIcon.setImageResource(id);
         holder.eventName.setText(event.getEventName());
         holder.hostName.setText("Host: " + event.getHost().getUserID());
 
