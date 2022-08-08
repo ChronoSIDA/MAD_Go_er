@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:textColor="#000"
+                android:textColor="@color/lightRed"
                 android:id="@+id/tv_all_go"
                 android:layout_marginTop="3dp"
                 android:textStyle="bold"
