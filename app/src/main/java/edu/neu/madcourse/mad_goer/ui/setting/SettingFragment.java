@@ -39,33 +39,6 @@ public class SettingFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         curUserName = activity.getCurrentUserName();
 
-
-        button_myHost = binding.buttonMyHostSetting;
-        button_myHost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Fragment goFragment = new Fragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.goFragmentID, goFragment);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-
-//                Fragment fragment = new Fragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, GoFragment.class, null);
-
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-        button_interest = binding.buttonInterestSetting;
-//        button_interest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         button_accountSec = binding.buttonAccountSecSetting;
         button_emergencyCont = binding.buttonEmergencyContSetting;
         button_language = binding.buttonLanguageSetting;

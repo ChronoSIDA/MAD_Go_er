@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -257,6 +259,7 @@ public class MainActivity extends AppCompatActivity{
     public void onResume() {
         if(isCreated) {
             navController.navigate(R.id.navigation_go);
+            currentMenuItemId = R.id.navigation_go;
             isCreated = false;
         }
         super.onResume();
@@ -526,11 +529,11 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void clickHost(View view){
-        Intent intent = new Intent(this, GoFragment.class);
-        intent.putExtra("nameTxt", currentUserName );
-        intent.putExtra("isLogin", isLogin );
-        startActivity(intent);
+    public void onClickMyHost(View view){
+        currentMenuItemId = R.id.navigation_go;
+        navController.navigate(R.id.navigation_go);
+//
+//        LinearLayout hostLayout = (LinearLayout) findViewById(R.id.tab_host_go);
+//        hostLayout.performClick();
     }
-
 }
