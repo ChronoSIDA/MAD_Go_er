@@ -68,6 +68,10 @@ public class GoFragment extends Fragment {
 
         TextView textView_all = binding.tvAllGo;
         TextView textView_host = binding.tvHostGo;
+        TextView textView_going = binding.tvGoingGo;
+        TextView textView_saved = binding.tvSavedGo;
+        TextView textView_past = binding.tvPastGo;
+
 
         textView_all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +85,26 @@ public class GoFragment extends Fragment {
                 setUpRecyclerView(1);
             }
         });
+        textView_going.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpRecyclerView(2);
+            }
+        });
+        textView_saved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpRecyclerView(3);
+            }
+        });
+        textView_past.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpRecyclerView(4);
+            }
+        });
+
+
 
         return root;
     }

@@ -183,9 +183,9 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event newevent = snapshot.getValue(Event.class);
-                if(!newevent.isPast()){
+                //if newevent !past
                     eventMap.put(newevent.getEventID(),newevent);
-                }
+
             }
 
             @Override
@@ -291,22 +291,32 @@ public class MainActivity extends AppCompatActivity{
 
         for (String key : eventIDkeySet) {
             //for all eventstatus, all to the first list
+            //list contains all events related to this user
             listofEventLists.get(0).add(eventMap.get(key));
 
             //if value is "host", add eventobj to first list in listoflists
             if (personalEventMap.get(key).equals("host")) {
-                listofEventLists.get(1).add(eventMap.get(key));
+                //eventmap里面没有3319pastevent
+                if(eventMap.get(key).isPast()){
+                    listofEventLists.get(4).add(eventMap.get(key));
+                }else{
+                    listofEventLists.get(1).add(eventMap.get(key));
+                }
             }
             if (personalEventMap.get(key).equals("going")) {
-                listofEventLists.get(2).add(eventMap.get(key));
+                if(eventMap.get(key).isPast()){
+                    listofEventLists.get(4).add(eventMap.get(key));
+                }else {
+                    listofEventLists.get(2).add(eventMap.get(key));
+                }
             }
             if (personalEventMap.get(key).equals("saved")) {
-                listofEventLists.get(3).add(eventMap.get(key));
+                if(eventMap.get(key).isPast()){
+                    listofEventLists.get(4).add(eventMap.get(key));
+                }else {
+                    listofEventLists.get(3).add(eventMap.get(key));
+                }
             }
-            if (personalEventMap.get(key).equals("past")) {
-                listofEventLists.get(4).add(eventMap.get(key));
-            }
-
         }
         return listofEventLists;
     }

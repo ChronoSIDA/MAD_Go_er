@@ -182,14 +182,19 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     event.setHost(currentUser);
                     event.setIconID(iconID);
                     System.out.println("xyz");
+
                     Long startDateTimestamp = calendar.getTimeInMillis();
                     Long durationTimeStamp = TimeUnit.HOURS.toMillis(Long.parseLong(duration.getText().toString()));
                     Long endDateTimestamp = startDateTimestamp + durationTimeStamp;
+
+
+
                     event.setStartDate(startDateTimestamp);
                     // startDate + duration
                     event.setEndDate(endDateTimestamp);
                     //add event to user, add user to event
                     currentUser.addEvent(event.getEventID(), "host");
+                    currentUser.addEvent(event.getEventID(), "going");
                     event.addUserToAttendingList(currentUser);
                     event.setActualLocation(actualLocation);
                     //update user in fb, push event to db

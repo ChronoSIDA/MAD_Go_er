@@ -71,8 +71,13 @@ public class HomeFragment extends Fragment {
         //convert the eventMap to arraylist to fit in the first parameter type
         if(eventMap != null){
             Collection<Event> values = eventMap.values();
-            ArrayList<Event> eventList = new ArrayList<>(values);
-
+            //ArrayList<Event> eventList = new ArrayList<>(values);
+            ArrayList<Event> eventList = new ArrayList<>();
+            for(Event e: values){
+                if(!e.isPast()){
+                    eventList.add(e);
+                }
+            }
             EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
             recyclerView.setLayoutManager(linearLayoutManager);
