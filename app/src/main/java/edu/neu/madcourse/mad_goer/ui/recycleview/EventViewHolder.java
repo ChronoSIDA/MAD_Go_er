@@ -34,6 +34,6 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         eventLocation.setText(theEventToBind.getLocation().toString());
     }
 
-    }
+}
 
 

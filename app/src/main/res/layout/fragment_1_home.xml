@@ -8,68 +8,47 @@
     tools:context=".ui.home.HomeFragment">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="219dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Search"
-        android:textColorHint="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
-
-    <AutoCompleteTextView
         android:id="@+id/autoSearchTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextTextPersonName"
-        android:layout_below="@+id/editTextTextPersonName"
-        android:layout_alignParentLeft="true"
-        android:ems="10"
-        android:text=""
-        tools:ignore="MissingConstraints">
-
-        <requestFocus />
-    </AutoCompleteTextView>
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="44dp"
+        android:layout_width="325dp"
         android:layout_height="44dp"
-        android:background="#00FFFFFF"
-        android:src="?android:attr/actionModeWebSearchDrawable"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/quantum_ic_search_grey600_24"
+        android:ems="10"
+        android:hint="Search"
+        android:textColor="@color/lightRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084"
-        app:tint="@color/lightRed" />
+        app:layout_constraintVertical_bias="0.0">
+    </EditText>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_homefrag"
         android:layout_width="wrap_content"
-        android:layout_height="470dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_filter_home"
-        app:layout_constraintVertical_bias="0.361" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_filter_home"
         android:layout_width="325dp"
         android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/lightOrange"
         android:text="Filters"
         android:textColor="@color/lightRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.016" />
+        app:layout_constraintTop_toBottomOf="@+id/autoSearchTV"
+        app:layout_constraintVertical_bias="0.00999999" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

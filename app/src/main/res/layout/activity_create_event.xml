@@ -191,10 +191,10 @@
                                     android:layout_width="210dp"
                                     android:layout_height="40dp"
                                     android:ems="10"
-                                    android:textColorHint="@color/grey"
-                                    android:textColor="@color/black"
                                     android:hint="Input a virtual meeting URL"
                                     android:inputType="textPersonName"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
                                     android:textSize="16sp"
                                     android:visibility="invisible"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -222,6 +222,7 @@
 
                                                 <EditText
                                                     android:id="@+id/id_islocation_create"
+                                                    android:clickable="true"
                                                     android:focusable="false"
                                                     android:layout_width="210dp"
                                                     android:layout_height="40dp"

@@ -38,6 +38,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 
+import org.w3c.dom.Text;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -171,8 +173,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: all condition check on whether all fields of event is complete
-//              if(date!= null&&)
                 if (checkValid()) {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     // ID = create time + name
@@ -181,7 +181,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     event.setEventName(eventName);
                     event.setHost(currentUser);
                     event.setIconID(iconID);
-                    System.out.println("xyz");
 
                     Long startDateTimestamp = calendar.getTimeInMillis();
                     Long durationTimeStamp = TimeUnit.HOURS.toMillis(Long.parseLong(duration.getText().toString()));
@@ -276,6 +275,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
@@ -300,6 +301,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         );
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
     public void showTimePickerDialog(){
@@ -473,7 +475,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
     }
 
     public Date getDate(int year, int month, int day) {
@@ -548,5 +549,4 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         }
         return super.dispatchTouchEvent(ev);
     }
-
 }

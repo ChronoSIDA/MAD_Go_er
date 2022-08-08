@@ -91,9 +91,9 @@ public class GoFragment extends Fragment {
         textView_past = binding.tvPastGo;
         tab_all_go = binding.tabAllGo;
         tab_all_host = binding.tabHostGo;
-        tab_all_going=binding.tabGoingGo;
+        tab_all_going = binding.tabGoingGo;
         tab_all_saved = binding.tabSavedGo;
-        tab_all_past=binding.tabPastGo;
+        tab_all_past = binding.tabPastGo;
 
 
         imageView_all = binding.imgAllGo;
