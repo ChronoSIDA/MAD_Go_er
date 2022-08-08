@@ -49,8 +49,7 @@ public class HomeFragment extends Fragment {
         activity = (MainActivity) getActivity();
         //get all value from eventMap, and then get eventname from value
         eventMap = activity.getEventMap();
-        nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
-
+        nameTxt = activity.getCurrentUserName();
         //eventmap is realtime data from mainactivity
         int size = eventMap.size();
         String[] eventNames = new String[size];
@@ -131,7 +130,9 @@ public class HomeFragment extends Fragment {
                     ArrayList<Event> eventList = new ArrayList<>(values);
 
                     intent.putExtra("eventID", eventList.get(position).getEventID());
-
+                    Event e = eventList.get(position);
+                    activity = (MainActivity) getActivity();
+                    nameTxt = activity.getCurrentUserName();
                     intent.putExtra("nameTxt", nameTxt);
 
                     // public or private:

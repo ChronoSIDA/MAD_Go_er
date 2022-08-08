@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity{
                         navController.navigate(R.id.navigation_setting);
                         return true;
                     case R.id.navigation_add_event:
-//                        createNewDialog();
+//                        createNewDialog();DatabaseReference curUserRef =
                         return true;
                 }
                 return true;

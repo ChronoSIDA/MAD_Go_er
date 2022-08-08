@@ -85,6 +85,7 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event newevent = snapshot.getValue(Event.class);
                 eventMap.put(newevent.getEventID(),newevent);
+                System.out.println("123");
             }
 
             @Override
@@ -108,8 +109,7 @@ public class EventDetailActivity extends AppCompatActivity {
         });
 
         event = eventMap.get(eventID);
-
-
+        System.out.println("123");
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
         scrollGoers.setMovementMethod(new ScrollingMovementMethod());
         TextView scrollDesc = (TextView) findViewById(R.id.id_desc_detail);
