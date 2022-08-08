@@ -429,15 +429,17 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    public ArrayAdapter<Event> getArrayAdapter() {
+    public ArrayAdapter<String> getArrayAdapter() {
         //event_list contains all Event objects under this user
         ArrayList<Event> event_list = getListofEventLists().get(0);
 
         //TO DO: pass event information of this user
+        ArrayList<String> myevent_list = new ArrayList<>(event_list.size());
         for (Event e: event_list) {
-            event_list.add(e);
+            String name = e.getEventName();
+            myevent_list.add(name);
         }
-        ArrayAdapter<Event> dataAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, event_list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, myevent_list);
 
         return dataAdapter;
     }

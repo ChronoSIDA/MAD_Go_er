@@ -1,6 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.comment;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class CommentFragment extends Fragment {
     private Spinner eventSpinner;
     private String currentUserName;
     private User currentUser;
-    private ArrayAdapter<Event> spinnerArrayAdapter;
+    private ArrayAdapter<String> spinnerArrayAdapter;
 
     DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
     private RecyclerView recyclerView;
@@ -62,9 +63,6 @@ public class CommentFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new CommentAdapter(comments, getContext()));
-        currentUserName = activity.getCurrentUserName();
-        spinnerArrayAdapter = activity.getArrayAdapter();
-        currentUser = activity.getCurrentUser();
 
         sendBtn = binding.btnSendMsg;
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +83,17 @@ public class CommentFragment extends Fragment {
 //        }
 
 //        ArrayAdapter<Event> dataAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, event_list);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        eventSpinner.setAdapter(spinnerArrayAdapter);
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
+                        currentUser = activity.getCurrentUser();
+                        currentUserName = activity.getCurrentUserName();
+                        spinnerArrayAdapter = activity.getArrayAdapter();
+                        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        eventSpinner.setAdapter(spinnerArrayAdapter);
+                    }
+                },
+                300);
 
         return root;
     }
