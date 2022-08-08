@@ -18,7 +18,26 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/navigation_add_event"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:focusable="true"
+        android:onClick="onCreateEventClick"
+        app:tint="#FF7276"
+        app:backgroundTint="#FFF4F4"
+        app:fabCustomSize="54dp"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:elevation="10dp"
+        app:srcCompat="@drawable/ic_baseline_add"
+        app:maxImageSize="45dp"/>
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"

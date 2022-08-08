@@ -25,6 +25,7 @@ import edu.neu.madcourse.mad_goer.messages.User;
 
 public class InterestActivity extends AppCompatActivity {
     private User user;
+    private String nameTxt;
     private Button btn;
     private TextView skip;
     private CheckBox music_cb;
@@ -61,7 +62,7 @@ public class InterestActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String nameTxt = extras.getString("nameTxt");
+        nameTxt = extras.getString("nameTxt");
         isLogin = extras.getBoolean("isLogin");
 
 
@@ -475,6 +476,16 @@ public class InterestActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void returnMain(View view){
+        if(isLogin){
+            Intent intent =  new Intent(InterestActivity.this, edu.neu.madcourse.mad_goer.MainActivity.class);
+            intent.putExtra("nameTxt", nameTxt);
+            startActivity(intent);
+        } else {
+            finish();
+        }
     }
 
     public void setInterestList(){

@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
     private static final String CURRENT_USER = "CURRENT_USER";
+    private static String CURRENT_NAV = "0";
     private String timePattern = "yyyy-MM-dd HH:mm:ss z";
     private DateFormat df = new SimpleDateFormat(timePattern);
 
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity{
     private String newEventType;
     private Boolean isLogin = false;
     private Boolean isCreated = false;
+
+    // navigation bundles
+    private BottomNavigationView navView;
+    private AppBarConfiguration appBarConfiguration;
+    private NavController navController;
+
 
 
     //saves all event from firebase
@@ -167,14 +174,14 @@ public class MainActivity extends AppCompatActivity{
         rQueue.add(request);
 
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+        appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_go, R.id.navigation_home, R.id.navigation_comment, R.id.navigation_setting)
                 .build();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
@@ -239,18 +246,21 @@ public class MainActivity extends AppCompatActivity{
                         navController.navigate(R.id.navigation_setting);
                         return true;
                     case R.id.navigation_add_event:
-                        createNewDialog();
+//                        createNewDialog();
                         return true;
-//                        Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
         });
+    }
 
-        if(isCreated){
+    @Override
+    public void onResume() {
+        if(isCreated) {
             navController.navigate(R.id.navigation_go);
             isCreated = false;
         }
+        super.onResume();
     }
 
 
@@ -325,6 +335,10 @@ public class MainActivity extends AppCompatActivity{
         return currentUser;
     }
 
+    public void onCreateEventClick(View view){
+        createNewDialog();
+    }
+
     public void createNewDialog(){
         dialogBuilder= new AlertDialog.Builder(this);
         final View EventPopupView = getLayoutInflater().inflate(R.layout.event_popup, null);
@@ -377,7 +391,6 @@ public class MainActivity extends AppCompatActivity{
         newEventSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                String tmp = newEventName.getText().toString();
                 if(!newEventName.getText().toString().equals("") && !newEventType.equals("Choose A Category")) {
                     dialog.dismiss();
                     isCreated = true;
@@ -409,7 +422,7 @@ public class MainActivity extends AppCompatActivity{
                 dialog.dismiss();
                 Snackbar.make(mainView, "Creation canceled, come back later", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).setAnchorView(navView).show();
-                nacControl.navigate(currentMenuItemId);
+//                nacControl.navigate(currentMenuItemId);
             }
         });
     }

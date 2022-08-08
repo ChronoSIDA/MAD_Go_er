@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_menu">
 
     <item
@@ -13,9 +14,20 @@
         android:title="@string/txt_go_nav" />
 
     <item
-        android:id="@+id/navigation_add_event"
-        android:icon="@drawable/ic_add"
+        android:id="@+id/navigation_add_event_false"
+        android:enabled="false"
         android:title="" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/@+id/navigation_add_event"-->
+<!--        android:layout_width="56dp"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        app:elevation="6dp"-->
+<!--        android:scaleType="center"-->
+<!--        android:icon="@drawable/ic_add"-->
+<!--        android:title=""/>-->
 
     <item
         android:id="@+id/navigation_comment"
@@ -27,4 +39,4 @@
         android:icon="@drawable/ic_settings_grey"
         android:title="@string/txt_setting_nav" />
 
-</menu>
+    </menu>

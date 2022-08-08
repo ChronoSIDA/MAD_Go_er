@@ -40,6 +40,14 @@
                 android:textAlignment="center"
                 android:text="All"
                 />
+
+            <ImageView
+                android:id="@+id/img_all_go"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_more_horiz_24"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +68,13 @@
                 android:textAlignment="center"
                 android:text="Host"
                 />
+            <ImageView
+                android:id="@+id/img_host_go"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_more_horiz_24"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -81,6 +96,13 @@
                 android:textAlignment="center"
                 android:text="Going"
                 />
+            <ImageView
+                android:id="@+id/img_going_go"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_more_horiz_24"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -101,6 +123,13 @@
                 android:textAlignment="center"
                 android:text="Saved"
                 />
+            <ImageView
+                android:id="@+id/img_saved_go"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_more_horiz_24"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -121,6 +150,13 @@
                 android:textAlignment="center"
                 android:text="Past"
                 />
+            <ImageView
+                android:id="@+id/img_past_go"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_more_horiz_24"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"/>
         </LinearLayout>
     </LinearLayout>
 
