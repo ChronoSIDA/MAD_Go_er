@@ -11,13 +11,12 @@
     <Button
         android:id="@+id/button_myHost_setting"
         style="?android:borderlessButtonStyle"
+        android:onClick="onClickMyHost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_button"
         android:text="My Hosts"
-        android:onClick="clickHost"
-
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"
         app:backgroundTint="@color/white"

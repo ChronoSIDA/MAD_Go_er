@@ -10,10 +10,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import edu.neu.madcourse.mad_goer.InterestActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
+import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment4SettingBinding;
+import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
 
 public class SettingFragment extends Fragment {
 
@@ -35,21 +39,6 @@ public class SettingFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         curUserName = activity.getCurrentUserName();
 
-
-        button_myHost = binding.buttonMyHostSetting;
-        button_myHost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        button_interest = binding.buttonInterestSetting;
-//        button_interest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         button_accountSec = binding.buttonAccountSecSetting;
         button_emergencyCont = binding.buttonEmergencyContSetting;
         button_language = binding.buttonLanguageSetting;
