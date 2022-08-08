@@ -50,7 +50,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
         int id = context.getResources().getIdentifier(getCategory, "drawable", context.getPackageName());
         holder.eventIcon.setImageResource(id);
         holder.eventName.setText(event.getEventName());
-        // 123
         holder.hostName.setText("Host: " + event.getHost().getUserID());
 
 
