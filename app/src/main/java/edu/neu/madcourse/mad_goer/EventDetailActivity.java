@@ -2,6 +2,7 @@ package edu.neu.madcourse.mad_goer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView attendingListTV;
     private TextView descriptionTV;
     private String eventID;
-    private HashMap<String,Event> eventMap;
+    private HashMap<String,Event> eventMap = new HashMap<>();
     private ArrayList<User> userList;
     private MainActivity mainActivity;
     private String currentUserName;
@@ -63,6 +64,14 @@ public class EventDetailActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         currentUserName = extras.getString("nameTxt");
         eventID = extras.getString("eventID");
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
+                        event = eventMap.get(eventID);
+                        retrieveDataDisplay();
+                    }
+                },
+                500);
 
 
         DatabaseReference curUserRef = databaseUserRef.child(currentUserName);
@@ -71,6 +80,7 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentUser = snapshot.getValue(User.class);
+                System.out.println(currentUser);
             }
 
             @Override
@@ -80,11 +90,14 @@ public class EventDetailActivity extends AppCompatActivity {
         });
 
         //geteventmap
+
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event newevent = snapshot.getValue(Event.class);
+                //if newevent !past
                 eventMap.put(newevent.getEventID(),newevent);
+
             }
 
             @Override
@@ -103,11 +116,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-        event = eventMap.get(eventID);
 
 
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
@@ -177,6 +187,9 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void retrieveDataDisplay(){
         joinBtn.setText(checkJoin(event, currentUser));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +231,7 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 
     //check joined
     public String checkJoin(Event event, User user){
