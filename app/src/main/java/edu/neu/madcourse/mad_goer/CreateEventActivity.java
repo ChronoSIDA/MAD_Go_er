@@ -89,9 +89,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private RadioButton isPublic, isPrivate, inPerson, virtual;
     private RadioGroup rg1, rg2;
 
-    //todo:
-    //add user obj to event's attending list
-    //add event to user's host event,
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");

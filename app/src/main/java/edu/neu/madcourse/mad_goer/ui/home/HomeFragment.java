@@ -9,8 +9,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -18,13 +16,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
-import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -38,11 +38,14 @@ public class HomeFragment extends Fragment {
     private MainActivity activity;
 
     private Fragment1HomeBinding binding;
-    private HashMap<String,Event> eventMap;
+    private HashMap<String,Event> eventMap = new HashMap<>();
     private RecyclerView recyclerView;
     private ArrayList<String> eventResultAutocomplete = new ArrayList<>();
     private String[] eventNamesAutocomplete;
+    private ArrayList<Event> eventList = new ArrayList<>();
 
+
+    DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,14 +62,16 @@ public class HomeFragment extends Fragment {
                 new Runnable() {
                     public void run() {
                         eventMap = activity.getEventMap();
-                        nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
-                        setDataOnDelay();
+                        nameTxt = activity.getCurrentUserName();
+                        setupeventlist();
+                        setupRecycleView(eventList);
                     }
                 },
                 300);
 
         EditText autoCompleteEditText = binding.autoSearchTV;
         Handler handler = new Handler(Looper.getMainLooper());
+
         autoCompleteEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,16 +92,29 @@ public class HomeFragment extends Fragment {
                         if(handler.hasMessages(0)){
                             handler.removeCallbacksAndMessages(null);
                         } else {
-                            eventNamesAutocomplete = ((MainActivity) getActivity()).getAutoSearchList();
+                            eventNamesAutocomplete = activity.getAutoSearchList();
                             String temp = autoCompleteEditText.getText().toString().trim();
                             for(String listItem : eventNamesAutocomplete) {
                                 if (listItem.contains(temp)) {
                                     eventResultAutocomplete.add(listItem);
                                 }
                             }
+                            //we have eventMap(key: eventID, value: event object)
+                            //and we have array of eventNames eventResultAutocomplete
 
                             // TODO 1.append recyclerview
                             // TODO 2.clean eventResultAutocomplete after recyceler view is finished
+                            ArrayList<Event> autoList = new ArrayList<>();
+                            Collection<Event> values = eventMap.values();
+                            for(int i = 0; i<eventResultAutocomplete.size();i++) {
+                                for (Event e : values) {
+                                   if(e.getEventName().equals(eventResultAutocomplete.get(i))){
+                                       autoList.add(e);
+                                    }
+                                }
+                            }
+                            setupRecycleView(autoList);
+                            eventResultAutocomplete.clear();
                         }
                     }
                 }, 800);
@@ -115,21 +133,26 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void setDataOnDelay(){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        RecyclerView recyclerView = binding.rvHomefrag;
-
-        //convert the eventMap to arraylist to fit in the first parameter type
-        if(eventMap != null){
+    public void setupeventlist() {
+        if (eventMap != null) {
             Collection<Event> values = eventMap.values();
             //ArrayList<Event> eventList = new ArrayList<>(values);
-            ArrayList<Event> eventList = new ArrayList<>();
-            for(Event e: values){
-                if(!e.isPast()){
+
+            for (Event e : values) {
+                if (!e.isPast()) {
                     eventList.add(e);
                 }
             }
-            EventAdapter eventAdapter = new EventAdapter(eventList,getContext());
+        }
+    }
+
+    public void setupRecycleView(ArrayList<Event> list){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView recyclerView = binding.rvHomefrag;
+        EventAdapter eventAdapter;
+        //convert the eventMap to arraylist to fit in the first parameter type
+
+            eventAdapter = new EventAdapter(list, getContext());
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setAdapter(eventAdapter);
@@ -186,6 +209,6 @@ public class HomeFragment extends Fragment {
                 }
             }));
         }
-    }
 }
+
 
