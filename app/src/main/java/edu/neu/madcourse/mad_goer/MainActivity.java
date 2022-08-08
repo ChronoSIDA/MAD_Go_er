@@ -7,8 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
 import android.text.Layout;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -16,10 +19,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +55,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -145,15 +151,6 @@ public class MainActivity extends AppCompatActivity{
             manager.createNotificationChannel(channel);
         }
 
-
-/*        ImageButton plus = findViewById(R.id.btn_create_event);
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewDialog();
-            }
-        });*/
-       // TextView senderOnSendPage = (TextView) findViewById(R.id.title_sender2);
         String urlJson = "https://goerapp-4e3c7-default-rtdb.firebaseio.com/User/" + "" +".json";
 
         StringRequest request = new StringRequest(Request.Method.GET, urlJson, new Response.Listener<String>(){
@@ -218,12 +215,13 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                new Runnable() {
-                    public void run() {
-                    }
-                },
-                100);
+//        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+//                new Runnable() {
+//                    public void run() {
+//                        getAutoComplete();
+//                    }
+//                },
+//                500);
 
 
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
@@ -253,6 +251,8 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
+
+
     }
 
     @Override
@@ -471,7 +471,6 @@ public class MainActivity extends AppCompatActivity{
                     Snackbar.make(view, "Event password incorrect, please try again later", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-
             }
         });
 
@@ -484,34 +483,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-
-//    public void onTabClick(View v){
-//
-//        GoFragment goFragment = (GoFragment)getSupportFragmentManager().findFragmentById(R.id.goFragmentID);
-//
-//        switch (v.getId()){
-//            case R.id.tab_all_go:
-//                if(listofEventLists != null && listofEventLists.get(0).size() > 0)
-//                goFragment.setUpRecyclerView(0);
-//                break;
-//            case R.id.tab_host_go:
-//                if(listofEventLists != null && listofEventLists.get(1).size() > 0)
-//                goFragment.setUpRecyclerView(1);
-//                break;
-//            case R.id.tab_going_go:
-//                if(listofEventLists != null && listofEventLists.get(2).size() > 0)
-//                goFragment.setUpRecyclerView(2);
-//                break;
-//            case R.id.tab_saved_go:
-//                if(listofEventLists != null && listofEventLists.get(3).size() > 0)
-//                goFragment.setUpRecyclerView(3);
-//                break;
-//            case R.id.tab_past_go:
-//                if(listofEventLists != null && listofEventLists.get(4).size() > 0)
-//                goFragment.setUpRecyclerView(4);
-//                break;
-//        }
-//    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -532,8 +503,42 @@ public class MainActivity extends AppCompatActivity{
     public void onClickMyHost(View view){
         currentMenuItemId = R.id.navigation_go;
         navController.navigate(R.id.navigation_go);
+
+        LinearLayout hostLayout = (LinearLayout) findViewById(R.id.tab_host_go);
+        if(hostLayout != null){
+            hostLayout.performClick();
+        }
+    }
+
+//    public void getAutoComplete(){
+//        //eventmap is realtime data from mainactivity
+//        int size = eventMap.size();
+//        eventNamesAutocomplete = new String[size];
 //
-//        LinearLayout hostLayout = (LinearLayout) findViewById(R.id.tab_host_go);
-//        hostLayout.performClick();
+//        int i = 0;
+//        for(String key: eventMap.keySet()){
+//            eventNamesAutocomplete[i] = eventMap.get(key).getEventName();
+//            i++;
+//        }
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+//                (this, android.R.layout.simple_spinner_dropdown_item, eventNamesAutocomplete);
+//        //Getting the instance of AutoCompleteTextView
+//
+//
+//        AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoSearchTV);
+//        actv.setThreshold(1);//will start working from first character
+//        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+//    }
+    public String[] getAutoSearchList(){
+        int size = eventMap.size();
+        String[] eventNamesAutocomplete = new String[size];
+
+        int i = 0;
+        for(String key: eventMap.keySet()){
+            eventNamesAutocomplete[i] = eventMap.get(key).getEventName();
+            i++;
+        }
+        return eventNamesAutocomplete;
     }
 }

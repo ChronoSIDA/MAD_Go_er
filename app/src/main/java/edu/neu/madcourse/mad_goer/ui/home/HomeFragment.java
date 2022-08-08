@@ -2,6 +2,7 @@ package edu.neu.madcourse.mad_goer.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +24,7 @@ import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
+import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -37,6 +40,8 @@ public class HomeFragment extends Fragment {
     private Fragment1HomeBinding binding;
     private HashMap<String,Event> eventMap;
     private RecyclerView recyclerView;
+    private ArrayList<String> eventResultAutocomplete = new ArrayList<>();
+    private String[] eventNamesAutocomplete;
 
 
 
@@ -49,29 +54,7 @@ public class HomeFragment extends Fragment {
         activity = (MainActivity) getActivity();
         //get all value from eventMap, and then get eventname from value
         eventMap = activity.getEventMap();
-        nameTxt = activity.getCurrentUserName();
-        //eventmap is realtime data from mainactivity
-        int size = eventMap.size();
-        String[] eventNames = new String[size];
-
-        int i = 0;
-        for(String key: eventMap.keySet()){
-                eventNames[i] = eventMap.get(key).getEventName();
-                i++;
-        }
-//
-//        autoSearchTV=binding.autoSearchTV;
-//        autoSearchTV.setThreshold(2);
-//        autoSearchTV.setAdapter(adapter);
-
-        //Creating the instance of ArrayAdapter containing list of fruit names
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (getContext(), android.R.layout.simple_spinner_dropdown_item, eventNames);
-        //Getting the instance of AutoCompleteTextView
-        AutoCompleteTextView actv = binding.autoSearchTV;
-        actv.setThreshold(1);//will start working from first character
-        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-//        actv.setTextColor(Color.RED);
+        nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
@@ -80,6 +63,44 @@ public class HomeFragment extends Fragment {
                     }
                 },
                 300);
+
+        EditText autoCompleteEditText = binding.autoSearchTV;
+        Handler handler = new Handler(Looper.getMainLooper());
+        autoCompleteEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                handler.sendEmptyMessage(0);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(handler.hasMessages(0)){
+                            handler.removeCallbacksAndMessages(null);
+                        } else {
+                            eventNamesAutocomplete = ((MainActivity) getActivity()).getAutoSearchList();
+                            String temp = autoCompleteEditText.getText().toString().trim();
+                            for(String listItem : eventNamesAutocomplete) {
+                                if (listItem.contains(temp)) {
+                                    eventResultAutocomplete.add(listItem);
+                                }
+                            }
+
+                            // TODO 1.append recyclerview
+                            // TODO 2.clean eventResultAutocomplete after recyceler view is finished
+                        }
+                    }
+                }, 800);
+            }
+        });
 
         return root;
     }
@@ -130,9 +151,7 @@ public class HomeFragment extends Fragment {
                     ArrayList<Event> eventList = new ArrayList<>(values);
 
                     intent.putExtra("eventID", eventList.get(position).getEventID());
-                    Event e = eventList.get(position);
-                    activity = (MainActivity) getActivity();
-                    nameTxt = activity.getCurrentUserName();
+
                     intent.putExtra("nameTxt", nameTxt);
 
                     // public or private:
