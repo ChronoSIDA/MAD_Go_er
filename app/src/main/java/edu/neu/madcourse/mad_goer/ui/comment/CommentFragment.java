@@ -43,6 +43,7 @@ public class CommentFragment extends Fragment {
     private ArrayAdapter<String> spinnerArrayAdapter;
 
     DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
+
     private RecyclerView recyclerView;
     private ArrayList<Comment> comments;
 
@@ -53,26 +54,30 @@ public class CommentFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = Fragment3CommentBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        comments = new ArrayList<Comment>();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView = binding.recyclerView;
-
-        MainActivity activity = (MainActivity) getActivity();
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new CommentAdapter(comments, getContext()));
-
         sendBtn = binding.btnSendMsg;
+        recyclerView = binding.recyclerView;
+        commentTV = binding.editCommentComment;
+        eventSpinner = binding.idEventNameComment;
+        View root = binding.getRoot();
+        MainActivity activity = (MainActivity) getActivity();
+
+        comments = new ArrayList<>();
+//        Date datetest = new Date();
+//        Comment test = new Comment("this is a comment","myuserid", datetest,"eventname");
+//        comments.add(test);
+
+
+
+
+
+
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 uploadComment();
             }
         });
-        commentTV = binding.editCommentComment;
-        eventSpinner = binding.idEventNameComment;
+
 
 //        //event_list contains all Event objects under this user
 //        ArrayList<Event> event_list = activity.getListofEventLists().get(0);
@@ -89,14 +94,24 @@ public class CommentFragment extends Fragment {
                         currentUser = activity.getCurrentUser();
                         currentUserName = activity.getCurrentUserName();
                         spinnerArrayAdapter = activity.getArrayAdapter();
-                        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        eventSpinner.setAdapter(spinnerArrayAdapter);
+                        setUpAdapter();
                     }
                 },
                 300);
 
         return root;
     }
+
+    private void setUpAdapter(){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new CommentAdapter(comments, getContext()));
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eventSpinner.setAdapter(spinnerArrayAdapter);
+
+    }
+
     public void uploadComment(){
         String thisComment = String.valueOf(commentTV.getText());
         if(thisComment== null){
@@ -104,7 +119,7 @@ public class CommentFragment extends Fragment {
                     .setAction("Action", null).show();
         }else {
             Date timestamp = Calendar.getInstance().getTime();
-            Comment newComment = new Comment(thisComment, currentUserName, timestamp, (Event)eventSpinner.getSelectedItem());
+            Comment newComment = new Comment(thisComment, currentUserName, timestamp, (String) eventSpinner.getSelectedItem());
             //push this new comment to database
             databaseCommentRef.push().setValue(newComment);
         }
