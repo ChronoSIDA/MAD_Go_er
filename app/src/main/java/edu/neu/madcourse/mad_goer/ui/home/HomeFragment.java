@@ -49,7 +49,6 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> eventResultAutocomplete = new ArrayList<>();
     private String[] eventNamesAutocomplete;
     private ArrayList<Event> eventList = new ArrayList<>();
-    private Boolean autoStarted = false;
     private Button btn_filter_home;
     private View filterView;
     private
