@@ -3,9 +3,13 @@ package edu.neu.madcourse.mad_goer.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,10 +31,14 @@ import edu.neu.madcourse.mad_goer.ui.recycleview.RecyclerItemClickListener;
 public class HomeFragment extends Fragment {
 
     private User currentUser;
+    private String nameTxt;
+    private MainActivity activity;
 
     private Fragment1HomeBinding binding;
     private HashMap<String,Event> eventMap;
     private RecyclerView recyclerView;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +46,33 @@ public class HomeFragment extends Fragment {
         binding = Fragment1HomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        activity = (MainActivity) getActivity();
+        //get all value from eventMap, and then get eventname from value
+        eventMap = activity.getEventMap();
+        nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
+
+        //eventmap is realtime data from mainactivity
+        int size = eventMap.size();
+        String[] eventNames = new String[size];
+
+        int i = 0;
+        for(String key: eventMap.keySet()){
+                eventNames[i] = eventMap.get(key).getEventName();
+                i++;
+        }
+//
+//        autoSearchTV=binding.autoSearchTV;
+//        autoSearchTV.setThreshold(2);
+//        autoSearchTV.setAdapter(adapter);
+
+        //Creating the instance of ArrayAdapter containing list of fruit names
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (getContext(), android.R.layout.simple_spinner_dropdown_item, eventNames);
+        //Getting the instance of AutoCompleteTextView
+        AutoCompleteTextView actv = binding.autoSearchTV;
+        actv.setThreshold(1);//will start working from first character
+        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+//        actv.setTextColor(Color.RED);
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
@@ -62,11 +97,6 @@ public class HomeFragment extends Fragment {
     public void setDataOnDelay(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = binding.rvHomefrag;
-
-        MainActivity activity = (MainActivity) getActivity();
-        //这里拿到的eventmap size为1
-        eventMap = activity.getEventMap();
-        String nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
 
         //convert the eventMap to arraylist to fit in the first parameter type
         if(eventMap != null){

@@ -21,6 +21,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.084" />
 
+    <AutoCompleteTextView
+        android:id="@+id/autoSearchTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextTextPersonName"
+        android:layout_below="@+id/editTextTextPersonName"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:text=""
+        tools:ignore="MissingConstraints">
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="44dp"
