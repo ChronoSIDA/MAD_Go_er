@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,23 @@ public class GoFragment extends Fragment {
     private User currentUser;
     private LinearLayout linearLayout;
 
+    private TextView textView_all;
+    private TextView textView_host;
+    private TextView textView_going;
+    private TextView textView_saved;
+    private TextView textView_past;
+    private LinearLayout tab_all_go;
+    private LinearLayout tab_all_host;
+    private LinearLayout tab_all_going;
+    private LinearLayout tab_all_saved;
+    private LinearLayout tab_all_past;
+
+    private ImageView imageView_all;
+    private ImageView imageView_host;
+    private ImageView imageView_going;
+    private ImageView imageView_saved;
+    private ImageView imageView_past;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,47 +84,88 @@ public class GoFragment extends Fragment {
         //default display all
         setUpRecyclerView(0);
 
-        TextView textView_all = binding.tvAllGo;
-        TextView textView_host = binding.tvHostGo;
-        TextView textView_going = binding.tvGoingGo;
-        TextView textView_saved = binding.tvSavedGo;
-        TextView textView_past = binding.tvPastGo;
+        textView_all = binding.tvAllGo;
+        textView_host = binding.tvHostGo;
+        textView_going = binding.tvGoingGo;
+        textView_saved = binding.tvSavedGo;
+        textView_past = binding.tvPastGo;
+        tab_all_go = binding.tabAllGo;
+        tab_all_host = binding.tabHostGo;
+        tab_all_going=binding.tabGoingGo;
+        tab_all_saved = binding.tabSavedGo;
+        tab_all_past=binding.tabPastGo;
 
 
-        textView_all.setOnClickListener(new View.OnClickListener() {
+        imageView_all = binding.imgAllGo;
+        imageView_host = binding.imgHostGo;
+        imageView_going = binding.imgGoingGo;
+        imageView_saved = binding.imgSavedGo;
+        imageView_past = binding.imgPastGo;
+
+
+        tab_all_go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(0);
+                changeBackToDefault();
+                textView_all.setTextColor(getResources().getColor(R.color.lightRed));
+                imageView_all.setVisibility(View.VISIBLE);
             }
         });
-        textView_host.setOnClickListener(new View.OnClickListener() {
+        tab_all_host.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(1);
+                changeBackToDefault();
+                textView_host.setTextColor(getResources().getColor(R.color.lightRed));
+                imageView_host.setVisibility(View.VISIBLE);
             }
         });
-        textView_going.setOnClickListener(new View.OnClickListener() {
+        tab_all_going.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(2);
+                changeBackToDefault();
+                textView_going.setTextColor(getResources().getColor(R.color.lightRed));
+                imageView_going.setVisibility(View.VISIBLE);
             }
         });
-        textView_saved.setOnClickListener(new View.OnClickListener() {
+        tab_all_saved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(3);
+                changeBackToDefault();
+                textView_saved.setTextColor(getResources().getColor(R.color.lightRed));
+                imageView_saved.setVisibility(View.VISIBLE);
             }
         });
-        textView_past.setOnClickListener(new View.OnClickListener() {
+        tab_all_past.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(4);
+                changeBackToDefault();
+                textView_past.setTextColor(getResources().getColor(R.color.lightRed));
+                imageView_past.setVisibility(View.VISIBLE);
             }
         });
 
 
 
         return root;
+    }
+
+    public void changeBackToDefault(){
+        textView_all.setTextColor(getResources().getColor(R.color.black));
+        textView_host.setTextColor(getResources().getColor(R.color.black));
+        textView_going.setTextColor(getResources().getColor(R.color.black));
+        textView_saved.setTextColor(getResources().getColor(R.color.black));
+        textView_past.setTextColor(getResources().getColor(R.color.black));
+
+        imageView_all.setVisibility(View.INVISIBLE);
+        imageView_host.setVisibility(View.INVISIBLE);
+        imageView_going.setVisibility(View.INVISIBLE);
+        imageView_saved.setVisibility(View.INVISIBLE);
+        imageView_past.setVisibility(View.INVISIBLE);
     }
 
     public void setUpRecyclerView(int pos){
