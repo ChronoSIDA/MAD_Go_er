@@ -10,10 +10,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import edu.neu.madcourse.mad_goer.InterestActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
+import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment4SettingBinding;
+import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
 
 public class SettingFragment extends Fragment {
 
@@ -40,7 +44,19 @@ public class SettingFragment extends Fragment {
         button_myHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Fragment goFragment = new Fragment();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.goFragmentID, goFragment);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
 
+//                Fragment fragment = new Fragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, GoFragment.class, null);
+
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         button_interest = binding.buttonInterestSetting;
