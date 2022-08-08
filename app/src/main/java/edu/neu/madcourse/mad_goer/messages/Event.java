@@ -2,6 +2,7 @@ package edu.neu.madcourse.mad_goer.messages;
 
 import android.location.Location;
 
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -249,4 +250,11 @@ public class Event {
         }
         return false;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Event{" +
+//                "attendingList=" + attendingList +
+//                '}';
+//    }
 }

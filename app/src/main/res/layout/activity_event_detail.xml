@@ -11,7 +11,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/string_public"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txt_host_detail"
@@ -27,7 +27,7 @@
         android:layout_marginStart="28dp"
         android:text="@string/string_art"
         android:textAlignment="viewStart"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:text="@string/string_link"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/id_location_detail"
@@ -51,24 +51,25 @@
 
     <TextView
         android:id="@+id/id_location_detail"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_width="260dp"
+        android:layout_height="24dp"
         android:text="@string/string_adresssss"
-        android:textAlignment="textEnd"
+        android:textAlignment="viewStart"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_timestamp_detail"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.038" />
 
     <TextView
         android:id="@+id/txt_time_detail"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:text="@string/string_time"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +85,7 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="28dp"
         android:text="@string/string_random_event"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,19 +96,19 @@
 
     <TextView
         android:id="@+id/id_goers_detail"
-        android:layout_width="275dp"
+        android:layout_width="260dp"
         android:layout_height="22dp"
         android:scrollbars="vertical"
         android:text="@string/string_userlist"
-        android:textAlignment="textEnd"
+        android:textAlignment="viewStart"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
-        app:layout_constraintStart_toEndOf="@+id/txt_goers_detail"
+        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_location_detail"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.053" />
 
     <TextView
         android:id="@+id/txt_event_name_detail"
@@ -116,7 +117,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="28dp"
         android:text="@string/string_event_name"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:text="@string/string_host_random_usr"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +142,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/string_descrition"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/id_goers_detail"
@@ -155,7 +156,7 @@
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:text="@string/string_07_26_2022"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,8 +167,8 @@
 
     <TextView
         android:id="@+id/id_desc_detail"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
+        android:layout_width="345dp"
+        android:layout_height="178dp"
         android:scrollbars="horizontal"
         android:text="@string/string_descs"
         android:textSize="16sp"
@@ -189,9 +190,11 @@
         android:onClick="returnBack"
         android:text="@string/string_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/id_desc_detail"
         app:layout_constraintTop_toBottomOf="@+id/id_desc_detail"
-        app:layout_constraintVertical_bias="0.542"
+        app:layout_constraintVertical_bias="0.46"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -200,7 +203,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:text="@string/string_go_ers"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -212,7 +215,6 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="32dp"
         android:backgroundTint="@color/lightRed"
         android:text="@string/string_join"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -220,7 +222,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btn_cancel_detail"
         app:layout_constraintTop_toBottomOf="@+id/id_desc_detail"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TextContrastCheck" />
 
     <ImageView

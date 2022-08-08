@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -90,7 +92,6 @@ public class EventDetailActivity extends AppCompatActivity {
         });
 
         //geteventmap
-
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -116,8 +117,11 @@ public class EventDetailActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
+        event = eventMap.get(eventID);
 
 
         TextView scrollGoers = (TextView) findViewById(R.id.id_goers_detail);
@@ -205,14 +209,18 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
-        hostTV.setText("Host: " + event.getHost().toString());
+
+        hostTV.setText("Host: " + event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
-        timeTV.setText(event.getStartDate().toString());
+//        timeTV.setText(event.getStartDate().toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm:ss:S");
+        timeTV.setText(simpleDateFormat.format(event.getStartDate()));
+
         categoryTV.setText(event.getCategory().toString());
         isPublicTV.setText(checkPublic(event));
         isVirtualTV.setText(checkVirtual(event));
-        addressTV.setText(location(event));
-        attendingListTV.setText(event.getAttendingList().toString());
+//        addressTV.setText(location(event));
+        attendingListTV.setText(attendingList(event));
         descriptionTV.setText(event.getDesc());
 
 
@@ -267,7 +275,7 @@ public class EventDetailActivity extends AppCompatActivity {
     public String location(Event event){
         String address;
         if(this.event.isInPerson()){
-            address = event.getLocation().toString();
+            address = event.getActualLocation();
         }else{
             address = event.getLink();
         }
@@ -278,5 +286,14 @@ public class EventDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public String attendingList(Event event){
+        String attendinglist = "";
+        for(User user: event.getAttendingList()){
+            attendinglist += (", " + user.getUserID());
+        }
+        return attendinglist;
+    }
+
 
 }
