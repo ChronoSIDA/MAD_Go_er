@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -89,9 +90,11 @@ public class HomeFragment extends Fragment {
                 System.out.println(eventResultAutocomplete);
                 //we have eventMap(key: eventID, value: event object)
                 //and we have array of eventNames eventResultAutocomplete
-
-                // TODO 1.append recyclerview
-                // TODO 2.clean eventResultAutocomplete after recyceler view is finished
+//
+//                if(eventResultAutocomplete.size() == 0){
+//                    eventResultAutocomplete.addAll(Arrays.asList(eventNamesAutocomplete));
+//                }
+//
                 ArrayList<Event> autoList = new ArrayList<>();
                 Collection<Event> values = eventMap.values();
                 for(int i = 0; i<eventResultAutocomplete.size();i++) {
