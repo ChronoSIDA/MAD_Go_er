@@ -24,6 +24,7 @@
 
         <LinearLayout
             android:id="@+id/tab_all_go"
+            android:clickable="true"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -52,6 +53,7 @@
 
         <LinearLayout
             android:id="@+id/tab_host_go"
+            android:clickable="true"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -80,6 +82,7 @@
         <LinearLayout
 
             android:id="@+id/tab_going_go"
+            android:clickable="true"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -107,6 +110,7 @@
 
         <LinearLayout
             android:id="@+id/tab_saved_go"
+            android:clickable="true"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -134,6 +138,7 @@
 
         <LinearLayout
             android:id="@+id/tab_past_go"
+            android:clickable="true"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
