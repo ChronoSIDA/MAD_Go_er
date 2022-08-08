@@ -18,10 +18,10 @@ public class Event {
     private Long endDate;
 
     //if false then virtual
-    private boolean inPerson;
+    private boolean inPerson = true;
 
     //if ture, public, if false private
-    private boolean isPublic;
+    private boolean isPublic = true;
     //only for private event
     private String eventPassword;
 
@@ -29,6 +29,7 @@ public class Event {
     private String link;
     //inperson:
     private LatLng location;
+
     private String actualLocationInString;
 
     private String desc;
@@ -230,9 +231,12 @@ public class Event {
         return this.eventPassword.equals(password);
     }
 
-//    public double calDistance(Location userLocation){
-//        return userLocation.distanceTo();
-//    }
+    public double calDistance(Location userLocation){
+        Location eventLocation = new Location("");
+        eventLocation.setLatitude(location.getLatitude());
+        eventLocation.setLongitude(location.getLongitude());
+        return userLocation.distanceTo(userLocation);
+    }
 
     public Boolean isPast(){
         Long endDate = getEndDate();
