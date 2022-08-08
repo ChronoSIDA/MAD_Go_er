@@ -53,12 +53,13 @@ public class HomeFragment extends Fragment {
 
         activity = (MainActivity) getActivity();
         //get all value from eventMap, and then get eventname from value
-        eventMap = activity.getEventMap();
-        nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
+
 
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
                     public void run() {
+                        eventMap = activity.getEventMap();
+                        nameTxt = ((MainActivity) getActivity()).getCurrentUserName();
                         setDataOnDelay();
                     }
                 },
