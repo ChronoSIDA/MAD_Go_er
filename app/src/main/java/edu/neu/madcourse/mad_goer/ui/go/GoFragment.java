@@ -54,6 +54,12 @@ public class GoFragment extends Fragment {
     private TextView textView_going;
     private TextView textView_saved;
     private TextView textView_past;
+    private LinearLayout tab_all_go;
+    private LinearLayout tab_all_host;
+    private LinearLayout tab_all_going;
+    private LinearLayout tab_all_saved;
+    private LinearLayout tab_all_past;
+
     private ImageView imageView_all;
     private ImageView imageView_host;
     private ImageView imageView_going;
@@ -83,6 +89,12 @@ public class GoFragment extends Fragment {
         textView_going = binding.tvGoingGo;
         textView_saved = binding.tvSavedGo;
         textView_past = binding.tvPastGo;
+        tab_all_go = binding.tabAllGo;
+        tab_all_host = binding.tabHostGo;
+        tab_all_going=binding.tabGoingGo;
+        tab_all_saved = binding.tabSavedGo;
+        tab_all_past=binding.tabPastGo;
+
 
         imageView_all = binding.imgAllGo;
         imageView_host = binding.imgHostGo;
@@ -91,7 +103,7 @@ public class GoFragment extends Fragment {
         imageView_past = binding.imgPastGo;
 
 
-        textView_all.setOnClickListener(new View.OnClickListener() {
+        tab_all_go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(0);
@@ -100,7 +112,7 @@ public class GoFragment extends Fragment {
                 imageView_all.setVisibility(View.VISIBLE);
             }
         });
-        textView_host.setOnClickListener(new View.OnClickListener() {
+        tab_all_host.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(1);
@@ -109,7 +121,7 @@ public class GoFragment extends Fragment {
                 imageView_host.setVisibility(View.VISIBLE);
             }
         });
-        textView_going.setOnClickListener(new View.OnClickListener() {
+        tab_all_going.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(2);
@@ -118,7 +130,7 @@ public class GoFragment extends Fragment {
                 imageView_going.setVisibility(View.VISIBLE);
             }
         });
-        textView_saved.setOnClickListener(new View.OnClickListener() {
+        tab_all_saved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(3);
@@ -127,7 +139,7 @@ public class GoFragment extends Fragment {
                 imageView_saved.setVisibility(View.VISIBLE);
             }
         });
-        textView_past.setOnClickListener(new View.OnClickListener() {
+        tab_all_past.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setUpRecyclerView(4);
