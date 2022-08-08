@@ -1,5 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -27,6 +30,7 @@ import java.util.HashMap;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
+import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
@@ -46,6 +50,9 @@ public class HomeFragment extends Fragment {
     private String[] eventNamesAutocomplete;
     private ArrayList<Event> eventList = new ArrayList<>();
     private Boolean autoStarted = false;
+    private Button btn_filter_home;
+    private View filterView;
+    private
 
 
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
@@ -56,6 +63,7 @@ public class HomeFragment extends Fragment {
 
         binding = Fragment1HomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        btn_filter_home = binding.btnFilterHome;
 
         activity = (MainActivity) getActivity();
         //get all value from eventMap, and then get eventname from value
@@ -127,6 +135,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btn_filter_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFiterAlertBox();
+
+            }
+        });
+
         return root;
     }
 
@@ -137,6 +153,19 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void openFiterAlertBox(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        final View view = factory.inflate(R.layout.filter_popup,null);
+        builder.setView(view);
+//        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+//            public void onClick(DialogInterface dialog, int which){
+//                dialog.dismiss();
+//            }
+//        });
+        builder.show();
     }
 
     public void setupeventlist() {
@@ -158,37 +187,37 @@ public class HomeFragment extends Fragment {
         EventAdapter eventAdapter;
         //convert the eventMap to arraylist to fit in the first parameter type
 
-            eventAdapter = new EventAdapter(list, getContext());
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-            recyclerView.setLayoutManager(linearLayoutManager);
-            recyclerView.setAdapter(eventAdapter);
-            recyclerView.setHasFixedSize(false);
-            recyclerView.setLayoutManager(layoutManager);
+        eventAdapter = new EventAdapter(list, getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(eventAdapter);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(layoutManager);
 
-            //added Jul14
-            //will auto show cardview from bottom
-            recyclerView.scrollToPosition(eventMap.size()-1);
+        //added Jul14
+        //will auto show cardview from bottom
+        recyclerView.scrollToPosition(eventMap.size()-1);
 
 
-            //when clicked something in recycleview(aka the event list), get the event id from the item clicked
-            //and pass the eventid to intent, and open new activity of(eventdetailactivity)
-            recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
-                @Override
-                public void onItemClick(View view, int position){
+        //when clicked something in recycleview(aka the event list), get the event id from the item clicked
+        //and pass the eventid to intent, and open new activity of(eventdetailactivity)
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position){
 
-                    Intent intent = new Intent(getContext(), EventDetailActivity.class);
-                    Collection<Event> values = eventMap.values();
-                    ArrayList<Event> eventList = new ArrayList<>(values);
+                Intent intent = new Intent(getContext(), EventDetailActivity.class);
+                Collection<Event> values = eventMap.values();
+                ArrayList<Event> eventList = new ArrayList<>(values);
 
-                    intent.putExtra("eventID", eventList.get(position).getEventID());
+                intent.putExtra("eventID", eventList.get(position).getEventID());
 
-                    intent.putExtra("nameTxt", nameTxt);
+                intent.putExtra("nameTxt", nameTxt);
 
-                    // public or private:
-                    if(eventList.get(position).isPublic()){
-                        startActivity(intent);
-                    } else {
-                        activity.verifyPassword(eventList.get(position), intent);
+                // public or private:
+                if(eventList.get(position).isPublic()){
+                    startActivity(intent);
+                } else {
+                    activity.verifyPassword(eventList.get(position), intent);
 //                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
 //                    alertDialog.setTitle("PASSWORD");
 //                    alertDialog.setMessage("Enter Password");
@@ -207,14 +236,19 @@ public class HomeFragment extends Fragment {
 //
 //                    alertDialog.setButton(());
 
-                    }
                 }
-                @Override
-                public void onLongItemClick(View view, int position){
+            }
+            @Override
+            public void onLongItemClick(View view, int position){
 
-                }
-            }));
-        }
+            }
+        }));
+    }
+
+    public void applyButtonOnCheck(){
+        // should in onCreate set listner
+        // private, public, in-person, virtual distance
+    }
 }
 
 
