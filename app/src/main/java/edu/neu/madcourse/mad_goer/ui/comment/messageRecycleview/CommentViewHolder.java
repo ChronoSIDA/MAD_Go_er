@@ -29,7 +29,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindThisData(Comment theMsgToBind) {
-        eventNameTV.setText(theMsgToBind.getEvent().getEventName());
+        eventNameTV.setText(theMsgToBind.getEventName());
         userIDTV.setText(theMsgToBind.getUser());
         postDateTV.setText(theMsgToBind.getTime().toString());
         commentTV.setText(theMsgToBind.getComment());
