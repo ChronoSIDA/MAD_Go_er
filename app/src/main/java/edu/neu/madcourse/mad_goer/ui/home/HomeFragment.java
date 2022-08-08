@@ -127,14 +127,18 @@ public class HomeFragment extends Fragment {
                 public void onItemClick(View view, int position){
 
                     Intent intent = new Intent(getContext(), EventDetailActivity.class);
-                    intent.putExtra("eventID", eventMap.get(position).getEventID());
+                    Collection<Event> values = eventMap.values();
+                    ArrayList<Event> eventList = new ArrayList<>(values);
+
+                    intent.putExtra("eventID", eventList.get(position).getEventID());
+
                     intent.putExtra("nameTxt", nameTxt);
 
                     // public or private:
-                    if(eventMap.get(position).isPublic()){
+                    if(eventList.get(position).isPublic()){
                         startActivity(intent);
                     } else {
-                        activity.verifyPassword(eventMap.get(position), intent);
+                        activity.verifyPassword(eventList.get(position), intent);
 //                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
 //                    alertDialog.setTitle("PASSWORD");
 //                    alertDialog.setMessage("Enter Password");

@@ -1,5 +1,7 @@
 package edu.neu.madcourse.mad_goer.messages;
 
+import android.location.Location;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -227,6 +229,10 @@ public class Event {
     public Boolean verifyPrivatePassword(String password){
         return this.eventPassword.equals(password);
     }
+
+//    public double calDistance(Location userLocation){
+//        return userLocation.distanceTo();
+//    }
 
     public Boolean isPast(){
         Long endDate = getEndDate();
