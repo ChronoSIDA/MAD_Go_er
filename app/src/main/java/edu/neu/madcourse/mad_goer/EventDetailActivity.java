@@ -224,7 +224,7 @@ public class EventDetailActivity extends AppCompatActivity {
         descriptionTV.setText(event.getDesc());
 
 
-        //star后加入该user的 saved list
+        //star后加入该user的12 saved list
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
