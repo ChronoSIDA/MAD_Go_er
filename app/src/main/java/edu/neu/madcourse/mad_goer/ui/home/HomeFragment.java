@@ -1,5 +1,6 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> eventResultAutocomplete = new ArrayList<>();
     private String[] eventNamesAutocomplete;
     private ArrayList<Event> eventList = new ArrayList<>();
+    private Boolean autoStarted = false;
 
 
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
@@ -72,6 +75,38 @@ public class HomeFragment extends Fragment {
         EditText autoCompleteEditText = binding.autoSearchTV;
         Handler handler = new Handler(Looper.getMainLooper());
 
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                eventNamesAutocomplete = activity.getAutoSearchList();
+                String temp = autoCompleteEditText.getText().toString().trim();
+                for(String listItem : eventNamesAutocomplete) {
+                    if (listItem.contains(temp)) {
+                        eventResultAutocomplete.add(listItem);
+                    }
+                }
+                System.out.println(eventResultAutocomplete);
+                //we have eventMap(key: eventID, value: event object)
+                //and we have array of eventNames eventResultAutocomplete
+
+                // TODO 1.append recyclerview
+                // TODO 2.clean eventResultAutocomplete after recyceler view is finished
+                ArrayList<Event> autoList = new ArrayList<>();
+                Collection<Event> values = eventMap.values();
+                for(int i = 0; i<eventResultAutocomplete.size();i++) {
+                    for (Event e : values) {
+                        if(e.getEventName().equals(eventResultAutocomplete.get(i))){
+                            autoList.add(e);
+                        }
+                    }
+                }
+                setupRecycleView(autoList);
+                eventResultAutocomplete.clear();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+            }
+        };
         autoCompleteEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,39 +120,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                handler.sendEmptyMessage(0);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(handler.hasMessages(0)){
-                            handler.removeCallbacksAndMessages(null);
-                        } else {
-                            eventNamesAutocomplete = activity.getAutoSearchList();
-                            String temp = autoCompleteEditText.getText().toString().trim();
-                            for(String listItem : eventNamesAutocomplete) {
-                                if (listItem.contains(temp)) {
-                                    eventResultAutocomplete.add(listItem);
-                                }
-                            }
-                            //we have eventMap(key: eventID, value: event object)
-                            //and we have array of eventNames eventResultAutocomplete
-
-                            // TODO 1.append recyclerview
-                            // TODO 2.clean eventResultAutocomplete after recyceler view is finished
-                            ArrayList<Event> autoList = new ArrayList<>();
-                            Collection<Event> values = eventMap.values();
-                            for(int i = 0; i<eventResultAutocomplete.size();i++) {
-                                for (Event e : values) {
-                                   if(e.getEventName().equals(eventResultAutocomplete.get(i))){
-                                       autoList.add(e);
-                                    }
-                                }
-                            }
-                            setupRecycleView(autoList);
-                            eventResultAutocomplete.clear();
-                        }
-                    }
-                }, 800);
+                handler.removeCallbacks(runnable);
+                handler.postDelayed(runnable, 500);
             }
         });
 
