@@ -357,6 +357,12 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         }else{
             event.setCapacity(Integer.parseInt(capacity.getText().toString()));
         }
+        String desc = event.getDesc();
+        if(!desc.equals("")) {
+            event.setDesc(descriptionTV.getText().toString());
+        }else{
+            event.setDesc("Waiting for Owner to add more description");
+        }
         return true;
     }
     //identify the event type by enum, and return the sticker associated with that type

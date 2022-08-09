@@ -48,7 +48,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<String> attendingList, int save, int capacity, int iconID) {
+    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<String> attendingList, int save, int capacity, int iconID, String description) {
         this.isValid = isValid;
         this.eventID = eventID;
         this.eventName = eventName;
@@ -67,6 +67,7 @@ public class Event {
         this.save = save;
         Capacity = capacity;
         this.iconID = iconID;
+        setDesc(description);
     }
 
 
