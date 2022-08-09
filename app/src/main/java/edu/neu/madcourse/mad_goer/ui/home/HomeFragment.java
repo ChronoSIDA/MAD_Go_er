@@ -163,11 +163,11 @@ public class HomeFragment extends Fragment {
         LayoutInflater factory = LayoutInflater.from(getActivity());
         final View view = factory.inflate(R.layout.filter_popup,null);
         builder.setView(view);
-        Boolean isPub = false;
-        Boolean isPri = false;
-        Boolean inPer = false;
-        Boolean vir = false;
-        Boolean dist= false;
+//        Boolean isPub = false;
+//        Boolean isPri = false;
+//        Boolean inPer = false;
+//        Boolean vir = false;
+//        Boolean dist= false;
 
         Button btn_apply = (Button) view.findViewById(R.id.btn_apply_filter);
         Button btn_cancel = (Button) view.findViewById(R.id.btn_cancel_filter);
@@ -247,23 +247,68 @@ public class HomeFragment extends Fragment {
         btn_apply.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //isPublic.isChecked();
               //  filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
+                // prepare a list for recycleview
+                Boolean haspublic = isPublic.isChecked();
+                Boolean hasprivate = isPrivate.isChecked();
+                Boolean hasinperson = inPerson.isChecked();
+                Boolean hasvirtual = virtual.isChecked();
+                Boolean checkeddistance = distance.isChecked();
+                int selectDistance = -1;
+                if(checkeddistance == true){
+                    selectDistance = findIntByProgress(prog);
+                }
+                ArrayList<Event> filteredList = filterByPreference(haspublic,hasprivate,hasinperson,hasvirtual,selectDistance);
+
+                //setupRecycleView(ArrayList<Event> list)
             }
         });
     }
 //TO DO: filter events by parameters
-    public void filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, Boolean distance, int progress){
-        int distanceRange = findIntByProgress(progress);
-        ArrayList<Event> filterList = new ArrayList<>();
+    public ArrayList<Event> filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, int selectDistance){
 
-        if (eventMap != null) {
-            Collection<Event> values = eventMap.values();
-            for (Event e : values) {
-                if (!e.isPast()){
-                    filterList.add(e);
+        ArrayList<Event> filteredList = new ArrayList<>(eventList);
+
+        // we already have eventList
+        if((isPublic == false && isPrivate == false) || (isPublic == true && isPrivate == true)){
+        //do nothing
+        }else if(isPublic == false) {
+            for (Event event : filteredList) {
+                if (event.isPublic()) {
+                    filteredList.remove(event);
+                }
+            }
+        }else if(isPrivate == false){
+            for (Event event : filteredList) {
+                if (!event.isPublic()) {
+                    filteredList.remove(event);
                 }
             }
         }
+
+        if((inPerson == false && virtual == false) || (inPerson == true && virtual == true)){
+            //do nothing
+        }else if(inPerson == false) {
+            for (Event event : filteredList) {
+                if (!event.isInPerson()) {
+                    filteredList.remove(event);
+                }
+            }
+        }else if(virtual == false){
+            for (Event event : filteredList) {
+                if (event.isInPerson()) {
+                    filteredList.remove(event);
+                }
+            }
+        }
+
+
+
+
+
+
+        return filteredList;
     }
 
     public int findIntByProgress(int progress){
@@ -331,7 +376,7 @@ public class HomeFragment extends Fragment {
 
         //added Jul14
         //will auto show cardview from bottom
-        recyclerView.scrollToPosition(list.size()-1);
+        //recyclerView.scrollToPosition(list.size());
 
 
         //when clicked something in recycleview(aka the event list), get the event id from the item clicked
