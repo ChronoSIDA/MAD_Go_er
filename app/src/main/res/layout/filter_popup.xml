@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.19999999" />
 
     <Button
         android:id="@+id/btn_cancel_filter"
@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="50dp"
         android:allowUndo="false"
         android:backgroundTint="@color/lightRed"
         android:text="Cancel"
@@ -158,11 +157,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:text="Value"
+            android:text="Distance/ miles"
             android:textAlignment="center"
             android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toEndOf="@+id/checkBox_distance_filter"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -173,7 +173,7 @@
             android:layout_height="17dp"
             android:layout_marginBottom="10dp"
             android:clickable="false"
-            android:max="10"
+            android:max="9"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBox_distance_filter"

@@ -247,7 +247,7 @@ public class HomeFragment extends Fragment {
         btn_apply.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
+              //  filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
             }
         });
     }
@@ -255,6 +255,7 @@ public class HomeFragment extends Fragment {
     public void filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, Boolean distance, int progress){
         int distanceRange = findIntByProgress(progress);
         ArrayList<Event> filterList = new ArrayList<>();
+
         if (eventMap != null) {
             Collection<Event> values = eventMap.values();
             for (Event e : values) {

@@ -39,7 +39,8 @@
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Comment"
+        android:textAlignment="center"
+        android:hint="Share a comment here about your event"
         app:layout_constraintBottom_toTopOf="@+id/btn_send_msg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
