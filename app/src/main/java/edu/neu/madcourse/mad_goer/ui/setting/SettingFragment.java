@@ -51,6 +51,7 @@ public class SettingFragment extends Fragment {
             }
         });
         button_emergencyCont = binding.buttonEmergencyContSetting;
+
         button_emergencyCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
