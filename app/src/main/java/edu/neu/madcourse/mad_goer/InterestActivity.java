@@ -85,6 +85,9 @@ public class InterestActivity extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btn_go_interest);
         skip = (TextView) findViewById(R.id.id_skip_interest);
+        if(!isLogin){
+            skip.setVisibility(View.INVISIBLE);
+        }
         music_cb = (CheckBox) findViewById(R.id.cbox_music_interest);
         edu_cb = (CheckBox) findViewById(R.id.cbox_edu_interest2);
         sports_cb = (CheckBox) findViewById(R.id.cbox_sport_interest);
