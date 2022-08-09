@@ -239,7 +239,9 @@ public class EventDetailActivity extends AppCompatActivity {
                         //todo: fix this: eventID is customized, here is adding new data rather than update data
                         databaseEventRef.child(eventID).setValue(event);
                         //add this event under the user, update current user in database
-                        currentUser.addEvent(eventID,"attending");
+
+                        currentUser.addEvent(eventID,"going");
+
                         databaseUserRef.child(currentUserName).setValue(currentUser);
 
                         Toast.makeText(EventDetailActivity.this,
@@ -256,7 +258,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     databaseEventRef.child(eventID).setValue(event);
 
                     //remove event from user attending list
-                    currentUser.removeEvent(eventID,"attending");
+                    currentUser.removeEvent(eventID,"going");
                     databaseUserRef.child(currentUserName).setValue(currentUser);
 
                     Toast.makeText(EventDetailActivity.this,

@@ -57,11 +57,25 @@ public class User {
         this.interestedTypeList.clear();
     }
     public void addEvent(String eventID, String eventStatus){
-        this.myEventList.put(eventID,eventStatus);
+        if(this.myEventList.get(eventID).contains(eventStatus)){
+
+        }else {
+            this.myEventList.put(eventID, eventStatus);
+        }
     }
 
     public void removeEvent(String eventID, String eventStatus){
-        this.myEventList.remove(eventID,eventStatus);
+        if(myEventList.get(eventID).equals(eventStatus)){
+            this.myEventList.remove(eventID,eventStatus);
+        }
+        else{
+            String value = this.myEventList.get(eventID);
+            if(value.contains(eventStatus)){
+                //strings are immutable, sent the value back to the string
+                value = value.replace(eventStatus,"");
+                this.myEventList.put(eventID,value);
+            }
+        }
     }
 
     public void addInterestType(EventType eventType){

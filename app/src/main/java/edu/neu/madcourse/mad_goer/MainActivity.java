@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity{
             listofEventLists.get(0).add(eventMap.get(key));
 
             //if value is "host", add eventobj to first list in listoflists
-            if (personalEventMap.get(key).equals("host")) {
+            if (personalEventMap.get(key).contains("host")) {
                 //eventmap里面没有3319pastevent
                 if(eventMap.get(key).isPast()){
                     listofEventLists.get(4).add(eventMap.get(key));
@@ -320,14 +320,14 @@ public class MainActivity extends AppCompatActivity{
                     listofEventLists.get(1).add(eventMap.get(key));
                 }
             }
-            if (personalEventMap.get(key).equals("going")) {
+            if (personalEventMap.get(key).contains("going")) {
                 if(eventMap.get(key).isPast()){
                     listofEventLists.get(4).add(eventMap.get(key));
                 }else {
                     listofEventLists.get(2).add(eventMap.get(key));
                 }
             }
-            if (personalEventMap.get(key).equals("saved")) {
+            if (personalEventMap.get(key).contains("saved")) {
                 if(eventMap.get(key).isPast()){
                     listofEventLists.get(4).add(eventMap.get(key));
                 }else {
