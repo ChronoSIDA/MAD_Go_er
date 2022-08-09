@@ -251,7 +251,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
+//TO DO: filter events by parameters
     public void filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, Boolean distance, int progress){
         int distanceRange = findIntByProgress(progress);
         ArrayList<Event> filterList = new ArrayList<>();
