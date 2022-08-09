@@ -220,6 +220,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 //if not full: Toast "Congratulations! Successfully Join!
                 //if full: Toast "Sorry, this event is full!"
 
+
                 if(!event.getAttendingList().contains(currentUser)){
                     if(event.getCapacity() > event.getAttendingList().size()){
                         //add user to event's attending list
@@ -232,7 +233,7 @@ public class EventDetailActivity extends AppCompatActivity {
                         Toast.makeText(EventDetailActivity.this,
                                 "Congratulations! You will GO to this event!", Toast.LENGTH_SHORT).show();
                         joinBtn.setText("Joined");
-                        attendingListTV.setText(attendingList(event));
+                        attendingListTV.setText(event.getAttendingList().toString() + currentUserName);
                     }else{
                         Toast.makeText(EventDetailActivity.this,
                                 "Sorry, this event is full. Try earlier next time!", Toast.LENGTH_SHORT).show();
@@ -248,7 +249,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     Toast.makeText(EventDetailActivity.this,
                             "Cancelled", Toast.LENGTH_SHORT).show();
                     joinBtn.setText("Go");
-                    attendingListTV.setText(attendingList(event));
+                    attendingListTV.setText(attendingList(event).replace(currentUserName, ""));
                 }
             }
         });
@@ -308,6 +309,4 @@ public class EventDetailActivity extends AppCompatActivity {
         }
         return attendinglist;
     }
-
-
 }
