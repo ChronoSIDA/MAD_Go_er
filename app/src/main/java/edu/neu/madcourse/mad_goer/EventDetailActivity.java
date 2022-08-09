@@ -236,7 +236,7 @@ public class EventDetailActivity extends AppCompatActivity {
                         Toast.makeText(EventDetailActivity.this,
                                 "Congratulations! You will GO to this event!", Toast.LENGTH_SHORT).show();
                         joinBtn.setText("Joined");
-                        attendingListTV.setText(event.getAttendingList().toString() + currentUserName);
+                        attendingListTV.setText(printAttendingList(event));
                     }else{
                         Toast.makeText(EventDetailActivity.this,
                                 "Sorry, this event is full. Try earlier next time!", Toast.LENGTH_SHORT).show();
@@ -253,8 +253,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     Toast.makeText(EventDetailActivity.this,
                             "Cancelled", Toast.LENGTH_SHORT).show();
                     joinBtn.setText("Go");
-                    String attendingListNames = printAttendingList(event);
-                    attendingListTV.setText(attendingListNames);
+                    attendingListTV.setText(printAttendingList(event));
                 }
             }
         });
