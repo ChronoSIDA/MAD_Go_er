@@ -245,6 +245,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     //remove user from event attending list
                     event.getAttendingList().remove(currentUserName);
                     databaseEventRef.child(eventID).setValue(event);
+
                     //remove event from user attending list
                     currentUser.removeEvent(eventID,"attending");
                     databaseUserRef.child(currentUserName).setValue(currentUser);
