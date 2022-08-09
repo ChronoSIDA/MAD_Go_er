@@ -331,7 +331,7 @@ public class HomeFragment extends Fragment {
 
         //added Jul14
         //will auto show cardview from bottom
-        recyclerView.scrollToPosition(eventMap.size()-1);
+        recyclerView.scrollToPosition(list.size()-1);
 
 
         //when clicked something in recycleview(aka the event list), get the event id from the item clicked
@@ -341,17 +341,15 @@ public class HomeFragment extends Fragment {
             public void onItemClick(View view, int position){
 
                 Intent intent = new Intent(getContext(), EventDetailActivity.class);
-                Collection<Event> values = eventMap.values();
-                ArrayList<Event> eventList = new ArrayList<>(values);
 
                 intent.putExtra("eventID", eventList.get(position).getEventID());
                 intent.putExtra("nameTxt", nameTxt);
 
                 // public or private:
-                if(eventList.get(position).isPublic()){
+                if(list.get(position).isPublic()){
                     startActivity(intent);
                 } else {
-                    activity.verifyPassword(eventList.get(position), intent);
+                    activity.verifyPassword(list.get(position), intent);
 //                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
 //                    alertDialog.setTitle("PASSWORD");
 //                    alertDialog.setMessage("Enter Password");

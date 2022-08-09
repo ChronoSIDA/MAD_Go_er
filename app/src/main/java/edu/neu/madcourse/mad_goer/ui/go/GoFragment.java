@@ -48,13 +48,14 @@ public class GoFragment extends Fragment {
     private String nameTxt;
     private HashMap<String,Event> eventMap = new HashMap<>();
     private Map<String,String> personalEventMap;
-    private ArrayList<ArrayList<Event>> listofEventLists;
+    private ArrayList<ArrayList<Event>> listofEventLists = new ArrayList<>();
     private RecyclerView recyclerView;
     private LinearLayout tabLayout;
     private EventAdapter eventAdapter;
     private LinearLayoutManager linearLayoutManager;
     private User currentUser;
     private LinearLayout linearLayout;
+    private int currentTab = 0;
 
     private TextView textView_all;
     private TextView textView_host;
@@ -80,7 +81,7 @@ public class GoFragment extends Fragment {
 
         binding = Fragment2GoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        
+
         recyclerView = binding.rvGofrag;
         tabLayout = binding.tabLayoutGo;
 
@@ -89,6 +90,7 @@ public class GoFragment extends Fragment {
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
                     public void run() {
+                        //eventmap saves all events
                         eventMap = activity.getEventMap();
                         nameTxt = activity.getCurrentUserName();
                         currentUser = activity.getCurrentUser();
@@ -120,20 +122,21 @@ public class GoFragment extends Fragment {
 
         //default display all or redirected from setting
         if(directFromSetting){
-            setUpRecyclerView(1);
+            currentTab = 1;
+            setUpRecyclerView(currentTab);
             changeBackToDefault();
             textView_host.setTextColor(getResources().getColor(R.color.lightRed));
             imageView_host.setVisibility(View.VISIBLE);
             directFromSetting = false;
             activity.setRedirectFromSetting();
         } else {
-            setUpRecyclerView(0);
+//            setUpRecyclerView(0);
         }
-
         tab_all_go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpRecyclerView(0);
+                currentTab = 0;
+                setUpRecyclerView(currentTab);
                 changeBackToDefault();
                 textView_all.setTextColor(getResources().getColor(R.color.lightRed));
                 imageView_all.setVisibility(View.VISIBLE);
@@ -142,7 +145,8 @@ public class GoFragment extends Fragment {
         tab_all_host.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpRecyclerView(1);
+                currentTab = 1;
+                setUpRecyclerView(currentTab);
                 changeBackToDefault();
                 textView_host.setTextColor(getResources().getColor(R.color.lightRed));
                 imageView_host.setVisibility(View.VISIBLE);
@@ -151,7 +155,8 @@ public class GoFragment extends Fragment {
         tab_all_going.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpRecyclerView(2);
+                currentTab = 2;
+                setUpRecyclerView(currentTab);
                 changeBackToDefault();
                 textView_going.setTextColor(getResources().getColor(R.color.lightRed));
                 imageView_going.setVisibility(View.VISIBLE);
@@ -160,7 +165,8 @@ public class GoFragment extends Fragment {
         tab_all_saved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpRecyclerView(3);
+                currentTab = 3;
+                setUpRecyclerView(currentTab);
                 changeBackToDefault();
                 textView_saved.setTextColor(getResources().getColor(R.color.lightRed));
                 imageView_saved.setVisibility(View.VISIBLE);
@@ -169,7 +175,8 @@ public class GoFragment extends Fragment {
         tab_all_past.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpRecyclerView(4);
+                currentTab = 4;
+                setUpRecyclerView(currentTab);
                 changeBackToDefault();
                 textView_past.setTextColor(getResources().getColor(R.color.lightRed));
                 imageView_past.setVisibility(View.VISIBLE);
@@ -195,10 +202,10 @@ public class GoFragment extends Fragment {
 
     public void setUpRecyclerView(int pos){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        if(listofEventLists != null && listofEventLists.get(0).size() > 0) {
-            eventAdapter = new EventAdapter(listofEventLists.get(pos), getContext());
-        }
-        linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+
+        ArrayList<Event> eventList = listofEventLists.get(pos);
+        eventAdapter = new EventAdapter(eventList, getContext());
+
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(eventAdapter);
         recyclerView.setHasFixedSize(false);
@@ -209,17 +216,14 @@ public class GoFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position){
-
+                ArrayList<Event> eventListOnTab = listofEventLists.get(currentTab);
                 Intent intent = new Intent(getContext(), EventDetailActivity.class);
-                Collection<Event> values = eventMap.values();
-                ArrayList<Event> eventList = new ArrayList<>(values);
 
-                intent.putExtra("eventID", eventList.get(position).getEventID());
-
+                intent.putExtra("eventID", eventListOnTab.get(position).getEventID());
                 intent.putExtra("nameTxt", nameTxt);
 
                 // public or private:
-                if(eventList.get(position).isPublic()){
+                if(eventListOnTab.get(position).isPublic()){
                     startActivity(intent);
                 } else {
 
