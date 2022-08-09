@@ -195,7 +195,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     event.setActualLocation(actualLocation);
                     //update user in fb, push event to db
                     databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);
-                    databaseEventRef.push().setValue(event);
+
+                    databaseEventRef.child(event.getEventID()).setValue(event);
                     Toast.makeText(CreateEventActivity.this, "Event created successfully", Toast.LENGTH_SHORT).show();
                     //or maybe go to detail page?
                     finish();

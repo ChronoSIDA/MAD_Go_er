@@ -173,7 +173,7 @@ public class EventDetailActivity extends AppCompatActivity {
         isPublicTV.setText(checkPublic(event));
         isVirtualTV.setText(checkVirtual(event));
         descriptionTV.setText(event.getDesc());
-        attendingListTV.setText(attendingList(event));
+        attendingListTV.setText(printAttendingList(event));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,6 +227,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     if(event.getCapacity() > event.getAttendingList().size()){
                         //add user to event's attending list
                         event.getAttendingList().add(currentUserName);
+                        //todo: fix this: eventID is customized, here is adding new data rather than update data
                         databaseEventRef.child(eventID).setValue(event);
                         //add this event under the user, update current user in database
                         currentUser.addEvent(eventID,"attending");
@@ -242,7 +243,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     }
                 }else{
                     //remove user from event attending list
-                    event.getAttendingList().remove(currentUser);
+                    event.getAttendingList().remove(currentUserName);
                     databaseEventRef.child(eventID).setValue(event);
                     //remove event from user attending list
                     currentUser.removeEvent(eventID,"attending");
@@ -251,7 +252,8 @@ public class EventDetailActivity extends AppCompatActivity {
                     Toast.makeText(EventDetailActivity.this,
                             "Cancelled", Toast.LENGTH_SHORT).show();
                     joinBtn.setText("Go");
-                    attendingListTV.setText(attendingList(event).replace(currentUserName, ""));
+                    String attendingListNames = printAttendingList(event);
+                    attendingListTV.setText(attendingListNames);
                 }
             }
         });
@@ -304,11 +306,13 @@ public class EventDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public String attendingList(Event event){
-        String attendinglist = "";
+    public String printAttendingList(Event event){
+
+        String attendingList = "";
+
         for(String username: event.getAttendingList()){
-            attendinglist += (username + " ");
+            attendingList += (username + " ");
         }
-        return attendinglist;
+        return attendingList;
     }
 }
