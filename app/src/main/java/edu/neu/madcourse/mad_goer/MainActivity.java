@@ -457,7 +457,6 @@ public class MainActivity extends AppCompatActivity{
         Button joinBtn = (Button) EventPopupView.findViewById(R.id.btn_join_passdialog);
         Button cancelBtn = (Button) EventPopupView.findViewById(R.id.btn_cancel_passdialog);
 
-        String userInputPassword = password.getText().toString();
         dialogBuilder.setView(EventPopupView);
         dialog= dialogBuilder.create();
         dialog.show();
@@ -465,9 +464,9 @@ public class MainActivity extends AppCompatActivity{
         joinBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                String userInputPassword = password.getText().toString();
                 if(event.verifyPrivatePassword(userInputPassword)) {
-
+                    dialog.dismiss();
                     Snackbar.make(view, "Password Correct!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     // add intent
