@@ -56,11 +56,22 @@ public class User {
     public void clearInterestList(){
         this.interestedTypeList.clear();
     }
-    public void addEvent(String eventID, String eventStatus){
-        if(this.myEventList.get(eventID).contains(eventStatus)){
 
-        }else {
+    public void addEvent(String eventID, String eventStatus) {
+
+        if (this.myEventList.get(eventID) == null) {
             this.myEventList.put(eventID, eventStatus);
+        } else {
+            //add going or hostgoing, saved
+            //host going is only added when create, going
+            if(this.myEventList.get(eventID).contains(eventStatus)) {
+                //do nothing
+            }else{
+                // do no contain new eventStatus
+                String value = this.myEventList.get(eventID);
+                value = value+eventStatus;
+                this.myEventList.put(eventID,value);
+            }
         }
     }
 
