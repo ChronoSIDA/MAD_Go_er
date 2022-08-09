@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -51,8 +54,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<Event> eventList = new ArrayList<>();
     private Button btn_filter_home;
     private View filterView;
-    private
-
+    private Button btn_cancel, btn_apply;
+    int prog;
 
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
@@ -155,16 +158,148 @@ public class HomeFragment extends Fragment {
     }
 
     public void openFiterAlertBox(){
+        AlertDialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater factory = LayoutInflater.from(getActivity());
         final View view = factory.inflate(R.layout.filter_popup,null);
         builder.setView(view);
+        Boolean isPub = false;
+        Boolean isPri = false;
+        Boolean inPer = false;
+        Boolean vir = false;
+        Boolean dist= false;
+
+        Button btn_apply = (Button) view.findViewById(R.id.btn_apply_filter);
+        Button btn_cancel = (Button) view.findViewById(R.id.btn_cancel_filter);
+
 //        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
 //            public void onClick(DialogInterface dialog, int which){
 //                dialog.dismiss();
 //            }
 //        });
-        builder.show();
+        CheckBox isPublic = (CheckBox)view.findViewById(R.id.id_radio_public_filter);
+        CheckBox isPrivate = (CheckBox) view.findViewById(R.id.id_radio_private_filter);
+        CheckBox inPerson = (CheckBox) view.findViewById(R.id.id_radio_inperson_filter);
+        CheckBox virtual = (CheckBox) view.findViewById(R.id.id_radio_virtual_filter);
+        CheckBox distance = (CheckBox) view.findViewById(R.id.checkBox_distance_filter);
+        SeekBar distanceBar = (SeekBar) view.findViewById(R.id.seekBar);
+        TextView seekBarText = (TextView) view.findViewById(R.id.seekBarText);
+        distanceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String distanceByProgress = "maximum distance.";
+                switch(progress){
+                    case 0:
+                        distanceByProgress = "1 miles.";
+                        break;
+                    case 1:
+                        distanceByProgress = "5 miles.";
+                        break;
+                    case 2:
+                        distanceByProgress = "10 miles.";
+                        break;
+                    case 3:
+                        distanceByProgress = "25 miles.";
+                        break;
+                    case 4:
+                        distanceByProgress = "50 miles.";
+                        break;
+                    case 5:
+                        distanceByProgress = "100 miles.";
+                        break;
+                    case 6:
+                        distanceByProgress = "200 miles.";
+                        break;
+                    case 7:
+                        distanceByProgress = "500 miles.";
+                        break;
+                    case 8:
+                        distanceByProgress = "1000 miles.";
+                        break;
+                    default:
+                        distanceByProgress = "maximum distance.";
+                        break;
+                }
+                prog = progress;
+                seekBarText.setText("Find Events within "+distanceByProgress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+        dialog= builder.create();
+        dialog.show();
+        btn_cancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        btn_apply.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
+            }
+        });
+    }
+
+    public void filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, Boolean distance, int progress){
+        int distanceRange = findIntByProgress(progress);
+        ArrayList<Event> filterList = new ArrayList<>();
+        if (eventMap != null) {
+            Collection<Event> values = eventMap.values();
+            for (Event e : values) {
+                if (!e.isPast()){
+                    filterList.add(e);
+                }
+            }
+        }
+    }
+
+    public int findIntByProgress(int progress){
+        int distanceByProgress;
+        switch(progress) {
+            case 0:
+                distanceByProgress = 1;
+                break;
+            case 1:
+                distanceByProgress = 5;
+                break;
+            case 2:
+                distanceByProgress = 10;
+                break;
+            case 3:
+                distanceByProgress = 25;
+                break;
+            case 4:
+                distanceByProgress = 50;
+                break;
+            case 5:
+                distanceByProgress = 100;
+                break;
+            case 6:
+                distanceByProgress = 200;
+                break;
+            case 7:
+                distanceByProgress = 500;
+                break;
+            case 8:
+                distanceByProgress = 1000;
+                break;
+            default:
+                distanceByProgress = Integer.MAX_VALUE;
+                break;
+        }
+        return distanceByProgress;
     }
 
     public void setupeventlist() {
@@ -243,6 +378,14 @@ public class HomeFragment extends Fragment {
             }
         }));
     }
+
+//    public int getProg(){
+//        return this.prog;
+//    }
+//
+//    public void setProg(int progress){
+//        this.prog = progress;
+//    }
 
     public void applyButtonOnCheck(){
         // should in onCreate set listner

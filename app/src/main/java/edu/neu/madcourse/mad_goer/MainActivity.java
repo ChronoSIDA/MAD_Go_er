@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+
     //saves all event from firebase
     //key is "eventID", value is Event
     private HashMap<String,Event> eventMap = new HashMap<>();
