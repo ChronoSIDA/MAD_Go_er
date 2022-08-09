@@ -72,6 +72,7 @@ public class GoFragment extends Fragment {
     private ImageView imageView_going;
     private ImageView imageView_saved;
     private ImageView imageView_past;
+    private Boolean directFromSetting = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -115,6 +116,19 @@ public class GoFragment extends Fragment {
         imageView_saved = binding.imgSavedGo;
         imageView_past = binding.imgPastGo;
 
+        directFromSetting = activity.ifRedirectFromSetting();
+
+        //default display all or redirected from setting
+        if(directFromSetting){
+            setUpRecyclerView(1);
+            changeBackToDefault();
+            textView_host.setTextColor(getResources().getColor(R.color.lightRed));
+            imageView_host.setVisibility(View.VISIBLE);
+            directFromSetting = false;
+            activity.setRedirectFromSetting();
+        } else {
+            setUpRecyclerView(0);
+        }
 
         tab_all_go.setOnClickListener(new View.OnClickListener() {
             @Override

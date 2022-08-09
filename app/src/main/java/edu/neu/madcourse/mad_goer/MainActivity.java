@@ -36,6 +36,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -70,6 +72,7 @@ import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
 import edu.neu.madcourse.mad_goer.LoginActivity;
+import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
 
 public class MainActivity extends AppCompatActivity{
     private NotificationManagerCompat notificationManagerCompat;
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity{
     private String currentUserName;
     public User currentUser;
     private ArrayList<ArrayList<Event>> listofEventLists = new ArrayList<>();
+    private Boolean directFromSetting = false;
 
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
@@ -503,13 +507,16 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void onClickMyHost(View view){
+        directFromSetting = true;
         currentMenuItemId = R.id.navigation_go;
         navController.navigate(R.id.navigation_go);
+    }
+    public Boolean ifRedirectFromSetting(){
+        return directFromSetting;
+    }
 
-        LinearLayout hostLayout = (LinearLayout) findViewById(R.id.tab_host_go);
-        if(hostLayout != null){
-            hostLayout.performClick();
-        }
+    public void setRedirectFromSetting(){
+        directFromSetting = false;
     }
 
 //    public void getAutoComplete(){
