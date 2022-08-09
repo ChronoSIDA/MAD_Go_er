@@ -1,6 +1,8 @@
 package edu.neu.madcourse.mad_goer.ui.go;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +23,20 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment2GoBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
+import edu.neu.madcourse.mad_goer.ui.recycleview.RecyclerItemClickListener;
 
 public class GoFragment extends Fragment {
 
@@ -39,7 +44,9 @@ public class GoFragment extends Fragment {
     private String timePattern = "yyyy-MM-dd HH:mm:ss z";
     private DateFormat df = new SimpleDateFormat(timePattern);
 
-
+    private MainActivity activity;
+    private String nameTxt;
+    private HashMap<String,Event> eventMap = new HashMap<>();
     private Map<String,String> personalEventMap;
     private ArrayList<ArrayList<Event>> listofEventLists;
     private RecyclerView recyclerView;
@@ -76,13 +83,19 @@ public class GoFragment extends Fragment {
         recyclerView = binding.rvGofrag;
         tabLayout = binding.tabLayoutGo;
 
-        MainActivity activity = (MainActivity) getActivity();
-        currentUser = activity.getCurrentUser();
-        //list is correct
-        listofEventLists = activity.getListofEventLists();
+        activity = (MainActivity) getActivity();
 
-        //default display all
-        setUpRecyclerView(0);
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
+                        eventMap = activity.getEventMap();
+                        nameTxt = activity.getCurrentUserName();
+                        currentUser = activity.getCurrentUser();
+                        listofEventLists = activity.getListofEventLists();
+                        setUpRecyclerView(0);
+                    }
+                },
+                300);
 
         textView_all = binding.tvAllGo;
         textView_host = binding.tvHostGo;
@@ -179,7 +192,53 @@ public class GoFragment extends Fragment {
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.scrollToPosition(listofEventLists.get(pos).size()-1);
+
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position){
+
+                Intent intent = new Intent(getContext(), EventDetailActivity.class);
+                Collection<Event> values = eventMap.values();
+                ArrayList<Event> eventList = new ArrayList<>(values);
+
+                intent.putExtra("eventID", eventList.get(position).getEventID());
+
+                intent.putExtra("nameTxt", nameTxt);
+
+                // public or private:
+                if(eventList.get(position).isPublic()){
+                    startActivity(intent);
+                } else {
+
+                    activity.verifyPassword(eventList.get(position), intent);
+//                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+//                    alertDialog.setTitle("PASSWORD");
+//                    alertDialog.setMessage("Enter Password");
+//                    final EditText input = new EditText(getActivity());
+//                    alertDialog.setView(input);
+//                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"CONFIRM",new View.OnClickListener(){
+//                        @Override
+//                        public void onClick(View view) {
+//                            if(input.getText().toString().equals(eventMap.get(position).getEventPassword()){
+//                                startActivity(intent);
+//                            }else{
+//
+//                            }
+//                        }
+//                    });
+//
+//                    alertDialog.setButton(());
+
+                }
+            }
+            @Override
+            public void onLongItemClick(View view, int position){
+
+            }
+        }));
     }
+
 
 
 
