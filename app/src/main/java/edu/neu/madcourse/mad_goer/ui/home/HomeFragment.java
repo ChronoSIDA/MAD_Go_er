@@ -345,7 +345,6 @@ public class HomeFragment extends Fragment {
                 ArrayList<Event> eventList = new ArrayList<>(values);
 
                 intent.putExtra("eventID", eventList.get(position).getEventID());
-
                 intent.putExtra("nameTxt", nameTxt);
 
                 // public or private:

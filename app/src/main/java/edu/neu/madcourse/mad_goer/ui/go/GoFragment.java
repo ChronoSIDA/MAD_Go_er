@@ -176,8 +176,6 @@ public class GoFragment extends Fragment {
             }
         });
 
-
-
         return root;
     }
 
