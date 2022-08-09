@@ -1,12 +1,14 @@
 package edu.neu.madcourse.mad_goer;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,9 @@ public class EventDetailActivity extends AppCompatActivity {
     private MainActivity mainActivity;
     private String currentUserName;
     private ImageButton saveBtn;
+    private ImageView picture;
+    private int iconID;
+
 
     //In event details activity, only need to access users in firebase to add joined event
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
@@ -144,6 +149,8 @@ public class EventDetailActivity extends AppCompatActivity {
         addressTV = (TextView) findViewById(R.id.id_location_detail);
         attendingListTV = (TextView) findViewById(R.id.id_goers_detail);
         descriptionTV = (TextView) findViewById(R.id.id_desc_detail);
+        picture = (ImageView) findViewById(R.id.img_categories);
+
 
 
 
@@ -166,7 +173,7 @@ public class EventDetailActivity extends AppCompatActivity {
         hostTV.setText("Host: " + event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
 //        timeTV.setText(event.getStartDate().toString());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm:ss:S");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
         timeTV.setText(simpleDateFormat.format(event.getStartDate()));
 
         categoryTV.setText(event.getCategory().toString());
@@ -174,6 +181,8 @@ public class EventDetailActivity extends AppCompatActivity {
         isVirtualTV.setText(checkVirtual(event));
         descriptionTV.setText(event.getDesc());
         attendingListTV.setText(printAttendingList(event));
+        addressTV.setText(location(event));
+        picture.setImageDrawable(getImageByType(event.getCategory().toString()));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -314,5 +323,108 @@ public class EventDetailActivity extends AppCompatActivity {
             attendingList += (username + " ");
         }
         return attendingList;
+    }
+
+    //identify the event type by enum, and return the sticker associated with that type
+    public Drawable getImageByType(String type){
+        Drawable typeImage;
+        if(type == null){
+            return null;
+        }
+
+        switch(type.toUpperCase()) {
+            case "SPORTS":
+                typeImage = getResources().getDrawable(R.drawable.sticker_sports);
+                iconID = R.drawable.sticker_sports;
+                break;
+            case "EDUCATION":
+                typeImage = getResources().getDrawable(R.drawable.sticker_education);
+                iconID = R.drawable.sticker_education;
+                break;
+            case "FITNESS":
+                typeImage = getResources().getDrawable(R.drawable.sticker_fitness);
+                iconID = R.drawable.sticker_fitness;
+                break;
+            case "TECHNOLOGY":
+                typeImage = getResources().getDrawable(R.drawable.sticker_technology);
+                iconID = R.drawable.sticker_technology;
+                break;
+            case "TRAVEL":
+                typeImage = getResources().getDrawable(R.drawable.sticker_travel);
+                iconID = R.drawable.sticker_travel;
+                break;
+            case "OUTDOOR":
+                typeImage = getResources().getDrawable(R.drawable.sticker_outdoor);
+                iconID = R.drawable.sticker_outdoor;
+                break;
+            case "GAMES":
+                typeImage = getResources().getDrawable(R.drawable.sticker_games);
+                iconID = R.drawable.sticker_games;
+                break;
+            case "ART":
+                typeImage = getResources().getDrawable(R.drawable.sticker_art);
+                iconID = R.drawable.sticker_art;
+                break;
+            case "CULTURE":
+                typeImage = getResources().getDrawable(R.drawable.sticker_culture);
+                iconID = R.drawable.sticker_culture;
+                break;
+            case "CAREER":
+                typeImage = getResources().getDrawable(R.drawable.sticker_career);
+                iconID = R.drawable.sticker_career;
+                break;
+            case "BUSINESS":
+                typeImage = getResources().getDrawable(R.drawable.sticker_business);
+                iconID = R.drawable.sticker_business;
+                break;
+            case "COMMUNITY":
+                typeImage = getResources().getDrawable(R.drawable.sticker_community);
+                iconID = R.drawable.sticker_community;
+                break;
+            case "DANCING":
+                typeImage = getResources().getDrawable(R.drawable.sticker_dancing);
+                iconID = R.drawable.sticker_dancing;
+                break;
+            case "HEALTH":
+                typeImage = getResources().getDrawable(R.drawable.sticker_health);
+                iconID = R.drawable.sticker_health;
+                break;
+            case "HOBBIES":
+                typeImage = getResources().getDrawable(R.drawable.sticker_hobbies);
+                iconID = R.drawable.sticker_hobbies;
+                break;
+            case "MOVEMENT":
+                typeImage = getResources().getDrawable(R.drawable.sticker_movement);
+                iconID = R.drawable.sticker_movement;
+                break;
+            case "LANGUAGE":
+                typeImage = getResources().getDrawable(R.drawable.sticker_language);
+                iconID = R.drawable.sticker_language;
+                break;
+            case "MUSIC":
+                typeImage = getResources().getDrawable(R.drawable.sticker_music);
+                iconID = R.drawable.sticker_music;
+                break;
+            case "FAMILY":
+                typeImage = getResources().getDrawable(R.drawable.sticker_family);
+                iconID = R.drawable.sticker_family;
+                break;
+            case "PETS":
+                typeImage = getResources().getDrawable(R.drawable.sticker_pets);
+                iconID = R.drawable.sticker_pets;
+                break;
+            case "RELIGION":
+                typeImage = getResources().getDrawable(R.drawable.sticker_religion);
+                iconID = R.drawable.sticker_religion;
+                break;
+            case "SCIENCE":
+                typeImage = getResources().getDrawable(R.drawable.sticker_science);
+                iconID = R.drawable.sticker_science;
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+        return typeImage;
     }
 }
