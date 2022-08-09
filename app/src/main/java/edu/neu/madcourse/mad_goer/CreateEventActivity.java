@@ -218,8 +218,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         time= (TextView) findViewById(R.id.id_time_create);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                showTimePickerDialog();
+            public void onClick(View v) {showTimePickerDialog();
             }
         });
         passwordTV=(EditText)findViewById(R.id.id_password_create);
