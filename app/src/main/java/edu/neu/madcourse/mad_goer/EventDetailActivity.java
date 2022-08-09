@@ -66,11 +66,13 @@ public class EventDetailActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         currentUserName = extras.getString("nameTxt");
         eventID = extras.getString("eventID");
+
         new android.os.Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
                     public void run() {
                         event = eventMap.get(eventID);
-                        retrieveDataDisplay();
+                        String temp = checkJoin(event, currentUser);
+                        retrieveDataDisplay(temp);
                     }
                 },
                 500);
@@ -159,8 +161,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
     }
 
-    public void retrieveDataDisplay(){
-        joinBtn.setText(checkJoin(event, currentUser));
+    public void retrieveDataDisplay(String joined){
+        joinBtn.setText(joined);
         hostTV.setText("Host: " + event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
 //        timeTV.setText(event.getStartDate().toString());
