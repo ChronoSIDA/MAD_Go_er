@@ -204,11 +204,13 @@ public class EventDetailActivity extends AppCompatActivity {
                 if(!currentUser.getSavedEventList().containsKey(eventID)){
                     currentUser.addEvent(eventID, "saved");
                     databaseUserRef.child(currentUserName).setValue(currentUser);
+                    saveBtn.setImageDrawable(getDrawable(R.drawable.ic_save_star_highlight));
                     Toast.makeText(EventDetailActivity.this,
                             "Saved!", Toast.LENGTH_SHORT).show();
                 }else{
                     currentUser.removeEvent(eventID,"saved");
                     databaseUserRef.child(currentUserName).setValue(currentUser);
+                    saveBtn.setImageDrawable(getDrawable(R.drawable.ic_save_star));
                     Toast.makeText(EventDetailActivity.this,
                             "You don't like it any more!", Toast.LENGTH_SHORT).show();
                 }
