@@ -71,7 +71,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         event = eventMap.get(eventID);
-                        String temp = checkJoin(event, currentUser);
+                        String temp = checkJoin(event, currentUserName);
                         retrieveDataDisplay(temp);
                     }
                 },
@@ -222,11 +222,11 @@ public class EventDetailActivity extends AppCompatActivity {
                 //if not full: Toast "Congratulations! Successfully Join!
                 //if full: Toast "Sorry, this event is full!"
 
-
-                if(!event.getAttendingList().contains(currentUser)){
+                //
+                if(!event.getAttendingList().contains(currentUserName)){
                     if(event.getCapacity() > event.getAttendingList().size()){
                         //add user to event's attending list
-                        event.getAttendingList().add(currentUser);
+                        event.getAttendingList().add(currentUserName);
                         databaseEventRef.child(eventID).setValue(event);
                         //add this event under the user, update current user in database
                         currentUser.addEvent(eventID,"attending");
@@ -259,8 +259,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
 
     //check joined
-    public String checkJoin(Event event, User user){
-        if(event.getAttendingList().contains(user)){
+    public String checkJoin(Event event, String userName){
+        if(event.getAttendingList().contains(userName)){
             return "Joined";
         }else{
             return "GO";
@@ -306,8 +306,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
     public String attendingList(Event event){
         String attendinglist = "";
-        for(User user: event.getAttendingList()){
-            attendinglist += (user.getUserID() + " ");
+        for(String username: event.getAttendingList()){
+            attendinglist += (username + " ");
         }
         return attendinglist;
     }

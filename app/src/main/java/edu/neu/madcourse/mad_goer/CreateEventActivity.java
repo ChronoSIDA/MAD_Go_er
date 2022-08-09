@@ -191,7 +191,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     //add event to user, add user to event
                     currentUser.addEvent(event.getEventID(), "host");
                     currentUser.addEvent(event.getEventID(), "going");
-                    event.addUserToAttendingList(currentUser);
+                    event.addUserToAttendingList(currentUserName);
                     event.setActualLocation(actualLocation);
                     //update user in fb, push event to db
                     databaseUserRef.child(currentUser.getUserID()).setValue(currentUser);

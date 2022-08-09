@@ -39,13 +39,16 @@ public class Event {
     private int duration;
     private int iconID;
 
+    private ArrayList<String> attendingList = new ArrayList<>();
+    private int save;
+
     //to link host
     private User host;
 
     public Event() {
     }
 
-    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<User> attendingList, int save, int capacity, int iconID) {
+    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<String> attendingList, int save, int capacity, int iconID) {
         this.isValid = isValid;
         this.eventID = eventID;
         this.eventName = eventName;
@@ -66,8 +69,7 @@ public class Event {
         this.iconID = iconID;
     }
 
-    private ArrayList<User> attendingList = new ArrayList<>();
-    private int save;
+
 
     public Boolean getIsValid() {
         return isValid;
@@ -77,8 +79,8 @@ public class Event {
         this.isValid = isValid;
     }
 
-    public void addUserToAttendingList(User user){
-        this.attendingList.add(user);
+    public void addUserToAttendingList(String userName){
+        this.attendingList.add(userName);
     }
 
     public String getEventID() {
@@ -185,11 +187,11 @@ public class Event {
         this.host = host;
     }
 
-    public ArrayList<User> getAttendingList() {
+    public ArrayList<String> getAttendingList() {
         return attendingList;
     }
 
-    public void setAttendingList(ArrayList<User> attendingList) {
+    public void setAttendingList(ArrayList<String> attendingList) {
         this.attendingList = attendingList;
     }
 
