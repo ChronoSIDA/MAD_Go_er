@@ -144,6 +144,66 @@ public class EventDetailActivity extends AppCompatActivity {
         descriptionTV = (TextView) findViewById(R.id.id_desc_detail);
 
 
+
+//        joinBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                //Logic: This part aims to add the event as "attending" under current currentUser in firebase
+////                //TODO: test if currentUser in firebase has updated its eventmap
+////                // Get a reference to our posts
+////                DatabaseReference ref = databaseUserRef.child(currentUserName);
+////                Map<String,Object> userUpdates = new HashMap<>();
+////                userUpdates.put(eventID,"attending");
+////                ref.push().setValue(userUpdates);
+
+
+    }
+
+    public void retrieveDataDisplay(){
+        joinBtn.setText(checkJoin(event, currentUser));
+        hostTV.setText("Host: " + event.getHost().getUserID());
+        eventNameTV.setText(event.getEventName());
+//        timeTV.setText(event.getStartDate().toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm:ss:S");
+        timeTV.setText(simpleDateFormat.format(event.getStartDate()));
+
+        categoryTV.setText(event.getCategory().toString());
+        isPublicTV.setText(checkPublic(event));
+        isVirtualTV.setText(checkVirtual(event));
+        descriptionTV.setText(event.getDesc());
+        attendingListTV.setText(attendingList(event));
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+//                        "If you leave right now, no changes will be saved, do you confirm to continue?", Snackbar.LENGTH_LONG);
+//                snackbar.setAction("Confirm", view -> {
+//                    snackbar.dismiss();
+                    finish();
+//                });
+//                snackbar.show();
+            }
+        });
+
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!currentUser.getSavedEventList().containsKey(eventID)){
+                    currentUser.addEvent(eventID, "saved");
+                    databaseUserRef.child(currentUserName).setValue(currentUser);
+                    Toast.makeText(EventDetailActivity.this,
+                            "Saved!", Toast.LENGTH_SHORT).show();
+                }else{
+                    currentUser.removeEvent(eventID,"saved");
+                    databaseUserRef.child(currentUserName).setValue(currentUser);
+                    Toast.makeText(EventDetailActivity.this,
+                            "You don't like it any more!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,6 +232,7 @@ public class EventDetailActivity extends AppCompatActivity {
                         Toast.makeText(EventDetailActivity.this,
                                 "Congratulations! You will GO to this event!", Toast.LENGTH_SHORT).show();
                         joinBtn.setText("Joined");
+                        attendingListTV.setText(attendingList(event));
                     }else{
                         Toast.makeText(EventDetailActivity.this,
                                 "Sorry, this event is full. Try earlier next time!", Toast.LENGTH_SHORT).show();
@@ -187,54 +248,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     Toast.makeText(EventDetailActivity.this,
                             "Cancelled", Toast.LENGTH_SHORT).show();
                     joinBtn.setText("Go");
-                }
-            }
-        });
-
-    }
-
-    public void retrieveDataDisplay(){
-        joinBtn.setText(checkJoin(event, currentUser));
-
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                        "If you leave right now, no changes will be saved, do you confirm to continue?", Snackbar.LENGTH_LONG);
-                snackbar.setAction("Confirm", view -> {
-                    snackbar.dismiss();
-                    finish();
-                });
-                snackbar.show();
-            }
-        });
-
-
-        hostTV.setText("Host: " + event.getHost().getUserID());
-        eventNameTV.setText(event.getEventName());
-//        timeTV.setText(event.getStartDate().toString());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm:ss:S");
-        timeTV.setText(simpleDateFormat.format(event.getStartDate()));
-
-        categoryTV.setText(event.getCategory().toString());
-        isPublicTV.setText(checkPublic(event));
-        isVirtualTV.setText(checkVirtual(event));
-//        addressTV.setText(location(event));
-        attendingListTV.setText(attendingList(event));
-        descriptionTV.setText(event.getDesc());
-
-
-        //star后加入该user的12 saved list
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!currentUser.getSavedEventList().containsKey(eventID)){
-                    currentUser.addEvent(eventID, "saved");
-                    databaseUserRef.child(currentUserName).setValue(currentUser);
-                }else{
-                    currentUser.removeEvent(eventID,"saved");
-                    databaseUserRef.child(currentUserName).setValue(currentUser);
+                    attendingListTV.setText(attendingList(event));
                 }
             }
         });
@@ -290,7 +304,7 @@ public class EventDetailActivity extends AppCompatActivity {
     public String attendingList(Event event){
         String attendinglist = "";
         for(User user: event.getAttendingList()){
-            attendinglist += (", " + user.getUserID());
+            attendinglist += (user.getUserID() + " ");
         }
         return attendinglist;
     }

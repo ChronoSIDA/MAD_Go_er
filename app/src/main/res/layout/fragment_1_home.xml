@@ -9,9 +9,11 @@
 
     <EditText
         android:id="@+id/autoSearchTV"
-        android:layout_width="325dp"
+        android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:drawableLeft="@drawable/quantum_ic_search_grey600_24"
         android:ems="10"
         android:hint="Search"
@@ -20,16 +22,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-    </EditText>
+        app:layout_constraintVertical_bias="0.0"></EditText>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_homefrag"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +41,11 @@
 
     <Button
         android:id="@+id/btn_filter_home"
-        android:layout_width="325dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/lightOrange"
         android:text="Filters"
