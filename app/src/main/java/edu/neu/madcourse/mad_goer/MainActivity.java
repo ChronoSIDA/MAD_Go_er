@@ -1,43 +1,36 @@
 package edu.neu.madcourse.mad_goer;
 
-import android.app.Fragment;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.Editable;
-import android.text.Layout;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -57,7 +50,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,9 +62,6 @@ import edu.neu.madcourse.mad_goer.databinding.ActivityMainBinding;
 import edu.neu.madcourse.mad_goer.messages.Event;
 import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
-import edu.neu.madcourse.mad_goer.ui.go.GoFragment;
-import edu.neu.madcourse.mad_goer.LoginActivity;
-import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
 
 public class MainActivity extends AppCompatActivity{
     private NotificationManagerCompat notificationManagerCompat;
@@ -193,9 +182,13 @@ public class MainActivity extends AppCompatActivity{
         databaseEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Event newevent = snapshot.getValue(Event.class);
+                Event newEvent = snapshot.getValue(Event.class);
                 //if newevent !past
-                    eventMap.put(newevent.getEventID(),newevent);
+                    eventMap.put(newEvent.getEventID(),newEvent);
+                //This is for sending notification when a new event is created
+                if (currentUser.getInterestedTypeList().contains(newEvent.getCategory().toString())) {
+                    sendNotification(newEvent);
+                }
 
             }
 
@@ -256,6 +249,7 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
+
 
 
     }
@@ -550,4 +544,111 @@ public class MainActivity extends AppCompatActivity{
         }
         return eventNamesAutocomplete;
     }
+
+    public void sendNotification(Event newEvent){
+//        LayoutInflater layoutInflater =LayoutInflater.from(this);
+//        View v = (View) this.findViewById(R.id.activity)
+
+        String channel = NotiApplication.CHANNEL_1_ID;
+        String title = "New Event has been posted";
+        String message = "You might be interested in " + newEvent.getEventName();
+
+
+        Bitmap bigIcon = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                getImageByType(newEvent.getCategory().toString()));
+
+        Notification notification = new NotificationCompat.Builder(this, channel)
+                .setSmallIcon(R.drawable.ic_action_go_red)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(bigIcon)
+                        .bigLargeIcon(null))
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(1, notification);
+    }
+
+    public int getImageByType(String type){
+        int typeImage;
+        if(type == null){
+            return R.drawable.sticker_education;
+        }
+        switch(type.toUpperCase()) {
+            case "SPORTS":
+                typeImage = R.drawable.sticker_sports;
+                break;
+            case "EDUCATION":
+                typeImage = R.drawable.sticker_education;
+                break;
+            case "FITNESS":
+                typeImage = R.drawable.sticker_fitness;
+                break;
+            case "TECHNOLOGY":
+                typeImage = R.drawable.sticker_technology;
+                break;
+            case "TRAVEL":
+                typeImage = R.drawable.sticker_travel;
+                break;
+            case "OUTDOOR":
+                typeImage = R.drawable.sticker_outdoor;
+                break;
+            case "GAMES":
+                typeImage = R.drawable.sticker_games;
+                break;
+            case "ART":
+                typeImage = R.drawable.sticker_art;
+                break;
+            case "CULTURE":
+                typeImage = R.drawable.sticker_culture;
+                break;
+            case "CAREER":
+                typeImage = R.drawable.sticker_career;
+                break;
+            case "BUSINESS":
+                typeImage = R.drawable.sticker_business;
+                break;
+            case "COMMUNITY":
+                typeImage = R.drawable.sticker_community;
+                break;
+            case "DANCING":
+                typeImage = R.drawable.sticker_dancing;
+                break;
+            case "HEALTH":
+                typeImage = R.drawable.sticker_health;
+                break;
+            case "HOBBIES":
+                typeImage = R.drawable.sticker_hobbies;
+                break;
+            case "MOVEMENT":
+                typeImage = R.drawable.sticker_movement;
+                break;
+            case "LANGUAGE":
+                typeImage = R.drawable.sticker_language;
+                break;
+            case "MUSIC":
+                typeImage = (R.drawable.sticker_music);
+                break;
+            case "FAMILY":
+                typeImage = (R.drawable.sticker_family);
+                break;
+            case "PETS":
+                typeImage = (R.drawable.sticker_pets);
+                break;
+            case "RELIGION":
+                typeImage = (R.drawable.sticker_religion);
+                break;
+            case "SCIENCE":
+                typeImage = (R.drawable.sticker_science);
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+        return typeImage;
+    }
+
 }

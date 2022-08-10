@@ -357,9 +357,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         }else{
             event.setCapacity(Integer.parseInt(capacity.getText().toString()));
         }
-        String desc = event.getDesc();
+        String desc = descriptionTV.getText().toString();
         if(!desc.equals("")) {
-            event.setDesc(descriptionTV.getText().toString());
+            event.setDesc(desc);
         }else{
             event.setDesc("Waiting for Owner to add more description");
         }
