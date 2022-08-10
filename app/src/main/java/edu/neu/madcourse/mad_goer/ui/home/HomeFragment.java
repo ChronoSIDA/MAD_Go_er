@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -178,11 +180,75 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
         CheckBox isPublic = (CheckBox)view.findViewById(R.id.id_radio_public_filter);
+        isPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked){
+
+                }else{
+
+                }
+
+            }
+        });
         CheckBox isPrivate = (CheckBox) view.findViewById(R.id.id_radio_private_filter);
+        isPrivate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked){
+
+                }else{
+
+                }
+
+            }
+        });
         CheckBox inPerson = (CheckBox) view.findViewById(R.id.id_radio_inperson_filter);
+        inPerson.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked){
+
+                }else{
+
+                }
+
+            }
+        });
         CheckBox virtual = (CheckBox) view.findViewById(R.id.id_radio_virtual_filter);
+        virtual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked){
+
+                }else{
+
+                }
+
+            }
+        });
         CheckBox distance = (CheckBox) view.findViewById(R.id.checkBox_distance_filter);
         SeekBar distanceBar = (SeekBar) view.findViewById(R.id.seekBar);
+        distanceBar.setEnabled(false);
+        distanceBar.setClickable(false);
+        distance.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked){
+                    distanceBar.setEnabled(true);
+                    distanceBar.setClickable(true);
+                }else{
+                    distanceBar.setEnabled(false);
+                    distanceBar.setClickable(false);
+                }
+
+            }
+        });
         TextView seekBarText = (TextView) view.findViewById(R.id.seekBarText);
         distanceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
@@ -224,6 +290,7 @@ public class HomeFragment extends Fragment {
                 seekBarText.setText("Find Events within "+distanceByProgress);
             }
 
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
@@ -234,7 +301,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
 
         dialog= builder.create();
         dialog.show();

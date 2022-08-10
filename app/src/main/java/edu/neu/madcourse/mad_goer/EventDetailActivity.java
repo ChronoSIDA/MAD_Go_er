@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private ImageButton saveBtn;
     private ImageView picture;
     private int iconID;
+    private ProgressBar progressBar;
 
 
     //In event details activity, only need to access users in firebase to add joined event
@@ -150,8 +152,8 @@ public class EventDetailActivity extends AppCompatActivity {
         attendingListTV = (TextView) findViewById(R.id.id_goers_detail);
         descriptionTV = (TextView) findViewById(R.id.id_desc_detail);
         picture = (ImageView) findViewById(R.id.img_categories);
-
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
 
 //        joinBtn.setOnClickListener(new View.OnClickListener() {
@@ -269,6 +271,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        progressBar.setVisibility(View.GONE);
     }
 
 
