@@ -123,15 +123,15 @@ public class GoFragment extends Fragment {
         //default display all or redirected from setting
         if(directFromSetting){
             currentTab = 1;
+            listofEventLists = activity.getListofEventLists();
             setUpRecyclerView(currentTab);
             changeBackToDefault();
             textView_host.setTextColor(getResources().getColor(R.color.lightRed));
             imageView_host.setVisibility(View.VISIBLE);
             directFromSetting = false;
             activity.setRedirectFromSetting();
-        } else {
-//            setUpRecyclerView(0);
         }
+
         tab_all_go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,7 +200,7 @@ public class GoFragment extends Fragment {
         imageView_past.setVisibility(View.INVISIBLE);
     }
 
-    public void setUpRecyclerView(int pos){
+    public void setUpRecyclerView(int pos) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         ArrayList<Event> eventList = listofEventLists.get(pos);
