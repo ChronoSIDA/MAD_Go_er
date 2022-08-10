@@ -175,9 +175,8 @@ public class EventDetailActivity extends AppCompatActivity {
         hostTV.setText(event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
 //        timeTV.setText(event.getStartDate().toString());
-        SimpleDateFormat simpleDateFormatStart = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
-        SimpleDateFormat simpleDateFormatEnd = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
-        timeTV.setText(simpleDateFormatStart.format(event.getStartDate()) + "- " + simpleDateFormatEnd);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
+        timeTV.setText(simpleDateFormat.format(event.getStartDate()) + " - " + simpleDateFormat.format(event.getEndDate()));
 
         categoryTV.setText(event.getCategory().toString());
         isPublicTV.setText(checkPublic(event));
@@ -274,6 +273,7 @@ public class EventDetailActivity extends AppCompatActivity {
         });
         progressBar.setVisibility(View.GONE);
     }
+
 
 
     //check joined
