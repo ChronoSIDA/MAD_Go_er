@@ -407,17 +407,27 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if(!newEventName.getText().toString().equals("") && !newEventType.equals("Choose A Category")) {
-                    dialog.dismiss();
-                    isCreated = true;
+                    if(newEventName.getText().toString().contains(",") || newEventName.getText().toString().contains(".") ||
+                            newEventName.getText().toString().contains("#") ||
+                            newEventName.getText().toString().contains("$") ||
+                            newEventName.getText().toString().contains("[") ||
+                            newEventName.getText().toString().contains("]") ||
+                            newEventName.getText().toString().contains("/")){
+                        Toast toast = Toast.makeText(getApplicationContext(), "Event name cannot contain the following: \n '/', '.', '#', '$', '[', or ']'", Toast.LENGTH_LONG);
+                        toast.show();
+                    } else {
+                        dialog.dismiss();
+                        isCreated = true;
 
 //                    addNewEvent(newEventName.getText().toString(), newEventType);
-                    Snackbar.make(mainView, "Event created successfully", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).setAnchorView(navView).show();
-                    Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
-                    switchActivityIntent.putExtra("nameTxt", currentUserName);
-                    switchActivityIntent.putExtra("eventName", newEventName.getText().toString());
-                    switchActivityIntent.putExtra("eventType", newEventType);
-                    startActivity(switchActivityIntent);
+                        Snackbar.make(mainView, "Event created successfully", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).setAnchorView(navView).show();
+                        Intent switchActivityIntent = new Intent(MainActivity.this, CreateEventActivity.class);
+                        switchActivityIntent.putExtra("nameTxt", currentUserName);
+                        switchActivityIntent.putExtra("eventName", newEventName.getText().toString());
+                        switchActivityIntent.putExtra("eventType", newEventType);
+                        startActivity(switchActivityIntent);
+                    }
 
                 }else if(newEventName.getText().toString().equals("")){
                     Toast toast = Toast.makeText(getApplicationContext(), "Please enter a name for your event.", Toast.LENGTH_LONG);

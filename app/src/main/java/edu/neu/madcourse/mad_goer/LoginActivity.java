@@ -73,7 +73,16 @@ public class LoginActivity extends AppCompatActivity{
                                     Toast.makeText(LoginActivity.this,"Username cannot be empty",Toast.LENGTH_SHORT).show();
                                 } else if(nameTxt.length() < 3 || nameTxt.length() > 10){
                                     Toast.makeText(LoginActivity.this,"Username length cannot be less than 3 characters \nUsername length cannot be longer than 10 characters",Toast.LENGTH_LONG).show();
-                                } else {
+                                } else if(nameTxt.contains(",") || nameTxt.contains(".") ||
+                                        nameTxt.contains("#") ||
+                                        nameTxt.contains("$") ||
+                                        nameTxt.contains("[") ||
+                                        nameTxt.contains("]") ||
+                                        nameTxt.contains("/") ||
+                                        nameTxt.contains(" ")){
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Username cannot contain the following: \n '/', '.', '#', '$', '[', ']', or ' '", Toast.LENGTH_LONG);
+                                    toast.show();
+                                }  else {
                                     currentUser = new User(nameTxt);
 
                                     //added a user object to database under Users
