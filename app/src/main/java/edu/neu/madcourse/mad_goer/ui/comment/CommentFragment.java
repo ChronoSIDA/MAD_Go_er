@@ -1,6 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.comment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +12,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import edu.neu.madcourse.mad_goer.databinding.Fragment3CommentBinding;
 import edu.neu.madcourse.mad_goer.MainActivity;
@@ -39,13 +44,13 @@ public class CommentFragment extends Fragment {
     private Event event;
     private Spinner eventSpinner;
     private String currentUserName;
-    private User currentUser;
+    MainActivity activity;
     private ArrayAdapter<String> spinnerArrayAdapter;
 
     DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
 
     private RecyclerView recyclerView;
-    private ArrayList<Comment> comments;
+    private ArrayList<Comment> commentList = new ArrayList<>();
 
     public CommentFragment() {
     }
@@ -55,20 +60,41 @@ public class CommentFragment extends Fragment {
 
         binding = Fragment3CommentBinding.inflate(inflater, container, false);
         sendBtn = binding.btnSendMsg;
-        recyclerView = binding.recyclerView;
+        recyclerView = binding.recyclerViewComment;
         commentTV = binding.editCommentComment;
         eventSpinner = binding.idEventNameComment;
         View root = binding.getRoot();
-        MainActivity activity = (MainActivity) getActivity();
+        activity = (MainActivity) getActivity();
 
-        comments = new ArrayList<>();
-//        Date datetest = new Date();
-//        Comment test = new Comment("this is a comment","myuserid", datetest,"eventname");
-//        comments.add(test);
+        databaseCommentRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Comment mycomment  = snapshot.getValue(Comment.class);
+                commentList.add(mycomment);
+                System.out.println(commentList);
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
 
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                Comment comment  = snapshot.getValue(Comment.class);
+                commentList.remove(comment);
+            }
 
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -88,13 +114,15 @@ public class CommentFragment extends Fragment {
 //        }
 
 //        ArrayAdapter<Event> dataAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, event_list);
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+        new Handler(Looper.getMainLooper()).postDelayed(
                 new Runnable() {
                     public void run() {
-                        currentUser = activity.getCurrentUser();
                         currentUserName = activity.getCurrentUserName();
+                        //spinnerarrayadapter get event names
                         spinnerArrayAdapter = activity.getArrayAdapter();
-                        setUpAdapter();
+                        setUpSpinnerAdapter();
+                        //set up rv display comment list
+                        setUpRecycleViewComment(commentList);
                     }
                 },
                 300);
@@ -102,11 +130,21 @@ public class CommentFragment extends Fragment {
         return root;
     }
 
-    private void setUpAdapter(){
+
+
+    public void setUpRecycleViewComment(ArrayList<Comment> list){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setHasFixedSize(true);
+        CommentAdapter commentAdapter = new CommentAdapter(list,getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(commentAdapter);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new CommentAdapter(comments, getContext()));
+
+    }
+
+
+    private void setUpSpinnerAdapter(){
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eventSpinner.setAdapter(spinnerArrayAdapter);
 
@@ -118,8 +156,10 @@ public class CommentFragment extends Fragment {
             Snackbar.make(getView(), "Please leave a comment.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }else {
-            Date timestamp = Calendar.getInstance().getTime();
-            Comment newComment = new Comment(thisComment, currentUserName, timestamp, (String) eventSpinner.getSelectedItem());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            Long nowStamp = timestamp.getTime();
+            //String commentTime = timestamp.toString();
+            Comment newComment = new Comment(thisComment, currentUserName, nowStamp, (String) eventSpinner.getSelectedItem());
             //push this new comment to database
             databaseCommentRef.push().setValue(newComment);
         }

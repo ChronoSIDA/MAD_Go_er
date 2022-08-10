@@ -175,7 +175,7 @@ public class EventDetailActivity extends AppCompatActivity {
         hostTV.setText(event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
 //        timeTV.setText(event.getStartDate().toString());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, MMM dd, Y | hh:mm a z");
         timeTV.setText(simpleDateFormat.format(event.getStartDate()) + " - " + simpleDateFormat.format(event.getEndDate()));
 
         categoryTV.setText(event.getCategory().toString());
