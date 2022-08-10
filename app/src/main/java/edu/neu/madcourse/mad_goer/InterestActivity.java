@@ -73,7 +73,6 @@ public class InterestActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
-                System.out.println(user);
             }
 
             @Override
@@ -466,7 +465,6 @@ public class InterestActivity extends AppCompatActivity {
                     user.addInterestType(EventType.RELIGION);
                 }
 
-                System.out.println(user.getInterestedTypeList());
 
                 //after checking all this, user should also be updated in firebase
                 databaseReference.child("User").child(user.getUserID()).setValue(user);

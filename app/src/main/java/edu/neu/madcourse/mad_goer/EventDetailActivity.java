@@ -91,7 +91,6 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentUser = snapshot.getValue(User.class);
-                System.out.println(currentUser);
             }
 
             @Override

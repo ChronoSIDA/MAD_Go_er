@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentUser = snapshot.getValue(User.class);
-                System.out.println(currentUser);
             }
 
             @Override
@@ -187,9 +186,6 @@ public class MainActivity extends AppCompatActivity{
                     eventMap.put(newEvent.getEventID(),newEvent);
                 //This is for sending notification when a new event is created
                 //sendNotification(newEvent);
-                System.out.println(currentUser.getInterestedTypeList());
-                System.out.println(newEvent.getCategory());
-
                 if (!loginAlready) {
                     if(!currentUserName.equals(newEvent.getHost().getUserID())) {
                         if (currentUser.getInterestedTypeList().contains(newEvent.getCategory())) {

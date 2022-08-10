@@ -114,7 +114,6 @@ public class HomeFragment extends Fragment {
                         eventResultAutocomplete.add(listItem);
                     }
                 }
-                System.out.println(eventResultAutocomplete);
                 //we have eventMap(key: eventID, value: event object)
                 //and we have array of eventNames eventResultAutocomplete
 //

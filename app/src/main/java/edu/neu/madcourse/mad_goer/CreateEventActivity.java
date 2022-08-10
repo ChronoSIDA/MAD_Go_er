@@ -105,7 +105,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         eventType = extras.getString("eventType");
 
         EventType randomTemp = EventType.valueOf(eventType.toUpperCase());
-        System.out.println(randomTemp);
 
         event = new Event(eventName, randomTemp);
         calendar = Calendar.getInstance();
@@ -282,7 +281,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);
-                System.out.println(status);
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }

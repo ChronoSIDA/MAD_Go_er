@@ -90,8 +90,6 @@ public class User {
     }
 
     public void addInterestType(EventType eventType){
-        System.out.println(eventType);
         this.interestedTypeList.add(eventType);
-        System.out.println(interestedTypeList);
     }
 }
