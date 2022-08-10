@@ -153,24 +153,18 @@ public class CommentFragment extends Fragment {
                 },
                 300);
 
-        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+
+
+        RecyclerView.OnScrollListener mTotalScrollListener = new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                mScrollY += scrollY;
-
+            public void onScrolled(RecyclerView recyclerViewFake, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mScrollY += dy;
             }
-        });
+        };
+        recyclerView.setOnScrollListener(mTotalScrollListener);
 
 
-
-//        RecyclerView.OnScrollListener mTotalScrollListener = new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerViewFake, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                mScrollY += dy;
-//            }
-//        };
-//        recyclerView.setOnScrollListener(mTotalScrollListener);
         return root;
     }
 
