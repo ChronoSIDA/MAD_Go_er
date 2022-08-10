@@ -13,8 +13,10 @@
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/id_event_name_create"
@@ -22,6 +24,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
+
                         <ImageView
                             android:id="@+id/img_category_create"
                             android:layout_width="390dp"
@@ -52,8 +55,8 @@
                                     android:layout_height="40dp"
                                     android:paddingTop="8dp"
                                     android:text="@string/string_random_event"
-                                    android:textColor="@color/black"
                                     android:textAlignment="textStart"
+                                    android:textColor="@color/black"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -94,20 +97,20 @@
                                     android:id="@+id/id_radio_public_filter"
                                     android:layout_width="162.5dp"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
                                     android:checked="true"
                                     android:onClick="onRadioButtonClicked"
                                     android:padding="10dp"
-                                    android:text="Public" />
+                                    android:text="Public"
+                                    android:textColor="@color/black" />
 
                                 <RadioButton
                                     android:id="@+id/id_radio_private_filter"
                                     android:layout_width="162.5dp"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
                                     android:onClick="onRadioButtonClicked"
                                     android:padding="10dp"
-                                    android:text="Private" />
+                                    android:text="Private"
+                                    android:textColor="@color/black" />
                         </RadioGroup>
 
                         <EditText
@@ -116,17 +119,17 @@
                             android:layout_height="40dp"
                             android:ems="10"
                             android:hint="Password"
-                            android:textColorHint="@color/grey"
-                            android:visibility="invisible"
+                            android:importantForAutofill="no"
                             android:inputType="textPersonName"
+                            android:textColorHint="@color/grey"
                             android:textSize="12sp"
+                            android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/radioGroup2"
                             app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
-                            app:layout_constraintVertical_bias="0.011"
-                            android:importantForAutofill="no" />
+                            app:layout_constraintVertical_bias="0.011" />
 
                         <RadioGroup
                             android:id="@+id/radioGroup"
@@ -144,20 +147,20 @@
                                     android:id="@+id/id_radio_inperson"
                                     android:layout_width="161dp"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
+                                    android:checked="true"
                                     android:onClick="onRadioButtonClicked"
                                     android:padding="8dp"
-                                    android:checked="true"
-                                    android:text="@string/string_in_person" />
+                                    android:text="@string/string_in_person"
+                                    android:textColor="@color/black" />
 
                                 <RadioButton
                                     android:id="@+id/id_radio_virtual"
                                     android:layout_width="163dp"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
                                     android:onClick="onRadioButtonClicked"
                                     android:padding="10dp"
-                                    android:text="@string/string_virtual" />
+                                    android:text="@string/string_virtual"
+                                    android:textColor="@color/black" />
 
                         </RadioGroup>
 
@@ -203,18 +206,18 @@
 
                                 <LinearLayout
                                     android:id="@+id/id_islocation_on_click_create"
-                                    android:orientation="vertical"
                                     android:layout_width="210dp"
                                     android:layout_height="40dp"
+                                    android:orientation="vertical"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                                     app:layout_constraintTop_toTopOf="parent"
                                     tools:context=".activity.CreateEventActivity">
 
                                         <LinearLayout
-                                            android:orientation="vertical"
                                             android:layout_width="210dp"
                                             android:layout_height="40dp"
+                                            android:orientation="vertical"
                                             app:layout_constraintBottom_toBottomOf="parent"
                                             app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                                             app:layout_constraintTop_toTopOf="parent"
@@ -222,39 +225,38 @@
 
                                                 <EditText
                                                     android:id="@+id/id_islocation_create"
-                                                    android:clickable="true"
-                                                    android:focusable="false"
                                                     android:layout_width="210dp"
                                                     android:layout_height="40dp"
+                                                    android:clickable="true"
                                                     android:drawableLeft="@drawable/quantum_ic_search_grey600_24"
+                                                    android:focusable="false"
                                                     android:hint="Enter the latLng"
+                                                    android:inputType="textPostalAddress"
                                                     android:textColor="@color/black"
                                                     android:textColorHint="@color/grey"
-                                                    android:inputType="textPostalAddress"
                                                     android:textSize="16sp" />
 
 
                                                 <fragment
                                                     android:id="@+id/places_fragment_create"
+                                                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
                                                     android:background="#FFF"
                                                     android:orientation="vertical"
                                                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                                                    tools:ignore="MissingConstraints">
-                                                </fragment>
+                                                    tools:ignore="MissingConstraints"></fragment>
 
                                         </LinearLayout>
 
-<!--                                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                                            android:id="@+id/places_recycler_view_create"-->
-<!--                                            android:background="#FFF"-->
-<!--                                            android:orientation="vertical"-->
-<!--                                            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-<!--                                            android:layout_width="match_parent"-->
-<!--                                            android:layout_height="wrap_content">-->
-<!--                                        </androidx.recyclerview.widget.RecyclerView>-->
+                                        <!--                                        <androidx.recyclerview.widget.RecyclerView-->
+                                        <!--                                            android:id="@+id/places_recycler_view_create"-->
+                                        <!--                                            android:background="#FFF"-->
+                                        <!--                                            android:orientation="vertical"-->
+                                        <!--                                            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+                                        <!--                                            android:layout_width="match_parent"-->
+                                        <!--                                            android:layout_height="wrap_content">-->
+                                        <!--                                        </androidx.recyclerview.widget.RecyclerView>-->
                                 </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -386,19 +388,21 @@
                             android:id="@+id/id_desc_create"
                             android:layout_width="325dp"
                             android:layout_height="200dp"
-                            android:minHeight="48dp"
-                            android:inputType="textMultiLine"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/border"
                             android:hint="Add description here (optional)"
+                            android:inputType="textMultiLine"
+                            android:minHeight="48dp"
+                            android:textAlignment="center"
                             android:textColorHint="@color/grey"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            android:background="@drawable/border"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-                            app:layout_constraintVertical_bias="0.433" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout6"
@@ -417,9 +421,9 @@
                                     android:layout_height="40dp"
                                     android:ems="10"
                                     android:hint="Enter the capacity"
+                                    android:inputType="numberSigned"
                                     android:textColor="@color/black"
                                     android:textColorHint="@color/grey"
-                                    android:inputType="numberSigned"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -429,9 +433,9 @@
                                     android:id="@+id/txt_capacity_create"
                                     android:layout_width="100dp"
                                     android:layout_height="40dp"
-                                    android:textColor="@color/black"
                                     android:paddingTop="8dp"
                                     android:text="Capacity:"
+                                    android:textColor="@color/black"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"

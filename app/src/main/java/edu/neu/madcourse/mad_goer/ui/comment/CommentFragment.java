@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import android.view.WindowManager;
 
 import edu.neu.madcourse.mad_goer.databinding.Fragment3CommentBinding;
 import edu.neu.madcourse.mad_goer.MainActivity;
@@ -65,6 +67,7 @@ public class CommentFragment extends Fragment {
         eventSpinner = binding.idEventNameComment;
         View root = binding.getRoot();
         activity = (MainActivity) getActivity();
+
 
         databaseCommentRef.addChildEventListener(new ChildEventListener() {
             @Override
