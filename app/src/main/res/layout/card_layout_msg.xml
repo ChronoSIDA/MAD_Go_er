@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="2dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
     app:cardMaxElevation="3dp"
     app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +27,7 @@
             android:layout_marginEnd="3dp"
             android:text="random msg random msg random msg random msg random msg random msg "
             android:textColor="@color/black"
-            android:textSize="10dp"
+            android:textSize="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +38,10 @@
             android:id="@+id/timestamp_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:padding="2dp"
             android:text="(07/29/2022 12:14pm) "
-            android:textColor="@color/darkGrey"
+            android:textColor="@color/black"
             android:textSize="11dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +52,10 @@
             android:id="@+id/sendername_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
+            android:layout_marginStart="16dp"
             android:padding="2dp"
             android:text="random_user"
-            android:textColor="#0CC00F"
+            android:textColor="#876445"
             android:textSize="11dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,28 +69,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
             android:padding="2dp"
-            android:text="said "
+            android:text="posted@"
             android:textColor="@color/black"
             android:textSize="11dp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/sendername_msg"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-
-        <!--Text VIew to display COurse Rating-->
-        <!--Image used in present in drawable folder-->
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="\@ "
-            android:textColor="@color/black"
-            android:textSize="11dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -99,11 +85,11 @@
             android:onClick="showEventDetail"
             android:padding="2dp"
             android:text="EDC 2022"
-            android:textColor="@color/strongRed"
+            android:textColor="#876445"
             android:textSize="11dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 

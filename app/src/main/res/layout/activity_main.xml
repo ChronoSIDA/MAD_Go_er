@@ -29,7 +29,7 @@
         android:layout_marginBottom="20dp"
         android:focusable="true"
         android:onClick="onCreateEventClick"
-        app:backgroundTint="#FFF4F4"
+
         app:elevation="10dp"
         app:fabCustomSize="54dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +38,8 @@
         app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment_activity_main"
         app:maxImageSize="45dp"
         app:srcCompat="@drawable/ic_baseline_add"
-        app:tint="#FF7276" />
+        app:backgroundTint="#ECB390"
+        app:tint="#EFEAD8" />
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"

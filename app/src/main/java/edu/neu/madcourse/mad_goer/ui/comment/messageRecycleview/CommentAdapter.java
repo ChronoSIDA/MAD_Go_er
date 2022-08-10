@@ -1,6 +1,7 @@
 package edu.neu.madcourse.mad_goer.ui.comment.messageRecycleview;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
                 public void onClick(View v) {
                     likeBtn.setImageResource(R.drawable.ic_like_filled);
                     comment.likesPlusOne();
+
                     databaseCommentRef.child(String.valueOf(comment.getTime())).setValue(comment);
 
                 }

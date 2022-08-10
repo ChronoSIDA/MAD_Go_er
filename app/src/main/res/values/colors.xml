@@ -8,17 +8,45 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#757575</color>
-    <color name ="strongRed">#ff3f44</color>
-    <color name ="lightRed2">#FA4A4A</color>
-    <color name ="lightRed">#FF7276</color>
+
+<!--strong red is used in comment event name-->
+    <color name ="strongRed">#ECB390</color>
+<!--    <color name ="strongRed">#ff3f44</color>-->
+
+    <color name ="lightRed2">#377D71</color>
+<!--    <color name ="lightRed2">#FA4A4A</color>-->
+
+
+    <color name ="lightbrown">#ECB390</color>
+
+    <color name ="lightRed">#94B49F</color>
+<!--    <color name ="lightRed">#FF7276</color>-->
+
+
+    <color name ="Pink7">#F37878</color>
+
     <color name ="Pink6">#faa1af</color>
     <color name ="Pink5">#f9b0bb</color>
     <color name ="Pink4">#fabfc9</color>
     <color name ="Pink3">#f9cdd6</color>
     <color name ="Pink2">#f9dbe1</color>
     <color name ="Pink1">#fae7ec</color>
+
+
     <color name ="darkGrey">#9A9A9A</color>
+
+
     <color name ="lightOrange">#fde6dd</color>
+
+
+
     <color name ="smokeWhite">#f3f2f1</color>
-    <color name ="lightGray">#efefef</color>
+<!--    <color name ="smokeWhite">#f3f2f1</color>-->
+
+
+    <color name ="lightGray">#94B49F</color>
+<!--    <color name ="lightGray">#efefef</color>-->
+
+
+
 </resources>

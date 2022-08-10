@@ -39,6 +39,7 @@ public class Comment {
     public int getLikes() {
         return this.likes;
     }
+    public void setLikes(int likes) {this.likes = likes;}
     public void likesPlusOne(){
         this.likes += 1;
     }

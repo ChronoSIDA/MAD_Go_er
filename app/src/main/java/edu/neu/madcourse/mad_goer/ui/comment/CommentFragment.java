@@ -3,6 +3,7 @@ package edu.neu.madcourse.mad_goer.ui.comment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,9 @@ public class CommentFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Comment> commentList = new ArrayList<>();
 
+    private int mScrollY = 0;
+    private boolean yiDongLe;
+
     public CommentFragment() {
     }
 
@@ -74,14 +78,30 @@ public class CommentFragment extends Fragment {
         databaseCommentRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Comment mycomment  = snapshot.getValue(Comment.class);
-                commentList.add(mycomment);
-                setUpRecycleViewComment(commentList);
+                Comment comment = snapshot.getValue(Comment.class);
+                int idx = 0;
+                for(Comment prevComment : commentList){
+                    commentList.get(0).setLikes(1);
+                    if(prevComment.getTime().equals(comment.getTime())){
+                        idx = commentList.indexOf(prevComment);
+                    }
+                }
+                commentList.add(comment);
+                setUpRecycleViewComment(commentList, idx);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                setUpRecycleViewComment(commentList);
+                Comment comment = snapshot.getValue(Comment.class);
+                int idx = 0;
+                for(Comment prevComment : commentList){
+                    commentList.get(0).setLikes(1);
+                    if(prevComment.getTime().equals(comment.getTime())){
+                        idx = commentList.indexOf(prevComment);
+                    }
+                }
+                commentList.get(idx).setLikes(comment.getLikes());
+                setUpRecycleViewComment(commentList, idx);
             }
 
             @Override
@@ -128,26 +148,35 @@ public class CommentFragment extends Fragment {
                         spinnerArrayAdapter = activity.getArrayAdapter();
                         setUpSpinnerAdapter();
                         //set up rv display comment list
-                        setUpRecycleViewComment(commentList);
+                        setUpRecycleViewComment(commentList, -1);
                     }
                 },
                 300);
 
+        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                mScrollY += scrollY;
+
+            }
+        });
+
+
+
+//        RecyclerView.OnScrollListener mTotalScrollListener = new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerViewFake, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                mScrollY += dy;
+//            }
+//        };
+//        recyclerView.setOnScrollListener(mTotalScrollListener);
         return root;
     }
 
 
 
-    public void setUpRecycleViewComment(ArrayList<Comment> inputList){
-        ArrayList<Comment> list = new ArrayList<>();
-
-        if(inputList.size() <= 6){
-            list = inputList;
-        }else{
-            for(int i = inputList.size()-6; i<inputList.size(); i++){
-                list.add(inputList.get(i));
-            }
-        }
+    public void setUpRecycleViewComment(ArrayList<Comment> list, int idx){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         CommentAdapter commentAdapter = new CommentAdapter(list,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
@@ -155,7 +184,14 @@ public class CommentFragment extends Fragment {
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.scrollToPosition(list.size()-1);
+//        if(idx != -1){
+//            recyclerView.scrollToPosition(list.size() - idx);
+//        }else {
+//            recyclerView.scrollToPosition(list.size()-1);
+//        }
+        int tmp = mScrollY;
+        recyclerView.scrollBy(0, 0);
+        recyclerView.scrollBy(0, tmp);
 
     }
 
@@ -179,6 +215,7 @@ public class CommentFragment extends Fragment {
             //push this new comment to database
             //databaseEventRef.child(event.getEventID()).setValue(event);
             //custom keyvalue in comment
+
             databaseCommentRef.child(String.valueOf(nowStamp)).setValue(newComment);
             //databaseCommentRef.push().setValue(newComment);
         }
