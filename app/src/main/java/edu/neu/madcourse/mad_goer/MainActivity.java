@@ -192,9 +192,11 @@ public class MainActivity extends AppCompatActivity{
                 System.out.println(currentUser.getInterestedTypeList());
                 System.out.println(newEvent.getCategory());
 
-                if(!loginAlready){
-                    if (currentUser.getInterestedTypeList().contains(newEvent.getCategory())) {
-                        sendNotification(newEvent);
+                if (!loginAlready) {
+                    if(!currentUserName.equals(newEvent.getHost().getUserID())) {
+                        if (currentUser.getInterestedTypeList().contains(newEvent.getCategory())) {
+                            sendNotification(newEvent);
+                        }
                     }
                 }
             }
@@ -559,7 +561,7 @@ public class MainActivity extends AppCompatActivity{
 
         String channel = NotiApplication.CHANNEL_1_ID;
         String title = "New Event has been posted";
-        String message = "You might be interested in " + newEvent.getEventName();
+        String message = "Interested in " + newEvent.getEventName()+"? ";
 
 
         Bitmap bigIcon = BitmapFactory.decodeResource(getApplicationContext().getResources(),

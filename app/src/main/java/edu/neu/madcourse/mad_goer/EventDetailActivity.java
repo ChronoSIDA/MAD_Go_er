@@ -180,7 +180,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
         categoryTV.setText(event.getCategory().toString());
         isPublicTV.setText(checkPublic(event));
-        isVirtualTV.setText(checkVirtual(event));
+        //isVirtualTV.setText(checkVirtual(event));
         attendingListTV.setText(printAttendingList(event));
         addressTV.setText(location(event));
         picture.setImageDrawable(getImageByType(event.getCategory().toString()));
