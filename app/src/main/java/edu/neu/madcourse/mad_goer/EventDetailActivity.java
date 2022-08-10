@@ -147,7 +147,7 @@ public class EventDetailActivity extends AppCompatActivity {
         timeTV = (TextView) findViewById(R.id.id_timestamp_detail);
         categoryTV = (TextView) findViewById(R.id.txt_categories_detail);
         isPublicTV = (TextView) findViewById(R.id.txt_isPublic_detail);
-        isVirtualTV = (TextView) findViewById(R.id.txt_location_detail);
+//        isVirtualTV = (TextView) findViewById(R.id.txt_location_detail);
         addressTV = (TextView) findViewById(R.id.id_location_detail);
         attendingListTV = (TextView) findViewById(R.id.id_goers_detail);
         descriptionTV = (TextView) findViewById(R.id.id_desc_detail);
@@ -172,11 +172,12 @@ public class EventDetailActivity extends AppCompatActivity {
 
     public void retrieveDataDisplay(String joined){
         joinBtn.setText(joined);
-        hostTV.setText("Host: " + event.getHost().getUserID());
+        hostTV.setText(event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
 //        timeTV.setText(event.getStartDate().toString());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
-        timeTV.setText(simpleDateFormat.format(event.getStartDate()));
+        SimpleDateFormat simpleDateFormatStart = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
+        SimpleDateFormat simpleDateFormatEnd = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
+        timeTV.setText(simpleDateFormatStart.format(event.getStartDate()) + "- " + simpleDateFormatEnd);
 
         categoryTV.setText(event.getCategory().toString());
         isPublicTV.setText(checkPublic(event));

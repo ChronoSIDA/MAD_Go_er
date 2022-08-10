@@ -11,13 +11,13 @@
     <string name="google_maps_key">123</string>
 
     <string name="teamInfo">Sida Zhang\nNUID: 001597035\nGithub: ChronoSIDA\n\nYang Yang\nNUID: 002921499\n Github: alyssayyang\n\nYiqian Huang\nNUID:002965390\nGithub: Lynette-Huang\n\nXue Tang\nNUID: 002916453\nGithub: XueTang422</string>
-    <string name="string_host_random_usr">Host: random_usr</string>
-    <string name="string_userlist">users1, user2, user3, user4, user5, user6, user7</string>
+    <string name="string_host_random_usr">random_usr</string>
+    <string name="string_userlist">users1, user2, user3, user4, user5</string>
     <string name="string_time">Time:</string>
     <string name="string_event_name">Event Name:</string>
     <string name="string_random_event">Random Event</string>
     <string name="string_public">Public</string>
-    <string name="string_07_26_2022">07/26/2022</string>
+    <string name="string_07_26_2022">07/26/2022 09:15</string>
     <string name="string_art">Art</string>
     <string name="string_link">Link:</string>
     <string name="string_adresssss">https://whateverthisshitis.com</string>
