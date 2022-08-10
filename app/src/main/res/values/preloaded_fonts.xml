@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/acme</item>
         <item>@font/amita_bold</item>
         <item>@font/bad_script</item>
+        <item>@font/calistoga</item>
         <item>@font/comic_neue_bold</item>
+        <item>@font/concert_one</item>
         <item>@font/give_you_glory</item>
         <item>@font/graduate</item>
         <item>@font/pacifico</item>
