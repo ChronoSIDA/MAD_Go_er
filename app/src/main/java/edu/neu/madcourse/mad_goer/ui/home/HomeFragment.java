@@ -1,9 +1,12 @@
 package edu.neu.madcourse.mad_goer.ui.home;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -22,10 +25,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -49,7 +59,7 @@ public class HomeFragment extends Fragment {
     private MainActivity activity;
 
     private Fragment1HomeBinding binding;
-    private HashMap<String,Event> eventMap = new HashMap<>();
+    private HashMap<String, Event> eventMap = new HashMap<>();
     private RecyclerView recyclerView;
     private ArrayList<String> eventResultAutocomplete = new ArrayList<>();
     private String[] eventNamesAutocomplete;
@@ -58,6 +68,11 @@ public class HomeFragment extends Fragment {
     private View filterView;
     private Button btn_cancel, btn_apply;
     int prog;
+
+    // location service
+    LocationRequest locationRequest;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int REQUEST_CODE = 99;
 
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
 
@@ -93,7 +108,7 @@ public class HomeFragment extends Fragment {
             public void run() {
                 eventNamesAutocomplete = activity.getAutoSearchList();
                 String temp = autoCompleteEditText.getText().toString().trim();
-                for(String listItem : eventNamesAutocomplete) {
+                for (String listItem : eventNamesAutocomplete) {
                     if (listItem.contains(temp)) {
                         eventResultAutocomplete.add(listItem);
                     }
@@ -108,9 +123,9 @@ public class HomeFragment extends Fragment {
 //
                 ArrayList<Event> autoList = new ArrayList<>();
                 Collection<Event> values = eventMap.values();
-                for(int i = 0; i<eventResultAutocomplete.size();i++) {
+                for (int i = 0; i < eventResultAutocomplete.size(); i++) {
                     for (Event e : values) {
-                        if(e.getEventName().equals(eventResultAutocomplete.get(i))){
+                        if (e.getEventName().equals(eventResultAutocomplete.get(i))) {
                             autoList.add(e);
                         }
                     }
@@ -142,7 +157,23 @@ public class HomeFragment extends Fragment {
         btn_filter_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFiterAlertBox();
+                locationRequest = LocationRequest.create();
+                if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Snackbar.make(v, "Location Access Denied", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+                } else if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Snackbar.make(v, "Location Access Denied", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
+                }
+//                fusedLocationProviderClient.getLastLocation(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(v.getContext());
+                Task task = fusedLocationProviderClient.getLastLocation();
+                task.addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        openFiterAlertBox(location);
+                    }
+                });
 
             }
         });
@@ -159,7 +190,8 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void openFiterAlertBox(){
+    public void openFiterAlertBox(Location location){
+        System.out.println(location);
         AlertDialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater factory = LayoutInflater.from(getActivity());
