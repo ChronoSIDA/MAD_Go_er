@@ -237,7 +237,7 @@ public class Event {
 
         eventLocation.setLatitude(this.getLatLng().getLatitude());
         eventLocation.setLongitude(this.getLatLng().getLongitude());
-        System.out.println(eventLocation);
+
         return userLocation.distanceTo(eventLocation) * 0.000621371;
     }
 
