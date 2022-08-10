@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity{
     public User currentUser;
     private ArrayList<ArrayList<Event>> listofEventLists = new ArrayList<>();
     private Boolean directFromSetting = false;
+    private Boolean loginAlready = true;
 
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
@@ -186,10 +188,15 @@ public class MainActivity extends AppCompatActivity{
                 //if newevent !past
                     eventMap.put(newEvent.getEventID(),newEvent);
                 //This is for sending notification when a new event is created
-                if (currentUser.getInterestedTypeList().contains(newEvent.getCategory().toString())) {
-                    sendNotification(newEvent);
-                }
+                //sendNotification(newEvent);
+                System.out.println(currentUser.getInterestedTypeList());
+                System.out.println(newEvent.getCategory());
 
+                if(!loginAlready){
+                    if (currentUser.getInterestedTypeList().contains(newEvent.getCategory())) {
+                        sendNotification(newEvent);
+                    }
+                }
             }
 
             @Override
@@ -212,14 +219,15 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
+        // to determine if events are new or not
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
 
-//        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-//                new Runnable() {
-//                    public void run() {
-//                        getAutoComplete();
-//                    }
-//                },
-//                500);
+                        loginAlready = false;
+                    }
+                },
+                500);
 
 
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
