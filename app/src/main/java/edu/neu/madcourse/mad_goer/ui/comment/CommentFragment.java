@@ -29,6 +29,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+
 import android.view.WindowManager;
 
 import edu.neu.madcourse.mad_goer.databinding.Fragment3CommentBinding;
@@ -79,7 +81,7 @@ public class CommentFragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                setUpRecycleViewComment(commentList);
             }
 
             @Override
@@ -136,14 +138,23 @@ public class CommentFragment extends Fragment {
 
 
 
-    public void setUpRecycleViewComment(ArrayList<Comment> list){
+    public void setUpRecycleViewComment(ArrayList<Comment> inputList){
+        ArrayList<Comment> list = new ArrayList<>();
+
+        if(inputList.size() <= 6){
+            list = inputList;
+        }else{
+            for(int i = inputList.size()-6; i<inputList.size(); i++){
+                list.add(inputList.get(i));
+            }
+        }
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         CommentAdapter commentAdapter = new CommentAdapter(list,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(commentAdapter);
-        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(false);
         recyclerView.scrollToPosition(list.size()-1);
 
     }

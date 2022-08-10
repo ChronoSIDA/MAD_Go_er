@@ -11,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import java.util.List;
 
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.messages.Comment;
+import edu.neu.madcourse.mad_goer.messages.User;
 import edu.neu.madcourse.mad_goer.ui.recycleview.EventAdapter;
 
 
@@ -82,14 +86,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, Y, hh:mm a");
             postDateTV.setText(simpleDateFormat.format(comment.getTime()));
             commentTV.setText(comment.getComment());
+
+
             likeTV.setText(String.valueOf(comment.getLikes()));
+            if(comment.getLikes() > 0){likeBtn.setImageResource(R.drawable.ic_like_filled);}
             likeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     likeBtn.setImageResource(R.drawable.ic_like_filled);
                     comment.likesPlusOne();
                     databaseCommentRef.child(String.valueOf(comment.getTime())).setValue(comment);
-                    //todo: push comment to fb
+
                 }
             });
         }
