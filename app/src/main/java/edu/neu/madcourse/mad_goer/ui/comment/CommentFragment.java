@@ -140,6 +140,7 @@ public class CommentFragment extends Fragment {
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.scrollToPosition(list.size()-1);
 
     }
 

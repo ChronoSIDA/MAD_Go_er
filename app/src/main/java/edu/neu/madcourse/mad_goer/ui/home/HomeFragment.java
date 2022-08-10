@@ -43,6 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
@@ -190,27 +191,17 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void openFiterAlertBox(Location location){
-        System.out.println(location);
+    public void openFiterAlertBox(Location userCurrentLocation){
+
         AlertDialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater factory = LayoutInflater.from(getActivity());
         final View view = factory.inflate(R.layout.filter_popup,null);
         builder.setView(view);
-//        Boolean isPub = false;
-//        Boolean isPri = false;
-//        Boolean inPer = false;
-//        Boolean vir = false;
-//        Boolean dist= false;
 
         Button btn_apply = (Button) view.findViewById(R.id.btn_apply_filter);
         Button btn_cancel = (Button) view.findViewById(R.id.btn_cancel_filter);
 
-//        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
-//            public void onClick(DialogInterface dialog, int which){
-//                dialog.dismiss();
-//            }
-//        });
         CheckBox isPublic = (CheckBox)view.findViewById(R.id.id_radio_public_filter);
         isPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -349,7 +340,6 @@ public class HomeFragment extends Fragment {
                 //  filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
                 // prepare a list for recycleview
 
-                //Location userCurrentLocation = ;
 
                 Boolean haspublic = isPublic.isChecked();
                 Boolean hasprivate = isPrivate.isChecked();
@@ -360,14 +350,15 @@ public class HomeFragment extends Fragment {
                 if(checkeddistance == true){
                     selectDistance = findIntByProgress(prog);
                 }
-                ArrayList<Event> filteredList = filterByPreference(haspublic,hasprivate,hasinperson,hasvirtual,selectDistance);
+                ArrayList<Event> filteredList = filterByPreference(haspublic,hasprivate,hasinperson,hasvirtual,selectDistance,userCurrentLocation);
 
                 setupRecycleView(filteredList);
+                dialog.dismiss();
             }
         });
     }
 //TO DO: filter events by parameters
-    public ArrayList<Event> filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, int selectDistance){
+    public ArrayList<Event> filterByPreference(Boolean isPublic, Boolean isPrivate, Boolean inPerson, Boolean virtual, int selectDistance, Location userCurrentLocation){
 
         ArrayList<Event> filteredList = new ArrayList<>(eventList);
 
@@ -375,15 +366,19 @@ public class HomeFragment extends Fragment {
         if((isPublic == false && isPrivate == false) || (isPublic == true && isPrivate == true)){
         //do nothing
         }else if(isPublic == false) {
-            for (Event event : filteredList) {
-                if (event.isPublic()) {
-                    filteredList.remove(event);
+            Iterator<Event> itr = filteredList.iterator();
+            while(itr.hasNext()){
+                Event event = itr.next();
+                if(event.isPublic()){
+                    itr.remove();
                 }
             }
         }else if(isPrivate == false){
-            for (Event event : filteredList) {
-                if (!event.isPublic()) {
-                    filteredList.remove(event);
+            Iterator<Event> itr = filteredList.iterator();
+            while(itr.hasNext()){
+                Event event = itr.next();
+                if(!event.isPublic()){
+                    itr.remove();
                 }
             }
         }
@@ -391,15 +386,19 @@ public class HomeFragment extends Fragment {
         if((inPerson == false && virtual == false) || (inPerson == true && virtual == true)){
             //do nothing
         }else if(inPerson == false) {
-            for (Event event : filteredList) {
-                if (!event.isInPerson()) {
-                    filteredList.remove(event);
+            Iterator<Event> itr = filteredList.iterator();
+            while(itr.hasNext()){
+                Event event = itr.next();
+                if(!event.isInPerson()){
+                    itr.remove();
                 }
             }
         }else if(virtual == false){
-            for (Event event : filteredList) {
-                if (event.isInPerson()) {
-                    filteredList.remove(event);
+            Iterator<Event> itr = filteredList.iterator();
+            while(itr.hasNext()){
+                Event event = itr.next();
+                if(event.isInPerson()){
+                    itr.remove();
                 }
             }
         }
@@ -407,19 +406,16 @@ public class HomeFragment extends Fragment {
         //if do not select Distance
         if(selectDistance == -1){
             return filteredList;
+        }else{
+            Iterator<Event> itr = filteredList.iterator();
+            while(itr.hasNext()){
+                Event event = itr.next();
+                if(event.calDistance(userCurrentLocation) > selectDistance){
+                    itr.remove();
+                }
+            }
+            return filteredList;
         }
-
-//        else{
-//            for(Event event : filteredList){
-//                //event有distance，另外需要一个
-//                //todo: check the unit for distance and selectdistance
-//                if(event.calDistance(userCurrentLocation) > selectDistance){
-//                    filteredList.remove(event);
-//                }
-//            }
-//            return filteredList;
-//        }
-        return filteredList;
     }
 
     public int findIntByProgress(int progress){
