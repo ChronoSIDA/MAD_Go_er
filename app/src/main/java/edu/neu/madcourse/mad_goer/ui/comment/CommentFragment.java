@@ -166,7 +166,10 @@ public class CommentFragment extends Fragment {
             //String commentTime = timestamp.toString();
             Comment newComment = new Comment(thisComment, currentUserName, nowStamp, (String) eventSpinner.getSelectedItem());
             //push this new comment to database
-            databaseCommentRef.push().setValue(newComment);
+            //databaseEventRef.child(event.getEventID()).setValue(event);
+            //custom keyvalue in comment
+            databaseCommentRef.child(String.valueOf(nowStamp)).setValue(newComment);
+            //databaseCommentRef.push().setValue(newComment);
         }
     }
 

@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +59,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
+        DatabaseReference databaseCommentRef = FirebaseDatabase.getInstance().getReference("Comment");
 
         private TextView eventNameTV, userIDTV, postDateTV, commentTV, likeTV;
         private ImageButton likeBtn;
@@ -84,6 +88,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
                 public void onClick(View v) {
                     likeBtn.setImageResource(R.drawable.ic_like_filled);
                     comment.likesPlusOne();
+                    databaseCommentRef.child(String.valueOf(comment.getTime())).setValue(comment);
+                    //todo: push comment to fb
                 }
             });
         }
