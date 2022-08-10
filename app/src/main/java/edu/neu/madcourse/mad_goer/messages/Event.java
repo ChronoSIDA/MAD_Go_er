@@ -2,11 +2,8 @@ package edu.neu.madcourse.mad_goer.messages;
 
 import android.location.Location;
 
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-import edu.neu.madcourse.mad_goer.messages.LatLng;
 
 public class Event {
 
@@ -29,7 +26,7 @@ public class Event {
     //vitual: link
     private String link;
     //inperson:
-    private LatLng location;
+    private LatLng latLng;
 
     private String actualLocationInString;
 
@@ -48,7 +45,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng location, String actualLocationInString, String desc, EventType category, User host, ArrayList<String> attendingList, int save, int capacity, int iconID, String description) {
+    public Event(Boolean isValid, String eventID, String eventName, Long startDate, Long endDate, boolean inPerson, boolean isPublic, String eventPassword, String link, LatLng latLng, String actualLocationInString, String desc, EventType category, User host, ArrayList<String> attendingList, int save, int capacity, int iconID, String description) {
         this.isValid = isValid;
         this.eventID = eventID;
         this.eventName = eventName;
@@ -58,7 +55,7 @@ public class Event {
         this.isPublic = isPublic;
         this.eventPassword = eventPassword;
         this.link = link;
-        this.location = location;
+        this.latLng = latLng;
         this.actualLocationInString = actualLocationInString;
         this.desc = desc;
         this.category = category;
@@ -148,12 +145,12 @@ public class Event {
         this.link = link;
     }
 
-    public LatLng getLocation() {
-        return location;
+    public LatLng getLatLng() {
+        return latLng;
     }
 
-    public void setLocation(LatLng location) {
-        this.location = location;
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
     }
 
     public String getActualLocation() {
@@ -237,9 +234,12 @@ public class Event {
 
     public double calDistance(Location userLocation){
         Location eventLocation = new Location("");
-        eventLocation.setLatitude(location.getLatitude());
-        eventLocation.setLongitude(location.getLongitude());
-        return userLocation.distanceTo(userLocation);
+
+        eventLocation.setLatitude(this.latLng.getLatitude());
+        eventLocation.setLongitude(this.latLng.getLongitude());
+
+
+        return userLocation.distanceTo(userLocation) * 0.000621371;
     }
 
     public Boolean isPast(){

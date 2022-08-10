@@ -38,14 +38,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 
-import org.w3c.dom.Text;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 import edu.neu.madcourse.mad_goer.helper.InputFilterMinMax;
@@ -334,7 +331,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 //                str+= "location ";
                 return false;
             }else{
-                event.setLocation(locationSet);
+                event.setLatLng(locationSet);
             }
         }
         if(date.getText().toString().equals("")){
