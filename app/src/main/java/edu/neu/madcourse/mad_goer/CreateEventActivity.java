@@ -175,6 +175,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     event.setEventName(eventName);
                     event.setHost(currentUser);
                     event.setIconID(iconID);
+                    event.setLatLng(locationSet);
+
 
                     Long startDateTimestamp = calendar.getTimeInMillis();
                     Long durationTimeStamp = TimeUnit.HOURS.toMillis(Long.parseLong(duration.getText().toString()));

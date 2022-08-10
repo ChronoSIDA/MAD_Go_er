@@ -10,9 +10,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/id_event_name_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,27 +23,31 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:theme="@style/mySpinnerItemStyle"
         app:layout_constraintBottom_toTopOf="@+id/edit_comment_comment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/edit_comment_comment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/border"
         android:ems="10"
+        android:hint="Share a comment here about your event"
         android:inputType="textMultiLine"
         android:textAlignment="center"
-        android:hint="Share a comment here about your event"
         app:layout_constraintBottom_toTopOf="@+id/btn_send_msg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_send_msg"
@@ -56,6 +60,8 @@
         android:text="SEND"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
