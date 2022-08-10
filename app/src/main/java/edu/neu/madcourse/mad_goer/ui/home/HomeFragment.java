@@ -410,8 +410,10 @@ public class HomeFragment extends Fragment {
             Iterator<Event> itr = filteredList.iterator();
             while(itr.hasNext()){
                 Event event = itr.next();
-                if(event.calDistance(userCurrentLocation) > selectDistance){
-                    itr.remove();
+                if(event.isInPerson()) {
+                    if (event.calDistance(userCurrentLocation) > selectDistance) {
+                        itr.remove();
+                    }
                 }
             }
             return filteredList;

@@ -235,11 +235,10 @@ public class Event {
     public double calDistance(Location userLocation){
         Location eventLocation = new Location("");
 
-        eventLocation.setLatitude(this.latLng.getLatitude());
-        eventLocation.setLongitude(this.latLng.getLongitude());
+        eventLocation.setLatitude(this.getLatLng().getLatitude());
+        eventLocation.setLongitude(this.getLatLng().getLongitude());
 
-
-        return userLocation.distanceTo(userLocation) * 0.000621371;
+        return userLocation.distanceTo(eventLocation) * 0.000621371;
     }
 
     public Boolean isPast(){
