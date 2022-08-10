@@ -315,6 +315,7 @@ public class MainActivity extends AppCompatActivity{
             //if value is "host", add eventobj to first list in listoflists
             if (personalEventMap.get(key).contains("host")) {
                 //eventmap里面没有3319pastevent
+                //donothing
                 if(eventMap.get(key).isPast()){
                     if(!listofEventLists.get(4).contains(eventMap.get(key))) {
                         listofEventLists.get(4).add(eventMap.get(key));
