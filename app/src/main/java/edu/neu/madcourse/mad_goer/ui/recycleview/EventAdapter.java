@@ -57,7 +57,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.Viewholder>{
         String stringDate= DateFor.format(event.getStartDate());
 
         holder.eventDate.setText(stringDate);
-        holder.eventLocation.setText(event.getActualLocation());
+        if(event.isInPerson()){
+            holder.eventLocation.setText(event.getActualLocation());
+        } else {
+            holder.eventLocation.setText(event.getLink());
+        }
     }
 
     @Override

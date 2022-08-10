@@ -1,11 +1,14 @@
 package edu.neu.madcourse.mad_goer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -174,8 +177,9 @@ public class EventDetailActivity extends AppCompatActivity {
         hostTV.setText(event.getHost().getUserID());
         eventNameTV.setText(event.getEventName());
 //        timeTV.setText(event.getStartDate().toString());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, MMM dd, Y | hh:mm a z");
-        timeTV.setText(simpleDateFormat.format(event.getStartDate()) + " - " + simpleDateFormat.format(event.getEndDate()));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd, hh:mm a ");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("MM dd, hh:mm a z");
+        timeTV.setText(simpleDateFormat.format(event.getStartDate()) + " - " + simpleDateFormat2.format(event.getEndDate()));
 
         categoryTV.setText(event.getCategory().toString());
         isPublicTV.setText(checkPublic(event));
@@ -183,6 +187,9 @@ public class EventDetailActivity extends AppCompatActivity {
         attendingListTV.setText(printAttendingList(event));
         addressTV.setText(location(event));
         picture.setImageDrawable(getImageByType(event.getCategory().toString()));
+        if(currentUser.getSavedEventList().containsKey(eventID)){
+            saveBtn.setImageResource(R.drawable.ic_save_star_highlight);
+        }
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -432,5 +439,14 @@ public class EventDetailActivity extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + type);
         }
         return typeImage;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

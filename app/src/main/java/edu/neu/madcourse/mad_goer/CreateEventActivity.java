@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -38,6 +39,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -63,6 +67,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     private long timeInTimestamp;
     private ImageView categoryIV;
     private TextView categoryTV;
+    private TextView isLocationTxt;
     private EditText isLocationEditField;
     private EditText passwordTV;
     private Switch isPublicTV;
@@ -199,7 +204,11 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     //or maybe go to detail page?
                     finish();
                 } else {
-                    Toast.makeText(CreateEventActivity.this, "Make sure all fields are completed", Toast.LENGTH_SHORT).show();
+                    if(isValid(urlTV.getText().toString())){
+                        Toast.makeText(CreateEventActivity.this, "Invalid URL, please try again", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(CreateEventActivity.this, "Make sure all fields are completed", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -223,7 +232,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         categoryIV = (ImageView) findViewById(R.id.img_category_create);
         categoryIV.setImageDrawable(getImageByType(eventType));
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
+        isLocationTxt = (TextView) findViewById(R.id.txt_isLocation_create);
         urlTV = (EditText) findViewById(R.id.id_isurl_create);
+        urlTV.setText("http://");
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
         duration =(EditText)findViewById(R.id.id_duration_create);
         duration.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "20")});
@@ -253,6 +264,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onClick(View v) {
                 event.setInPerson(true);
+                isLocationTxt.setText("Location: ");
                 addressTV.setVisibility(View.VISIBLE);
                 urlTV.setVisibility(View.INVISIBLE);
             }
@@ -261,6 +273,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onClick(View v) {
                 event.setInPerson(false);
+                isLocationTxt.setText("URL: ");
                 urlTV.setVisibility(View.VISIBLE);
                 addressTV.setVisibility(View.INVISIBLE);
             }
@@ -322,7 +335,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             if(urlTV.getText().toString().equals("")){
 //                str += "meeting url ";
                 return false;
-            }else{
+            } else if (isValid(urlTV.getText().toString())){
+                return false;
+            } else{
                 event.setLink(urlTV.getText().toString());
             }
         }
@@ -539,6 +554,15 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             return String.valueOf(c);
         else
             return "0" + String.valueOf(c);
+    }
+
+    public boolean isValid(String url) {
+        try {
+            new URL(url).toURI();
+        } catch (URISyntaxException | MalformedURLException e) {
+            return false;
+        }
+        return Patterns.WEB_URL.matcher(url).matches();
     }
 
     @Override

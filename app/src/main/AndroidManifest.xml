@@ -41,35 +41,22 @@
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
         </activity>
 
         <activity
             android:name=".InterestActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
         </activity>
 
         <activity
             android:name=".EventDetailActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
 
         <activity
             android:windowSoftInputMode="adjustPan"
             android:name=".CreateEventActivity"
             android:screenOrientation="portrait">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
 
         <meta-data
