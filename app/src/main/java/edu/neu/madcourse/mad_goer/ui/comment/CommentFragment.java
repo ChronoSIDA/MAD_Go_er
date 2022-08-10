@@ -71,7 +71,6 @@ public class CommentFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Comment mycomment  = snapshot.getValue(Comment.class);
                 commentList.add(mycomment);
-                System.out.println(commentList);
             }
 
             @Override

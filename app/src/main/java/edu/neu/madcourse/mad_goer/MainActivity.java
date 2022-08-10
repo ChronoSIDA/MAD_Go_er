@@ -316,14 +316,18 @@ public class MainActivity extends AppCompatActivity{
             if (personalEventMap.get(key).contains("host")) {
                 //eventmap里面没有3319pastevent
                 if(eventMap.get(key).isPast()){
-                    listofEventLists.get(4).add(eventMap.get(key));
+                    if(!listofEventLists.get(4).contains(eventMap.get(key))) {
+                        listofEventLists.get(4).add(eventMap.get(key));
+                    }
                 }else{
                     listofEventLists.get(1).add(eventMap.get(key));
                 }
             }
             if (personalEventMap.get(key).contains("going")) {
                 if(eventMap.get(key).isPast()){
-                    listofEventLists.get(4).add(eventMap.get(key));
+                    if(!listofEventLists.get(4).contains(eventMap.get(key))) {
+                        listofEventLists.get(4).add(eventMap.get(key));
+                    }
                 }else {
                     listofEventLists.get(2).add(eventMap.get(key));
                 }
@@ -335,6 +339,8 @@ public class MainActivity extends AppCompatActivity{
                     listofEventLists.get(3).add(eventMap.get(key));
                 }
             }
+
+
         }
         return listofEventLists;
     }
