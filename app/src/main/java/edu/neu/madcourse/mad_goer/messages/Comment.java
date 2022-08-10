@@ -1,22 +1,22 @@
 package edu.neu.madcourse.mad_goer.messages;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Comment {
 
     private String comment;
-    private String userID;
-    private Date timeStamp;
+    private String user;
+    private Long time;
     private String eventName;
     private int likes;
 
     public Comment() {
     }
 
-    public Comment(String comment, String userID, Date timeStamp, String eventName) {
+    public Comment(String comment, String userID, Long time, String eventName) {
         this.comment = comment;
-        this.userID = userID;
-        this.timeStamp = timeStamp;
+        this.user = userID;
+        this.time = time;
         this.eventName = eventName;
         this.likes = 0;
     }
@@ -25,11 +25,11 @@ public class Comment {
         return this.comment;
     }
     public String getUser(){
-        return this.userID;
+        return this.user;
     }
 
-    public Date getTime(){
-        return this.timeStamp;
+    public Long getTime(){
+        return this.time;
     }
 
     public String getEventName(){

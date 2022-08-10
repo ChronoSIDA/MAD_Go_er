@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -75,7 +76,6 @@ public class HomeFragment extends Fragment {
     private static final int REQUEST_CODE = 99;
 
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -346,8 +346,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //isPublic.isChecked();
-              //  filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
+                //  filterByPreference(isPublic.isChecked(), isPrivate.isChecked(),inPerson.isChecked(),virtual.isChecked(), distance.isChecked(), prog);
                 // prepare a list for recycleview
+
+                //Location userCurrentLocation = ;
+
                 Boolean haspublic = isPublic.isChecked();
                 Boolean hasprivate = isPrivate.isChecked();
                 Boolean hasinperson = inPerson.isChecked();
@@ -359,7 +362,7 @@ public class HomeFragment extends Fragment {
                 }
                 ArrayList<Event> filteredList = filterByPreference(haspublic,hasprivate,hasinperson,hasvirtual,selectDistance);
 
-                //setupRecycleView(ArrayList<Event> list)
+                setupRecycleView(filteredList);
             }
         });
     }
@@ -401,11 +404,21 @@ public class HomeFragment extends Fragment {
             }
         }
 
+        //if do not select Distance
+        if(selectDistance == -1){
+            return filteredList;
+        }
 
-
-
-
-
+//        else{
+//            for(Event event : filteredList){
+//                //event有distance，另外需要一个
+//                //todo: check the unit for distance and selectdistance
+//                if(event.calDistance(userCurrentLocation) > selectDistance){
+//                    filteredList.remove(event);
+//                }
+//            }
+//            return filteredList;
+//        }
         return filteredList;
     }
 

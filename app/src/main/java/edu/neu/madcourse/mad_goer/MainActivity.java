@@ -64,8 +64,8 @@ import edu.neu.madcourse.mad_goer.messages.EventType;
 import edu.neu.madcourse.mad_goer.messages.User;
 
 public class MainActivity extends AppCompatActivity{
-    private NotificationManagerCompat notificationManagerCompat;
 
+    private NotificationManagerCompat notificationManagerCompat;
     private ActivityMainBinding binding;
     private static final String CURRENT_USER = "CURRENT_USER";
     private static String CURRENT_NAV = "0";
@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity{
     private NavController navController;
 
 
-
-
     //saves all event from firebase
     //key is "eventID", value is Event
     private HashMap<String,Event> eventMap = new HashMap<>();
@@ -102,7 +100,6 @@ public class MainActivity extends AppCompatActivity{
     public User currentUser;
     private ArrayList<ArrayList<Event>> listofEventLists = new ArrayList<>();
     private Boolean directFromSetting = false;
-
 
     DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
     DatabaseReference databaseEventRef = FirebaseDatabase.getInstance().getReference("Event");
