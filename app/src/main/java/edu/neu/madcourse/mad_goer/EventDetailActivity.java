@@ -208,18 +208,17 @@ public class EventDetailActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!currentUser.getSavedEventList().containsKey(eventID)){
+                if( currentUser.getMyEventList().get(eventID) == null|| !currentUser.getMyEventList().get(eventID).contains("saved")){
                     currentUser.addEvent(eventID, "saved");
                     databaseUserRef.child(currentUserName).setValue(currentUser);
                     saveBtn.setImageDrawable(getDrawable(R.drawable.ic_save_star_highlight));
-                    Toast.makeText(EventDetailActivity.this,
-                            "Saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventDetailActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
                 }else{
                     currentUser.removeEvent(eventID,"saved");
                     databaseUserRef.child(currentUserName).setValue(currentUser);
                     saveBtn.setImageDrawable(getDrawable(R.drawable.ic_save_star));
                     Toast.makeText(EventDetailActivity.this,
-                            "You don't like it any more!", Toast.LENGTH_SHORT).show();
+                            "Unsaved event!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
