@@ -155,6 +155,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
         btn_filter_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
