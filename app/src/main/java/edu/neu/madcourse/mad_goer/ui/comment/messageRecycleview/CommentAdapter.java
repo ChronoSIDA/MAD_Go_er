@@ -90,7 +90,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
 
 
             likeTV.setText(String.valueOf(comment.getLikes()));
-            if(comment.getLikes() > 0){likeBtn.setImageResource(R.drawable.ic_like_filled);}
+            if(comment.getLikes() > 0){
+                likeBtn.setImageResource(R.drawable.ic_like_filled);
+            } else {
+                likeBtn.setImageResource(R.drawable.ic_like_unfilled);
+            }
             likeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
