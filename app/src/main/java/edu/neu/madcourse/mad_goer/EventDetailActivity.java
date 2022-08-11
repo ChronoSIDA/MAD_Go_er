@@ -187,10 +187,10 @@ public class EventDetailActivity extends AppCompatActivity {
         attendingListTV.setText(printAttendingList(event));
         addressTV.setText(location(event));
         picture.setImageDrawable(getImageByType(event.getCategory().toString()));
+        descriptionTV.setText("\t\t" + event.getDesc());
         if(currentUser.getSavedEventList().containsKey(eventID)){
             saveBtn.setImageResource(R.drawable.ic_save_star_highlight);
         }
-
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
