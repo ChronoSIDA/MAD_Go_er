@@ -96,6 +96,20 @@ public class GoFragment extends Fragment {
                         currentUser = activity.getCurrentUser();
                         listofEventLists = activity.getListofEventLists();
                         setUpRecyclerView(0);
+
+                        directFromSetting = activity.ifRedirectFromSetting();
+
+                        //default display all or redirected from setting
+                        if(directFromSetting){
+                            currentTab = 1;
+                            listofEventLists = activity.getListofEventLists();
+                            setUpRecyclerView(currentTab);
+                            changeBackToDefault();
+                            textView_host.setTextColor(getResources().getColor(R.color.lightRed));
+                            imageView_host.setVisibility(View.VISIBLE);
+                            directFromSetting = false;
+                            activity.setRedirectFromSetting();
+                        }
                     }
                 },
                 300);
@@ -118,19 +132,6 @@ public class GoFragment extends Fragment {
         imageView_saved = binding.imgSavedGo;
         imageView_past = binding.imgPastGo;
 
-        directFromSetting = activity.ifRedirectFromSetting();
-
-        //default display all or redirected from setting
-        if(directFromSetting){
-            currentTab = 1;
-            listofEventLists = activity.getListofEventLists();
-            setUpRecyclerView(currentTab);
-            changeBackToDefault();
-            textView_host.setTextColor(getResources().getColor(R.color.lightRed));
-            imageView_host.setVisibility(View.VISIBLE);
-            directFromSetting = false;
-            activity.setRedirectFromSetting();
-        }
 
         tab_all_go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,8 +205,9 @@ public class GoFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         ArrayList<Event> eventList = listofEventLists.get(pos);
-        eventAdapter = new EventAdapter(eventList, getContext());
+        EventAdapter eventAdapter;
 
+        eventAdapter = new EventAdapter(eventList, getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(eventAdapter);
         recyclerView.setHasFixedSize(false);
@@ -226,26 +228,7 @@ public class GoFragment extends Fragment {
                 if(eventListOnTab.get(position).isPublic()){
                     startActivity(intent);
                 } else {
-
                     activity.verifyPassword(eventList.get(position), intent);
-//                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-//                    alertDialog.setTitle("PASSWORD");
-//                    alertDialog.setMessage("Enter Password");
-//                    final EditText input = new EditText(getActivity());
-//                    alertDialog.setView(input);
-//                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"CONFIRM",new View.OnClickListener(){
-//                        @Override
-//                        public void onClick(View view) {
-//                            if(input.getText().toString().equals(eventMap.get(position).getEventPassword()){
-//                                startActivity(intent);
-//                            }else{
-//
-//                            }
-//                        }
-//                    });
-//
-//                    alertDialog.setButton(());
-
                 }
             }
             @Override

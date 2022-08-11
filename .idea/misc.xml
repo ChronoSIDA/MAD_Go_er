@@ -8,24 +8,17 @@
         <entry key="app/src/main/res/drawable-anydpi/ic_comment.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/ic_like_filled.xml" value="0.23" />
         <entry key="app/src/main/res/drawable-anydpi/ic_like_unfilled.xml" value="0.23" />
-        <entry key="app/src/main/res/drawable-anydpi/ic_location_detail.xml" value="0.281" />
-        <entry key="app/src/main/res/drawable-anydpi/ic_time_detail.xml" value="0.281" />
         <entry key="app/src/main/res/drawable-mdpi/interest_selected.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable-v24/pink_out_line.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/add.xml" value="0.311" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.265" />
         <entry key="app/src/main/res/drawable/highlight_selected.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_album_grey.xml" value="0.1755" />
-        <entry key="app/src/main/res/drawable/ic_album_red.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/ic_baseline_add.xml" value="0.244" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.244" />
         <entry key="app/src/main/res/drawable/ic_home_grey.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_red.xml" value="0.2065" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1755" />
-        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/ic_settings_grey.xml" value="0.281" />
-        <entry key="app/src/main/res/drawable/ic_settings_red.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/interest_selected.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/interest_unselected 2.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/interest_unselected.xml" value="0.1" />
@@ -33,12 +26,7 @@
         <entry key="app/src/main/res/drawable/spinner_dropdown.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/spinner_dropdown_border.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/textview_username.xml" value="0.1325" />
-        <entry key="app/src/main/res/font/amita_bold.xml" value="0.375" />
         <entry key="app/src/main/res/font/bad_script.xml" value="0.28125" />
-        <entry key="app/src/main/res/font/comic_neue_bold.xml" value="0.375" />
-        <entry key="app/src/main/res/font/give_you_glory.xml" value="0.375" />
-        <entry key="app/src/main/res/font/graduate.xml" value="0.375" />
-        <entry key="app/src/main/res/font/pacifico.xml" value="0.375" />
         <entry key="app/src/main/res/font/spicy_rice.xml" value="0.28125" />
         <entry key="app/src/main/res/layout-land/activity_create_event.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout-land/activity_interest.xml" value="0.21822916666666667" />
@@ -47,16 +35,16 @@
         <entry key="app/src/main/res/layout-land/fragment_2_go.xml" value="0.3255208333333333" />
         <entry key="app/src/main/res/layout-land/fragment_send.xml" value="0.35989583333333336" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.4238156209987196" />
-        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.33990706420168726" />
+        <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.8866120218579235" />
         <entry key="app/src/main/res/layout/activity_host.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/activity_interest.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19246826171874998" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/card_layout.xml" value="0.3703256936067551" />
-        <entry key="app/src/main/res/layout/card_layout_msg.xml" value="0.38738738738738737" />
+        <entry key="app/src/main/res/layout/card_layout.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/card_layout_msg.xml" value="0.45" />
         <entry key="app/src/main/res/layout/event_popup.xml" value="0.16034985422740525" />
-        <entry key="app/src/main/res/layout/filter_popup.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/filter_popup.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_1_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_2_go.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_3_album.xml" value="0.25" />
@@ -72,7 +60,7 @@
         <entry key="app/src/main/res/layout/password_dialog.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/radio_grop.xml" value="0.44140625" />
         <entry key="app/src/main/res/layout/tab_bar.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/toolbar.xml" value="0.43648223876953124" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar_theme.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.132" />

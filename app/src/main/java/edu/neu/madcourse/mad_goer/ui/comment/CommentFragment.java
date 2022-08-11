@@ -58,7 +58,6 @@ public class CommentFragment extends Fragment {
     private ArrayList<Comment> commentList = new ArrayList<>();
 
     private int mScrollY = 0;
-    private boolean yiDongLe;
 
     public CommentFragment() {
     }
@@ -185,15 +184,14 @@ public class CommentFragment extends Fragment {
 //        }
         int tmp = mScrollY;
         recyclerView.scrollBy(0, 0);
+        mScrollY = 0;
         recyclerView.scrollBy(0, tmp);
-
     }
 
 
     private void setUpSpinnerAdapter(){
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eventSpinner.setAdapter(spinnerArrayAdapter);
-
     }
 
     public void uploadComment(){
@@ -209,7 +207,6 @@ public class CommentFragment extends Fragment {
             //push this new comment to database
             //databaseEventRef.child(event.getEventID()).setValue(event);
             //custom keyvalue in comment
-
             databaseCommentRef.child(String.valueOf(nowStamp)).setValue(newComment);
             //databaseCommentRef.push().setValue(newComment);
         }

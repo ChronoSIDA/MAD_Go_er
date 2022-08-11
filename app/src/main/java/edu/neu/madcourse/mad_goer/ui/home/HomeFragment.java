@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
     private View filterView;
     private Button btn_cancel, btn_apply;
     int prog;
+    private ArrayList<Event> currentList;
 
     // location service
     LocationRequest locationRequest;
@@ -164,17 +165,17 @@ public class HomeFragment extends Fragment {
                 } else if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Snackbar.make(v, "Location Access Denied", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
-                }
-//                fusedLocationProviderClient.getLastLocation(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(v.getContext());
-                Task task = fusedLocationProviderClient.getLastLocation();
-                task.addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        openFiterAlertBox(location);
-                    }
-                });
+                } else {
+                    fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(v.getContext());
+                    Task task = fusedLocationProviderClient.getLastLocation();
+                    task.addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            openFiterAlertBox(location);
+                        }
+                    });
 
+                }
             }
         });
 
@@ -482,45 +483,24 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
 
-        //added Jul14
-        //will auto show cardview from bottom
-        //recyclerView.scrollToPosition(list.size());
 
 
-        //when clicked something in recycleview(aka the event list), get the event id from the item clicked
-        //and pass the eventid to intent, and open new activity of(eventdetailactivity)
+        currentList = list;
+
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position){
 
                 Intent intent = new Intent(getContext(), EventDetailActivity.class);
 
-                intent.putExtra("eventID", eventList.get(position).getEventID());
+                intent.putExtra("eventID", currentList.get(position).getEventID());
                 intent.putExtra("nameTxt", nameTxt);
 
                 // public or private:
-                if(list.get(position).isPublic()){
+                if(currentList.get(position).isPublic()){
                     startActivity(intent);
                 } else {
-                    activity.verifyPassword(list.get(position), intent);
-//                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-//                    alertDialog.setTitle("PASSWORD");
-//                    alertDialog.setMessage("Enter Password");
-//                    final EditText input = new EditText(getActivity());
-//                    alertDialog.setView(input);
-//                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"CONFIRM",new View.OnClickListener(){
-//                        @Override
-//                        public void onClick(View view) {
-//                            if(input.getText().toString().equals(eventMap.get(position).getEventPassword()){
-//                                startActivity(intent);
-//                            }else{
-//
-//                            }
-//                        }
-//                    });
-//
-//                    alertDialog.setButton(());
-
+                    activity.verifyPassword(currentList.get(position), intent);
                 }
             }
             @Override
