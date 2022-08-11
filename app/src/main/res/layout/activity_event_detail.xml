@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/id_event_name_detail"
         android:layout_width="298dp"
-        android:layout_height="23dp"
+        android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
         android:text="@string/string_random_event"
