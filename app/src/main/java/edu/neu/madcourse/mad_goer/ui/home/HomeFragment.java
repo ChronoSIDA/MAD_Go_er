@@ -155,12 +155,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        locationRequest = LocationRequest.create();
         ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
         btn_filter_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                locationRequest = LocationRequest.create();
                 if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Snackbar.make(v, "Location Access Denied", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
@@ -413,8 +413,20 @@ public class HomeFragment extends Fragment {
             while(itr.hasNext()){
                 Event event = itr.next();
                 if(event.isInPerson()) {
-                    if (event.calDistance(userCurrentLocation) > selectDistance) {
-                        itr.remove();
+                    if(userCurrentLocation == null) {
+                        LayoutInflater factory = LayoutInflater.from(getActivity());
+                        final View v = factory.inflate(R.layout.fragment_1_home,null);
+                        if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            Snackbar.make(v, "Location Access Denied", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+                        } else if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            Snackbar.make(v, "Location Access Denied", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
+                        }
+                    } else {
+                        if (event.calDistance(userCurrentLocation) > selectDistance) {
+                            itr.remove();
+                        }
                     }
                 }
             }
