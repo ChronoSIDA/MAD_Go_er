@@ -40,8 +40,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout"
-                            android:layout_width="326dp"
-                            android:layout_height="56dp"
+                            android:layout_width="325dp"
+                            android:layout_height="40dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/img_category_create"
                             app:layout_constraintHorizontal_bias="0.507"
@@ -51,8 +51,8 @@
 
                                 <TextView
                                     android:id="@+id/id_event_name_name_create"
-                                    android:layout_width="222dp"
-                                    android:layout_height="54dp"
+                                    android:layout_width="210dp"
+                                    android:layout_height="40dp"
                                     android:paddingTop="8dp"
                                     android:text="@string/string_random_event"
                                     android:textAlignment="textStart"
@@ -61,13 +61,12 @@
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.0" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
                                     android:id="@+id/txt_event_name_create"
-                                    android:layout_width="97dp"
-                                    android:layout_height="39dp"
+                                    android:layout_width="100dp"
+                                    android:layout_height="40dp"
                                     android:paddingTop="8dp"
                                     android:text="@string/string_event_name"
                                     android:textColor="@color/black"
@@ -116,8 +115,8 @@
 
                         <EditText
                             android:id="@+id/id_password_create"
-                            android:layout_width="320dp"
-                            android:layout_height="6dp"
+                            android:layout_width="325dp"
+                            android:layout_height="40dp"
                             android:ems="10"
                             android:hint="Password"
                             android:importantForAutofill="no"

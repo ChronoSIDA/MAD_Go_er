@@ -11,11 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -74,6 +80,8 @@ public class GoFragment extends Fragment {
     private ImageView imageView_saved;
     private ImageView imageView_past;
     private Boolean directFromSetting = false;
+
+    DatabaseReference databaseUserRef = FirebaseDatabase.getInstance().getReference("User");
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
