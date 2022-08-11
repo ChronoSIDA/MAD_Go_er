@@ -237,7 +237,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         addressTV = (EditText) findViewById(R.id.id_islocation_create);
         isLocationTxt = (TextView) findViewById(R.id.txt_isLocation_create);
         urlTV = (EditText) findViewById(R.id.id_isurl_create);
-        urlTV.setText("http://");
+        urlTV.setText("https://");
         descriptionTV = (EditText) findViewById(R.id.id_desc_create);
         duration =(EditText)findViewById(R.id.id_duration_create);
         duration.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "20")});
