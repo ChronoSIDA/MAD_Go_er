@@ -207,11 +207,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
                     //or maybe go to detail page?
                     finish();
                 } else {
-                    if(isValid(urlTV.getText().toString())){
-                        Toast.makeText(CreateEventActivity.this, "Invalid URL, please try again", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(CreateEventActivity.this, "Make sure all fields are completed", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(CreateEventActivity.this, "Make sure all fields are completed", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -338,9 +334,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             if(urlTV.getText().toString().equals("")){
 //                str += "meeting url ";
                 return false;
-            } else if (isValid(urlTV.getText().toString())){
-                return false;
-            } else{
+            } else {
                 event.setLink(urlTV.getText().toString());
             }
         }
@@ -559,14 +553,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             return "0" + String.valueOf(c);
     }
 
-    public boolean isValid(String urlString) {
-        try {
-            URL url = new URL(urlString);
-            return URLUtil.isValidUrl(urlString) && Patterns.WEB_URL.matcher(urlString).matches();
-        } catch (MalformedURLException e) {
-        }
-        return false;
-    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
