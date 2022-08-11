@@ -197,6 +197,7 @@ public class HomeFragment extends Fragment {
         btn_resetFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                autoCompleteEditText.setText("");
                 Boolean haspublic = isPublic.isChecked();
                 Boolean hasprivate = isPrivate.isChecked();
                 Boolean hasinperson = inPerson.isChecked();

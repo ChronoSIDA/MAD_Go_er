@@ -199,7 +199,10 @@ public class CommentFragment extends Fragment {
         if(thisComment== null){
             Snackbar.make(getView(), "Please leave a comment.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-        }else {
+        } else if (eventSpinner.getSelectedItem() == null){
+            Snackbar.make(getView(), "Your current have no GO", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             Long nowStamp = timestamp.getTime();
             //String commentTime = timestamp.toString();
