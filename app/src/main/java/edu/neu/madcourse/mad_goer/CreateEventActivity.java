@@ -11,6 +11,7 @@ import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -48,6 +49,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.neu.madcourse.mad_goer.helper.InputFilterMinMax;
 import edu.neu.madcourse.mad_goer.messages.Event;
@@ -556,13 +559,13 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             return "0" + String.valueOf(c);
     }
 
-    public boolean isValid(String url) {
+    public boolean isValid(String urlString) {
         try {
-            new URL(url).toURI();
-        } catch (URISyntaxException | MalformedURLException e) {
-            return false;
+            URL url = new URL(urlString);
+            return URLUtil.isValidUrl(urlString) && Patterns.WEB_URL.matcher(urlString).matches();
+        } catch (MalformedURLException e) {
         }
-        return Patterns.WEB_URL.matcher(url).matches();
+        return false;
     }
 
     @Override
