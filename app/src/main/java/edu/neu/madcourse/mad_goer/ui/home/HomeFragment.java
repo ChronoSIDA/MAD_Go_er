@@ -21,9 +21,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -46,6 +48,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import edu.neu.madcourse.mad_goer.EventDetailActivity;
+import edu.neu.madcourse.mad_goer.LoginActivity;
 import edu.neu.madcourse.mad_goer.MainActivity;
 import edu.neu.madcourse.mad_goer.R;
 import edu.neu.madcourse.mad_goer.databinding.Fragment1HomeBinding;
@@ -67,6 +70,7 @@ public class HomeFragment extends Fragment {
     private String[] eventNamesAutocomplete;
     private ArrayList<Event> eventList = new ArrayList<>();
     private Button btn_filter_home;
+    private ImageView btn_resetFilter;
     private View filterView;
     private Button btn_cancel, btn_apply;
     int prog;
@@ -85,6 +89,7 @@ public class HomeFragment extends Fragment {
         binding = Fragment1HomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         btn_filter_home = binding.btnFilterHome;
+        btn_resetFilter = binding.resetFilter;
 
         activity = (MainActivity) getActivity();
         //get all value from eventMap, and then get eventname from value
@@ -178,6 +183,33 @@ public class HomeFragment extends Fragment {
                     });
 
                 }
+            }
+        });
+
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        final View view = factory.inflate(R.layout.filter_popup,null);
+        CheckBox isPublic = (CheckBox) view.findViewById(R.id.id_radio_public_filter);
+        CheckBox isPrivate = (CheckBox) view.findViewById(R.id.id_radio_private_filter);
+        CheckBox inPerson = (CheckBox) view.findViewById(R.id.id_radio_inperson_filter);
+        CheckBox virtual = (CheckBox) view.findViewById(R.id.id_radio_virtual_filter);
+        CheckBox distance = (CheckBox) view.findViewById(R.id.checkBox_distance_filter);
+
+        btn_resetFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean haspublic = isPublic.isChecked();
+                Boolean hasprivate = isPrivate.isChecked();
+                Boolean hasinperson = inPerson.isChecked();
+                Boolean hasvirtual = virtual.isChecked();
+                Boolean checkeddistance = distance.isChecked();
+                int selectDistance = -1;
+                if(checkeddistance == true){
+                    selectDistance = findIntByProgress(prog);
+                }
+                ArrayList<Event> filteredList = filterByPreference(haspublic,hasprivate,hasinperson,hasvirtual,selectDistance, null);
+
+                setupRecycleView(filteredList);
+                Toast.makeText(view.getContext() ,"Filter Reset",Toast.LENGTH_SHORT).show();
             }
         });
 
